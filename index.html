@@ -335,4 +335,9 @@ function pokerStart(){if(isBusy)return;if(balance<pokerBet){haptic('lose');flash
 
 setInterval(()=>{try{localStorage.setItem('cf_b',balance);localStorage.setItem('cf_s',JSON.stringify(stats));}catch(e){}},5000);
 (function(){try{const sb=localStorage.getItem('cf_b');const ss=localStorage.getItem('cf_s');if(sb){balance=parseInt(sb);updateBalance();}if(ss){stats=JSON.parse(ss);updateStats();}}catch(e){}})();
-document.addEventListener('touchstart',(e)=>{const t=e.target.closest('.game-card')||e.target.closest('.main-btn')||e.target.
+document.addEventListener('touchstart',(e)=>{const t=e.target.closest('.game-card')||e.target.closest('.main-btn')||e.target.closest('.game-card')||e.target.closest('.main-btn')||e.target.closest('.bet-btn')||e.target.closest('.rl-btn');if(t){if(tg.HapticFeedback)tg.HapticFeedback.impactOccurred('light');}},{passive:true});
+let lastTap=0;document.addEventListener('touchend',(e)=>{const n=Date.now();if(n-lastTap<200){e.preventDefault();}lastTap=n;},{passive:false});
+console.log('%c🔥 COIN FLIP','color:#a855f7;font-size:22px;font-weight:900;letter-spacing:4px;text-shadow:0 0 20px #a855f7');
+</script>
+</body>
+</html>
