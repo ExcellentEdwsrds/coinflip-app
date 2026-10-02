@@ -11,8 +11,9 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:#1a0d2e;color:#fff;-webkit-font-smoothing:antialiased}
 body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}
+.svg-icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block}
+.svg-icon-fill{width:24px;height:24px;fill:currentColor;stroke:none;display:block}
 
-/* ФОН */
 .bg{position:fixed;inset:0;z-index:-5;background:linear-gradient(180deg,#1a0d2e 0%,#2a1548 50%,#3a1d5c 100%)}
 .aurora{position:fixed;inset:-30%;z-index:-4;pointer-events:none;background:radial-gradient(ellipse at 20% 20%,rgba(140,80,255,.4) 0%,transparent 45%),radial-gradient(ellipse at 80% 70%,rgba(200,80,255,.35) 0%,transparent 45%);animation:auroraMove 20s ease-in-out infinite alternate;filter:blur(50px)}
 @keyframes auroraMove{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-30px,20px) scale(1.15)}}
@@ -22,21 +23,19 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 
 .app{position:relative;z-index:10;width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden}
 
-/* ТОП БАР */
 .top-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;flex-shrink:0;gap:8px}
-.logo-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-size:24px}
-.balance-pill{background:rgba(40,25,70,.85);border:1px solid rgba(140,80,255,.4);padding:8px 12px;border-radius:12px;display:flex;align-items:center;gap:4px;font-size:14px;font-weight:700;backdrop-filter:blur(20px);cursor:pointer}
+.logo-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;color:#a855f7}
+.balance-pill{background:rgba(40,25,70,.85);border:1px solid rgba(140,80,255,.4);padding:8px 12px;border-radius:12px;display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;backdrop-filter:blur(20px);cursor:pointer;color:#fff}
 .balance-pill .val{color:#fff;font-weight:800}
-.balance-pill .arrow{color:#a78bfa;font-size:10px}
+.balance-pill .arrow{color:#a78bfa;width:12px;height:12px}
 .deposit-btn{background:linear-gradient(135deg,#4ade80,#22c55e);color:#0a2e15;border:none;padding:10px 16px;border-radius:12px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 4px 15px rgba(74,222,128,.4)}
-.bell-btn{width:42px;height:42px;border-radius:12px;background:rgba(40,25,70,.85);border:1px solid rgba(140,80,255,.3);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;position:relative}
+.bell-btn{width:42px;height:42px;border-radius:12px;background:rgba(40,25,70,.85);border:1px solid rgba(140,80,255,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;color:#c084fc}
 .bell-btn .badge{position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;font-size:10px;font-weight:900;padding:2px 6px;border-radius:10px;min-width:18px;text-align:center}
-.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#6366f1);display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid rgba(140,80,255,.5);cursor:pointer}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#6366f1);display:flex;align-items:center;justify-content:center;border:2px solid rgba(140,80,255,.5);cursor:pointer;color:#fff}
 
 .content{flex:1;overflow-y:auto;padding-bottom:100px;scrollbar-width:none}
 .content::-webkit-scrollbar{display:none}
 
-/* БАННЕР С КЕЙСОМ */
 .banner{margin:0 14px 16px;border-radius:20px;background:linear-gradient(135deg,#5b21b6 0%,#7c3aed 50%,#a855f7 100%);padding:22px 20px;position:relative;overflow:hidden;box-shadow:0 10px 40px rgba(124,58,237,.5);min-height:180px;display:flex;flex-direction:column;justify-content:center}
 .banner::before{content:'';position:absolute;top:-40%;right:-20%;width:220px;height:220px;background:radial-gradient(circle,rgba(255,215,0,.3),transparent 70%);animation:bannerPulse 4s ease-in-out infinite}
 @keyframes bannerPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.2);opacity:1}}
@@ -44,55 +43,56 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .banner-title{font-size:20px;font-weight:900;color:#fff;position:relative;z-index:2;margin-bottom:4px}
 .banner-sub{font-size:12px;color:rgba(255,255,255,.8);position:relative;z-index:2;margin-bottom:16px}
 .banner-btn{background:linear-gradient(135deg,#a855f7,#8b5cf6);color:#fff;border:none;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 6px 20px rgba(168,85,247,.5);position:relative;z-index:2;align-self:flex-start}
-.banner-gift{position:absolute;right:-20px;bottom:-20px;font-size:140px;opacity:.4;pointer-events:none}
+.banner-gift{position:absolute;right:-20px;bottom:-20px;opacity:.35;pointer-events:none;color:#ffd700}
 
-/* ПОИСК + ФИЛЬТРЫ */
 .search-row{display:flex;gap:8px;padding:0 14px 12px}
-.search-input{flex:1;background:rgba(40,25,70,.7);border:1px solid rgba(140,80,255,.3);border-radius:14px;padding:12px 16px;color:#fff;font-size:14px;outline:none}
+.search-wrap{flex:1;position:relative}
+.search-wrap .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:#a78bfa;pointer-events:none}
+.search-input{width:100%;background:rgba(40,25,70,.7);border:1px solid rgba(140,80,255,.3);border-radius:14px;padding:12px 16px 12px 42px;color:#fff;font-size:14px;outline:none}
 .search-input::placeholder{color:#a78bfa}
 .filter-btn{background:rgba(40,25,70,.7);border:1px solid rgba(140,80,255,.3);border-radius:14px;padding:12px 16px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px}
+.filter-btn .chev{width:14px;height:14px;color:#a78bfa}
 
 .lobby-row{padding:0 14px 16px}
 .lobby-btn{width:100%;background:rgba(40,25,70,.7);border:1px solid rgba(140,80,255,.3);border-radius:14px;padding:14px 16px;color:#fff;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
 .lobby-btn .left{display:flex;align-items:center;gap:10px}
+.lobby-btn .chev{width:16px;height:16px;color:#a78bfa}
 
-/* СЕКЦИИ */
 .section{padding:0 14px;margin-bottom:18px}
 .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .section-title{font-size:17px;font-weight:900;display:flex;align-items:center;gap:8px}
-.section-more{font-size:12px;color:#a78bfa;font-weight:700;cursor:pointer}
+.section-title .crown{width:20px;height:20px;color:#ffd700}
+.section-more{font-size:12px;color:#a78bfa;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px}
+.section-more .chev{width:12px;height:12px}
 
-/* КАРТОЧКИ ИГР — 2 КОЛОНКИ */
 .games-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.game-card{background:linear-gradient(145deg,rgba(40,25,70,.9),rgba(25,15,45,.9));border:1px solid rgba(140,80,255,.3);border-radius:18px;overflow:hidden;cursor:pointer;position:relative;backdrop-filter:blur(20px);transition:all .2s;box-shadow:0 6px 25px rgba(0,0,0,.5)}
+.game-card{background:linear-gradient(145deg,rgba(40,25,70,.9),rgba(25,15,45,.9));border:1px solid rgba(140,80,255,.3);border-radius:18px;overflow:hidden;cursor:pointer;position:relative;transition:all .2s;box-shadow:0 6px 25px rgba(0,0,0,.5)}
 .game-card:active{transform:scale(.96);border-color:#c084fc;box-shadow:0 0 30px rgba(192,132,252,.6)}
 .game-card .game-img{width:100%;height:120px;object-fit:cover;display:block}
 .game-card .game-name{font-size:13px;font-weight:800;color:#fff;padding:10px 12px 4px;line-height:1.2}
 .game-card .game-tag{font-size:10px;color:#a78bfa;padding:0 12px 10px;font-weight:600}
 
-/* НИЖНЕЕ МЕНЮ — 5 РАЗДЕЛОВ */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(20,10,35,.98);backdrop-filter:blur(24px);border-top:1px solid rgba(140,80,255,.3);display:flex;justify-content:space-around;align-items:center;padding:10px 0 18px;z-index:100;padding-bottom:calc(10px + env(safe-area-inset-bottom))}
-.nav-item{text-align:center;font-size:10px;color:#7a5aa0;flex:1;cursor:pointer;font-weight:700;position:relative}
+.nav-item{text-align:center;font-size:10px;color:#7a5aa0;flex:1;cursor:pointer;font-weight:700;position:relative;display:flex;flex-direction:column;align-items:center;gap:4px}
 .nav-item.active{color:#c084fc}
-.nav-icon{font-size:22px;display:block;margin-bottom:4px}
 .nav-item.center{position:relative;margin-top:-20px}
-.nav-item.center .nav-icon{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#6366f1);display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 8px 30px rgba(168,85,247,.6);border:4px solid #1a0d2e;font-size:26px}
+.nav-item.center .nav-circle{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#6366f1);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(168,85,247,.6);border:4px solid #1a0d2e;color:#fff}
 
-/* ЭКРАН ВЫБОРА СТАВКИ */
 .bet-screen{position:fixed;inset:0;background:rgba(10,5,20,.98);backdrop-filter:blur(30px);z-index:600;display:none;flex-direction:column;padding:env(safe-area-inset-top) 20px calc(20px + env(safe-area-inset-bottom));overflow-y:auto}
 .bet-screen.active{display:flex;animation:screenIn .3s cubic-bezier(.4,0,.2,1)}
 @keyframes screenIn{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
 .bet-header{display:flex;align-items:center;gap:14px;padding:20px 0 24px}
-.bet-back{width:44px;height:44px;border-radius:14px;background:rgba(40,25,70,.8);border:1px solid rgba(140,80,255,.4);color:#c084fc;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.bet-back{width:44px;height:44px;border-radius:14px;background:rgba(40,25,70,.8);border:1px solid rgba(140,80,255,.4);color:#c084fc;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .bet-title{font-size:22px;font-weight:900}
 .bet-subtitle{font-size:12px;color:#a78bfa;font-weight:600;margin-top:2px}
 .bet-list{display:flex;flex-direction:column;gap:10px;padding-bottom:20px}
 .bet-option{padding:18px;border-radius:16px;background:linear-gradient(145deg,rgba(40,25,70,.9),rgba(25,15,45,.9));border:1px solid rgba(140,80,255,.3);color:#fff;font-size:16px;font-weight:800;cursor:pointer;text-align:center;transition:all .2s;display:flex;align-items:center;justify-content:space-between}
 .bet-option:active{transform:scale(.97);border-color:#c084fc;box-shadow:0 0 30px rgba(192,132,252,.6)}
 .bet-option .bet-value{font-size:20px;font-weight:900;color:#ffd700}
-.bet-option .bet-arrow{color:#c084fc;font-size:18px}
+.bet-option .bet-arrow{color:#c084fc;width:18px;height:18px}
 .bet-option.custom{background:linear-gradient(135deg,#a855f7,#6366f1);border-color:transparent}
 .bet-option.custom .bet-value{color:#fff}
+.bet-option.custom .bet-arrow{color:#fff}
 </style>
 </head><body>
 <div class="bg"></div>
@@ -101,15 +101,26 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 
 <div class="app">
 <div class="top-bar">
-<div class="logo-icon">♠️</div>
+<div class="logo-icon">
+<svg class="svg-icon-fill" viewBox="0 0 24 24" style="width:32px;height:32px">
+<path d="M12 2L15 9H9L12 2Z"/>
+<path d="M12 7L16 14H8L12 7Z"/>
+<circle cx="12" cy="18" r="3"/>
+</svg>
+</div>
 <div class="balance-pill" onclick="openBot('deposit')">
 <span class="val" id="balance">10000</span>
 <span>₽</span>
-<span class="arrow">▼</span>
+<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
 </div>
 <button class="deposit-btn" onclick="openBot('deposit')">Пополнить</button>
-<div class="bell-btn" onclick="openBot('deposit')">🔔<span class="badge">2</span></div>
-<div class="avatar" onclick="openBot('deposit')">👤</div>
+<div class="bell-btn" onclick="openBot('deposit')">
+<svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+<span class="badge">2</span>
+</div>
+<div class="avatar" onclick="openBot('deposit')">
+<svg class="svg-icon" viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+</div>
 </div>
 
 <div class="content">
@@ -118,25 +129,40 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 <div class="banner-title">Приветственный бонус</div>
 <div class="banner-sub">Стартуй с преимуществом</div>
 <button class="banner-btn">Пополнить</button>
-<div class="banner-gift">🎁</div>
+<div class="banner-gift">
+<svg viewBox="0 0 24 24" fill="currentColor" style="width:160px;height:160px"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+</div>
 </div>
 
 <div class="search-row">
-<input type="text" class="search-input" placeholder="🔍 Поиск" id="searchInput" oninput="filterGames()">
-<button class="filter-btn" onclick="openBot('deposit')">Провайдеры ▼</button>
+<div class="search-wrap">
+<svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+<input type="text" class="search-input" placeholder="Поиск" id="searchInput" oninput="filterGames()">
+</div>
+<button class="filter-btn" onclick="openBot('deposit')">Провайдеры
+<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
 </div>
 
 <div class="lobby-row">
 <button class="lobby-btn" onclick="openBot('deposit')">
-<div class="left"><span>🎮</span><span>Лобби</span></div>
-<span style="color:#a78bfa">▼</span>
+<div class="left">
+<svg class="svg-icon" viewBox="0 0 24 24" style="width:20px;height:20px"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+<span>Лобби</span>
+</div>
+<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
 </button>
 </div>
 
 <div class="section">
 <div class="section-header">
-<div class="section-title">👑 Популярные игры</div>
-<div class="section-more" onclick="openBot('deposit')">Все игры →</div>
+<div class="section-title">
+<svg class="crown" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18l2-10 5 5 2-8 2 8 5-5 2 10H3z"/></svg>
+Популярные игры
+</div>
+<div class="section-more" onclick="openBot('deposit')">Все игры
+<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+</div>
 </div>
 <div class="games-grid" id="gamesGrid">
 <div class="game-card" data-name="слоты slots" onclick="openBet('slots','Слоты')"><img src="slots.jpg" class="game-img" alt="Слоты"><div class="game-name">Слоты</div><div class="game-tag">от 50 ₽</div></div>
@@ -151,50 +177,81 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 </div>
 
 <div class="bottom-nav">
-<div class="nav-item" onclick="openBot('deposit')"><span class="nav-icon">☰</span>Меню</div>
-<div class="nav-item" onclick="openBot('deposit')"><span class="nav-icon">🎁</span>Бонусы</div>
-<div class="nav-item center active"><span class="nav-icon">🎰</span>Казино</div>
-<div class="nav-item" onclick="openBot('deposit')"><span class="nav-icon">💬</span>Чат</div>
-<div class="nav-item" onclick="openBot('deposit')"><span class="nav-icon">👥</span>Пригласить</div>
+<div class="nav-item" onclick="openBot('deposit')">
+<svg class="svg-icon" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+Меню
+</div>
+<div class="nav-item" onclick="openBot('deposit')">
+<svg class="svg-icon" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+Бонусы
+</div>
+<div class="nav-item center active">
+<div class="nav-circle">
+<svg class="svg-icon" viewBox="0 0 24 24" style="width:28px;height:28px"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+</div>
+Казино
+</div>
+<div class="nav-item" onclick="openBot('deposit')">
+<svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+Чат
+</div>
+<div class="nav-item" onclick="openBot('deposit')">
+<svg class="svg-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+Пригласить
+</div>
 </div>
 
-<!-- ЭКРАН ВЫБОРА СТАВКИ -->
 <div class="bet-screen" id="betScreen">
 <div class="bet-header">
-<button class="bet-back" onclick="closeBet()">←</button>
+<button class="bet-back" onclick="closeBet()">
+<svg class="svg-icon" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+</button>
 <div>
 <div class="bet-title" id="betTitle">Игра</div>
 <div class="bet-subtitle">Выбери сумму ставки</div>
 </div>
 </div>
 <div class="bet-list">
-<div class="bet-option" onclick="playWith(50)"><span>Ставка</span><span class="bet-value">50 ₽</span><span class="bet-arrow">→</span></div>
-<div class="bet-option" onclick="playWith(100)"><span>Ставка</span><span class="bet-value">100 ₽</span><span class="bet-arrow">→</span></div>
-<div class="bet-option" onclick="playWith(200)"><span>Ставка</span><span class="bet-value">200 ₽</span><span class="bet-arrow">→</span></div>
-<div class="bet-option" onclick="playWith(300)"><span>Ставка</span><span class="bet-value">300 ₽</span><span class="bet-arrow">→</span></div>
-<div class="bet-option" onclick="playWith(400)"><span>Ставка</span><span class="bet-value">400 ₽</span><span class="bet-arrow">→</span></div>
-<div class="bet-option" onclick="playWith(500)"><span>Ставка</span><span class="bet-value">500 ₽</span><span class="bet-arrow">→</span></div>
-<div class="bet-option" onclick="playWith(600)"><span>Ставка</span><span class="bet-value">600 ₽</span><span class="bet-arrow">→</span></div>
-<div class="bet-option" onclick="playWith(700)"><span>Ставка</span><span class="bet-value">700 ₽</span><span class="bet-arrow">→</span></div>
-<div class="bet-option" onclick="playWith(800)"><span>Ставка</span><span class="bet-value">800 ₽</span><span class="bet-arrow">→</span></div>
-<div class="bet-option" onclick="playWith(900)"><span>Ставка</span><span class="bet-value">900 ₽</span><span class="bet-arrow">→</span></div>
-<div class="bet-option" onclick="playWith(1000)"><span>Ставка</span><span class="bet-value">1000 ₽</span><span class="bet-arrow">→</span></div>
-<div class="bet-option custom" onclick="playCustom()"><span>Своя сумма</span><span class="bet-value">✍️</span><span class="bet-arrow">→</span></div>
+<div class="bet-option" onclick="playWith(50)"><span>Ставка</span><span class="bet-value">50 ₽</span><svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+<div class="bet-option" onclick="playWith(100)"><span>Ставка</span><span class="bet-value">100 ₽</span><svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+<div class="bet-option" onclick="playWith(200)"><span>Ставка</span><span class="bet-value">200 ₽</span><svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+<div class="bet-option" onclick="playWith(300)"><span>Ставка</span><span class="bet-value">300 ₽</span><svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+<div class="bet-option" onclick="playWith(400)"><span>Ставка</span><span class="bet-value">400 ₽</span><svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+<div class="bet-option" onclick="playWith(500)"><span>Ставка</span><span class="bet-value">500 ₽</span><svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+<div class="bet-option" onclick="playWith(600)"><span>Ставка</span><span class="bet-value">600 ₽</span><svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+<div class="bet-option" onclick="playWith(700)"><span>Ставка</span><span class="bet-value">700 ₽</span><svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+<div class="bet-option" onclick="playWith(800)"><span>Ставка</span><span class="bet-value">800 ₽</span><svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+<div class="bet-option" onclick="playWith(900)"><span>Ставка</span><span class="bet-value">900 ₽</span><svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+<div class="bet-option" onclick="playWith(1000)"><span>Ставка</span><span class="bet-value">1000 ₽</span><svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+<div class="bet-option custom" onclick="playCustom()"><span>Своя сумма</span><span class="bet-value">✍</span><svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
 </div>
 </div>
 
-<!-- ЭКРАН ВЫБОРА СТОРОНЫ МОНЕТКИ -->
 <div class="bet-screen" id="coinSideScreen">
 <div class="bet-header">
-<button class="bet-back" onclick="closeCoinSide()">←</button>
+<button class="bet-back" onclick="closeCoinSide()">
+<svg class="svg-icon" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+</button>
 <div>
 <div class="bet-title">Монетка</div>
 <div class="bet-subtitle">Выбери сторону</div>
 </div>
 </div>
 <div class="bet-list">
-<div class="bet-option" onclick="playCoin('heads')"><span>👑 Орёл</span><span class="bet-value">→</span></div>
-<div class="bet-option" onclick="playCoin('tails')"><span>🔥 Решка</span><span class="bet-value">→</span></div>
+<div class="bet-option" onclick="playCoin('heads')">
+<span style="display:flex;align-items:center;gap:10px">
+<svg class="svg-icon" viewBox="0 0 24 24" style="color:#ffd700"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+Орёл
+</span>
+<svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+</div>
+<div class="bet-option" onclick="playCoin('tails')">
+<span style="display:flex;align-items:center;gap:10px">
+<svg class="svg-icon" viewBox="0 0 24 24" style="color:#ff6b00"><circle cx="12" cy="12" r="9"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+Решка
+</span>
+<svg class="bet-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+</div>
 </div>
 </div><script>
 const tg=window.Telegram.WebApp;
