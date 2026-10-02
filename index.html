@@ -51,8 +51,6 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#6366f1);display:flex;align-items:center;justify-content:center;border:2px solid rgba(140,80,255,.5);cursor:pointer;color:#fff}
 .content{flex:1;overflow-y:auto;padding-bottom:100px;scrollbar-width:none}
 .content::-webkit-scrollbar{display:none}
-
-/* BANNER */
 .banner{margin:0 14px 16px;border-radius:20px;background:linear-gradient(135deg,#5b21b6 0%,#7c3aed 50%,#a855f7 100%);padding:22px 20px;position:relative;overflow:hidden;box-shadow:0 10px 40px rgba(124,58,237,.5);min-height:180px;display:flex;flex-direction:column;justify-content:center;cursor:pointer}
 .banner::before{content:'';position:absolute;top:-40%;right:-20%;width:220px;height:220px;background:radial-gradient(circle,rgba(255,215,0,.3),transparent 70%);animation:bannerPulse 4s ease-in-out infinite}
 @keyframes bannerPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.2);opacity:1}}
@@ -89,8 +87,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .nav-item.active{color:#c084fc}
 .nav-item.center{position:relative;margin-top:-20px}
 .nav-item.center .nav-circle{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#6366f1);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(168,85,247,.6);border:4px solid #0d0518;color:#fff}
-           </style><style>
-/* GAME SCREEN */
+</style>/* GAME SCREEN */
 .game-screen{position:fixed;inset:0;background:rgba(10,5,20,.98);backdrop-filter:blur(30px);z-index:600;display:none;flex-direction:column;padding:env(safe-area-inset-top) 20px calc(20px + env(safe-area-inset-bottom));overflow-y:auto}
 .game-screen.active{display:flex;animation:screenIn .3s cubic-bezier(.4,0,.2,1)}
 @keyframes screenIn{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
@@ -180,9 +177,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .main-btn.red{background:linear-gradient(135deg,#ef4444,#b91c1c)}
 .main-btn.green{background:linear-gradient(135deg,#22c55e,#15803d)}
 .actions-row{display:flex;gap:8px;width:100%;max-width:340px;margin-top:16px}
-.actions-row .main-btn{flex:1;padding:14px 6px;font-size:12px;max-width:none;margin-top:0}
-</style><style>
-/* GENERIC MODAL */
+.actions-row .main-btn{flex:1;padding:14px 6px;font-size:12px;max-width:none;margin-top:0}/* GENERIC MODAL */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:900;display:none;align-items:flex-end;justify-content:center}
 .modal.active{display:flex;animation:fadeIn .25s}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -199,7 +194,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .modal-item .mi-sub{font-size:11px;color:#a78bfa;font-weight:500;margin-top:2px}
 .modal-close{margin-top:14px;width:100%;padding:14px;border-radius:14px;background:rgba(40,25,70,.6);border:1px solid rgba(140,80,255,.3);color:#c084fc;font-weight:800;font-size:14px;cursor:pointer}
 
-/* PAYMENT STEP 1 */
+/* ===== PAYMENT STEP 1 ===== */
 .pay-modal{display:none;position:fixed;inset:0;background:#0d0518;z-index:950;overflow-y:auto;padding:env(safe-area-inset-top) 0 calc(30px + env(safe-area-inset-bottom))}
 .pay-modal.active{display:block;animation:fadeIn .25s}
 .pay-top{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;position:sticky;top:0;background:#0d0518;z-index:5}
@@ -223,22 +218,93 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .pay-card .left{display:flex;flex-direction:column;justify-content:space-between;height:100%;gap:18px}
 .pay-card .name{font-size:15px;font-weight:800;color:#fff}
 .pay-card .min{font-size:12px;color:#8a7aab;font-weight:600}
-.pay-card .logo{width:56px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.4)}
 .pay-card .bonus-tag{display:flex;align-items:center;gap:4px;background:rgba(140,80,255,.15);border:1px solid rgba(168,85,247,.4);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:800;color:#c084fc;align-self:flex-start;margin-top:6px}
 
-.logo-tpay{background:linear-gradient(135deg,#ffd93b,#f5b400);color:#1a1a1a}
-.logo-tpay span{background:#1a1a1a;color:#ffd93b;padding:2px 5px;border-radius:4px;font-size:11px;margin-right:2px}
-.logo-sber{background:linear-gradient(135deg,#21a038,#0d7a22);color:#fff}
-.logo-alfa{background:#ef3124;color:#fff}
-.logo-vtb{background:linear-gradient(135deg,#0a2977,#0d47a1);color:#fff}
-.logo-psb{background:#fff;color:#003791}
-.logo-gazprom{background:linear-gradient(135deg,#0d47a1,#1e88e5);color:#fff;font-size:11px}
-.logo-1click{background:linear-gradient(135deg,#f5b400,#ef3124);color:#fff;display:flex;flex-direction:column;font-size:10px;line-height:1.1;text-align:center}
-.logo-sky{background:linear-gradient(135deg,#fff,#e0e0e0);color:#0066cc;font-size:10px;text-align:center;line-height:1}
-.logo-ton{background:radial-gradient(circle,#2ca5e0,#0088cc);color:#fff;border-radius:50%!important;width:50px!important;height:50px!important;font-size:22px}
-.logo-usdt{background:radial-gradient(circle,#26a17b,#007a54);color:#fff;border-radius:50%!important;width:50px!important;height:50px!important;font-size:22px}
+/* ===== РЕАЛИСТИЧНЫЕ ЛОГОТИПЫ БАНКОВ ===== */
+.pay-card .logo{
+  width:60px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:12px;flex-shrink:0;position:relative;overflow:hidden;
+  box-shadow:0 6px 18px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.25);
+}
+.pay-card .logo::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:45%;
+  background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0));
+  border-radius:10px 10px 50% 50%;pointer-events:none;
+}
+.pay-card .logo::after{
+  content:'';position:absolute;inset:0;border-radius:10px;
+  box-shadow:inset 0 -2px 6px rgba(0,0,0,.35),inset 0 2px 4px rgba(255,255,255,.15);
+  pointer-events:none;
+}
 
-/* PAYMENT STEP 2 */
+/* T-Pay */
+.logo-tpay{background:linear-gradient(135deg,#ffe066 0%,#ffc93c 40%,#e8a400 100%);color:#1a1a1a;flex-direction:column;gap:1px}
+.logo-tpay .tpay-box{background:#1a1a1a;color:#ffd93b;padding:2px 6px;border-radius:4px;font-size:11px;font-weight:900;letter-spacing:.5px}
+.logo-tpay .tpay-txt{font-size:13px;font-weight:900;color:#1a1a1a;letter-spacing:-.5px}
+
+/* SberPay */
+.logo-sber{background:linear-gradient(135deg,#2ecc40 0%,#21a038 50%,#0d7a22 100%);color:#fff;gap:3px}
+.logo-sber .sber-s{font-size:20px;font-weight:900;text-shadow:0 2px 4px rgba(0,0,0,.3)}
+.logo-sber .sber-t{font-size:9px;font-weight:800;letter-spacing:.5px;position:absolute;bottom:6px;right:8px;opacity:.9}
+
+/* Альфа */
+.logo-alfa{background:linear-gradient(135deg,#ff3b30 0%,#ef3124 50%,#b81e14 100%);color:#fff}
+.logo-alfa .alfa-a{font-size:26px;font-weight:900;font-family:Georgia,serif;text-shadow:0 2px 4px rgba(0,0,0,.4);line-height:1}
+.logo-alfa .alfa-bar{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);width:20px;height:3px;background:#fff;border-radius:2px}
+
+/* ВТБ */
+.logo-vtb{background:linear-gradient(135deg,#1a3d8f 0%,#0a2977 50%,#051c4d 100%);color:#fff}
+.logo-vtb .vtb-lines{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:2px}
+.logo-vtb .vtb-lines span{display:block;height:3px;background:#4da6ff;border-radius:2px;box-shadow:0 0 4px rgba(77,166,255,.6)}
+.logo-vtb .vtb-lines span:nth-child(1){width:14px}
+.logo-vtb .vtb-lines span:nth-child(2){width:10px}
+.logo-vtb .vtb-lines span:nth-child(3){width:6px}
+.logo-vtb .vtb-txt{position:absolute;bottom:8px;right:8px;font-size:14px;font-weight:900;letter-spacing:-.5px}
+
+/* ПСБ */
+.logo-psb{background:linear-gradient(135deg,#ffffff 0%,#f0f0f0 100%);color:#003791;position:relative}
+.logo-psb::before{
+  content:'';position:absolute;top:8px;left:8px;width:18px;height:18px;
+  background:linear-gradient(135deg,#ec6608,#ff8a00);border-radius:3px;
+  transform:rotate(-10deg);box-shadow:0 2px 4px rgba(236,102,8,.4);
+}
+.logo-psb .psb-txt{position:absolute;bottom:8px;right:8px;font-size:13px;font-weight:900;color:#003791}
+
+/* Газпромбанк */
+.logo-gazprom{background:linear-gradient(135deg,#1e88e5 0%,#0d47a1 50%,#062e6e 100%);color:#fff;overflow:hidden}
+.logo-gazprom::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:32px;height:32px;border-radius:50%;border:2px solid rgba(255,255,255,.5);
+  box-shadow:0 0 10px rgba(255,255,255,.3);
+}
+.logo-gazprom::after{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.7);
+}
+.logo-gazprom .gaz-txt{position:absolute;bottom:4px;left:50%;transform:translateX(-50%);font-size:8px;font-weight:800;letter-spacing:.5px;white-space:nowrap}
+
+/* 1 клик */
+.logo-1click{background:linear-gradient(135deg,#f5b400 0%,#e88b00 50%,#ef3124 100%);color:#fff;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;padding:6px}
+.logo-1click .cell{background:rgba(255,255,255,.25);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;backdrop-filter:blur(2px)}
+
+/* Sky Pay */
+.logo-sky{background:linear-gradient(135deg,#ffffff 0%,#e8e8e8 50%,#d0d0d0 100%);color:#0066cc;flex-direction:column;gap:2px}
+.logo-sky .sky-txt{font-size:13px;font-weight:900;color:#0066cc;letter-spacing:-.5px;line-height:1}
+.logo-sky .sky-sub{font-size:8px;font-weight:800;color:#1a3d8f;letter-spacing:1px}
+
+/* TON */
+.logo-ton{background:radial-gradient(circle at 30% 30%,#5fd0ff 0%,#2ca5e0 40%,#0088cc 70%,#005f99 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:26px;font-weight:900;box-shadow:0 6px 20px rgba(44,165,224,.6),inset 0 2px 8px rgba(255,255,255,.3),inset 0 -4px 10px rgba(0,0,0,.3)}
+.logo-ton::before{display:none}
+.logo-ton::after{display:none}
+.logo-ton .ton-icon{font-size:30px;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.4)}
+
+/* USDT */
+.logo-usdt{background:radial-gradient(circle at 30% 30%,#3ec49a 0%,#26a17b 40%,#007a54 70%,#004d34 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:26px;font-weight:900;box-shadow:0 6px 20px rgba(38,161,123,.6),inset 0 2px 8px rgba(255,255,255,.3),inset 0 -4px 10px rgba(0,0,0,.3)}
+.logo-usdt::before{display:none}
+.logo-usdt::after{display:none}
+.logo-usdt .usdt-icon{font-size:28px;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.4)}
+
+/* ===== PAYMENT STEP 2 ===== */
 .pay-step2{display:none;position:fixed;inset:0;background:#0d0518;z-index:960;overflow-y:auto;padding:env(safe-area-inset-top) 0 140px 0}
 .pay-step2.active{display:block;animation:fadeIn .25s}
 .step2-header{display:flex;justify-content:space-between;align-items:center;padding:16px 18px}
@@ -247,7 +313,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .step2-header .close-x{background:none;border:none;color:#9a8ab8;font-size:26px;cursor:pointer;line-height:1}
 .step2-title{font-size:26px;font-weight:900;padding:8px 18px 22px}
 .step2-method{display:flex;align-items:center;gap:14px;background:#1a0f2e;border:1px solid rgba(140,80,255,.2);border-radius:14px;padding:14px 16px;margin:0 18px 20px}
-.step2-method .logo{width:44px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;flex-shrink:0}
+.step2-method .logo{width:44px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;flex-shrink:0;background:#2a1548;color:#fff}
 .step2-method .name{flex:1;font-size:15px;font-weight:800}
 .step2-method .chev{color:#8a7aab;font-size:20px}
 .step2-sum-label{font-size:13px;color:#c9b8e8;padding:0 18px 8px}
@@ -274,6 +340,24 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .step2-continue .to-label{font-size:13px;color:#8a7aab;margin-bottom:8px}
 .step2-continue .btn{width:100%;padding:16px;border-radius:14px;border:none;background:#2a2a3a;color:#8a7aab;font-size:16px;font-weight:800;cursor:pointer;transition:all .2s}
 .step2-continue .btn.active{background:#2196f3;color:#fff;box-shadow:0 6px 25px rgba(33,150,243,.5)}
+
+/* ===== ЭКРАН ПОИСКА РЕКВИЗИТОВ ===== */
+.search-reqs-screen{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 40%,#2a1548 0%,#0d0518 70%);z-index:970;display:none;align-items:center;justify-content:center;padding:20px;text-align:center}
+.search-reqs-screen.active{display:flex;animation:fadeIn .35s}
+.srs-content{max-width:340px;width:100%;display:flex;flex-direction:column;align-items:center}
+.srs-spinner{position:relative;width:140px;height:140px;margin-bottom:32px}
+.srs-ring{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;border-top-color:#a855f7;border-right-color:#a855f7;animation:srsSpin 1.2s linear infinite}
+.srs-ring-inner{position:absolute;inset:16px;border-radius:50%;border:3px solid transparent;border-bottom-color:#c084fc;border-left-color:#c084fc;animation:srsSpin 1.8s linear infinite reverse}
+@keyframes srsSpin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.srs-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:44px;filter:drop-shadow(0 0 20px rgba(168,85,247,.8));animation:srsPulse 2s ease-in-out infinite}
+@keyframes srsPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.15)}}
+.srs-title{font-size:24px;font-weight:900;color:#fff;margin-bottom:10px;letter-spacing:1px}
+.srs-subtitle{font-size:14px;color:#a78bfa;margin-bottom:28px;line-height:1.5}
+.srs-timer{background:rgba(40,25,70,.7);border:1px solid rgba(168,85,247,.4);border-radius:16px;padding:14px 24px;margin-bottom:20px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(10px)}
+.srs-timer #srsTimer{font-size:28px;font-weight:900;color:#ffd700;font-variant-numeric:tabular-nums;text-shadow:0 0 20px rgba(255,215,0,.5)}
+.srs-timer-label{font-size:11px;color:#8a7aab;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.srs-status{font-size:13px;color:#c9b8e8;font-weight:600;animation:srsDots 1.5s ease-in-out infinite}
+@keyframes srsDots{0%,100%{opacity:.6}50%{opacity:1}}
 </style>
 </head><body>
 
@@ -426,35 +510,35 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
   <div class="pay-grid">
     <div class="pay-card" onclick="payChoose('T-PAY','tpay',200)">
       <div class="left"><div class="name">T-PAY</div><div class="min">от 200 ₽</div></div>
-      <div class="logo logo-tpay"><span>T</span>Pay</div>
+      <div class="logo logo-tpay"><div class="tpay-box">T</div><div class="tpay-txt">Pay</div></div>
     </div>
     <div class="pay-card" onclick="payChoose('SberPay','sber',1000)">
       <div class="left"><div class="name">SberPay</div><div class="min">от 1 000 ₽</div></div>
-      <div class="logo logo-sber">Sber</div>
+      <div class="logo logo-sber"><div class="sber-s">S</div><div class="sber-t">PAY</div></div>
     </div>
     <div class="pay-card" onclick="payChoose('Альфа-Банк','alfa',1000)">
       <div class="left"><div class="name">Альфа-Банк</div><div class="min">от 1 000 ₽</div></div>
-      <div class="logo logo-alfa">A</div>
+      <div class="logo logo-alfa"><div class="alfa-a">A</div><div class="alfa-bar"></div></div>
     </div>
     <div class="pay-card" onclick="payChoose('ВТБ','vtb',1000)">
-      <div class="left"><div class="name">ВТБ 1 клик</div><div class="min">от 1 000 ₽</div></div>
-      <div class="logo logo-vtb">ВТБ</div>
+      <div class="left"><div class="name">ВТБ</div><div class="min">от 1 000 ₽</div></div>
+      <div class="logo logo-vtb"><div class="vtb-lines"><span></span><span></span><span></span></div><div class="vtb-txt">ВТБ</div></div>
     </div>
     <div class="pay-card" onclick="payChoose('ПСБ','psb',1000)">
       <div class="left"><div class="name">ПСБ Банк</div><div class="min">от 1 000 ₽</div></div>
-      <div class="logo logo-psb">ПСБ</div>
+      <div class="logo logo-psb"><div class="psb-txt">ПСБ</div></div>
     </div>
     <div class="pay-card" onclick="payChoose('Газпромбанк','gaz',1000)">
       <div class="left"><div class="name">Газпромбанк</div><div class="min">от 1 000 ₽</div></div>
-      <div class="logo logo-gazprom">ГПБ</div>
+      <div class="logo logo-gazprom"><div class="gaz-txt">ГАЗПРОМ</div></div>
     </div>
     <div class="pay-card" onclick="payChoose('1 клик','1click',200)">
       <div class="left"><div class="name">1 клик</div><div class="min">от 200 ₽</div></div>
-      <div class="logo logo-1click"><div>T</div><div>A</div></div>
+      <div class="logo logo-1click"><div class="cell">T</div><div class="cell">S</div><div class="cell">X</div><div class="cell">A</div></div>
     </div>
     <div class="pay-card" onclick="payChoose('Sky Pay','sky',5000)">
       <div class="left"><div class="name">Sky Pay</div><div class="min">от 5 000 ₽</div></div>
-      <div class="logo logo-sky">SKY<br>PAY</div>
+      <div class="logo logo-sky"><div class="sky-txt">SKY</div><div class="sky-sub">PAY</div></div>
     </div>
   </div>
 
@@ -465,14 +549,14 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
         <div class="name">TON<br><span style="font-size:12px;color:#9a8ab8">(Toncoin)</span></div>
         <div class="bonus-tag">🎁 +7%</div>
       </div>
-      <div class="logo logo-ton">◈</div>
+      <div class="logo logo-ton"><span class="ton-icon">◈</span></div>
     </div>
     <div class="pay-card" onclick="payChoose('USDT','usdt',100)">
       <div class="left">
         <div class="name">USDT<br><span style="font-size:12px;color:#9a8ab8">(Toncoin)</span></div>
         <div class="bonus-tag">🎁 +7%</div>
       </div>
-      <div class="logo logo-usdt">₮</div>
+      <div class="logo logo-usdt"><span class="usdt-icon">₮</span></div>
     </div>
   </div>
 </div>
@@ -485,7 +569,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
   </div>
   <div class="step2-title">Банковский платёж</div>
   <div class="step2-method" onclick="backToPayList()">
-    <div class="logo logo-tpay" id="s2Logo">T</div>
+    <div class="logo" id="s2Logo">T</div>
     <div class="name" id="s2Name">T-PAY</div>
     <div class="chev">⇅</div>
   </div>
@@ -515,6 +599,24 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
   <div class="step2-continue">
     <div class="to-label">К пополнению</div>
     <button class="btn" id="s2ContinueBtn" onclick="payContinue()">Продолжить</button>
+  </div>
+</div>
+
+<!-- ЭКРАН ПОИСКА РЕКВИЗИТОВ -->
+<div class="search-reqs-screen" id="searchReqsScreen">
+  <div class="srs-content">
+    <div class="srs-spinner">
+      <div class="srs-ring"></div>
+      <div class="srs-ring-inner"></div>
+      <div class="srs-icon">🔍</div>
+    </div>
+    <div class="srs-title">Поиск реквизитов</div>
+    <div class="srs-subtitle">Пожалуйста, не закрывайте приложение</div>
+    <div class="srs-timer">
+      <span id="srsTimer">10:00</span>
+      <span class="srs-timer-label">до истечения ссылки</span>
+    </div>
+    <div class="srs-status" id="srsStatus">Связываемся с оператором...</div>
   </div>
 </div><script>
 /* ============ TELEGRAM SAFE INIT ============ */
@@ -709,7 +811,7 @@ function handleModalAction(action){
   }
   alert('Раздел в разработке');
 }
-/* ============ PAYMENT STEP 1 ============ */
+     </script>/* ============ PAYMENT STEP 1 ============ */
 function openPay(){
   haptic('medium');
   document.getElementById('payBal').innerText = balance + ' ₽';
@@ -780,15 +882,57 @@ function toggleBonus(){
   bonusEnabled = !bonusEnabled;
   document.getElementById('bonusToggle').classList.toggle('on', bonusEnabled);
 }
+
+/* ============ ЭКРАН ПОИСКА РЕКВИЗИТОВ ============ */
+let srsInterval = null;
+let srsTimeLeft = 600;
+
+function openSearchReqs(){
+  haptic('medium');
+  document.getElementById('searchReqsScreen').classList.add('active');
+  srsTimeLeft = 600;
+  updateSrsTimer();
+  if(srsInterval) clearInterval(srsInterval);
+  srsInterval = setInterval(()=>{
+    srsTimeLeft--;
+    updateSrsTimer();
+    if(srsTimeLeft <= 0){
+      clearInterval(srsInterval);
+      document.getElementById('srsStatus').innerText = '⏱ Время истекло. Попробуйте снова.';
+    }
+  }, 1000);
+}
+
+function closeSearchReqs(){
+  document.getElementById('searchReqsScreen').classList.remove('active');
+  if(srsInterval) clearInterval(srsInterval);
+}
+
+function updateSrsTimer(){
+  const m = Math.floor(srsTimeLeft / 60);
+  const s = srsTimeLeft % 60;
+  document.getElementById('srsTimer').innerText = m + ':' + String(s).padStart(2, '0');
+}
+
+/* ============ PAY CONTINUE ============ */
 function payContinue(){
   if(!validateSum()) return;
   haptic('medium');
   const sum = parseInt(document.getElementById('s2Input').value);
-  const total = bonusEnabled ? Math.floor(sum * 2) : sum;
-  alert('✅ Заявка на пополнение\n\nМетод: ' + payMethod.name + '\nСумма: ' + sum + ' ₽' + (bonusEnabled ? '\nБонус 100%: +' + sum + ' ₽' : '') + '\n\nИтого к зачислению: ' + total + ' ₽\n\nПереход в бота для оплаты...');
-  if(tg.openTelegramLink){
-    tg.openTelegramLink('https://t.me/CoinFlipClupRoBot?start=pay_' + payMethod.code + '_' + sum + '_' + (bonusEnabled?1:0));
-  }
+  const userId = tg.initDataUnsafe?.user?.id || '0';
+  const userName = tg.initDataUnsafe?.user?.first_name || 'Гость';
+
+  fetch('/api/notify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      type: 'request',
+      userName, userId, amount: sum, method: payMethod.name
+    })
+  }).catch(e => console.error('notify error', e));
+
+  closePay2();
+  openSearchReqs();
 }
 
 /* ============ GAME OPEN/CLOSE ============ */
@@ -805,9 +949,7 @@ function openGame(game){
 function closeGame(){
   haptic('light');
   document.getElementById('gameScreen').classList.remove('active');
-}
-
-/* ============ SYMBOLS ============ */
+  }/* ============ SYMBOLS ============ */
 const SYM = {
   diamond:'<svg viewBox="0 0 64 64" width="64" height="64"><defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a5f3fc"/><stop offset="0.5" stop-color="#06b6d4"/><stop offset="1" stop-color="#0e7490"/></linearGradient></defs><path d="M32 4 L60 32 L32 60 L4 32 Z" fill="url(#gd)" stroke="#083344" stroke-width="1.5"/></svg>',
   crown:'<svg viewBox="0 0 64 64" width="64" height="64"><defs><linearGradient id="gc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="0.5" stop-color="#eab308"/><stop offset="1" stop-color="#854d0e"/></linearGradient></defs><path d="M8 50 L12 22 L24 34 L32 12 L40 34 L52 22 L56 50 Z" fill="url(#gc)" stroke="#422006" stroke-width="1.5"/><circle cx="12" cy="20" r="3" fill="#fef08a"/><circle cx="32" cy="10" r="3" fill="#fef08a"/><circle cx="52" cy="20" r="3" fill="#fef08a"/></svg>',
@@ -841,7 +983,9 @@ function renderGame(game){
   else if(game==='poker'){
     area.innerHTML = '<div class="game-field"><div class="card-area"><div class="hand"><div class="hand-title">Ваши карты <span id="pScore">?</span></div><div class="cards" id="pCards"></div></div><div class="hand"><div class="hand-title">Стол <span id="tScore">?</span></div><div class="cards" id="tCards"></div></div></div><button class="main-btn" id="pokerStartBtn" onclick="pokerStart()">Раздать карты</button><div class="result-msg" id="result"></div></div>';
   }
-  }/* ============ SLOTS ============ */
+}
+
+/* ============ SLOTS ============ */
 function renderReels(idxs){
   const syms = ['diamond','crown','cherry','star','coin','seven'];
   ['r1','r2','r3'].forEach((id,i)=>{
@@ -925,7 +1069,9 @@ function playDice(){
     if(ps > ds){ balance += currentBet*2; updateUI(); showResult('Победа! '+ps+' vs '+ds+' +'+currentBet*2+' ₽','win'); }
     else { updateUI(); showResult('Проигрыш '+ps+' vs '+ds,'lose'); }
   }, 1800);
-  }/* ============ BLACKJACK ============ */
+}
+
+/* ============ BLACKJACK ============ */
 function cardValue(c){ if(c==='A')return 11; if(['K','Q','J'].includes(c))return 10; return parseInt(c); }
 function calcHand(hand){
   let s=0, a=0;
@@ -991,9 +1137,7 @@ function endBJ(){
   document.getElementById('bjStartBtn').style.display='block';
   document.getElementById('bjStartBtn').innerText='Играть снова';
   document.getElementById('bjActions').style.display='none';
-}
-
-/* ============ ROULETTE ============ */
+}/* ============ ROULETTE ============ */
 function playRoulette(betType){
   haptic('medium');
   if(!checkBet()) return; updateUI();
@@ -1012,7 +1156,9 @@ function playRoulette(betType){
     wheel.style.transform = 'rotate('+(deg%360)+'deg)';
     setTimeout(()=>{ wheel.style.transition = 'transform 4s cubic-bezier(.17,.67,.3,1)'; }, 50);
   }, 4000);
-    }/* ============ COIN ============ */
+}
+
+/* ============ COIN ============ */
 function playCoin(side){
   haptic('medium');
   if(!checkBet()) return; updateUI();
@@ -1078,7 +1224,9 @@ if(tg.BackButton){
     const m = document.getElementById('modal');
     const p1 = document.getElementById('payModal');
     const p2 = document.getElementById('payStep2');
+    const srs = document.getElementById('searchReqsScreen');
     if(g.classList.contains('active')) closeGame();
+    else if(srs.classList.contains('active')) closeSearchReqs();
     else if(p2.classList.contains('active')) closePay2();
     else if(p1.classList.contains('active')) closePay();
     else if(m.classList.contains('active')) closeModal();
