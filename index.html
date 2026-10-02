@@ -13,6 +13,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:
 body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}
 .svg-icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block}
 
+/* LOADER */
 .loader{position:fixed;inset:0;z-index:99999;background:linear-gradient(180deg,#1a0d2e 0%,#2a1548 50%,#3a1d5c 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:30px;transition:opacity .8s ease,visibility .8s ease}
 .loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
 .loader-logo{font-size:44px;font-weight:900;background:linear-gradient(135deg,#a855f7,#c084fc,#e9d5ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:6px;filter:drop-shadow(0 0 30px rgba(168,85,247,.8));animation:loaderPulse 2s ease-in-out infinite}
@@ -27,6 +28,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .loader-fill{width:0;height:100%;background:linear-gradient(90deg,#a855f7,#c084fc);animation:fillBar 2s ease-in-out forwards;box-shadow:0 0 15px #a855f7}
 @keyframes fillBar{0%{width:0}100%{width:100%}}
 
+/* BG */
 .bg{position:fixed;inset:0;z-index:-5;background:linear-gradient(180deg,#1a0d2e 0%,#2a1548 50%,#3a1d5c 100%)}
 .aurora{position:fixed;inset:-30%;z-index:-4;pointer-events:none;background:radial-gradient(ellipse at 20% 20%,rgba(140,80,255,.5) 0%,transparent 45%),radial-gradient(ellipse at 80% 70%,rgba(200,80,255,.4) 0%,transparent 45%);animation:auroraMove 20s ease-in-out infinite alternate;filter:blur(50px)}
 @keyframes auroraMove{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-30px,20px) scale(1.15)}}
@@ -37,6 +39,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .particle{position:absolute;width:2px;height:2px;border-radius:50%;opacity:0;animation:floatUp linear infinite;box-shadow:0 0 10px currentColor}
 @keyframes floatUp{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) scale(1);opacity:0}}
 
+/* APP */
 .app{position:relative;z-index:10;width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden}
 .top-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;flex-shrink:0;gap:8px}
 .logo-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;color:#a855f7;cursor:pointer}
@@ -48,6 +51,8 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#6366f1);display:flex;align-items:center;justify-content:center;border:2px solid rgba(140,80,255,.5);cursor:pointer;color:#fff}
 .content{flex:1;overflow-y:auto;padding-bottom:100px;scrollbar-width:none}
 .content::-webkit-scrollbar{display:none}
+
+/* BANNER */
 .banner{margin:0 14px 16px;border-radius:20px;background:linear-gradient(135deg,#5b21b6 0%,#7c3aed 50%,#a855f7 100%);padding:22px 20px;position:relative;overflow:hidden;box-shadow:0 10px 40px rgba(124,58,237,.5);min-height:180px;display:flex;flex-direction:column;justify-content:center;cursor:pointer}
 .banner::before{content:'';position:absolute;top:-40%;right:-20%;width:220px;height:220px;background:radial-gradient(circle,rgba(255,215,0,.3),transparent 70%);animation:bannerPulse 4s ease-in-out infinite}
 @keyframes bannerPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.2);opacity:1}}
@@ -56,6 +61,8 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .banner-sub{font-size:12px;color:rgba(255,255,255,.8);position:relative;z-index:2;margin-bottom:16px}
 .banner-btn{background:linear-gradient(135deg,#a855f7,#8b5cf6);color:#fff;border:none;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 6px 20px rgba(168,85,247,.5);position:relative;z-index:2;align-self:flex-start}
 .banner-gift{position:absolute;right:-20px;bottom:-20px;opacity:.35;pointer-events:none;color:#ffd700}
+
+/* SEARCH */
 .search-row{display:flex;gap:8px;padding:0 14px 12px}
 .search-wrap{flex:1;position:relative}
 .search-wrap .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:#a78bfa;pointer-events:none}
@@ -63,6 +70,8 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .search-input::placeholder{color:#a78bfa}
 .filter-btn{background:rgba(40,25,70,.7);border:1px solid rgba(140,80,255,.3);border-radius:14px;padding:12px 16px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px}
 .filter-btn .chev{width:14px;height:14px;color:#a78bfa}
+
+/* SECTION */
 .section{padding:0 14px;margin-bottom:18px}
 .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .section-title{font-size:17px;font-weight:900;display:flex;align-items:center;gap:8px}
@@ -70,15 +79,18 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .games-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .game-card{background:linear-gradient(145deg,rgba(40,25,70,.9),rgba(25,15,45,.9));border:1px solid rgba(140,80,255,.3);border-radius:18px;overflow:hidden;cursor:pointer;position:relative;transition:all .2s;box-shadow:0 6px 25px rgba(0,0,0,.5)}
 .game-card:active{transform:scale(.96);border-color:#c084fc;box-shadow:0 0 35px rgba(192,132,252,.7)}
-.game-card .game-img{width:100%;height:110px;object-fit:cover;display:block;background:linear-gradient(135deg,#5b21b6,#a855f7)}
+.game-card .game-img{width:100%;height:120px;object-fit:cover;display:block;background:linear-gradient(135deg,#5b21b6,#a855f7)}
 .game-card .game-name{font-size:13px;font-weight:800;color:#fff;padding:10px 12px 4px;line-height:1.2}
 .game-card .game-tag{font-size:10px;color:#a78bfa;padding:0 12px 10px;font-weight:600}
+
+/* BOTTOM NAV */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(20,10,35,.98);backdrop-filter:blur(24px);border-top:1px solid rgba(140,80,255,.3);display:flex;justify-content:space-around;align-items:center;padding:10px 0 18px;z-index:100;padding-bottom:calc(10px + env(safe-area-inset-bottom))}
 .nav-item{text-align:center;font-size:10px;color:#7a5aa0;flex:1;cursor:pointer;font-weight:700;position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0}
 .nav-item.active{color:#c084fc}
 .nav-item.center{position:relative;margin-top:-20px}
 .nav-item.center .nav-circle{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#6366f1);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(168,85,247,.6);border:4px solid #1a0d2e;color:#fff}
-
+            </style><style>
+/* GAME SCREEN */
 .game-screen{position:fixed;inset:0;background:rgba(10,5,20,.98);backdrop-filter:blur(30px);z-index:600;display:none;flex-direction:column;padding:env(safe-area-inset-top) 20px calc(20px + env(safe-area-inset-bottom));overflow-y:auto}
 .game-screen.active{display:flex;animation:screenIn .3s cubic-bezier(.4,0,.2,1)}
 @keyframes screenIn{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
@@ -89,8 +101,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .game-balance{background:rgba(40,25,70,.8);border:1px solid rgba(140,80,255,.4);padding:8px 14px;border-radius:12px;font-size:14px;font-weight:800;color:#ffd700}
 .game-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 0;min-height:0}
 .game-field{width:100%;max-width:340px;background:linear-gradient(145deg,rgba(40,25,70,.9),rgba(25,15,45,.9));border:1px solid rgba(140,80,255,.4);border-radius:24px;padding:30px 22px;text-align:center;box-shadow:0 0 40px rgba(168,85,247,.2)}
-</style>
-</head><style>
+
 /* SLOTS */
 .reels{display:flex;justify-content:center;gap:12px;margin-bottom:26px}
 .reel{width:80px;height:100px;background:linear-gradient(145deg,#2a1548,#0a0514);border-radius:16px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(168,85,247,.5);box-shadow:inset 0 3px 15px rgba(0,0,0,.8);transition:all .3s;position:relative;overflow:hidden}
@@ -153,17 +164,11 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
     radial-gradient(circle at 70% 80%,rgba(120,53,15,.7) 0%,rgba(0,0,0,0) 45%),
     radial-gradient(circle at 50% 50%,#ffe680 0%,#ffd700 35%,#c8951a 70%,#8b6914 100%);
   border:5px solid #a97d14;
-  box-shadow:
-    0 0 60px rgba(255,215,0,.9),
-    inset 0 0 40px rgba(139,105,20,.7),
-    inset 0 6px 12px rgba(255,255,255,.6),
-    inset 0 -8px 18px rgba(0,0,0,.35);
-  color:#3a2808;
-  text-shadow:0 2px 3px rgba(0,0,0,.35)
-}
+  box-shadow:0 0 60px rgba(255,215,0,.9),inset 0 0 40px rgba(139,105,20,.7),inset 0 6px 12px rgba(255,255,255,.6),inset 0 -8px 18px rgba(0,0,0,.35);
+  color:#3a2808;text-shadow:0 2px 3px rgba(0,0,0,.35)}
 .coin-face::before{content:'';position:absolute;inset:10px;border-radius:50%;border:2px dashed rgba(120,53,15,.5)}
 .coin-tails{transform:rotateY(180deg)}
-.coin-symbol{font-size:58px;font-weight:900;line-height:1;font-family:'Inter',sans-serif}
+.coin-symbol{font-size:58px;font-weight:900;line-height:1}
 .coin-text{font-size:11px;letter-spacing:5px;font-weight:900;margin-top:6px}
 .coin.rolling{animation:coinSpin 4s cubic-bezier(.25,.7,.4,1) forwards}
 @keyframes coinSpin{
@@ -173,12 +178,12 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
   75%{transform:rotateY(2700deg) translateY(-40px)}
   100%{transform:rotateY(3600deg) translateY(0)}
 }
-.coin-shadow{width:120px;height:14px;background:radial-gradient(ellipse,rgba(0,0,0,.6),transparent 70%);margin:6px auto 0;transition:all .3s}
+.coin-shadow{width:120px;height:14px;background:radial-gradient(ellipse,rgba(0,0,0,.6),transparent 70%);margin:6px auto 0}
 
+/* RESULT + BUTTONS */
 .result-msg{font-size:20px;font-weight:900;text-align:center;margin-top:20px;min-height:30px}
 .result-msg.win{color:#4ade80;text-shadow:0 0 20px rgba(74,222,128,.6)}
 .result-msg.lose{color:#ef4444;text-shadow:0 0 20px rgba(239,68,68,.6)}
-
 .bet-label{font-size:10px;color:#a78bfa;letter-spacing:3px;text-align:center;font-weight:700;margin-bottom:10px;text-transform:uppercase}
 .bet-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;max-width:340px;margin:0 auto}
 .bet-btn{padding:12px 4px;border-radius:12px;background:rgba(40,25,70,.7);border:1px solid rgba(168,85,247,.4);color:#fff;font-size:13px;font-weight:700;cursor:pointer;text-align:center}
@@ -190,7 +195,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .actions-row{display:flex;gap:8px;width:100%;max-width:340px;margin-top:16px}
 .actions-row .main-btn{flex:1;padding:14px 6px;font-size:12px;max-width:none;margin-top:0}
 
-/* MODAL */
+/* GENERIC MODAL (bottom sheet) */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:900;display:none;align-items:flex-end;justify-content:center}
 .modal.active{display:flex;animation:fadeIn .25s}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -200,15 +205,53 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .modal-title{font-size:20px;font-weight:900;margin-bottom:14px;text-align:center}
 .modal-text{font-size:14px;color:#c9b8e8;margin-bottom:18px;line-height:1.5;text-align:center}
 .modal-list{display:flex;flex-direction:column;gap:8px}
-.modal-item{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:rgba(40,25,70,.6);border:1px solid rgba(140,80,255,.25);cursor:pointer;font-weight:700;font-size:14px;color:#fff;transition:all .15s}
+.modal-item{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:rgba(40,25,70,.6);border:1px solid rgba(140,80,255,.25);cursor:pointer;font-weight:700;font-size:14px;color:#fff}
 .modal-item:active{background:rgba(168,85,247,.3);transform:scale(.97)}
-.modal-item .mi-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#a855f7,#6366f1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.modal-item .mi-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#a855f7,#6366f1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
 .modal-item .mi-text{flex:1}
 .modal-item .mi-sub{font-size:11px;color:#a78bfa;font-weight:500;margin-top:2px}
 .modal-close{margin-top:14px;width:100%;padding:14px;border-radius:14px;background:rgba(40,25,70,.6);border:1px solid rgba(140,80,255,.3);color:#c084fc;font-weight:800;font-size:14px;cursor:pointer}
+
+/* ===== PAYMENT MENU ===== */
+.pay-modal{display:none;position:fixed;inset:0;background:#0d0518;z-index:950;overflow-y:auto;padding:env(safe-area-inset-top) 0 calc(30px + env(safe-area-inset-bottom))}
+.pay-modal.active{display:block;animation:fadeIn .25s}
+.pay-top{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;position:sticky;top:0;background:#0d0518;z-index:5}
+.pay-close{background:none;border:none;color:#fff;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px}
+.pay-close .x{font-size:22px;line-height:1}
+.pay-user{display:flex;align-items:center;gap:10px}
+.pay-user-info{text-align:right;font-size:11px;color:#9a8ab8}
+.pay-user-info .bal{color:#fff;font-size:14px;font-weight:800;display:block;margin-top:2px}
+.pay-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#ff8a00,#ff5e00);display:flex;align-items:center;justify-content:center;font-size:20px}
+.pay-title{display:flex;justify-content:space-between;align-items:center;padding:8px 18px 18px;border-bottom:1px solid rgba(255,255,255,.06)}
+.pay-title h2{font-size:24px;font-weight:900}
+.pay-title .close-x{background:none;border:none;color:#9a8ab8;font-size:26px;cursor:pointer;line-height:1}
+.pay-region{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;font-size:14px;color:#c9b8e8}
+.pay-region .val{display:flex;align-items:center;gap:8px;background:rgba(40,25,70,.6);padding:8px 12px;border-radius:10px;font-weight:700;color:#fff;border:1px solid rgba(140,80,255,.2)}
+.pay-region .flag{font-size:16px}
+.pay-section-title{font-size:20px;font-weight:900;padding:8px 18px 14px;color:#fff}
+.pay-section-title.crypto{padding-top:24px;border-top:1px solid rgba(255,255,255,.06);margin-top:16px}
+.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px}
+.pay-card{background:#1a0f2e;border:1px solid rgba(140,80,255,.15);border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:flex-end;min-height:110px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
+.pay-card:active{transform:scale(.96);border-color:#a855f7}
+.pay-card .left{display:flex;flex-direction:column;justify-content:space-between;height:100%;gap:18px}
+.pay-card .name{font-size:15px;font-weight:800;color:#fff}
+.pay-card .min{font-size:12px;color:#8a7aab;font-weight:600}
+.pay-card .logo{width:56px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.pay-card .bonus-tag{display:flex;align-items:center;gap:4px;background:rgba(140,80,255,.15);border:1px solid rgba(168,85,247,.4);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:800;color:#c084fc;align-self:flex-start;margin-top:6px}
+
+.logo-tpay{background:linear-gradient(135deg,#ffd93b,#f5b400);color:#1a1a1a}
+.logo-tpay span{background:#1a1a1a;color:#ffd93b;padding:2px 5px;border-radius:4px;font-size:11px;margin-right:2px}
+.logo-sber{background:linear-gradient(135deg,#21a038,#0d7a22);color:#fff}
+.logo-alfa{background:#ef3124;color:#fff}
+.logo-vtb{background:linear-gradient(135deg,#0a2977,#0d47a1);color:#fff}
+.logo-psb{background:#fff;color:#003791}
+.logo-gazprom{background:linear-gradient(135deg,#0d47a1,#1e88e5);color:#fff;font-size:11px}
+.logo-1click{background:linear-gradient(135deg,#f5b400,#ef3124);color:#fff;display:flex;flex-direction:column;font-size:10px;line-height:1.1;text-align:center}
+.logo-sky{background:linear-gradient(135deg,#fff,#e0e0e0);color:#0066cc;font-size:10px;text-align:center;line-height:1}
+.logo-ton{background:radial-gradient(circle,#2ca5e0,#0088cc);color:#fff;border-radius:50%!important;width:50px!important;height:50px!important;font-size:22px}
+.logo-usdt{background:radial-gradient(circle,#26a17b,#007a54);color:#fff;border-radius:50%!important;width:50px!important;height:50px!important;font-size:22px}
 </style>
-</head>
-<body>
+</head><body>
 
 <!-- LOADER -->
 <div class="loader" id="loader">
@@ -218,7 +261,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
   <div class="loader-bar"><div class="loader-fill"></div></div>
 </div>
 
-<!-- BACKGROUND -->
+<!-- BG -->
 <div class="bg"></div>
 <div class="aurora"></div>
 <div class="stars" id="stars"></div>
@@ -234,7 +277,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
     <div class="balance-pill" onclick="openModal('balance')">
       <span class="val" id="balance">10000</span><span>₽</span>
     </div>
-    <button class="deposit-btn" onclick="openModal('deposit')">Пополнить</button>
+    <button class="deposit-btn" onclick="openPay()">Пополнить</button>
     <div class="bell-btn" onclick="openModal('notifications')">
       <svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
       <span class="badge">2</span>
@@ -246,7 +289,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 
   <!-- CONTENT -->
   <div class="content">
-    <div class="banner" onclick="openModal('deposit')">
+    <div class="banner" onclick="openPay()">
       <div class="banner-tag">100FS + 100%</div>
       <div class="banner-title">Приветственный бонус</div>
       <div class="banner-sub">Стартуй с преимуществом</div>
@@ -270,12 +313,30 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
         </div>
       </div>
       <div class="games-grid" id="gamesGrid">
-        <div class="game-card" data-name="слоты slots" onclick="openGame('slots')"><div class="game-img" style="background:linear-gradient(135deg,#a855f7,#6366f1)"></div><div class="game-name">Слоты</div><div class="game-tag">от 50 ₽</div></div>
-        <div class="game-card" data-name="кости dice" onclick="openGame('dice')"><div class="game-img" style="background:linear-gradient(135deg,#22c55e,#15803d)"></div><div class="game-name">Кости</div><div class="game-tag">от 50 ₽</div></div>
-        <div class="game-card" data-name="блэкджек blackjack" onclick="openGame('blackjack')"><div class="game-img" style="background:linear-gradient(135deg,#dc2626,#7f1d1d)"></div><div class="game-name">Блэкджек</div><div class="game-tag">от 50 ₽</div></div>
-        <div class="game-card" data-name="рулетка roulette" onclick="openGame('roulette')"><div class="game-img" style="background:linear-gradient(135deg,#f59e0b,#b45309)"></div><div class="game-name">Рулетка</div><div class="game-tag">от 50 ₽</div></div>
-        <div class="game-card" data-name="монетка coin" onclick="openGame('coin')"><div class="game-img" style="background:linear-gradient(135deg,#facc15,#a16207)"></div><div class="game-name">Монетка</div><div class="game-tag">от 50 ₽</div></div>
-        <div class="game-card" data-name="покер poker" onclick="openGame('poker')"><div class="game-img" style="background:linear-gradient(135deg,#ec4899,#831843)"></div><div class="game-name">Покер</div><div class="game-tag">от 50 ₽</div></div>
+        <div class="game-card" data-name="слоты slots" onclick="openGame('slots')">
+          <img src="slots.jpg" class="game-img" onerror="this.style.display='none'">
+          <div class="game-name">Слоты</div><div class="game-tag">от 50 ₽</div>
+        </div>
+        <div class="game-card" data-name="кости dice" onclick="openGame('dice')">
+          <img src="dice.jpg" class="game-img" onerror="this.style.display='none'">
+          <div class="game-name">Кости</div><div class="game-tag">от 50 ₽</div>
+        </div>
+        <div class="game-card" data-name="блэкджек blackjack" onclick="openGame('blackjack')">
+          <img src="blackjack.jpg" class="game-img" onerror="this.style.display='none'">
+          <div class="game-name">Блэкджек</div><div class="game-tag">от 50 ₽</div>
+        </div>
+        <div class="game-card" data-name="рулетка roulette" onclick="openGame('roulette')">
+          <div class="game-img" style="background:linear-gradient(135deg,#f59e0b,#b45309)"></div>
+          <div class="game-name">Рулетка</div><div class="game-tag">от 50 ₽</div>
+        </div>
+        <div class="game-card" data-name="монетка coin" onclick="openGame('coin')">
+          <img src="coin.jpg" class="game-img" onerror="this.style.display='none'">
+          <div class="game-name">Монетка</div><div class="game-tag">от 50 ₽</div>
+        </div>
+        <div class="game-card" data-name="покер poker" onclick="openGame('poker')">
+          <img src="poker.jpg" class="game-img" onerror="this.style.display='none'">
+          <div class="game-name">Покер</div><div class="game-tag">от 50 ₽</div>
+        </div>
       </div>
     </div>
   </div>
@@ -313,7 +374,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
   </div>
 </div>
 
-<!-- MODAL -->
+<!-- GENERIC MODAL -->
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -321,12 +382,86 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
     <div id="modalBody"></div>
     <button class="modal-close" onclick="closeModal()">Закрыть</button>
   </div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="pay-modal" id="payModal">
+  <div class="pay-top">
+    <button class="pay-close" onclick="closePay()"><span class="x">×</span> Закрыть</button>
+    <div class="pay-user">
+      <div class="pay-user-info">RUB ▾<span class="bal" id="payBal">0 ₽</span></div>
+      <div class="pay-avatar">🐸</div>
+    </div>
+  </div>
+  <div class="pay-title">
+    <h2>Кошелёк</h2>
+    <button class="close-x" onclick="closePay()">×</button>
+  </div>
+  <div class="pay-region">
+    <span>Регион оплаты ❔</span>
+    <span class="val"><span class="flag">🇷🇺</span> RUB ▾</span>
+  </div>
+
+  <div class="pay-section-title">Банковский платёж</div>
+  <div class="pay-grid">
+    <div class="pay-card" onclick="paySelect('T-Pay',200)">
+      <div class="left"><div class="name">T-PAY</div><div class="min">от 200 ₽</div></div>
+      <div class="logo logo-tpay"><span>T</span>Pay</div>
+    </div>
+    <div class="pay-card" onclick="paySelect('SberPay',1000)">
+      <div class="left"><div class="name">SberPay</div><div class="min">от 1 000 ₽</div></div>
+      <div class="logo logo-sber">Sber</div>
+    </div>
+    <div class="pay-card" onclick="paySelect('Альфа-Банк',1000)">
+      <div class="left"><div class="name">Альфа-Банк</div><div class="min">от 1 000 ₽</div></div>
+      <div class="logo logo-alfa">A</div>
+    </div>
+    <div class="pay-card" onclick="paySelect('ВТБ',1000)">
+      <div class="left"><div class="name">ВТБ 1 клик</div><div class="min">от 1 000 ₽</div></div>
+      <div class="logo logo-vtb">ВТБ</div>
+    </div>
+    <div class="pay-card" onclick="paySelect('ПСБ',1000)">
+      <div class="left"><div class="name">ПСБ Банк</div><div class="min">от 1 000 ₽</div></div>
+      <div class="logo logo-psb">ПСБ</div>
+    </div>
+    <div class="pay-card" onclick="paySelect('Газпромбанк',1000)">
+      <div class="left"><div class="name">Газпромбанк</div><div class="min">от 1 000 ₽</div></div>
+      <div class="logo logo-gazprom">ГПБ</div>
+    </div>
+    <div class="pay-card" onclick="paySelect('1 клик',200)">
+      <div class="left"><div class="name">1 клик</div><div class="min">от 200 ₽</div></div>
+      <div class="logo logo-1click"><div>T</div><div>A</div></div>
+    </div>
+    <div class="pay-card" onclick="paySelect('Sky Pay',5000)">
+      <div class="left"><div class="name">Sky Pay</div><div class="min">от 5 000 ₽</div></div>
+      <div class="logo logo-sky">SKY<br>PAY</div>
+    </div>
+  </div>
+
+  <div class="pay-section-title crypto">Криптовалюта</div>
+  <div class="pay-grid">
+    <div class="pay-card" onclick="paySelect('TON',100)">
+      <div class="left">
+        <div class="name">TON<br><span style="font-size:12px;color:#9a8ab8">(Toncoin)</span></div>
+        <div class="bonus-tag">🎁 +7%</div>
+      </div>
+      <div class="logo logo-ton">◈</div>
+    </div>
+    <div class="pay-card" onclick="paySelect('USDT',100)">
+      <div class="left">
+        <div class="name">USDT<br><span style="font-size:12px;color:#9a8ab8">(Toncoin)</span></div>
+        <div class="bonus-tag">🎁 +7%</div>
+      </div>
+      <div class="logo logo-usdt">₮</div>
+    </div>
+  </div>
 </div><script>
 /* ============ TELEGRAM SAFE INIT ============ */
 const tg = (window.Telegram && window.Telegram.WebApp) ? window.Telegram.WebApp : {
   ready:()=>{}, expand:()=>{}, close:()=>{},
   setHeaderColor:()=>{}, setBackgroundColor:()=>{},
-  HapticFeedback:null, BackButton:null
+  HapticFeedback:null, BackButton:null,
+  openTelegramLink:null
 };
 try{ tg.ready(); tg.expand(); tg.setHeaderColor('#1a0d2e'); tg.setBackgroundColor('#1a0d2e'); }catch(e){}
 
@@ -383,6 +518,7 @@ setTimeout(()=>{document.getElementById('loader').classList.add('hidden');}, 220
 function updateUI(){
   const el = document.getElementById('balance'); if(el) el.innerText = balance;
   const gb = document.getElementById('gameBalance'); if(gb) gb.innerText = balance + ' ₽';
+  const pb = document.getElementById('payBal'); if(pb) pb.innerText = balance + ' ₽';
   localStorage.setItem('ms_balance', balance);
 }
 
@@ -447,19 +583,9 @@ const MODALS = {
     title:'Пригласить друга',
     text:'За каждого приглашённого друга вы получаете <b>500 ₽</b>, а он — <b>бонус 100%</b> на первый депозит!',
     items:[
-      {icon:'🔗', text:'Скопировать ссылку', sub:'https://t.me/CoinFlipClupRoBot', action:'copy_link'},
+      {icon:'🔗', text:'Скопировать ссылку', sub:'t.me/CoinFlipClupRoBot', action:'copy_link'},
       {icon:'📤', text:'Поделиться', sub:'Отправить друзьям', action:'share'},
       {icon:'👥', text:'Мои рефералы', sub:'0 человек', action:'my_refs'}
-    ]
-  },
-  deposit: {
-    title:'Пополнение',
-    text:'Выберите сумму пополнения',
-    items:[
-      {icon:'💳', text:'500 ₽', sub:'+ 100 FS в подарок', action:'dep_500'},
-      {icon:'💳', text:'1000 ₽', sub:'+ 100% бонус', action:'dep_1000'},
-      {icon:'💳', text:'2000 ₽', sub:'+ 100% бонус', action:'dep_2000'},
-      {icon:'💳', text:'5000 ₽', sub:'+ 100% бонус + 200 FS', action:'dep_5000'}
     ]
   },
   balance: {
@@ -529,10 +655,11 @@ function closeModal(){
   haptic('light');
   document.getElementById('modal').classList.remove('active');
 }
+
 function handleModalAction(action){
   haptic('medium');
-  if(action==='deposit'){ closeModal(); setTimeout(()=>openModal('deposit'), 200); return; }
-  if(action==='profile'){ closeModal(); setTimeout(()=>openModal('profile'), 200); return; }
+  if(action==='deposit'){ closeModal(); setTimeout(openPay, 250); return; }
+  if(action==='profile'){ closeModal(); setTimeout(()=>openModal('profile'), 250); return; }
   if(action==='home'){ closeModal(); return; }
   if(action==='copy_link'){
     const link = 'https://t.me/CoinFlipClupRoBot';
@@ -542,19 +669,42 @@ function handleModalAction(action){
   }
   if(action==='share'){
     const link = 'https://t.me/CoinFlipClupRoBot';
-    if(tg.openTelegramLink) tg.openTelegramLink('https://t.me/share/url?url='+encodeURIComponent(link));
-    return;
-  }
-  if(action.startsWith('dep_')){
-    const sum = parseInt(action.split('_')[1]);
-    alert('Заявка на пополнение '+sum+' ₽ принята!');
-    if(tg.openTelegramLink) tg.openTelegramLink('https://t.me/CoinFlipClupRoBot?start=deposit_'+sum);
+    if(tg.openTelegramLink){
+      tg.openTelegramLink('https://t.me/share/url?url='+encodeURIComponent(link));
+    } else {
+      alert('Ссылка: '+link);
+    }
     return;
   }
   alert('Раздел в разработке');
 }
 
-/* ============ OPEN / CLOSE GAME ============ */
+/* ============ PAYMENT ============ */
+function openPay(){
+  haptic('medium');
+  document.getElementById('payBal').innerText = balance + ' ₽';
+  document.getElementById('payModal').classList.add('active');
+}
+function closePay(){
+  haptic('light');
+  document.getElementById('payModal').classList.remove('active');
+}
+function paySelect(method, minSum){
+  haptic('medium');
+  const sum = prompt('Введите сумму пополнения (мин. '+minSum+' ₽):', minSum);
+  if(!sum) return;
+  const n = parseInt(sum);
+  if(isNaN(n) || n < minSum){
+    alert('Минимум '+minSum+' ₽');
+    return;
+  }
+  alert('✅ Заявка на пополнение\n\nМетод: '+method+'\nСумма: '+n+' ₽\n\nПереход в бота для оплаты...');
+  if(tg.openTelegramLink){
+    tg.openTelegramLink('https://t.me/CoinFlipClupRoBot?start=pay_'+method+'_'+n);
+  }
+}
+
+/* ============ GAME OPEN/CLOSE ============ */
 function openGame(game){
   haptic('medium');
   currentGame = game;
@@ -569,8 +719,7 @@ function closeGame(){
   haptic('light');
   document.getElementById('gameScreen').classList.remove('active');
 }
-
-/* ============ SYMBOLS ============ */
+</script>/* ============ SYMBOLS ============ */
 const SYM = {
   diamond:'<svg viewBox="0 0 64 64" width="64" height="64"><defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a5f3fc"/><stop offset="0.5" stop-color="#06b6d4"/><stop offset="1" stop-color="#0e7490"/></linearGradient></defs><path d="M32 4 L60 32 L32 60 L4 32 Z" fill="url(#gd)" stroke="#083344" stroke-width="1.5"/></svg>',
   crown:'<svg viewBox="0 0 64 64" width="64" height="64"><defs><linearGradient id="gc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="0.5" stop-color="#eab308"/><stop offset="1" stop-color="#854d0e"/></linearGradient></defs><path d="M8 50 L12 22 L24 34 L32 12 L40 34 L52 22 L56 50 Z" fill="url(#gc)" stroke="#422006" stroke-width="1.5"/><circle cx="12" cy="20" r="3" fill="#fef08a"/><circle cx="32" cy="10" r="3" fill="#fef08a"/><circle cx="52" cy="20" r="3" fill="#fef08a"/></svg>',
@@ -583,7 +732,6 @@ const SYM = {
 /* ============ RENDER GAMES ============ */
 function renderGame(game){
   const area = document.getElementById('gameArea');
-
   if(game==='slots'){
     area.innerHTML = '<div class="game-field"><div class="reels"><div class="reel" id="r1"></div><div class="reel" id="r2"></div><div class="reel" id="r3"></div></div><button class="main-btn" onclick="playSlots()">Крутить</button><div class="result-msg" id="result"></div></div>';
     renderReels([0,1,2]);
@@ -605,7 +753,9 @@ function renderGame(game){
   else if(game==='poker'){
     area.innerHTML = '<div class="game-field"><div class="card-area"><div class="hand"><div class="hand-title">Ваши карты <span id="pScore">?</span></div><div class="cards" id="pCards"></div></div><div class="hand"><div class="hand-title">Стол <span id="tScore">?</span></div><div class="cards" id="tCards"></div></div></div><button class="main-btn" id="pokerStartBtn" onclick="pokerStart()">Раздать карты</button><div class="result-msg" id="result"></div></div>';
   }
-}/* ============ SLOTS ============ */
+}
+
+/* ============ SLOTS ============ */
 function renderReels(idxs){
   const syms = ['diamond','crown','cherry','star','coin','seven'];
   ['r1','r2','r3'].forEach((id,i)=>{
@@ -859,7 +1009,9 @@ if(tg.BackButton){
   tg.BackButton.onClick(()=>{
     const g = document.getElementById('gameScreen');
     const m = document.getElementById('modal');
+    const p = document.getElementById('payModal');
     if(g.classList.contains('active')) closeGame();
+    else if(p.classList.contains('active')) closePay();
     else if(m.classList.contains('active')) closeModal();
     else if(tg.close) tg.close();
   });
