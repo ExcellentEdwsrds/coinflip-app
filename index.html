@@ -412,4 +412,27 @@ document.getElementById('pCards').innerHTML=p1.card+p2.card;
 document.getElementById('tCards').innerHTML=t1.card+t2.card+t3.card;
 document.getElementById('pScore').innerText=p1.v+p2.v;
 document.getElementById('tScore').innerText=t1.v+t2.v+t3.v;
-setTimeout(()=>{const win=Math.random()<0.45;if(win){balance+=currentBet*
+setTimeout(()=>{const win=Math.random()<0.45;if(win){balance+=currentBet*function pokerStart(){
+haptic('medium');if(!checkBet())return;updateUI();
+const p1=newCard(),p2=newCard();
+const t1=newCard(),t2=newCard(),t3=newCard();
+document.getElementById('pCards').innerHTML=p1.card+p2.card;
+document.getElementById('tCards').innerHTML=t1.card+t2.card+t3.card;
+document.getElementById('pScore').innerText=p1.v+p2.v;
+document.getElementById('tScore').innerText=t1.v+t2.v+t3.v;
+setTimeout(()=>{
+const win=Math.random()<0.45;
+if(win){
+balance+=currentBet*2;
+updateUI();
+showResult('Победа! +'+currentBet*2+' ₽','win');
+}else{
+updateUI();
+showResult('Проигрыш','lose');
+}
+document.getElementById('pokerStartBtn').innerText='Играть снова';
+},1500);
+}
+</script>
+</body>
+</html>
