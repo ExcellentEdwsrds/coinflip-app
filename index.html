@@ -12,9 +12,11 @@
 html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:#0a0a14;color:#fff;-webkit-font-smoothing:antialiased}
 body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}
 svg{display:block}
-.loader{position:fixed;inset:0;z-index:99999;background:linear-gradient(180deg,#0a0a14,#141428,#1a1a3a);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:30px;transition:opacity .6s,visibility .6s}
+
+/* LOADER */
+.loader{position:fixed;inset:0;z-index:99999;background:linear-gradient(180deg,#0a0a14 0%,#141428 50%,#1a1a3a 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:30px;transition:opacity .6s ease,visibility .6s ease}
 .loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.loader-logo{font-size:46px;font-weight:900;background:linear-gradient(135deg,#4a6fe8,#6b8cff,#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:6px;filter:drop-shadow(0 0 30px rgba(74,111,232,.8));animation:loaderPulse 2s ease-in-out infinite}
+.loader-logo{font-size:44px;font-weight:900;background:linear-gradient(135deg,#4a6fe8,#6b8cff,#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:6px;filter:drop-shadow(0 0 30px rgba(74,111,232,.8));animation:loaderPulse 2s ease-in-out infinite}
 @keyframes loaderPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 .loader-sub{font-size:12px;color:#6b8cff;letter-spacing:6px;font-weight:600;text-transform:uppercase;margin-top:-16px}
 .loader-ring{width:80px;height:80px;position:relative}
@@ -25,34 +27,54 @@ svg{display:block}
 .loader-bar{width:200px;height:3px;background:rgba(74,111,232,.2);border-radius:2px;overflow:hidden}
 .loader-fill{width:0;height:100%;background:linear-gradient(90deg,#4a6fe8,#6b8cff);animation:fillBar 1.8s ease-in-out forwards;box-shadow:0 0 15px #4a6fe8}
 @keyframes fillBar{to{width:100%}}
+
+/* APP BASE */
 .app{position:relative;z-index:10;width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden}
-.content{flex:1;overflow-y:auto;padding-bottom:110px;scrollbar-width:none}
+.content{flex:1;overflow-y:auto;padding-bottom:120px;scrollbar-width:none}
 .content::-webkit-scrollbar{display:none}
-.top-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;flex-shrink:0;gap:10px;background:#0a0a14;position:sticky;top:0;z-index:50}
-.top-logo{font-size:22px;font-weight:900;font-style:italic;color:#4a6fe8;letter-spacing:-1px;line-height:.9;cursor:pointer}
-.top-logo .sub{font-size:11px;font-weight:500;font-style:italic;color:#8a9ab8;display:block;letter-spacing:0}
-.top-balance{display:flex;flex-direction:column;align-items:flex-end;gap:2px;cursor:pointer;padding:6px 12px;background:#141428;border-radius:12px;border:1px solid rgba(74,111,232,.2)}
-.top-balance .rub{font-size:10px;color:#8a9ab8;font-weight:700;letter-spacing:1px}
-.top-balance .val{font-size:15px;font-weight:900;color:#fff}
-.deposit-btn-top{background:linear-gradient(135deg,#2196f3,#1565c0);color:#fff;border:none;padding:10px 16px;border-radius:10px;font-size:12px;font-weight:900;cursor:pointer;box-shadow:0 4px 14px rgba(33,150,243,.4);font-family:'Inter',sans-serif;letter-spacing:.3px}
-.top-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#4a6fe8,#2a4fc8);display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid rgba(255,255,255,.15);overflow:hidden;position:relative}
+
+/* TOP BAR */
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;flex-shrink:0;gap:8px;background:#0a0a14;position:sticky;top:0;z-index:50}
+.top-logo{font-size:20px;font-weight:900;font-style:italic;color:#4a6fe8;letter-spacing:-1px;line-height:1;cursor:pointer;flex-shrink:0}
+.top-logo .sub{font-size:10px;font-weight:500;font-style:italic;color:#8a9ab8;display:block;letter-spacing:0}
+.top-balance{display:flex;align-items:center;gap:6px;cursor:pointer;padding:8px 12px;background:#141428;border-radius:12px;border:1px solid rgba(74,111,232,.2)}
+.top-balance .rub{font-size:10px;color:#8a9ab8;font-weight:700;letter-spacing:.5px}
+.top-balance .val{font-size:14px;font-weight:900;color:#fff}
+.deposit-btn-top{background:linear-gradient(135deg,#2196f3,#1565c0);color:#fff;border:none;padding:9px 14px;border-radius:10px;font-size:12px;font-weight:900;cursor:pointer;box-shadow:0 4px 14px rgba(33,150,243,.4);font-family:'Inter',sans-serif;letter-spacing:.2px;flex-shrink:0}
+.top-bell{width:38px;height:38px;border-radius:12px;background:#141428;border:1px solid rgba(74,111,232,.2);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;color:#c084fc;flex-shrink:0}
+.top-bell svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.top-bell .badge{position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;font-size:9px;font-weight:900;padding:2px 5px;border-radius:8px;min-width:16px;text-align:center}
+.top-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#4a6fe8,#2a4fc8);display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid rgba(255,255,255,.15);overflow:hidden;position:relative;flex-shrink:0}
 .top-avatar::after{content:'';position:absolute;bottom:0;right:0;width:10px;height:10px;background:#22c55e;border-radius:50%;border:2px solid #0a0a14}
-.top-avatar svg{width:22px;height:22px;fill:#fff}
+.top-avatar svg{width:20px;height:20px;fill:#fff}
+
+/* BOTTOM NAV */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#0f0f1e;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-around;align-items:flex-end;padding:8px 0 calc(8px + env(safe-area-inset-bottom));z-index:100}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;color:#6b7280;font-size:10px;font-weight:700;cursor:pointer;flex:1;padding:6px 0;position:relative;font-family:'Inter',sans-serif}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;color:#6b7280;font-size:10px;font-weight:700;cursor:pointer;flex:1;padding:6px 0;position:relative;font-family:'Inter',sans-serif;transition:color .2s}
 .nav-item.active{color:#fff}
 .nav-item svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.nav-item .badge{position:absolute;top:2px;right:calc(50% - 20px);background:#ef4444;color:#fff;font-size:9px;font-weight:900;padding:2px 5px;border-radius:8px;min-width:16px;text-align:center}
-</style>
-</head>
-<body>
-<div class="loader" id="loader">
-  <div class="loader-logo">MAGIC SPIN</div>
-  <div class="loader-sub">CASINO</div>
-  <div class="loader-ring"></div>
-  <div class="loader-bar"><div class="loader-fill"></div></div>
-</div>
-<style>
+.nav-item .badge{position:absolute;top:0;right:calc(50% - 20px);background:#ef4444;color:#fff;font-size:9px;font-weight:900;padding:2px 5px;border-radius:8px;min-width:16px;text-align:center}
+
+/* LIVE WINS — дорожка */
+.live-wins{padding:0 0 20px}
+.live-wins-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding:0 16px}
+.live-dot{width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 12px #22c55e;animation:livePulse 1.5s ease-in-out infinite}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.live-wins-head h3{font-size:18px;font-weight:900;color:#fff}
+.live-wins-head h3 span{color:#22c55e}
+.live-wins-row{display:flex;gap:10px;overflow-x:auto;scroll-behavior:smooth;padding:4px 16px 4px;scrollbar-width:none}
+.live-wins-row::-webkit-scrollbar{display:none}
+.lw-card{flex-shrink:0;width:180px;background:#141428;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px;animation:lwSlide .5s ease-out}
+@keyframes lwSlide{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+.lw-card .lw-top{display:flex;align-items:center;gap:8px}
+.lw-card .lw-img{width:40px;height:40px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,#4a6fe8,#2a4fc8);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.lw-card .lw-img svg{width:22px;height:22px}
+.lw-card .lw-info{flex:1;min-width:0}
+.lw-card .lw-game{font-size:12px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lw-card .lw-user{font-size:10px;color:#8a9ab8;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lw-card .lw-win{font-size:18px;font-weight:900;color:#22c55e;text-align:right;letter-spacing:-.3px}
+
+/* BIG BANNERS */
 .big-games{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:4px 16px 24px}
 .big-card{border-radius:16px;position:relative;overflow:hidden;cursor:pointer;aspect-ratio:1/1.15;box-shadow:0 10px 30px rgba(0,0,0,.6);transition:transform .15s}
 .big-card:active{transform:scale(.97)}
@@ -60,27 +82,17 @@ svg{display:block}
 .big-card .overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.85) 100%);pointer-events:none}
 .big-card .title{position:absolute;bottom:28px;left:12px;right:12px;font-size:16px;font-weight:900;color:#fff;text-align:center;letter-spacing:.5px;text-shadow:0 2px 8px rgba(0,0,0,.9);line-height:1.1}
 .big-card .provider{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:3px 10px;font-size:9px;color:#c9d5e8;font-weight:700;letter-spacing:1px;backdrop-filter:blur(4px)}
-.big-card .icon-svg{position:absolute;top:14%;left:50%;transform:translateX(-50%);width:80px;height:80px;filter:drop-shadow(0 6px 16px rgba(0,0,0,.7))}
-.live-wins{padding:0 16px 20px}
-.live-wins-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.live-dot{width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 12px #22c55e;animation:livePulse 1.5s ease-in-out infinite}
-@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
-.live-wins-head h3{font-size:18px;font-weight:900;color:#fff}
-.live-wins-head h3 span{color:#22c55e}
-.live-wins-row{display:flex;flex-direction:column;gap:8px}
-.lw-card{background:#141428;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:12px;animation:lwSlide .5s ease-out}
-@keyframes lwSlide{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-.lw-card .lw-img{width:44px;height:44px;border-radius:8px;flex-shrink:0;background:linear-gradient(135deg,#4a6fe8,#2a4fc8);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff}
-.lw-card .lw-info{flex:1;min-width:0}
-.lw-card .lw-game{font-size:13px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lw-card .lw-user{font-size:11px;color:#8a9ab8;margin-top:2px}
-.lw-card .lw-win{font-size:15px;font-weight:900;color:#22c55e;white-space:nowrap}
+.big-card .icon-svg{position:absolute;top:12%;left:50%;transform:translateX(-50%);width:90px;height:90px;filter:drop-shadow(0 6px 16px rgba(0,0,0,.7))}
+
+/* SECTIONS */
 .section-block{padding:0 16px 24px}
 .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .section-head h3{font-size:20px;font-weight:900;color:#fff}
 .section-head .nav-btns{display:flex;align-items:center;gap:8px}
 .section-head .all-btn{background:#1a1a2e;border:1px solid rgba(255,255,255,.08);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:10px;cursor:pointer;font-family:'Inter',sans-serif}
-.section-head .arr-btn{width:36px;height:36px;border-radius:10px;background:#1a1a2e;border:1px solid rgba(255,255,255,.08);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:900}
+.section-head .arr-btn{width:36px;height:36px;border-radius:10px;background:#1a1a2e;border:1px solid rgba(255,255,255,.08);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.section-head .arr-btn svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
 .games-row{display:flex;gap:10px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:4px;scrollbar-width:none}
 .games-row::-webkit-scrollbar{display:none}
 .game-tile{flex-shrink:0;width:140px;aspect-ratio:1/1.35;border-radius:14px;position:relative;overflow:hidden;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.5);transition:transform .15s}
@@ -89,8 +101,10 @@ svg{display:block}
 .game-tile .overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.85) 100%);pointer-events:none}
 .game-tile .title{position:absolute;bottom:26px;left:8px;right:8px;font-size:13px;font-weight:900;color:#fff;line-height:1.1;text-align:center;letter-spacing:.3px;text-shadow:0 2px 6px rgba(0,0,0,.9)}
 .game-tile .provider{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:2px 8px;font-size:8px;color:#c9d5e8;font-weight:700;letter-spacing:.8px;white-space:nowrap;backdrop-filter:blur(4px)}
-.game-tile .icon-svg{position:absolute;top:16%;left:50%;transform:translateX(-50%);width:56px;height:56px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.7))}
-.bg-space{background:radial-gradient(circle at 50% 40%,#3a2a6e 0%,#1a1a3a 60%,#0a0a14 100%)}
+.game-tile .icon-svg{position:absolute;top:14%;left:50%;transform:translateX(-50%);width:64px;height:64px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.7))}
+
+/* ФОНЫ */
+.bg-space{background:radial-gradient(circle at 50% 40%,#4a3a8e 0%,#1a1a3a 60%,#0a0a14 100%)}
 .bg-avia{background:linear-gradient(180deg,#3b82f6 0%,#1e40af 60%,#0a0a14 100%)}
 .bg-slots{background:linear-gradient(180deg,#f59e0b 0%,#b45309 60%,#0a0a14 100%)}
 .bg-dice{background:linear-gradient(180deg,#10b981 0%,#047857 60%,#0a0a14 100%)}
@@ -98,14 +112,17 @@ svg{display:block}
 .bg-roulette{background:linear-gradient(180deg,#ec4899 0%,#831843 60%,#0a0a14 100%)}
 .bg-coin{background:linear-gradient(180deg,#facc15 0%,#a16207 60%,#0a0a14 100%)}
 .bg-poker{background:linear-gradient(180deg,#6366f1 0%,#3730a3 60%,#0a0a14 100%)}
+
+/* FOOTER */
 .footer{padding:30px 16px 100px;color:#8a9ab8}
 .footer-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}
-.footer h4{font-size:15px;color:#fff;font-weight:900;margin-bottom:14px}
-.footer a{display:block;color:#8a9ab8;font-size:13px;font-weight:600;text-decoration:none;padding:6px 0;cursor:pointer}
+.footer h4{font-size:14px;color:#fff;font-weight:900;margin-bottom:14px}
+.footer a{display:block;color:#8a9ab8;font-size:13px;font-weight:600;text-decoration:none;padding:6px 0;cursor:pointer;transition:color .15s}
 .footer a:active{color:#6b8cff}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:20px;text-align:center;font-size:12px;color:#4a5568;line-height:1.6}
 .footer-brand{font-size:20px;font-weight:900;color:#4a6fe8;letter-spacing:-1px;font-style:italic;margin-bottom:6px}
-</style><style>
+  </style><style>
+/* GAME SCREEN */
 .game-screen{position:fixed;inset:0;background:#0a0a14;z-index:600;display:none;flex-direction:column;overflow:hidden}
 .game-screen.active{display:flex;animation:screenIn .25s}
 @keyframes screenIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
@@ -116,7 +133,7 @@ svg{display:block}
 .game-title{font-size:18px;font-weight:900}
 .game-balance{background:rgba(255,255,255,.08);padding:8px 14px;border-radius:12px;font-size:14px;font-weight:800;color:#ffd700}
 .game-body{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.game-stage{flex:1;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden}
+.game-stage{flex:1;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden;min-height:0}
 .game-panel{background:#0f0f1e;border-top:1px solid rgba(255,255,255,.06);padding:14px 16px calc(14px + env(safe-area-inset-bottom));flex-shrink:0}
 .bet-label{font-size:10px;color:#6b7280;letter-spacing:2px;text-align:center;font-weight:700;margin-bottom:8px;text-transform:uppercase}
 .bet-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
@@ -133,43 +150,43 @@ svg{display:block}
 .result-msg{font-size:18px;font-weight:900;text-align:center;margin-top:10px;min-height:24px;transition:all .2s}
 .result-msg.win{color:#4ade80;text-shadow:0 0 20px rgba(74,222,128,.6)}
 .result-msg.lose{color:#ef4444;text-shadow:0 0 20px rgba(239,68,68,.6)}
-</style><style>
+
 /* SLOT MACHINE */
-.slot-machine{width:100%;max-width:360px;background:linear-gradient(180deg,#2a1f4a,#1a1230);border-radius:24px;padding:18px 16px 22px;box-shadow:0 20px 60px rgba(0,0,0,.8),inset 0 2px 0 rgba(255,255,255,.1),inset 0 -4px 10px rgba(0,0,0,.5);border:2px solid #3a2a5e;position:relative}
-.slot-machine::before{content:'';position:absolute;top:0;left:0;right:0;height:60px;background:linear-gradient(180deg,rgba(255,255,255,.08),transparent);border-radius:24px 24px 0 0;pointer-events:none}
-.slot-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding:0 4px}
-.slot-brand{font-size:14px;font-weight:900;letter-spacing:2px;background:linear-gradient(135deg,#ffd700,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.slot-lights{display:flex;gap:6px}
-.slot-lights span{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px rgba(74,222,128,.9);animation:lightBlink 1.5s ease-in-out infinite}
+.slot-machine{width:100%;max-width:340px;background:linear-gradient(180deg,#2a1f4a,#1a1230);border-radius:22px;padding:16px 14px 20px;box-shadow:0 20px 60px rgba(0,0,0,.8),inset 0 2px 0 rgba(255,255,255,.1),inset 0 -4px 10px rgba(0,0,0,.5);border:2px solid #3a2a5e;position:relative}
+.slot-machine::before{content:'';position:absolute;top:0;left:0;right:0;height:60px;background:linear-gradient(180deg,rgba(255,255,255,.08),transparent);border-radius:22px 22px 0 0;pointer-events:none}
+.slot-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:0 4px}
+.slot-brand{font-size:13px;font-weight:900;letter-spacing:2px;background:linear-gradient(135deg,#ffd700,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.slot-lights{display:flex;gap:5px}
+.slot-lights span{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px rgba(74,222,128,.9);animation:lightBlink 1.5s ease-in-out infinite}
 .slot-lights span:nth-child(2){animation-delay:.3s;background:#ffd700;box-shadow:0 0 10px rgba(255,215,0,.9)}
 .slot-lights span:nth-child(3){animation-delay:.6s;background:#ef4444;box-shadow:0 0 10px rgba(239,68,68,.9)}
 @keyframes lightBlink{0%,100%{opacity:1}50%{opacity:.3}}
-.slot-window{background:linear-gradient(180deg,#0a0514,#1a0d2e);border-radius:16px;padding:12px 8px;box-shadow:inset 0 4px 20px rgba(0,0,0,.9),0 0 0 2px #3a2a5e;position:relative;overflow:hidden;margin-bottom:14px}
-.slot-window::before,.slot-window::after{content:'';position:absolute;left:0;right:0;height:20px;pointer-events:none;z-index:3}
+.slot-window{background:linear-gradient(180deg,#0a0514,#1a0d2e);border-radius:14px;padding:10px 8px;box-shadow:inset 0 4px 20px rgba(0,0,0,.9),0 0 0 2px #3a2a5e;position:relative;overflow:hidden;margin-bottom:12px}
+.slot-window::before,.slot-window::after{content:'';position:absolute;left:0;right:0;height:18px;pointer-events:none;z-index:3}
 .slot-window::before{top:0;background:linear-gradient(180deg,rgba(0,0,0,.95),transparent)}
 .slot-window::after{bottom:0;background:linear-gradient(0deg,rgba(0,0,0,.95),transparent)}
 .reels{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.reel{aspect-ratio:1/1.3;background:linear-gradient(180deg,#1a0d2e,#0a0514);border-radius:12px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(140,80,255,.2);position:relative;overflow:hidden;box-shadow:inset 0 0 20px rgba(0,0,0,.9)}
+.reel{aspect-ratio:1/1.2;background:linear-gradient(180deg,#1a0d2e,#0a0514);border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(140,80,255,.2);position:relative;overflow:hidden;box-shadow:inset 0 0 20px rgba(0,0,0,.9)}
 .reel-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
 .reel.spin .reel-inner{animation:reelScroll .12s linear infinite}
 @keyframes reelScroll{0%{transform:translateY(-40%);opacity:.5}50%{opacity:1}100%{transform:translateY(40%);opacity:.5}}
 .reel.win{border-color:#ffd700;box-shadow:0 0 30px rgba(255,215,0,.9),inset 0 0 20px rgba(255,215,0,.5);animation:reelWin .4s ease-in-out infinite alternate}
-@keyframes reelWin{0%{transform:scale(1)}100%{transform:scale(1.04)}}
+@keyframes reelWin{0%{transform:scale(1)}100%{transform:scale(1.05)}}
 .reel-inner svg{width:70%;height:70%;filter:drop-shadow(0 4px 8px rgba(0,0,0,.7))}
-.slot-controls{display:flex;align-items:center;gap:12px;justify-content:center}
-.slot-btn-spin{width:76px;height:76px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#6b8cff,#4a6fe8 60%,#2a4fc8);border:4px solid #1a1a3a;color:#fff;font-size:14px;font-weight:900;letter-spacing:1px;cursor:pointer;box-shadow:0 8px 25px rgba(74,111,232,.6),inset 0 2px 4px rgba(255,255,255,.4),inset 0 -6px 12px rgba(0,0,0,.3);transition:all .1s;font-family:'Inter',sans-serif}
+.slot-controls{display:flex;align-items:center;gap:10px;justify-content:center}
+.slot-btn-spin{width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#6b8cff,#4a6fe8 60%,#2a4fc8);border:4px solid #1a1a3a;color:#fff;font-size:14px;font-weight:900;letter-spacing:1px;cursor:pointer;box-shadow:0 8px 25px rgba(74,111,232,.6),inset 0 2px 4px rgba(255,255,255,.4),inset 0 -6px 12px rgba(0,0,0,.3);transition:all .1s;font-family:'Inter',sans-serif}
 .slot-btn-spin:active{transform:scale(.94)}
 .slot-btn-spin:disabled{background:radial-gradient(circle at 30% 30%,#3a3a4a,#2a2a3a 60%,#1a1a2a);box-shadow:inset 0 2px 4px rgba(0,0,0,.4);cursor:not-allowed}
 .slot-info{flex:1;text-align:center}
-.slot-info .label{font-size:10px;color:#6b7280;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
-.slot-info .val{font-size:18px;font-weight:900;color:#ffd700}
-.slot-legend{margin-top:14px;padding:10px 12px;background:rgba(0,0,0,.4);border-radius:12px;display:flex;justify-content:space-around;gap:4px;font-size:10px;color:#8a9ab8;font-weight:700;text-align:center;border:1px solid rgba(255,255,255,.06)}
+.slot-info .label{font-size:9px;color:#6b7280;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px}
+.slot-info .val{font-size:16px;font-weight:900;color:#ffd700}
+.slot-legend{margin-top:12px;padding:10px 12px;background:rgba(0,0,0,.4);border-radius:12px;display:flex;justify-content:space-around;gap:4px;font-size:10px;color:#8a9ab8;font-weight:700;text-align:center;border:1px solid rgba(255,255,255,.06)}
 .slot-legend .item{display:flex;flex-direction:column;align-items:center;gap:2px}
 .slot-legend .item .mult{color:#ffd700;font-weight:900;font-size:11px}
 
 /* DICE */
-.dice-table{width:100%;max-width:360px;background:radial-gradient(ellipse at 50% 30%,rgba(74,111,232,.15),transparent 60%),linear-gradient(180deg,#0f0f28,#0a0a14);border-radius:24px;padding:30px 20px;box-shadow:inset 0 0 60px rgba(74,111,232,.15);border:1px solid rgba(74,111,232,.15);position:relative;overflow:hidden;text-align:center}
-.dice-arena{display:flex;justify-content:center;gap:40px;perspective:1200px;margin-bottom:26px;min-height:150px;align-items:center}
+.dice-table{width:100%;max-width:340px;background:radial-gradient(ellipse at 50% 30%,rgba(74,111,232,.15),transparent 60%),linear-gradient(180deg,#0f0f28,#0a0a14);border-radius:22px;padding:28px 20px;box-shadow:inset 0 0 60px rgba(74,111,232,.15);border:1px solid rgba(74,111,232,.15);position:relative;overflow:hidden;text-align:center}
+.dice-arena{display:flex;justify-content:center;gap:40px;perspective:1200px;margin-bottom:24px;min-height:140px;align-items:center}
 .cube{width:80px;height:80px;position:relative;transform-style:preserve-3d;transition:transform 1.4s cubic-bezier(.3,.6,.4,1);transform:rotateX(-20deg) rotateY(20deg)}
 .cube.rolling{animation:diceThrow 1.4s cubic-bezier(.3,.6,.4,1) forwards}
 @keyframes diceThrow{
@@ -186,11 +203,11 @@ svg{display:block}
 .cube-face.f5{transform:rotateX(90deg) translateZ(40px)}
 .cube-face.f6{transform:rotateX(-90deg) translateZ(40px)}
 .dot{position:absolute;width:12px;height:12px;background:radial-gradient(circle at 30% 30%,#3a2a5e,#1a0d2e);border-radius:50%;box-shadow:inset 0 2px 3px rgba(0,0,0,.7)}
-</style><style>
+
 /* COIN */
-.coin-arena{width:100%;max-width:360px;background:radial-gradient(ellipse at 50% 60%,rgba(250,204,21,.1),transparent 60%),linear-gradient(180deg,#0f0f28,#0a0a14);border-radius:24px;padding:40px 20px 30px;text-align:center;position:relative;overflow:hidden;border:1px solid rgba(250,204,21,.15)}
-.coin-stage{perspective:1200px;display:flex;justify-content:center;margin-bottom:20px;height:200px;align-items:center;position:relative}
-.coin-3d{width:130px;height:130px;position:relative;transform-style:preserve-3d;transition:transform .3s}
+.coin-arena{width:100%;max-width:340px;background:radial-gradient(ellipse at 50% 60%,rgba(250,204,21,.1),transparent 60%),linear-gradient(180deg,#0f0f28,#0a0a14);border-radius:22px;padding:36px 20px 26px;text-align:center;position:relative;overflow:hidden;border:1px solid rgba(250,204,21,.15)}
+.coin-stage{perspective:1200px;display:flex;justify-content:center;margin-bottom:20px;height:180px;align-items:center;position:relative}
+.coin-3d{width:120px;height:120px;position:relative;transform-style:preserve-3d;transition:transform .3s}
 .coin-3d.flipping{animation:coinFlip 3.5s cubic-bezier(.4,.6,.4,1) forwards}
 @keyframes coinFlip{
 0%{transform:rotateY(0) translateY(0) rotateX(0)}
@@ -203,49 +220,48 @@ svg{display:block}
 .coin-side::before{content:'';position:absolute;inset:10px;border-radius:50%;border:2px dashed rgba(120,53,15,.5)}
 .coin-side::after{content:'';position:absolute;inset:16px;border-radius:50%;border:1px solid rgba(120,53,15,.4)}
 .coin-tails-side{transform:rotateY(180deg)}
-.coin-side .sym{font-size:50px;font-weight:900;line-height:1}
+.coin-side .sym{font-size:46px;font-weight:900;line-height:1}
 .coin-side .txt{font-size:9px;letter-spacing:4px;font-weight:900;margin-top:6px}
-.coin-shadow{width:140px;height:16px;background:radial-gradient(ellipse,rgba(0,0,0,.7),transparent 70%);margin:0 auto;filter:blur(6px)}
+.coin-shadow{width:130px;height:14px;background:radial-gradient(ellipse,rgba(0,0,0,.7),transparent 70%);margin:0 auto;filter:blur(6px)}
 
 /* ROULETTE */
-.roulette-table{width:100%;max-width:360px;background:radial-gradient(ellipse at 50% 50%,rgba(22,163,74,.15),transparent 60%),linear-gradient(180deg,#0a2e1a,#052e1a);border-radius:24px;padding:24px 16px 20px;border:2px solid rgba(34,197,94,.2);box-shadow:inset 0 0 60px rgba(0,0,0,.6);text-align:center}
-.roulette-wheel-wrap{position:relative;width:240px;height:240px;margin:0 auto 20px}
+.roulette-table{width:100%;max-width:340px;background:radial-gradient(ellipse at 50% 50%,rgba(22,163,74,.15),transparent 60%),linear-gradient(180deg,#0a2e1a,#052e1a);border-radius:22px;padding:20px 14px 18px;border:2px solid rgba(34,197,94,.2);box-shadow:inset 0 0 60px rgba(0,0,0,.6);text-align:center}
+.roulette-wheel-wrap{position:relative;width:220px;height:220px;margin:0 auto 18px}
 .roulette-arrow-top{position:absolute;top:-8px;left:50%;transform:translateX(-50%);z-index:10;color:#ffd700;filter:drop-shadow(0 0 10px rgba(255,215,0,.9))}
-.roulette-arrow-top svg{width:26px;height:26px;fill:currentColor}
+.roulette-arrow-top svg{width:24px;height:24px;fill:currentColor}
 .roulette-wheel-real{width:100%;height:100%;border-radius:50%;position:relative;transition:transform 5s cubic-bezier(.15,.7,.3,1);box-shadow:0 0 40px rgba(255,215,0,.4),inset 0 0 40px rgba(0,0,0,.7);border:6px solid #8b6914;background:conic-gradient(from 0deg,#16a34a 0deg 9.73deg,#dc2626 9.73deg 19.46deg,#1a0d2e 19.46deg 29.19deg,#dc2626 29.19deg 38.92deg,#1a0d2e 38.92deg 48.65deg,#dc2626 48.65deg 58.38deg,#1a0d2e 58.38deg 68.11deg,#dc2626 68.11deg 77.84deg,#1a0d2e 77.84deg 87.57deg,#dc2626 87.57deg 97.3deg,#1a0d2e 97.3deg 107.03deg,#dc2626 107.03deg 116.76deg,#1a0d2e 116.76deg 126.49deg,#dc2626 126.49deg 136.22deg,#1a0d2e 136.22deg 145.95deg,#dc2626 145.95deg 155.68deg,#1a0d2e 155.68deg 165.41deg,#dc2626 165.41deg 175.14deg,#1a0d2e 175.14deg 184.87deg,#dc2626 184.87deg 194.6deg,#1a0d2e 194.6deg 204.33deg,#dc2626 204.33deg 214.06deg,#1a0d2e 214.06deg 223.79deg,#dc2626 223.79deg 233.52deg,#1a0d2e 233.52deg 243.25deg,#dc2626 243.25deg 252.98deg,#1a0d2e 252.98deg 262.71deg,#dc2626 262.71deg 272.44deg,#1a0d2e 272.44deg 282.17deg,#dc2626 282.17deg 291.9deg,#1a0d2e 291.9deg 301.63deg,#dc2626 301.63deg 311.36deg,#1a0d2e 311.36deg 321.09deg,#dc2626 321.09deg 330.82deg,#1a0d2e 330.82deg 340.55deg,#dc2626 340.55deg 350.28deg,#16a34a 350.28deg 360deg)}
-.roulette-center-display{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3a1d5c,#0a0514);border:3px solid #ffd700;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#ffd700;box-shadow:0 0 25px rgba(255,215,0,.7),inset 0 0 15px rgba(0,0,0,.8);z-index:5}
-.roulette-ball{position:absolute;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,#c0c0c0 60%,#808080);box-shadow:0 0 15px rgba(255,255,255,.9),0 2px 6px rgba(0,0,0,.6);z-index:6;opacity:0;transition:opacity .3s;top:20px;left:50%;transform:translateX(-50%)}
+.roulette-center-display{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3a1d5c,#0a0514);border:3px solid #ffd700;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#ffd700;box-shadow:0 0 25px rgba(255,215,0,.7),inset 0 0 15px rgba(0,0,0,.8);z-index:5}
+.roulette-ball{position:absolute;width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,#c0c0c0 60%,#808080);box-shadow:0 0 15px rgba(255,255,255,.9),0 2px 6px rgba(0,0,0,.6);z-index:6;opacity:0;transition:opacity .3s;top:18px;left:50%;transform:translateX(-50%)}
 .roulette-ball.visible{opacity:1}
 .roulette-bets-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
-.rb-btn{padding:14px 10px;border-radius:14px;border:2px solid;font-weight:900;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;text-transform:uppercase;letter-spacing:1px;font-family:'Inter',sans-serif}
+.rb-btn{padding:13px 8px;border-radius:14px;border:2px solid;font-weight:900;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif}
 .rb-btn:active{transform:scale(.96)}
 .rb-btn.red{background:linear-gradient(135deg,#dc2626,#7f1d1d);border-color:#ef4444;color:#fff;box-shadow:0 4px 15px rgba(220,38,38,.4)}
 .rb-btn.black{background:linear-gradient(135deg,#1a1a2e,#0a0a14);border-color:#3a3a5e;color:#fff;box-shadow:0 4px 15px rgba(0,0,0,.4)}
 .rb-btn.green{background:linear-gradient(135deg,#16a34a,#052e1a);border-color:#22c55e;color:#fff;box-shadow:0 4px 15px rgba(22,163,74,.4);grid-column:span 2}
 .rb-btn .mult-badge{background:rgba(0,0,0,.4);border-radius:8px;padding:2px 8px;font-size:11px}
 
-/* CARD TABLE (BJ + POKER) — статичный, не растягивается */
-.card-table{width:100%;max-width:400px;height:auto;background:radial-gradient(ellipse at 50% 40%,#0d5c2e 0%,#064220 60%,#032414 100%);border-radius:200px 200px 20px 20px;padding:26px 18px;position:relative;overflow:hidden;box-shadow:inset 0 0 80px rgba(0,0,0,.7),0 20px 60px rgba(0,0,0,.8),0 0 0 6px #4a2f0f,0 0 0 10px #2a1a05;border:1px solid rgba(0,0,0,.5);min-height:320px;max-height:340px;flex-shrink:0}
-.card-table::before{content:'';position:absolute;inset:14px;border-radius:180px 180px 14px 14px;border:1px dashed rgba(255,215,0,.15);pointer-events:none}
-.card-table::after{content:'MAGIC SPIN';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:32px;font-weight:900;letter-spacing:8px;color:rgba(255,215,0,.05);pointer-events:none;white-space:nowrap}
-.hand-zone{position:relative;z-index:2;margin-bottom:12px}
-.hand-title{font-size:11px;color:#ffd700;letter-spacing:2px;font-weight:800;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding:0 4px;text-shadow:0 2px 4px rgba(0,0,0,.8)}
-.hand-title .score-badge{background:rgba(0,0,0,.5);border:1px solid rgba(255,215,0,.4);border-radius:8px;padding:3px 10px;font-size:13px;color:#ffd700;font-weight:900}
-.cards-zone{display:flex;gap:5px;min-height:88px;align-items:center;justify-content:center;flex-wrap:wrap;padding:4px}
-.chips-zone{position:absolute;bottom:12px;right:12px;display:flex;z-index:3}
-.chip{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.4),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#dc2626 20%,#dc2626 40%,#fff 40%,#fff 50%,#dc2626 50%,#dc2626 65%,#fff 65%,#fff 75%,#dc2626 75%);border:2px solid #7f1d1d;margin-left:-14px;box-shadow:0 3px 8px rgba(0,0,0,.6);position:relative}
+/* CARD TABLE — ФИКСИРОВАННЫЙ */
+.card-table{width:100%;max-width:380px;background:radial-gradient(ellipse at 50% 40%,#0d5c2e 0%,#064220 60%,#032414 100%);border-radius:180px 180px 18px 18px;padding:22px 16px;position:relative;overflow:hidden;box-shadow:inset 0 0 80px rgba(0,0,0,.7),0 20px 60px rgba(0,0,0,.8),0 0 0 6px #4a2f0f,0 0 0 10px #2a1a05;border:1px solid rgba(0,0,0,.5);height:auto;min-height:280px;max-height:320px;flex-shrink:0}
+.card-table::before{content:'';position:absolute;inset:14px;border-radius:160px 160px 12px 12px;border:1px dashed rgba(255,215,0,.15);pointer-events:none}
+.card-table::after{content:'MAGIC SPIN';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px;font-weight:900;letter-spacing:8px;color:rgba(255,215,0,.05);pointer-events:none;white-space:nowrap}
+.hand-zone{position:relative;z-index:2;margin-bottom:10px}
+.hand-title{font-size:10px;color:#ffd700;letter-spacing:2px;font-weight:800;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding:0 4px;text-shadow:0 2px 4px rgba(0,0,0,.8)}
+.hand-title .score-badge{background:rgba(0,0,0,.5);border:1px solid rgba(255,215,0,.4);border-radius:8px;padding:3px 10px;font-size:12px;color:#ffd700;font-weight:900}
+.cards-zone{display:flex;gap:4px;min-height:78px;align-items:center;justify-content:center;flex-wrap:wrap;padding:4px}
+.chips-zone{position:absolute;bottom:10px;right:10px;display:flex;z-index:3}
+.chip{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.4),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#dc2626 20%,#dc2626 40%,#fff 40%,#fff 50%,#dc2626 50%,#dc2626 65%,#fff 65%,#fff 75%,#dc2626 75%);border:2px solid #7f1d1d;margin-left:-12px;box-shadow:0 3px 8px rgba(0,0,0,.6);position:relative}
 .chip::after{content:attr(data-val);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.9)}
 .chip.gold{background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.5),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#d4af37 20%,#d4af37 40%,#fff 40%,#fff 50%,#d4af37 50%,#d4af37 65%,#fff 65%,#fff 75%,#d4af37 75%);border-color:#8b6914}
 .chip.blue{background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.5),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#2563eb 20%,#2563eb 40%,#fff 40%,#fff 50%,#2563eb 50%,#2563eb 65%,#fff 65%,#fff 75%,#2563eb 75%);border-color:#1e40af}
 .chip.green{background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.5),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#16a34a 20%,#16a34a 40%,#fff 40%,#fff 50%,#16a34a 50%,#16a34a 65%,#fff 65%,#fff 75%,#16a34a 75%);border-color:#14532d}
 
-/* CARD */
-.card{width:58px;height:84px;border-radius:8px;background:linear-gradient(145deg,#fff,#f0f0f0);display:flex;flex-direction:column;justify-content:space-between;padding:5px;box-shadow:0 6px 18px rgba(0,0,0,.7),inset 0 2px 4px rgba(255,255,255,.9);color:#1a0d2e;font-weight:900;position:relative;animation:cardDeal .4s ease-out;flex-shrink:0}
+.card{width:54px;height:78px;border-radius:8px;background:linear-gradient(145deg,#fff,#f0f0f0);display:flex;flex-direction:column;justify-content:space-between;padding:4px;box-shadow:0 6px 18px rgba(0,0,0,.7),inset 0 2px 4px rgba(255,255,255,.9);color:#1a0d2e;font-weight:900;position:relative;animation:cardDeal .4s ease-out;flex-shrink:0}
 @keyframes cardDeal{0%{opacity:0;transform:translateY(-60px) rotate(-15deg) scale(.7)}100%{opacity:1;transform:translateY(0) rotate(0) scale(1)}}
 .card.red{color:#dc2626}
-.card .corner{font-size:11px;line-height:1;display:flex;flex-direction:column;align-items:center;font-weight:900}
+.card .corner{font-size:10px;line-height:1;display:flex;flex-direction:column;align-items:center;font-weight:900}
 .card .corner.bottom{transform:rotate(180deg)}
-.card .center-suit{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:24px;opacity:.9}
+.card .center-suit{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:22px;opacity:.9}
 .card.back{background:repeating-linear-gradient(45deg,#5b21b6 0px,#5b21b6 8px,#7c3aed 8px,#7c3aed 16px);border:2px solid #a855f7;position:relative;overflow:hidden}
 .card.back::before{content:'';position:absolute;inset:5px;border:2px solid rgba(255,255,255,.4);border-radius:5px}
 </style><style>
@@ -254,62 +270,128 @@ svg{display:block}
 .pay-modal.active{display:block;animation:fadeIn .25s}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .pay-top{display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 14px) 18px 14px}
-.pay-close{background:none;border:none;color:#fff;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif}
-.pay-close .x{font-size:20px;line-height:1}
+.pay-close{background:none;border:none;color:#fff;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif}
+.pay-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .pay-user{display:flex;align-items:center;gap:10px}
-.pay-user-info{text-align:right;font-size:11px;color:#8a9ab8}
+.pay-user-info{text-align:right;font-size:10px;color:#8a9ab8;font-weight:700}
 .pay-user-info .bal{color:#fff;font-size:14px;font-weight:800;display:block;margin-top:2px}
 .pay-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#4a6fe8,#2a4fc8);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .pay-avatar svg{width:20px;height:20px;fill:#fff}
 .pay-title{display:flex;justify-content:space-between;align-items:center;padding:0 18px 20px}
-.pay-title h2{font-size:26px;font-weight:900}
+.pay-title h2{font-size:24px;font-weight:900}
 .pay-title .close-x{background:none;border:none;color:#8a9ab8;font-size:26px;cursor:pointer;line-height:1}
 .pay-tabs{display:flex;gap:6px;padding:0 18px 20px}
-.pay-tab{flex:1;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,.04);color:#8a9ab8;font-size:14px;font-weight:800;cursor:pointer;text-align:center;transition:all .2s;border:none;font-family:'Inter',sans-serif}
+.pay-tab{flex:1;padding:13px 8px;border-radius:12px;background:rgba(255,255,255,.04);color:#8a9ab8;font-size:13px;font-weight:800;cursor:pointer;text-align:center;transition:all .2s;border:none;font-family:'Inter',sans-serif}
 .pay-tab.active{background:#1a1a2e;color:#fff}
 .pay-content{display:none}
 .pay-content.active{display:block;animation:fadeIn .25s}
 .pay-balance-row{display:flex;justify-content:space-between;align-items:center;padding:0 18px 22px}
-.pay-balance-row .lbl{font-size:13px;color:#8a9ab8;font-weight:600;margin-bottom:4px}
+.pay-balance-row .lbl{font-size:12px;color:#8a9ab8;font-weight:600;margin-bottom:4px}
 .pay-balance-row .val{font-size:20px;font-weight:900;color:#fff}
-.pay-rub-select{display:flex;align-items:center;gap:8px;background:#1a1a2e;padding:10px 14px;border-radius:12px;font-weight:800;color:#fff;cursor:pointer;font-size:14px}
-.pay-section-title{font-size:18px;font-weight:900;padding:0 18px 14px;color:#fff}
+.pay-rub-select{display:flex;align-items:center;gap:8px;background:#1a1a2e;padding:10px 14px;border-radius:12px;font-weight:800;color:#fff;font-size:13px}
+.pay-section-title{font-size:16px;font-weight:900;padding:0 18px 14px;color:#fff}
 .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px}
-.pay-card{background:#1a1a2e;border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:flex-end;min-height:110px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
+.pay-card{background:#1a1a2e;border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:flex-end;min-height:100px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
 .pay-card:active{transform:scale(.96)}
-.pay-card .left{display:flex;flex-direction:column;justify-content:space-between;height:100%;gap:18px;flex:1}
-.pay-card .name{font-size:14px;font-weight:800;color:#fff}
-.pay-card .min{font-size:11px;color:#8a9ab8;font-weight:600}
-.pay-card .bonus-tag{background:rgba(140,80,255,.15);border-radius:20px;padding:4px 10px;font-size:10px;font-weight:800;color:#c084fc;align-self:flex-start;margin-top:6px}
-.pay-card .logo{width:56px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.4);position:relative;overflow:hidden;text-align:center;line-height:1.1;padding:2px}
-.logo-tpay{background:linear-gradient(135deg,#ffd93b,#f5b400);color:#1a1a1a;font-size:16px}
-.logo-sber{background:linear-gradient(135deg,#21a038,#0d7a22);color:#fff;font-size:14px}
-.logo-alfa{background:#ef3124;color:#fff;font-size:24px;font-family:Georgia,serif}
-.logo-vtb{background:linear-gradient(135deg,#0a2977,#0d47a1);color:#fff;font-size:13px;letter-spacing:-.5px}
-.logo-psb{background:#fff;color:#003791;font-size:14px}
-.logo-gaz{background:linear-gradient(135deg,#0d47a1,#1e88e5);color:#fff;font-size:11px}
-.logo-1click{background:linear-gradient(135deg,#f5b400,#ef3124);color:#fff;font-size:13px}
-.logo-sky{background:linear-gradient(135deg,#fff,#e0e0e0);color:#0066cc;font-size:11px;font-weight:900}
-.logo-ton{background:radial-gradient(circle at 30% 30%,#5fd0ff 0%,#2ca5e0 40%,#0088cc 70%,#005f99 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:22px}
-.logo-usdt{background:radial-gradient(circle at 30% 30%,#3ec49a 0%,#26a17b 40%,#007a54 70%,#004d34 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:22px}
-.logo-trx{background:radial-gradient(circle at 30% 30%,#ff5757 0%,#dc2626 40%,#991b1b 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:18px}
-.logo-eth{background:radial-gradient(circle at 30% 30%,#a5b4fc 0%,#6366f1 40%,#4338ca 70%,#312e81 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:18px}
-.logo-card{background:linear-gradient(135deg,#1a4b8c,#0d3d7a 50%,#062c5e);color:#fff;font-size:11px;font-style:italic}
-.logo-sbp{background:#fff;color:#5b8def;font-size:14px;font-weight:900}
+.pay-card .left{display:flex;flex-direction:column;justify-content:space-between;height:100%;gap:14px;flex:1}
+.pay-card .name{font-size:13px;font-weight:800;color:#fff;line-height:1.2}
+.pay-card .min{font-size:10px;color:#8a9ab8;font-weight:600}
+.pay-card .bonus-tag{background:rgba(140,80,255,.15);border-radius:20px;padding:4px 10px;font-size:10px;font-weight:800;color:#c084fc;align-self:flex-start;margin-top:4px}
+
+/* LOGO BASE */
+.pay-card .logo{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;position:relative;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -3px 8px rgba(0,0,0,.3)}
+.pay-card .logo::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,0));border-radius:12px 12px 60% 60%;pointer-events:none}
+.pay-card .logo::after{content:'';position:absolute;inset:0;border-radius:12px;box-shadow:inset 0 -3px 8px rgba(0,0,0,.3);pointer-events:none}
+
+/* T-PAY */
+.logo-tpay{background:linear-gradient(135deg,#FFD93B 0%,#FFC400 45%,#E8A400 100%);color:#000;flex-direction:column;gap:0;padding-top:4px}
+.logo-tpay .tpay-box{background:#000;color:#FFD93B;padding:3px 7px;border-radius:5px;font-size:13px;font-weight:900;line-height:1;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.logo-tpay .tpay-txt{font-size:9px;font-weight:900;color:#000;letter-spacing:-.3px;margin-top:2px}
+
+/* SBERPAY */
+.logo-sber{background:linear-gradient(135deg,#2ECC40 0%,#21A038 50%,#0D7A22 100%);color:#fff;flex-direction:column;gap:1px}
+.logo-sber .sber-check{width:24px;height:24px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.logo-sber .sber-check::before{content:'';width:12px;height:7px;border-left:3px solid #21A038;border-bottom:3px solid #21A038;transform:rotate(-45deg) translate(1px,-2px)}
+.logo-sber .sber-txt{font-size:8px;font-weight:900;color:#fff;letter-spacing:.3px;margin-top:1px}
+
+/* АЛЬФА */
+.logo-alfa{background:linear-gradient(135deg,#EF3124 0%,#C41E14 50%,#8B0E08 100%);color:#fff}
+.logo-alfa .alfa-a{font-size:26px;font-weight:900;font-family:Georgia,serif;line-height:1;text-shadow:0 2px 4px rgba(0,0,0,.4)}
+.logo-alfa .alfa-bar{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);width:20px;height:3px;background:#fff;border-radius:2px}
+
+/* ВТБ */
+.logo-vtb{background:linear-gradient(135deg,#0A2977 0%,#062155 50%,#03143A 100%);color:#fff}
+.logo-vtb .vtb-lines{position:absolute;top:12px;left:9px;display:flex;flex-direction:column;gap:2px}
+.logo-vtb .vtb-lines span{display:block;height:3px;background:linear-gradient(90deg,#4DA6FF,#2C7FCC);border-radius:2px;box-shadow:0 0 6px rgba(77,166,255,.8)}
+.logo-vtb .vtb-lines span:nth-child(1){width:16px}
+.logo-vtb .vtb-lines span:nth-child(2){width:12px}
+.logo-vtb .vtb-lines span:nth-child(3){width:8px}
+.logo-vtb .vtb-txt{position:absolute;bottom:6px;right:7px;font-size:12px;font-weight:900;letter-spacing:-.5px;color:#fff}
+
+/* ПСБ */
+.logo-psb{background:linear-gradient(135deg,#FFFFFF 0%,#F5F5F5 50%,#E8E8E8 100%);color:#003791}
+.logo-psb .psb-blob{position:absolute;top:10px;left:10px;width:22px;height:22px}
+.logo-psb .psb-blob::before{content:'';position:absolute;top:0;left:0;width:14px;height:14px;background:linear-gradient(135deg,#EC6608,#FF8A00);border-radius:4px;transform:rotate(-15deg);box-shadow:0 3px 6px rgba(236,102,8,.4)}
+.logo-psb .psb-blob::after{content:'';position:absolute;bottom:0;right:0;width:12px;height:12px;background:linear-gradient(135deg,#003791,#1E5BB8);border-radius:4px;transform:rotate(15deg);box-shadow:0 3px 6px rgba(0,55,145,.4)}
+.logo-psb .psb-txt{position:absolute;bottom:5px;right:7px;font-size:11px;font-weight:900;color:#003791}
+
+/* ГАЗПРОМБАНК */
+.logo-gaz{background:linear-gradient(135deg,#1E88E5 0%,#0D47A1 50%,#062E6E 100%);color:#fff}
+.logo-gaz::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;border:2px solid rgba(255,255,255,.4);box-shadow:0 0 12px rgba(255,255,255,.3),inset 0 0 12px rgba(255,255,255,.2)}
+.logo-gaz::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,.6);box-shadow:0 0 8px rgba(255,255,255,.4)}
+.logo-gaz .gaz-txt{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);font-size:6px;font-weight:800;letter-spacing:.5px;white-space:nowrap;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+
+/* 1 КЛИК */
+.logo-1click{background:linear-gradient(135deg,#F5B400 0%,#E88B00 50%,#EF3124 100%);color:#fff;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;padding:8px}
+.logo-1click .cell{background:rgba(255,255,255,.25);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;border:1px solid rgba(255,255,255,.3)}
+
+/* SKY PAY */
+.logo-sky{background:linear-gradient(135deg,#FFFFFF 0%,#F0F0F0 50%,#D8D8D8 100%);color:#0066CC;flex-direction:column;gap:1px;padding:4px}
+.logo-sky .sky-icon{font-size:16px;line-height:1;color:#0066CC}
+.logo-sky .sky-txt{font-size:10px;font-weight:900;color:#0066CC;line-height:1}
+.logo-sky .sky-sub{font-size:6px;font-weight:800;color:#1A3D8F;letter-spacing:1px}
+
+/* TON */
+.logo-ton{background:radial-gradient(circle at 30% 25%,#7DDBFF 0%,#2CA5E0 35%,#0088CC 65%,#005F99 100%);color:#fff;border-radius:50%!important;width:52px!important;height:52px!important;padding:0}
+.logo-ton::before{display:none}
+.logo-ton::after{content:'';position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(255,255,255,.3);box-shadow:inset 0 0 15px rgba(255,255,255,.3)}
+.logo-ton .ton-icon{font-size:26px;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.5);z-index:1}
+
+/* USDT */
+.logo-usdt{background:radial-gradient(circle at 30% 25%,#55E0AC 0%,#26A17B 35%,#007A54 65%,#004D34 100%);color:#fff;border-radius:50%!important;width:52px!important;height:52px!important;padding:0}
+.logo-usdt::before{display:none}
+.logo-usdt::after{content:'';position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(255,255,255,.3);box-shadow:inset 0 0 15px rgba(255,255,255,.3)}
+.logo-usdt .usdt-icon{font-size:24px;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.5);z-index:1}
+
+/* TRX */
+.logo-trx{background:radial-gradient(circle at 30% 25%,#FF7070 0%,#DC2626 35%,#991B1B 65%,#5C0F0F 100%);color:#fff;border-radius:50%!important;width:52px!important;height:52px!important;padding:0}
+.logo-trx::before{display:none}
+.logo-trx::after{content:'';position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(255,255,255,.3);box-shadow:inset 0 0 15px rgba(255,255,255,.3)}
+.logo-trx .trx-icon{font-size:22px;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.5);z-index:1}
+
+/* ETH */
+.logo-eth{background:radial-gradient(circle at 30% 25%,#B5C0FF 0%,#6366F1 35%,#4338CA 65%,#281F70 100%);color:#fff;border-radius:50%!important;width:52px!important;height:52px!important;padding:0}
+.logo-eth::before{display:none}
+.logo-eth::after{content:'';position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(255,255,255,.3);box-shadow:inset 0 0 15px rgba(255,255,255,.3)}
+.logo-eth .eth-icon{font-size:22px;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.5);z-index:1}
+
+/* CARD / SBP для вывода */
+.logo-card{background:linear-gradient(135deg,#1a4b8c,#0d3d7a 50%,#062c5e);color:#fff;font-size:11px;font-style:italic;font-weight:900;letter-spacing:.3px}
+.logo-sbp{background:#fff;color:#5b8def;font-size:13px;font-weight:900}
 
 /* WITHDRAW SCREENS */
 .wd-screen{display:none;position:fixed;inset:0;background:#0a0a14;z-index:960;overflow-y:auto;padding-bottom:env(safe-area-inset-bottom)}
 .wd-screen.active{display:block;animation:fadeIn .25s}
 .wd-header{display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 14px) 18px 20px}
 .wd-header .back{background:none;border:none;color:#fff;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:'Inter',sans-serif}
-.wd-header .back .arr{font-size:22px;line-height:1}
+.wd-header .back svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .wd-header .close-x{background:none;border:none;color:#8a9ab8;font-size:26px;cursor:pointer;line-height:1}
-.wd-title{font-size:26px;font-weight:900;padding:0 18px 22px}
+.wd-title{font-size:24px;font-weight:900;padding:0 18px 22px}
 .wd-form{padding:0 18px}
 .wd-select{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer;font-weight:700;font-size:15px}
 .wd-select .left{display:flex;align-items:center;gap:12px}
 .wd-select .chev{color:#8a9ab8;font-size:18px}
-.wd-select .ico{width:28px;height:28px;border-radius:8px;background:#2a2a4e;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900}
+.wd-select .ico{width:28px;height:28px;border-radius:8px;background:#2a2a4e;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff}
 .wd-input{width:100%;background:#1a1a2e;border:1.5px solid transparent;border-radius:14px;padding:16px;color:#fff;font-size:15px;font-weight:600;outline:none;margin-bottom:12px;font-family:'Inter',sans-serif;transition:border-color .2s}
 .wd-input::placeholder{color:#6b7280;font-weight:500}
 .wd-input.ok{border-color:#2196f3}
@@ -325,17 +407,47 @@ svg{display:block}
 .wd-phone-prefix{background:#1a1a2e;border:1.5px solid transparent;border-radius:14px;padding:16px 12px;display:flex;align-items:center;gap:6px;font-weight:800;color:#fff;flex-shrink:0;font-size:15px}
 .wd-phone-wrap .wd-input{flex:1;margin-bottom:0}
 
-/* HISTORY */
-.hist-list{padding:0 18px 30px}
-.hist-item{background:#1a1a2e;border-radius:14px;padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-.hist-item .l{display:flex;align-items:center;gap:12px}
-.hist-item .ico{width:38px;height:38px;border-radius:10px;background:rgba(74,111,232,.15);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#6b8cff}
-.hist-item .nm{font-size:14px;font-weight:800;color:#fff;margin-bottom:2px}
-.hist-item .dt{font-size:11px;color:#8a9ab8}
-.hist-item .amt{font-size:15px;font-weight:900}
-.hist-item .amt.plus{color:#4ade80}
-.hist-item .amt.minus{color:#ef4444}
-.hist-empty{text-align:center;padding:60px 20px;color:#6b7280;font-size:14px}
+/* SUM INPUT SCREEN (перед поиском реквизитов) */
+.sum-screen{display:none;position:fixed;inset:0;background:#0a0a14;z-index:955;overflow-y:auto;padding-bottom:140px}
+.sum-screen.active{display:block;animation:fadeIn .25s}
+.sum-header{display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 14px) 18px 20px}
+.sum-header .back{background:none;border:none;color:#fff;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:'Inter',sans-serif}
+.sum-header .back svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.sum-header .close-x{background:none;border:none;color:#8a9ab8;font-size:26px;cursor:pointer;line-height:1}
+.sum-title{font-size:24px;font-weight:900;padding:0 18px 20px}
+.sum-method{display:flex;align-items:center;gap:14px;background:#1a1a2e;border-radius:16px;padding:16px;margin:0 18px 20px}
+.sum-method .logo{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;position:relative;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.25)}
+.sum-method .info{flex:1}
+.sum-method .info .nm{font-size:15px;font-weight:800;color:#fff}
+.sum-method .info .min{font-size:11px;color:#8a9ab8;font-weight:600;margin-top:2px}
+.sum-method .info .chg{font-size:11px;color:#6b8cff;font-weight:800;margin-top:2px}
+.sum-label{font-size:12px;color:#8a9ab8;padding:0 18px 8px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px}
+.sum-input-wrap{margin:0 18px 8px;position:relative}
+.sum-input{width:100%;background:#1a1a2e;border:2px solid #ff6a00;border-radius:14px;padding:18px 16px;color:#fff;font-size:18px;font-weight:700;outline:none;font-family:'Inter',sans-serif;transition:border-color .2s}
+.sum-input::placeholder{color:#8a7aab;font-weight:600}
+.sum-input.ok{border-color:#2196f3}
+.sum-input.error{border-color:#ff6a00}
+.sum-err{color:#ff6a00;font-size:13px;padding:0 18px 12px;display:none}
+.sum-err.show{display:block}
+.sum-presets{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 18px 20px}
+.sum-preset{background:#1a1a2e;border:1px solid rgba(140,80,255,.15);border-radius:12px;padding:14px 6px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;text-align:center;transition:all .15s;font-family:'Inter',sans-serif}
+.sum-preset:active{background:#2a1548;border-color:#a855f7}
+.sum-bonus{margin:0 18px 20px;background:linear-gradient(135deg,#1a2470,#0f1847);border:1px solid rgba(70,120,220,.4);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden}
+.sum-bonus::after{content:'';position:absolute;right:-30px;bottom:-40px;width:140px;height:140px;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.15),transparent 70%);pointer-events:none;transform:rotate(45deg)}
+.sum-bonus .info{flex:1;position:relative;z-index:1}
+.sum-bonus .info .title{font-size:14px;font-weight:800;color:#fff;margin-bottom:4px}
+.sum-bonus .info .cond{font-size:11px;color:#8ab0ff;display:flex;align-items:center;gap:6px}
+.sum-bonus .toggle{width:52px;height:30px;background:#2a3570;border-radius:15px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;z-index:1}
+.sum-bonus .toggle.on{background:#4a6fe8}
+.sum-bonus .toggle::after{content:'';position:absolute;top:3px;left:3px;width:24px;height:24px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.sum-bonus .toggle.on::after{transform:translateX(22px)}
+.sum-result{background:#1a1a2e;border-radius:14px;padding:14px 16px;margin:0 18px 20px;font-size:13px;color:#8a9ab8}
+.sum-result .r{display:flex;justify-content:space-between;padding:5px 0}
+.sum-result .r .v{color:#fff;font-weight:800}
+.sum-result .r.gold .v{color:#ffd700}
+.sum-continue{position:fixed;bottom:0;left:0;right:0;padding:16px 18px calc(20px + env(safe-area-inset-bottom));background:#0a0a14;border-top:1px solid rgba(255,255,255,.06);z-index:5}
+.sum-continue .btn{width:100%;padding:16px;border-radius:14px;border:none;background:linear-gradient(135deg,#4a6fe8,#6b8cff);color:#fff;font-size:16px;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:1px;box-shadow:0 8px 25px rgba(74,111,232,.5)}
+.sum-continue .btn:disabled{background:#2a2a3a;color:#6b7280;box-shadow:none;cursor:not-allowed}
 
 /* SEARCH REQS */
 .search-reqs-screen{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 40%,#1a1a3a,#0a0a14 70%);z-index:970;display:none;align-items:center;justify-content:center;padding:20px;text-align:center}
@@ -345,25 +457,27 @@ svg{display:block}
 .srs-ring{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;border-top-color:#4a6fe8;border-right-color:#4a6fe8;animation:srsSpin 1.2s linear infinite}
 .srs-ring-inner{position:absolute;inset:16px;border-radius:50%;border:3px solid transparent;border-bottom-color:#6b8cff;border-left-color:#6b8cff;animation:srsSpin 1.8s linear infinite reverse}
 @keyframes srsSpin{to{transform:rotate(360deg)}}
-.srs-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:44px;filter:drop-shadow(0 0 20px rgba(74,111,232,.8));animation:srsPulse 2s ease-in-out infinite}
+.srs-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;animation:srsPulse 2s ease-in-out infinite}
+.srs-icon svg{width:100%;height:100%;fill:none;stroke:#6b8cff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 20px rgba(74,111,232,.8))}
 @keyframes srsPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.15)}}
-.srs-title{font-size:24px;font-weight:900;color:#fff;margin-bottom:10px}
-.srs-subtitle{font-size:14px;color:#8a9ab8;margin-bottom:28px;line-height:1.5}
+.srs-title{font-size:22px;font-weight:900;color:#fff;margin-bottom:10px}
+.srs-subtitle{font-size:13px;color:#8a9ab8;margin-bottom:28px;line-height:1.5}
 .srs-timer{background:rgba(26,26,46,.9);border:1px solid rgba(74,111,232,.4);border-radius:16px;padding:14px 24px;margin-bottom:20px;display:flex;flex-direction:column;gap:4px}
-.srs-timer #srsTimer{font-size:28px;font-weight:900;color:#ffd700;font-variant-numeric:tabular-nums;text-shadow:0 0 20px rgba(255,215,0,.5)}
-.srs-timer-label{font-size:11px;color:#8a9ab8;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.srs-timer #srsTimer{font-size:26px;font-weight:900;color:#ffd700;font-variant-numeric:tabular-nums;text-shadow:0 0 20px rgba(255,215,0,.5)}
+.srs-timer-label{font-size:10px;color:#8a9ab8;letter-spacing:1px;text-transform:uppercase;font-weight:700}
 .srs-status{font-size:13px;color:#c9d5e8;font-weight:600}
 
-/* BONUSES PANEL */
+/* BONUSES */
 .bonuses-screen{display:none;position:fixed;inset:0;background:#0a0a14;z-index:940;overflow-y:auto;padding-bottom:env(safe-area-inset-bottom)}
 .bonuses-screen.active{display:block;animation:fadeIn .25s}
 .bon-head{display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 14px) 18px 20px}
-.bon-head h2{font-size:26px;font-weight:900}
+.bon-head h2{font-size:24px;font-weight:900}
 .bon-head .promo{background:#1a1a2e;border:none;color:#fff;font-size:12px;font-weight:800;padding:10px 14px;border-radius:10px;cursor:pointer;font-family:'Inter',sans-serif}
 .bon-cats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:0 18px 24px}
 .bon-cat{background:#141428;border-radius:14px;padding:16px 8px;text-align:center;cursor:pointer;border:1px solid rgba(255,255,255,.06);position:relative}
-.bon-cat .ico{font-size:34px;margin-bottom:6px}
-.bon-cat .nm{font-size:12px;color:#fff;font-weight:800}
+.bon-cat .ico{display:flex;justify-content:center;margin-bottom:8px}
+.bon-cat .ico svg{width:36px;height:36px}
+.bon-cat .nm{font-size:11px;color:#fff;font-weight:800}
 .bon-cat .bdg{position:absolute;top:8px;right:8px;background:#ef4444;color:#fff;font-size:10px;font-weight:900;padding:2px 6px;border-radius:10px;min-width:18px;text-align:center}
 .bon-panel{padding:0 18px 30px}
 .bon-panel h3{font-size:22px;font-weight:900;margin-bottom:6px}
@@ -378,8 +492,8 @@ svg{display:block}
 .bon-card .timer{font-size:12px;color:rgba(255,255,255,.85);margin-bottom:14px;position:relative;z-index:1}
 .bon-card .timer b{background:rgba(0,0,0,.25);padding:4px 10px;border-radius:8px;font-weight:900;font-variant-numeric:tabular-nums}
 .bon-card .use-btn{background:#fff;color:#000;border:none;padding:12px 22px;border-radius:12px;font-size:14px;font-weight:900;cursor:pointer;position:relative;z-index:1;font-family:'Inter',sans-serif}
-.bon-card .gift{position:absolute;right:-10px;bottom:-10px;font-size:80px;opacity:.85;transform:rotate(-10deg)}
-.bon-card .info{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;z-index:2}
+.bon-card .gift{position:absolute;right:-10px;bottom:-10px;opacity:.85;transform:rotate(-10deg)}
+.bon-card .gift svg{width:100px;height:100px}
 
 /* SIDE MENU */
 .side-menu{position:fixed;inset:0;z-index:980;display:none}
@@ -387,26 +501,27 @@ svg{display:block}
 .side-menu-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);animation:fadeIn .2s}
 .side-menu-panel{position:absolute;top:0;right:0;bottom:0;width:88%;max-width:380px;background:#0a0a14;animation:slideRight .3s cubic-bezier(.4,0,.2,1);overflow-y:auto;padding-bottom:30px}
 @keyframes slideRight{from{transform:translateX(100%)}to{transform:translateX(0)}}
-.sm-head{display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 14px) 18px 20px}
+.sm-head{display:flex;align-items:center;justify-content:flex-end;padding:calc(env(safe-area-inset-top) + 14px) 18px 20px}
 .sm-head .close{background:none;border:none;color:#fff;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif}
-.sm-head .close .x{font-size:22px}
+.sm-head .close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .sm-switch{display:flex;background:#141428;border-radius:12px;padding:4px;margin:0 18px 16px}
-.sm-switch button{flex:1;background:none;border:none;color:#8a9ab8;font-size:14px;font-weight:800;padding:12px;border-radius:10px;cursor:pointer;font-family:'Inter',sans-serif}
+.sm-switch button{flex:1;background:none;border:none;color:#8a9ab8;font-size:13px;font-weight:800;padding:12px;border-radius:10px;cursor:pointer;font-family:'Inter',sans-serif}
 .sm-switch button.active{background:#2196f3;color:#fff}
 .sm-search{margin:0 18px 20px;background:#141428;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px}
 .sm-search svg{width:18px;height:18px;fill:none;stroke:#8a9ab8;stroke-width:2}
 .sm-search input{background:none;border:none;color:#fff;font-size:14px;outline:none;flex:1;font-family:'Inter',sans-serif}
-.sm-item{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;font-size:15px;font-weight:700;color:#fff;border-left:3px solid transparent}
+.sm-item{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;font-size:14px;font-weight:700;color:#fff;border-left:3px solid transparent}
 .sm-item:active{background:rgba(74,111,232,.1)}
 .sm-item.active{color:#4a90e2;border-left-color:#4a90e2;background:rgba(74,111,232,.08)}
 .sm-item .ic{width:22px;height:22px;display:flex;align-items:center;justify-content:center}
 .sm-item .ic svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .sm-item .bdg{margin-left:auto;background:#ef4444;color:#fff;font-size:11px;font-weight:900;padding:3px 8px;border-radius:10px;min-width:22px;text-align:center}
 .sm-item .arr{margin-left:auto;background:#2a2a4e;color:#fff;font-size:12px;padding:6px 10px;border-radius:8px}
-.sm-cat{padding:14px 18px 8px;font-size:13px;color:#8a9ab8;font-weight:800;text-transform:uppercase;letter-spacing:1px}
+.sm-cat{padding:14px 18px 8px;font-size:12px;color:#8a9ab8;font-weight:800;text-transform:uppercase;letter-spacing:1px}
 .sm-divider{height:1px;background:rgba(255,255,255,.06);margin:12px 0}
 .sm-socials{display:flex;gap:10px;padding:16px 18px}
-.sm-socials a{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;font-weight:900;font-size:18px;color:#fff}
+.sm-socials a{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;color:#fff}
+.sm-socials a svg{width:22px;height:22px;fill:#fff}
 .sm-socials .vk{background:#0077ff}
 .sm-socials .tg{background:#0088cc}
 .sm-socials .x{background:#000}
@@ -415,50 +530,153 @@ svg{display:block}
 .sm-lang span{background:#141428;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:800}
 .sm-support{display:flex;align-items:center;justify-content:space-between;background:#141428;margin:0 18px 20px;padding:14px 16px;border-radius:14px}
 .sm-support .l{display:flex;align-items:center;gap:12px;font-weight:800;font-size:14px}
+.sm-support .l svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2}
 .sm-support .badge24{background:#2196f3;color:#fff;font-size:12px;font-weight:900;padding:6px 12px;border-radius:10px}
 
 /* MODAL */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:900;display:none;align-items:flex-end;justify-content:center}
 .modal.active{display:flex;animation:fadeIn .25s}
-.modal-sheet{background:linear-gradient(180deg,#1a1a2e,#0f0f1e);border-radius:24px 24px 0 0;padding:22px 20px calc(30px + env(safe-area-inset-bottom));max-width:500px;width:100%;max-height:80vh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.4,0,.2,1)}
+.modal-sheet{background:linear-gradient(180deg,#1a1a2e,#0f0f1e);border-radius:24px 24px 0 0;padding:22px 20px calc(30px + env(safe-area-inset-bottom));max-width:500px;width:100%;max-height:80vh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.4,0,.2,1);border:1px solid rgba(74,111,232,.2)}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .modal-handle{width:44px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 16px}
 .modal-title{font-size:20px;font-weight:900;margin-bottom:14px;text-align:center}
+.modal-text{font-size:14px;color:#c9d5e8;margin-bottom:18px;line-height:1.5;text-align:center}
 .modal-list{display:flex;flex-direction:column;gap:8px}
-.modal-item{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);cursor:pointer;font-weight:700;font-size:14px;color:#fff}
+.modal-item{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);cursor:pointer;font-weight:700;font-size:14px;color:#fff;transition:background .15s}
 .modal-item:active{background:rgba(74,111,232,.2);transform:scale(.98)}
-.modal-item .mi-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#4a6fe8,#6b8cff);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.modal-item .mi-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#4a6fe8,#6b8cff);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.modal-item .mi-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .modal-item .mi-text{flex:1}
 .modal-item .mi-sub{font-size:11px;color:#8a9ab8;font-weight:500;margin-top:2px}
 .modal-close{margin-top:14px;width:100%;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:none;color:#8a9ab8;font-weight:800;font-size:14px;cursor:pointer;font-family:'Inter',sans-serif}
-</style><div class="app" id="app">
+
+/* SUCCESS MODAL */
+.success-modal{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);z-index:990;display:none;align-items:center;justify-content:center;padding:20px}
+.success-modal.active{display:flex;animation:fadeIn .25s}
+.success-box{background:linear-gradient(180deg,#1a1a2e,#0f0f1e);border:1px solid rgba(74,111,232,.3);border-radius:24px;padding:32px 24px;max-width:340px;width:100%;text-align:center;animation:successPop .4s cubic-bezier(.4,1.4,.6,1)}
+@keyframes successPop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
+.success-icon{width:80px;height:80px;margin:0 auto 20px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#15803d);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(34,197,94,.5)}
+.success-icon svg{width:44px;height:44px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.success-title{font-size:20px;font-weight:900;color:#fff;margin-bottom:10px}
+.success-text{font-size:14px;color:#c9d5e8;line-height:1.5;margin-bottom:22px}
+.success-btn{background:linear-gradient(135deg,#4a6fe8,#6b8cff);color:#fff;border:none;padding:14px 24px;border-radius:14px;font-size:14px;font-weight:900;cursor:pointer;width:100%;font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:1px;box-shadow:0 8px 25px rgba(74,111,232,.5)}
+
+/* SPORT PLACEHOLDER */
+.sport-screen{display:none;position:fixed;inset:0;background:#0a0a14;z-index:940;overflow-y:auto}
+.sport-screen.active{display:block;animation:fadeIn .25s}
+.sport-inner{padding:calc(env(safe-area-inset-top) + 60px) 24px 40px;text-align:center}
+.sport-icon{width:120px;height:120px;margin:0 auto 24px;border-radius:50%;background:linear-gradient(135deg,#4a6fe8,#2a4fc8);display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(74,111,232,.5)}
+.sport-icon svg{width:60px;height:60px;fill:none;stroke:#fff;stroke-width:2}
+.sport-title{font-size:26px;font-weight:900;color:#fff;margin-bottom:10px}
+.sport-sub{font-size:14px;color:#8a9ab8;line-height:1.6;margin-bottom:24px;max-width:280px;margin-left:auto;margin-right:auto}
+.sport-badge{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;padding:10px 20px;border-radius:12px;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:1px;box-shadow:0 8px 25px rgba(245,158,11,.4)}
+
+/* PROFILE */
+.profile-screen{display:none;position:fixed;inset:0;background:#0a0a14;z-index:940;overflow-y:auto;padding-bottom:40px}
+.profile-screen.active{display:block;animation:fadeIn .25s}
+.prof-head{display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 14px) 18px 20px}
+.prof-head h2{font-size:24px;font-weight:900}
+.prof-head .close{background:#1a1a2e;border:none;color:#fff;width:36px;height:36px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.prof-head .close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.prof-hero{margin:0 18px 20px;background:linear-gradient(135deg,#2a1f4a,#1a1230);border-radius:20px;padding:24px;text-align:center;position:relative;overflow:hidden;border:1px solid rgba(74,111,232,.2)}
+.prof-hero::before{content:'';position:absolute;top:-40%;right:-20%;width:200px;height:200px;background:radial-gradient(circle,rgba(74,111,232,.3),transparent 70%);pointer-events:none}
+.prof-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#4a6fe8,#2a4fc8);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;border:3px solid rgba(255,255,255,.15);box-shadow:0 10px 30px rgba(74,111,232,.4);position:relative;z-index:1}
+.prof-avatar svg{width:40px;height:40px;fill:#fff}
+.prof-name{font-size:20px;font-weight:900;color:#fff;margin-bottom:4px;position:relative;z-index:1}
+.prof-id{font-size:12px;color:#8a9ab8;font-weight:600;position:relative;z-index:1}
+.prof-balance{margin-top:16px;background:rgba(0,0,0,.3);border-radius:14px;padding:14px;position:relative;z-index:1}
+.prof-balance .lbl{font-size:11px;color:#8a9ab8;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.prof-balance .val{font-size:28px;font-weight:900;color:#ffd700}
+.prof-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px 20px}
+.prof-stat{background:#141428;border-radius:14px;padding:16px;border:1px solid rgba(255,255,255,.06)}
+.prof-stat .ico{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#4a6fe8,#6b8cff);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.prof-stat .ico svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.prof-stat .lbl{font-size:11px;color:#8a9ab8;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.prof-stat .val{font-size:18px;font-weight:900;color:#fff}
+.prof-actions{padding:0 18px}
+.prof-action{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#141428;border-radius:14px;margin-bottom:8px;cursor:pointer;border:1px solid rgba(255,255,255,.06);transition:all .15s}
+.prof-action:active{background:#1e1e38;transform:scale(.98)}
+.prof-action .ico{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#4a6fe8,#6b8cff);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.prof-action .ico svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.prof-action .txt{flex:1;font-size:14px;font-weight:700;color:#fff}
+.prof-action .arr{color:#8a9ab8}
+.prof-action .arr svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* VIP */
+.vip-screen{display:none;position:fixed;inset:0;background:#0a0a14;z-index:940;overflow-y:auto;padding-bottom:40px}
+.vip-screen.active{display:block;animation:fadeIn .25s}
+.vip-head{display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 14px) 18px 20px}
+.vip-head h2{font-size:24px;font-weight:900}
+.vip-head .close{background:#1a1a2e;border:none;color:#fff;width:36px;height:36px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.vip-head .close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.vip-intro{padding:0 18px 20px;font-size:13px;color:#8a9ab8;text-align:center;line-height:1.5}
+.vip-cards{padding:0 18px}
+.vip-card{border-radius:20px;padding:22px 20px;margin-bottom:14px;position:relative;overflow:hidden;cursor:pointer;transition:transform .15s}
+.vip-card:active{transform:scale(.98)}
+.vip-card.silver{background:linear-gradient(135deg,#c0c0c0 0%,#8a8a8a 50%,#5a5a5a 100%);box-shadow:0 12px 40px rgba(192,192,192,.3)}
+.vip-card.gold{background:linear-gradient(135deg,#ffd700 0%,#d4af37 50%,#8b6914 100%);box-shadow:0 12px 40px rgba(255,215,0,.4)}
+.vip-card.platinum{background:linear-gradient(135deg,#e0e8ff 0%,#a5b4fc 40%,#4a6fe8 100%);box-shadow:0 12px 40px rgba(74,111,232,.5)}
+.vip-card::before{content:'';position:absolute;top:-30%;right:-20%;width:180px;height:180px;background:radial-gradient(circle,rgba(255,255,255,.3),transparent 70%);pointer-events:none}
+.vip-card .vip-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;margin-bottom:14px}
+.vip-card .vip-icon{width:56px;height:56px;border-radius:16px;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px)}
+.vip-card .vip-icon svg{width:34px;height:34px;fill:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+.vip-card .vip-name{font-size:24px;font-weight:900;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.4);letter-spacing:1px}
+.vip-card .vip-desc{font-size:12px;color:rgba(255,255,255,.85);font-weight:600;margin-bottom:16px;position:relative;z-index:1}
+.vip-card .vip-price{display:flex;align-items:baseline;justify-content:space-between;position:relative;z-index:1}
+.vip-card .vip-price .amount{font-size:32px;font-weight:900;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.4);letter-spacing:-1px}
+.vip-card .vip-price .per{font-size:13px;color:rgba(255,255,255,.85);font-weight:700}
+.vip-card .vip-features{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.2);position:relative;z-index:1}
+.vip-card .vip-feature{display:flex;align-items:center;gap:8px;font-size:12px;color:#fff;font-weight:600;padding:3px 0}
+.vip-card .vip-feature svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+</style>
+</head><body>
+
+<div class="loader" id="loader">
+  <div class="loader-logo">MAGIC SPIN</div>
+  <div class="loader-sub">CASINO</div>
+  <div class="loader-ring"></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<div class="app" id="app">
   <div class="top-bar">
     <div class="top-logo" onclick="openSideMenu()">Magic<span class="sub">Spin</span></div>
     <div class="top-balance" onclick="openPay()">
-      <div class="rub">RUB</div>
-      <div class="val" id="balance">10000 ₽</div>
+      <span class="rub">RUB</span>
+      <span class="val" id="balance">10000</span>
     </div>
     <button class="deposit-btn-top" onclick="openPay()">Пополнить</button>
-    <div class="top-avatar" onclick="openModal('profile')">
+    <div class="top-bell" onclick="openModal('notifications')">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="badge">2</span>
+    </div>
+    <div class="top-avatar" onclick="openProfile()">
       <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
     </div>
   </div>
 
-  <div class="content">
+  <div class="content" id="mainContent">
     <div class="big-games">
-      <div class="big-card" onclick="openGame('slots')">
+      <div class="big-card" onclick="openGame('spacexy')">
         <div class="bg-img bg-space"></div>
-        <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#f0c060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6 L38 24 L56 20 L42 34 L50 52 L32 42 L14 52 L22 34 L8 20 L26 24 Z" fill="rgba(240,192,96,.15)"/></svg>
+        <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#8b9cff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 8 C 20 20, 12 32, 12 42 C 12 48, 16 52, 22 52 L 22 58 L 42 58 L 42 52 C 48 52, 52 48, 52 42 C 52 32, 44 20, 32 8 Z" fill="rgba(139,156,255,.15)"/>
+          <circle cx="32" cy="32" r="8" fill="rgba(139,156,255,.3)"/>
+          <circle cx="32" cy="32" r="3" fill="#8b9cff"/>
+          <path d="M 14 52 L 6 58 M 50 52 L 58 58" stroke="#8b9cff" stroke-width="2"/>
+        </svg>
         <div class="overlay"></div>
         <div class="title">SPACE XY</div>
-        <div class="provider">BGAMING</div>
+        <div class="provider">MAGIC SPIN</div>
       </div>
       <div class="big-card" onclick="openGame('avia')">
         <div class="bg-img bg-avia"></div>
-        <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><path d="M56 20 L40 32 L48 44 L42 46 L32 36 L22 40 L18 34 L30 28 L22 14 L28 12 L38 24 L52 16 Z"/></svg>
+        <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)">
+          <path d="M58 22 L40 34 L48 46 L42 48 L32 38 L22 42 L18 36 L30 30 L22 16 L28 14 L38 26 L52 18 Z"/>
+        </svg>
         <div class="overlay"></div>
         <div class="title">AVIAMASTERS</div>
-        <div class="provider">BGAMING</div>
+        <div class="provider">MAGIC SPIN</div>
       </div>
     </div>
 
@@ -475,35 +693,56 @@ svg{display:block}
         <h3>Слоты</h3>
         <div class="nav-btns">
           <button class="all-btn">Все</button>
-          <button class="arr-btn" onclick="scrollRow('slotsRow', -1)">‹</button>
-          <button class="arr-btn" onclick="scrollRow('slotsRow', 1)">›</button>
+          <button class="arr-btn" onclick="scrollRow('slotsRow', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="arr-btn" onclick="scrollRow('slotsRow', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
         </div>
       </div>
       <div class="games-row" id="slotsRow">
         <div class="game-tile" onclick="openGame('slots')">
           <div class="bg-img bg-slots"></div>
-          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><rect x="10" y="14" width="44" height="36" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="22" cy="32" r="3"/><circle cx="32" cy="32" r="3"/><circle cx="42" cy="32" r="3"/></svg>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round">
+            <rect x="10" y="14" width="44" height="36" rx="6"/>
+            <circle cx="22" cy="32" r="3" fill="#fff"/>
+            <circle cx="32" cy="32" r="3" fill="#fff"/>
+            <circle cx="42" cy="32" r="3" fill="#fff"/>
+          </svg>
           <div class="overlay"></div>
           <div class="title">СЛОТЫ</div>
           <div class="provider">MAGIC SPIN</div>
         </div>
         <div class="game-tile" onclick="openGame('dice')">
           <div class="bg-img bg-dice"></div>
-          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><rect x="10" y="10" width="44" height="44" rx="8" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="22" cy="22" r="3"/><circle cx="42" cy="42" r="3"/></svg>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3">
+            <rect x="10" y="10" width="44" height="44" rx="8"/>
+            <circle cx="22" cy="22" r="3" fill="#fff"/>
+            <circle cx="42" cy="42" r="3" fill="#fff"/>
+            <circle cx="42" cy="22" r="3" fill="#fff"/>
+            <circle cx="22" cy="42" r="3" fill="#fff"/>
+          </svg>
           <div class="overlay"></div>
           <div class="title">КОСТИ</div>
           <div class="provider">MAGIC SPIN</div>
         </div>
         <div class="game-tile" onclick="openGame('coin')">
           <div class="bg-img bg-coin"></div>
-          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="3"/><text x="32" y="42" text-anchor="middle" font-size="24" font-weight="900" fill="currentColor" stroke="none">O</text></svg>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3">
+            <circle cx="32" cy="32" r="22"/>
+            <text x="32" y="42" text-anchor="middle" font-size="24" font-weight="900" fill="#fff" stroke="none">O</text>
+          </svg>
           <div class="overlay"></div>
           <div class="title">МОНЕТКА</div>
           <div class="provider">MAGIC SPIN</div>
         </div>
         <div class="game-tile" onclick="openGame('roulette')">
           <div class="bg-img bg-roulette"></div>
-          <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="3"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="8"/></svg>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3">
+            <circle cx="32" cy="32" r="22"/>
+            <circle cx="32" cy="32" r="8"/>
+            <line x1="32" y1="10" x2="32" y2="14"/>
+            <line x1="32" y1="50" x2="32" y2="54"/>
+            <line x1="10" y1="32" x2="14" y2="32"/>
+            <line x1="50" y1="32" x2="54" y2="32"/>
+          </svg>
           <div class="overlay"></div>
           <div class="title">РУЛЕТКА</div>
           <div class="provider">MAGIC SPIN</div>
@@ -516,28 +755,36 @@ svg{display:block}
         <h3>Live-игры</h3>
         <div class="nav-btns">
           <button class="all-btn">Все</button>
-          <button class="arr-btn" onclick="scrollRow('liveRow', -1)">‹</button>
-          <button class="arr-btn" onclick="scrollRow('liveRow', 1)">›</button>
+          <button class="arr-btn" onclick="scrollRow('liveRow', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="arr-btn" onclick="scrollRow('liveRow', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
         </div>
       </div>
       <div class="games-row" id="liveRow">
         <div class="game-tile" onclick="openGame('blackjack')">
           <div class="bg-img bg-blackjack"></div>
-          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><rect x="18" y="8" width="28" height="44" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><text x="32" y="38" text-anchor="middle" font-size="18" font-weight="900" fill="currentColor" stroke="none">A</text></svg>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3">
+            <rect x="18" y="8" width="28" height="44" rx="4"/>
+            <text x="32" y="40" text-anchor="middle" font-size="20" font-weight="900" fill="#fff" stroke="none">A</text>
+          </svg>
           <div class="overlay"></div>
           <div class="title">БЛЭКДЖЕК</div>
           <div class="provider">LIVE</div>
         </div>
         <div class="game-tile" onclick="openGame('poker')">
           <div class="bg-img bg-poker"></div>
-          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><path d="M32 8 C22 20 14 26 14 36 C14 44 20 48 26 46 L26 56 L38 56 L38 46 C44 48 50 44 50 36 C50 26 42 20 32 8 Z"/></svg>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="#fff">
+            <path d="M32 8 C22 20 14 26 14 36 C14 44 20 48 26 46 L26 56 L38 56 L38 46 C44 48 50 44 50 36 C50 26 42 20 32 8 Z"/>
+          </svg>
           <div class="overlay"></div>
           <div class="title">ПОКЕР</div>
           <div class="provider">LIVE</div>
         </div>
         <div class="game-tile" onclick="openGame('roulette')">
           <div class="bg-img bg-roulette"></div>
-          <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="3"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="8"/></svg>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3">
+            <circle cx="32" cy="32" r="22"/>
+            <circle cx="32" cy="32" r="8"/>
+          </svg>
           <div class="overlay"></div>
           <div class="title">РУЛЕТКА</div>
           <div class="provider">LIVE</div>
@@ -550,31 +797,40 @@ svg{display:block}
         <h3>Быстрые игры</h3>
         <div class="nav-btns">
           <button class="all-btn">Все</button>
-          <button class="arr-btn" onclick="scrollRow('fastRow', -1)">‹</button>
-          <button class="arr-btn" onclick="scrollRow('fastRow', 1)">›</button>
+          <button class="arr-btn" onclick="scrollRow('fastRow', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="arr-btn" onclick="scrollRow('fastRow', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
         </div>
       </div>
       <div class="games-row" id="fastRow">
         <div class="game-tile" onclick="openGame('coin')">
           <div class="bg-img bg-coin"></div>
-          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="3"/><text x="32" y="42" text-anchor="middle" font-size="24" font-weight="900" fill="currentColor" stroke="none">O</text></svg>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3">
+            <circle cx="32" cy="32" r="22"/>
+            <text x="32" y="42" text-anchor="middle" font-size="24" font-weight="900" fill="#fff" stroke="none">O</text>
+          </svg>
           <div class="overlay"></div>
           <div class="title">МОНЕТКА</div>
           <div class="provider">MAGIC SPIN</div>
         </div>
         <div class="game-tile" onclick="openGame('dice')">
           <div class="bg-img bg-dice"></div>
-          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><rect x="10" y="10" width="44" height="44" rx="8" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="22" cy="22" r="3"/><circle cx="42" cy="42" r="3"/></svg>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3">
+            <rect x="10" y="10" width="44" height="44" rx="8"/>
+            <circle cx="22" cy="22" r="3" fill="#fff"/>
+            <circle cx="42" cy="42" r="3" fill="#fff"/>
+          </svg>
           <div class="overlay"></div>
           <div class="title">КОСТИ</div>
           <div class="provider">MAGIC SPIN</div>
         </div>
         <div class="game-tile" onclick="openGame('avia')">
           <div class="bg-img bg-avia"></div>
-          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><path d="M56 20 L40 32 L48 44 L42 46 L32 36 L22 40 L18 34 L30 28 L22 14 L28 12 L38 24 L52 16 Z"/></svg>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="#fff">
+            <path d="M58 22 L40 34 L48 46 L42 48 L32 38 L22 42 L18 36 L30 30 L22 16 L28 14 L38 26 L52 18 Z"/>
+          </svg>
           <div class="overlay"></div>
           <div class="title">AVIA</div>
-          <div class="provider">BGAMING</div>
+          <div class="provider">MAGIC SPIN</div>
         </div>
       </div>
     </div>
@@ -591,12 +847,12 @@ svg{display:block}
         </div>
         <div>
           <h4>Дополнительно</h4>
-          <a>Достижения</a>
-          <a>Партнёрская программа</a>
-          <a>Служба поддержки</a>
-          <a>Контактная информация</a>
-          <a>Политика конфиденциальности</a>
-          <a>Bug Bounty</a>
+          <a onclick="openVip()">VIP-статус</a>
+          <a onclick="openModal('soon')">Достижения</a>
+          <a onclick="openModal('soon')">Партнёрская программа</a>
+          <a onclick="openModal('soon')">Служба поддержки</a>
+          <a onclick="openModal('soon')">Контактная информация</a>
+          <a onclick="openModal('soon')">Политика конфиденциальности</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -606,7 +862,11 @@ svg{display:block}
       </div>
     </div>
   </div>
-</div><!-- ИГРОВОЙ ЭКРАН -->
+</div>
+
+<div class="bottom-nav" id="bottomNav"></div>
+
+<!-- ИГРОВОЙ ЭКРАН -->
 <div class="game-screen" id="gameScreen">
   <div class="game-header">
     <div class="left">
@@ -636,10 +896,13 @@ svg{display:block}
   </div>
 </div>
 
-<div class="bottom-nav" id="bottomNav"></div><!-- ПЛАТЁЖКА -->
+<!-- ПЛАТЁЖКА -->
 <div class="pay-modal" id="payModal">
   <div class="pay-top">
-    <button class="pay-close" onclick="closePay()"><span class="x">×</span> Назад</button>
+    <button class="pay-close" onclick="closePay()">
+      <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Назад
+    </button>
     <div class="pay-user">
       <div class="pay-user-info">RUB<span class="bal" id="payBal">0 ₽</span></div>
       <div class="pay-avatar"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></div>
@@ -667,69 +930,69 @@ svg{display:block}
     <div class="pay-grid">
       <div class="pay-card" onclick="payChoose('T-PAY','tpay',200)">
         <div class="left"><div class="name">T-PAY</div><div class="min">от 200 ₽</div></div>
-        <div class="logo logo-tpay">T</div>
+        <div class="logo logo-tpay"><div class="tpay-box">T</div><div class="tpay-txt">Pay</div></div>
       </div>
       <div class="pay-card" onclick="payChoose('SberPay','sber',1000)">
         <div class="left"><div class="name">SberPay</div><div class="min">от 1 000 ₽</div></div>
-        <div class="logo logo-sber">Sber</div>
+        <div class="logo logo-sber"><div class="sber-check"></div><div class="sber-txt">PAY</div></div>
       </div>
       <div class="pay-card" onclick="payChoose('Альфа-Банк','alfa',1000)">
         <div class="left"><div class="name">Альфа-Банк</div><div class="min">от 1 000 ₽</div></div>
-        <div class="logo logo-alfa">A</div>
+        <div class="logo logo-alfa"><div class="alfa-a">A</div><div class="alfa-bar"></div></div>
       </div>
       <div class="pay-card" onclick="payChoose('ВТБ','vtb',1000)">
-        <div class="left"><div class="name">ВТБ 1 клик</div><div class="min">от 1 000 ₽</div></div>
-        <div class="logo logo-vtb">ВТБ</div>
+        <div class="left"><div class="name">ВТБ</div><div class="min">от 1 000 ₽</div></div>
+        <div class="logo logo-vtb"><div class="vtb-lines"><span></span><span></span><span></span></div><div class="vtb-txt">ВТБ</div></div>
       </div>
       <div class="pay-card" onclick="payChoose('ПСБ','psb',1000)">
         <div class="left"><div class="name">ПСБ Банк</div><div class="min">от 1 000 ₽</div></div>
-        <div class="logo logo-psb">ПСБ</div>
+        <div class="logo logo-psb"><div class="psb-blob"></div><div class="psb-txt">ПСБ</div></div>
       </div>
       <div class="pay-card" onclick="payChoose('Газпромбанк','gaz',1000)">
         <div class="left"><div class="name">Газпромбанк</div><div class="min">от 1 000 ₽</div></div>
-        <div class="logo logo-gaz">ГПБ</div>
+        <div class="logo logo-gaz"><div class="gaz-txt">ГАЗПРОМ</div></div>
       </div>
       <div class="pay-card" onclick="payChoose('1 клик','1click',200)">
         <div class="left"><div class="name">1 клик</div><div class="min">от 200 ₽</div></div>
-        <div class="logo logo-1click">1КЛ</div>
+        <div class="logo logo-1click"><div class="cell">T</div><div class="cell">S</div><div class="cell">X</div><div class="cell">A</div></div>
       </div>
       <div class="pay-card" onclick="payChoose('Sky Pay','sky',5000)">
         <div class="left"><div class="name">Sky Pay</div><div class="min">от 5 000 ₽</div></div>
-        <div class="logo logo-sky">SKY<br>PAY</div>
+        <div class="logo logo-sky"><div class="sky-icon">◆</div><div class="sky-txt">SKY</div><div class="sky-sub">PAY</div></div>
       </div>
     </div>
     <div class="pay-section-title" style="padding-top:20px;border-top:1px solid rgba(255,255,255,.06);margin:16px 18px 14px;padding-left:0;padding-right:0">Криптовалюта</div>
     <div class="pay-grid">
       <div class="pay-card" onclick="payChoose('TON','ton',100)">
-        <div class="left"><div class="name">TON<br><span style="font-size:12px;color:#8a9ab8">(Toncoin)</span></div><div class="bonus-tag">+7%</div></div>
-        <div class="logo logo-ton">◈</div>
+        <div class="left"><div class="name">TON<br><span style="font-size:11px;color:#8a9ab8">(Toncoin)</span></div><div class="bonus-tag">+7%</div></div>
+        <div class="logo logo-ton"><span class="ton-icon">◈</span></div>
       </div>
       <div class="pay-card" onclick="payChoose('USDT','usdt',100)">
-        <div class="left"><div class="name">USDT<br><span style="font-size:12px;color:#8a9ab8">(Toncoin)</span></div><div class="bonus-tag">+7%</div></div>
-        <div class="logo logo-usdt">₮</div>
+        <div class="left"><div class="name">USDT<br><span style="font-size:11px;color:#8a9ab8">(Toncoin)</span></div><div class="bonus-tag">+7%</div></div>
+        <div class="logo logo-usdt"><span class="usdt-icon">₮</span></div>
       </div>
       <div class="pay-card" onclick="payChoose('USDT TRC20','usdt-trc',100)">
-        <div class="left"><div class="name">USDT<br><span style="font-size:12px;color:#8a9ab8">(TRC20)</span></div></div>
-        <div class="logo logo-usdt">₮</div>
+        <div class="left"><div class="name">USDT<br><span style="font-size:11px;color:#8a9ab8">(TRC20)</span></div></div>
+        <div class="logo logo-usdt"><span class="usdt-icon">₮</span></div>
       </div>
       <div class="pay-card" onclick="payChoose('TRX','trx',100)">
-        <div class="left"><div class="name">TRX<br><span style="font-size:12px;color:#8a9ab8">(Tron)</span></div></div>
-        <div class="logo logo-trx">TRX</div>
+        <div class="left"><div class="name">TRX<br><span style="font-size:11px;color:#8a9ab8">(Tron)</span></div></div>
+        <div class="logo logo-trx"><span class="trx-icon">◭</span></div>
       </div>
       <div class="pay-card" onclick="payChoose('ETH','eth',100)">
-        <div class="left"><div class="name">ETH<br><span style="font-size:12px;color:#8a9ab8">(Ethereum)</span></div></div>
-        <div class="logo logo-eth">ETH</div>
+        <div class="left"><div class="name">ETH<br><span style="font-size:11px;color:#8a9ab8">(Ethereum)</span></div></div>
+        <div class="logo logo-eth"><span class="eth-icon">◆</span></div>
       </div>
     </div>
   </div>
 
   <div class="pay-content" id="payTab-withdraw">
     <div class="pay-grid" style="padding-bottom:30px">
-      <div class="pay-card" onclick="openWdCard()" style="min-height:130px">
+      <div class="pay-card" onclick="openWdCard()" style="min-height:120px">
         <div class="left"><div class="name">Перевод на карту</div><div class="min">от 3 093 ₽</div></div>
         <div class="logo logo-card">VISA</div>
       </div>
-      <div class="pay-card" onclick="openWdSbp()" style="min-height:130px">
+      <div class="pay-card" onclick="openWdSbp()" style="min-height:120px">
         <div class="left"><div class="name">СБП</div><div class="min">от 3 093 ₽</div></div>
         <div class="logo logo-sbp">СБП</div>
       </div>
@@ -737,55 +1000,89 @@ svg{display:block}
   </div>
 
   <div class="pay-content" id="payTab-history">
-    <div class="hist-list" id="histList">
-      <div class="hist-empty">История пуста</div>
+    <div class="hist-list" id="histList" style="padding:0 18px 30px">
+      <div class="hist-empty" style="text-align:center;padding:60px 20px;color:#6b7280;font-size:14px">История пуста</div>
     </div>
   </div>
 </div>
 
-<!-- ВЫВОД: КАРТА -->
+<!-- ЭКРАН ВВОДА СУММЫ -->
+<div class="sum-screen" id="sumScreen">
+  <div class="sum-header">
+    <button class="back" onclick="closeSumScreen()">
+      <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Назад
+    </button>
+    <button class="close-x" onclick="closeSumScreen()">×</button>
+  </div>
+  <div class="sum-title">Пополнение</div>
+  <div class="sum-method">
+    <div class="logo logo-tpay" id="sumLogo"><div class="tpay-box">T</div><div class="tpay-txt">Pay</div></div>
+    <div class="info">
+      <div class="nm" id="sumName">T-PAY</div>
+      <div class="min" id="sumMin">Минимум 200 ₽</div>
+      <div class="chg">▾ Изменить метод</div>
+    </div>
+  </div>
+  <div class="sum-label">Сумма пополнения</div>
+  <div class="sum-input-wrap">
+    <input type="tel" class="sum-input" id="sumInput" placeholder="Мин. сумма 200 ₽" inputmode="numeric" oninput="sumValidate()">
+  </div>
+  <div class="sum-err" id="sumErr">Некорректный формат суммы</div>
+  <div class="sum-presets">
+    <button class="sum-preset" onclick="sumPreset(500)">500 ₽</button>
+    <button class="sum-preset" onclick="sumPreset(1000)">1 000 ₽</button>
+    <button class="sum-preset" onclick="sumPreset(3030)">3 030 ₽</button>
+    <button class="sum-preset" onclick="sumPreset(5050)">5 050 ₽</button>
+    <button class="sum-preset" onclick="sumPreset(8080)">8 080 ₽</button>
+    <button class="sum-preset" onclick="sumPreset(10010)">10 010 ₽</button>
+    <button class="sum-preset" onclick="sumPreset(25025)">25 025 ₽</button>
+    <button class="sum-preset" onclick="sumPreset(70777)">70 777 ₽</button>
+  </div>
+  <div class="sum-bonus">
+    <div class="info">
+      <div class="title">Бонус 100% + 75 FS</div>
+      <div class="cond">Условия бонуса</div>      </div>
+    </div>
+    <div class="toggle on" id="bonusToggle" onclick="toggleBonus()"></div>
+  </div>
+  <div class="sum-result">
+    <div class="r"><span>К пополнению:</span><span class="v" id="sumAmount">0 ₽</span></div>
+    <div class="r gold"><span>Бонус:</span><span class="v" id="sumBonus">+0 ₽</span></div>
+    <div class="r"><span>Фриспины:</span><span class="v" id="sumFs">0 FS</span></div>
+  </div>
+  <div class="sum-continue">
+    <button class="btn" id="sumContinueBtn" onclick="sumContinue()" disabled>Продолжить</button>
+  </div>
+</div>
+
 <div class="wd-screen" id="wdCardScreen">
   <div class="wd-header">
-    <button class="back" onclick="closeWdCard()"><span class="arr">‹</span> Назад</button>
+    <button class="back" onclick="closeWdCard()"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Назад</button>
     <button class="close-x" onclick="closeWdCard()">×</button>
   </div>
-  <div class="wd-title">Вывод</div>
+  <div class="wd-title">Вывод на карту</div>
   <div class="wd-form">
-    <div class="wd-select">
-      <div class="left">
-        <div class="ico">💳</div>
-        <div>Перевод на карту</div>
-      </div>
-      <div class="chev">⇅</div>
-    </div>
     <input type="text" class="wd-input" id="wdCardFio" placeholder="ФИО">
     <input type="text" class="wd-input" id="wdCardNum" placeholder="Номер банковской карты" inputmode="numeric">
     <input type="tel" class="wd-input error" id="wdCardSum" placeholder="Минимальная сумма 3093 ₽" inputmode="numeric" oninput="wdCardValidate()">
     <div class="wd-err show" id="wdCardSumErr">Минимальная сумма 3093 ₽</div>
-    <div class="wd-hint">Ваш текущий баланс: <span class="val" id="wdCardBal">0 ₽</span></div>
+    <div class="wd-hint">Ваш баланс: <span class="val" id="wdCardBal">0 ₽</span></div>
     <div class="wd-summary">
       <div class="row"><span>На счет поступит:</span><span class="v" id="wdCardReceive">0.00 ₽</span></div>
-      <div class="row"><span>Комиссия за перевод</span><span class="v">0.00 ₽</span></div>
+      <div class="row"><span>Комиссия:</span><span class="v">0.00 ₽</span></div>
     </div>
-    <button class="main-btn" onclick="wdCardContinue()">Продолжить</button>
+    <button class="main-btn" style="max-width:none" onclick="wdCardContinue()">Продолжить</button>
   </div>
 </div>
 
-<!-- ВЫВОД: СБП -->
 <div class="wd-screen" id="wdSbpScreen">
   <div class="wd-header">
-    <button class="back" onclick="closeWdSbp()"><span class="arr">‹</span> Назад</button>
+    <button class="back" onclick="closeWdSbp()"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Назад</button>
     <button class="close-x" onclick="closeWdSbp()">×</button>
   </div>
   <div class="wd-title">Вывод по СБП</div>
   <div class="wd-form">
-    <div class="wd-select">
-      <div class="left">
-        <div class="ico">СБП</div>
-        <div>СБП</div>
-      </div>
-      <div class="chev">⇅</div>
-    </div>
     <input type="text" class="wd-input" id="wdSbpFio" placeholder="ФИО">
     <div class="wd-phone-wrap">
       <div class="wd-phone-prefix">🇷🇺 +7</div>
@@ -794,25 +1091,52 @@ svg{display:block}
     <div class="wd-err show" id="wdSbpPhoneErr">Некорректный номер</div>
     <input type="tel" class="wd-input error" id="wdSbpSum" placeholder="Минимальная сумма 3093 ₽" inputmode="numeric" oninput="wdSbpValidate()">
     <div class="wd-err show" id="wdSbpSumErr">Минимальная сумма 3093 ₽</div>
-    <div class="wd-hint">Ваш текущий баланс: <span class="val" id="wdSbpBal">0 ₽</span></div>
+    <div class="wd-hint">Ваш баланс: <span class="val" id="wdSbpBal">0 ₽</span></div>
     <div class="wd-summary">
       <div class="row"><span>На счет поступит:</span><span class="v" id="wdSbpReceive">0.00 ₽</span></div>
-      <div class="row"><span>Комиссия за перевод</span><span class="v">0.00 ₽</span></div>
+      <div class="row"><span>Комиссия:</span><span class="v">0.00 ₽</span></div>
     </div>
-    <button class="main-btn" onclick="wdSbpContinue()">Продолжить</button>
+    <button class="main-btn" style="max-width:none" onclick="wdSbpContinue()">Продолжить</button>
   </div>
 </div>
 
-<!-- БОНУСЫ -->
+<div class="search-reqs-screen" id="searchReqsScreen">
+  <div class="srs-content">
+    <div class="srs-spinner">
+      <div class="srs-ring"></div>
+      <div class="srs-ring-inner"></div>
+      <div class="srs-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    </div>
+    <div class="srs-title">Поиск реквизитов</div>
+    <div class="srs-subtitle">Пожалуйста, не закрывайте приложение</div>
+    <div class="srs-timer">
+      <span id="srsTimer">10:00</span>
+      <span class="srs-timer-label">до истечения ссылки</span>
+    </div>
+    <div class="srs-status" id="srsStatus">Связываемся с оператором</div>
+  </div>
+</div>
+
 <div class="bonuses-screen" id="bonusesScreen">
   <div class="bon-head">
     <h2>Бонусы</h2>
     <button class="promo" onclick="promoCode()">Ввести промокод</button>
   </div>
   <div class="bon-cats">
-    <div class="bon-cat"><div class="ico">🎁</div><div class="nm">Мои бонусы</div><div class="bdg">3</div></div>
-    <div class="bon-cat"><div class="ico">💰</div><div class="nm">Кешбэк</div><div class="bdg">1</div></div>
-    <div class="bon-cat"><div class="ico">⭐</div><div class="nm">VIP</div></div>
+    <div class="bon-cat" onclick="openModal('soon')">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 12h18M12 8v13M12 8s-2-5-5-5-3 5 5 5zM12 8s2-5 5-5 3 5-5 5z"/></svg></div>
+      <div class="nm">Мои бонусы</div>
+      <div class="bdg">3</div>
+    </div>
+    <div class="bon-cat" onclick="openModal('soon')">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9h5a2 2 0 0 1 0 4h-4a2 2 0 0 0 0 4h5"/></svg></div>
+      <div class="nm">Кешбэк</div>
+      <div class="bdg">1</div>
+    </div>
+    <div class="bon-cat" onclick="openVip()">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9 16 14 18 22 12 17 6 22 8 14 2 9 9 9 12 2"/></svg></div>
+      <div class="nm">VIP</div>
+    </div>
   </div>
   <div class="bon-panel">
     <h3>Панель бонусов</h3>
@@ -823,37 +1147,34 @@ svg{display:block}
       <button class="bon-tab">Использованные</button>
     </div>
     <div class="bon-card active-bonus">
-      <div class="info">i</div>
       <div class="title">100% + 75 FS на третий депозит</div>
       <div class="timer">На активацию: <b>10ч : 52м : 07с</b></div>
       <button class="use-btn" onclick="useBonus()">Использовать</button>
-      <div class="gift">🎁</div>
+      <div class="gift"><svg viewBox="0 0 64 64" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2"><rect x="8" y="24" width="48" height="32" rx="4"/><path d="M8 32h48M32 24v32M32 24s-6-12-14-12-6 12 14 12zM32 24s6-12 14-12 6 12-14 12z"/></svg></div>
     </div>
     <div class="bon-card locked">
-      <div class="info">i</div>
       <div class="title">До 100% + 75 FS на четвёртый депозит</div>
       <div class="timer">Заблокирован</div>
-      <div class="gift">🎁</div>
+      <div class="gift"><svg viewBox="0 0 64 64" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"><rect x="8" y="24" width="48" height="32" rx="4"/><path d="M8 32h48M32 24v32M32 24s-6-12-14-12-6 12 14 12zM32 24s6-12 14-12 6 12-14 12z"/></svg></div>
     </div>
   </div>
 </div>
 
-<!-- БОКОВОЕ МЕНЮ -->
 <div class="side-menu" id="sideMenu">
   <div class="side-menu-overlay" onclick="closeSideMenu()"></div>
   <div class="side-menu-panel">
     <div class="sm-head">
-      <button class="close" onclick="closeSideMenu()"><span class="x">×</span> Закрыть</button>
+      <button class="close" onclick="closeSideMenu()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Закрыть</button>
     </div>
     <div class="sm-switch">
       <button class="active">Казино</button>
-      <button onclick="sportStub()">Спорт</button>
+      <button onclick="closeSideMenu();openSport()">Спорт</button>
     </div>
     <div class="sm-search">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" placeholder="Поиск">
     </div>
-    <div class="sm-item active" onclick="closeSideMenu()">
+    <div class="sm-item active" onclick="closeSideMenu();scrollTop()">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
       Главная
     </div>
@@ -862,51 +1183,147 @@ svg{display:block}
       Бонусы
       <span class="bdg">4</span>
     </div>
-    <div class="sm-item" onclick="closeSideMenu()">
-      <div class="ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-      Избранное
+    <div class="sm-item" onclick="closeSideMenu();openVip()">
+      <div class="ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9 16 14 18 22 12 17 6 22 8 14 2 9 9 9 12 2"/></svg></div>
+      VIP-статус
     </div>
-    <div class="sm-item" onclick="closeSideMenu()">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></div>
-      Турниры
-      <span class="arr">▾</span>
+    <div class="sm-item" onclick="closeSideMenu();openProfile()">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      Профиль
     </div>
     <div class="sm-divider"></div>
     <div class="sm-cat">Казино</div>
-    <div class="sm-item" onclick="closeSideMenu()">
-      <div class="ic"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
-      Популярные
-    </div>
     <div class="sm-item" onclick="closeSideMenu();openGame('slots')">
       <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div>
       Слоты
     </div>
-    <div class="sm-item" onclick="closeSideMenu()">
-      <div class="ic"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-      Быстрые игры
+    <div class="sm-item" onclick="closeSideMenu();openGame('roulette')">
+      <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="3" x2="12" y2="7"/></svg></div>
+      Рулетка
     </div>
-    <div class="sm-item" onclick="closeSideMenu()">
-      <div class="ic"><span style="background:#fff;color:#000;padding:1px 6px;border-radius:4px;font-size:10px;font-weight:900">NEW</span></div>
-      Новинки
+    <div class="sm-item" onclick="closeSideMenu();openGame('blackjack')">
+      <div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/></svg></div>
+      Блэкджек
     </div>
     <div class="sm-divider"></div>
     <div class="sm-socials">
-      <a class="vk">VK</a>
-      <a class="tg">TG</a>
-      <a class="x">X</a>
-      <a class="ig">IG</a>
+      <a class="vk" onclick="openModal('soon')"><svg viewBox="0 0 24 24"><path d="M13.16 17.4c-5.4 0-8.7-3.7-8.83-9.86h2.76c.1 4.5 2.1 6.4 3.66 6.8V7.54h2.6v4.05c1.5-.16 3.1-1.9 3.63-4.05h2.6c-.42 2.63-2.14 4.38-3.36 5.15 1.22.62 3.17 2.15 3.92 4.71h-2.87c-.57-1.8-2-3.14-3.92-3.3v3.3h-.3z"/></svg></a>
+      <a class="tg" onclick="openModal('soon')"><svg viewBox="0 0 24 24"><path d="M22 3L2 11l6 2 2 6 4-5 6 4 2-15zM9.5 13.5L18 8l-6.5 6-1 3.5-1-4z"/></svg></a>
+      <a class="x" onclick="openModal('soon')"><svg viewBox="0 0 24 24"><path d="M18.9 3H22l-7.5 8.6L23 21h-6.7l-5-6.5L5.6 21H2.5l8-9.2L1.4 3h6.8l4.5 6 6.2-6zm-1.2 16h1.8L7.4 4.8H5.5L17.7 19z"/></svg></a>
+      <a class="ig" onclick="openModal('soon')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2"/></svg></a>
     </div>
-    <div class="sm-lang">
-      <span>🇷🇺 RU</span>
-    </div>
-    <div class="sm-support">
-      <div class="l"><svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Поддержка</div>
+    <div class="sm-lang"><span>🇷🇺 RU</span></div>
+    <div class="sm-support" onclick="openModal('soon')">
+      <div class="l"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Поддержка</div>
       <div class="badge24">24/7</div>
     </div>
   </div>
 </div>
 
-<!-- МОДАЛКА -->
+<div class="sport-screen" id="sportScreen">
+  <div class="sport-inner">
+    <div class="sport-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+    </div>
+    <div class="sport-title">Ставки на спорт</div>
+    <div class="sport-sub">Раздел находится в разработке. Скоро тут появятся футбол, баскетбол, теннис и многое другое.</div>
+    <div class="sport-badge">Скоро</div>
+  </div>
+</div>
+
+<div class="profile-screen" id="profileScreen">
+  <div class="prof-head">
+    <h2>Профиль</h2>
+    <button class="close" onclick="closeProfile()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="prof-hero">
+    <div class="prof-avatar"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></div>
+    <div class="prof-name">Гость</div>
+    <div class="prof-id">ID: <span id="profId">0</span></div>
+    <div class="prof-balance">
+      <div class="lbl">Баланс</div>
+      <div class="val" id="profBalance">10 000 ₽</div>
+    </div>
+  </div>
+  <div class="prof-stats">
+    <div class="prof-stat">
+      <div class="ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <div class="lbl">Всего игр</div>
+      <div class="val" id="profGames">0</div>
+    </div>
+    <div class="prof-stat">
+      <div class="ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="lbl">Побед</div>
+      <div class="val" id="profWins">0</div>
+    </div>
+  </div>
+  <div class="prof-actions">
+    <div class="prof-action" onclick="openVip()">
+      <div class="ico"><svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9 16 14 18 22 12 17 6 22 8 14 2 9 9 9 12 2"/></svg></div>
+      <div class="txt">VIP-статус</div>
+      <div class="arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </div>
+    <div class="prof-action" onclick="openPay()">
+      <div class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20"/></svg></div>
+      <div class="txt">Пополнить</div>
+      <div class="arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </div>
+    <div class="prof-action" onclick="openModal('soon')">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div class="txt">История игр</div>
+      <div class="arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<div class="vip-screen" id="vipScreen">
+  <div class="vip-head">
+    <h2>VIP-статус</h2>
+    <button class="close" onclick="closeVip()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="vip-intro">Выберите уровень VIP-статуса. Эксклюзивные бонусы, повышенный кэшбэк и личный менеджер.</div>
+  <div class="vip-cards">
+    <div class="vip-card silver" onclick="buyVip('Silver',500)">
+      <div class="vip-top">
+        <div class="vip-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9 16 14 18 22 12 17 6 22 8 14 2 9 9 9 12 2"/></svg></div>
+        <div class="vip-name">SILVER</div>
+      </div>
+      <div class="vip-desc">Начальный уровень с базовыми привилегиями</div>
+      <div class="vip-price"><span class="amount">500 ₽</span><span class="per">/ месяц</span></div>
+      <div class="vip-features">
+        <div class="vip-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Кэшбэк 5%</div>
+        <div class="vip-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Ускоренный вывод</div>
+      </div>
+    </div>
+    <div class="vip-card gold" onclick="buyVip('Gold',1000)">
+      <div class="vip-top">
+        <div class="vip-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9 16 14 18 22 12 17 6 22 8 14 2 9 9 9 12 2"/></svg></div>
+        <div class="vip-name">GOLD</div>
+      </div>
+      <div class="vip-desc">Средний уровень с расширенными бонусами</div>
+      <div class="vip-price"><span class="amount">1 000 ₽</span><span class="per">/ месяц</span></div>
+      <div class="vip-features">
+        <div class="vip-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Кэшбэк 10%</div>
+        <div class="vip-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Повышенные лимиты</div>
+        <div class="vip-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Персональные акции</div>
+      </div>
+    </div>
+    <div class="vip-card platinum" onclick="buyVip('Platinum',1500)">
+      <div class="vip-top">
+        <div class="vip-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9 16 14 18 22 12 17 6 22 8 14 2 9 9 9 12 2"/></svg></div>
+        <div class="vip-name">PLATINUM</div>
+      </div>
+      <div class="vip-desc">Максимальный уровень — эксклюзивные привилегии</div>
+      <div class="vip-price"><span class="amount">1 500 ₽</span><span class="per">/ месяц</span></div>
+      <div class="vip-features">
+        <div class="vip-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Кэшбэк 15%</div>
+        <div class="vip-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Личный менеджер</div>
+        <div class="vip-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Закрытые турниры</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -916,21 +1333,12 @@ svg{display:block}
   </div>
 </div>
 
-<!-- ЭКРАН ПОИСКА РЕКВИЗИТОВ -->
-<div class="search-reqs-screen" id="searchReqsScreen">
-  <div class="srs-content">
-    <div class="srs-spinner">
-      <div class="srs-ring"></div>
-      <div class="srs-ring-inner"></div>
-      <div class="srs-icon">🔍</div>
-    </div>
-    <div class="srs-title">Поиск реквизитов</div>
-    <div class="srs-subtitle">Пожалуйста, не закрывайте приложение</div>
-    <div class="srs-timer">
-      <span id="srsTimer">10:00</span>
-      <span class="srs-timer-label">до истечения ссылки</span>
-    </div>
-    <div class="srs-status" id="srsStatus">Связываемся с оператором</div>
+<div class="success-modal" id="successModal">
+  <div class="success-box">
+    <div class="success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="success-title" id="successTitle">Готово!</div>
+    <div class="success-text" id="successText">Операция выполнена</div>
+    <button class="success-btn" onclick="closeSuccess()">ОК</button>
   </div>
 </div><script>
 "use strict";
@@ -951,8 +1359,11 @@ window.currentBet = 100;
 window.currentGame = "";
 window.bjBet = 0; window.bjPlayer = []; window.bjDealer = []; window.bjActive = false;
 window.payMethod = {name:"T-PAY", code:"tpay", min:200};
-window.wdMethod = "card";
 window.srsInterval = null; window.srsTimeLeft = 600;
+window.bonusEnabled = true;
+window.rouletteRotation = 0;
+window.avia = { active:false, animation:null, mult:1, bet:0, x:0, y:0, obstacles:[], startTime:0 };
+window.gamesPlayed = 0; window.gamesWon = 0;
 
 setTimeout(function(){ var l = document.getElementById("loader"); if(l) l.classList.add("hidden"); }, 1800);
 
@@ -963,34 +1374,28 @@ window.haptic = function(t){
 
 window.loadBalance = function(){
   try { var s = localStorage.getItem("ms_balance"); if(s) window.balance = parseInt(s); } catch(e){}
+  try { var g = localStorage.getItem("ms_games"); if(g) window.gamesPlayed = parseInt(g); } catch(e){}
+  try { var w = localStorage.getItem("ms_wins"); if(w) window.gamesWon = parseInt(w); } catch(e){}
   window.updateUI();
 };
 window.saveBalance = function(){
-  try { localStorage.setItem("ms_balance", window.balance); } catch(e){}
+  try {
+    localStorage.setItem("ms_balance", window.balance);
+    localStorage.setItem("ms_games", window.gamesPlayed);
+    localStorage.setItem("ms_wins", window.gamesWon);
+  } catch(e){}
 };
 window.updateUI = function(){
-  var b = document.getElementById("balance"); if(b) b.innerText = window.balance + " ₽";
+  var b = document.getElementById("balance"); if(b) b.innerText = window.balance;
   var gb = document.getElementById("gameBalance"); if(gb) gb.innerText = window.balance + " ₽";
   var pb = document.getElementById("payBal"); if(pb) pb.innerText = window.balance + " ₽";
   var pb2 = document.getElementById("payBal2"); if(pb2) pb2.innerText = window.balance + " ₽";
   var wcb = document.getElementById("wdCardBal"); if(wcb) wcb.innerText = window.balance + " ₽";
   var wsb = document.getElementById("wdSbpBal"); if(wsb) wsb.innerText = window.balance + " ₽";
+  var prof = document.getElementById("profBalance"); if(prof) prof.innerText = window.balance.toLocaleString("ru-RU") + " ₽";
+  var pg = document.getElementById("profGames"); if(pg) pg.innerText = window.gamesPlayed;
+  var pw = document.getElementById("profWins"); if(pw) pw.innerText = window.gamesWon;
   window.saveBalance();
-};
-
-window.getHistory = function(){
-  try { return JSON.parse(localStorage.getItem("ms_history") || "[]"); } catch(e){ return []; }
-};
-window.saveHistory = function(item){
-  try {
-    var h = JSON.parse(localStorage.getItem("ms_history") || "[]");
-    h.unshift(item);
-    if(h.length > 50) h = h.slice(0,50);
-    localStorage.setItem("ms_history", JSON.stringify(h));
-  } catch(e){}
-};
-window.addHistory = function(type, amount, method){
-  window.saveHistory({type:type, amount:amount, date:Date.now(), method:method||""});
 };
 
 window.setBet = function(v, el){
@@ -1011,6 +1416,7 @@ window.checkBet = function(){
     return false;
   }
   window.balance -= window.currentBet;
+  window.gamesPlayed++;
   return true;
 };
 window.scrollRow = function(id, dir){
@@ -1019,40 +1425,33 @@ window.scrollRow = function(id, dir){
   if(el) el.scrollBy({left: dir*160, behavior:"smooth"});
 };
 window.scrollTop = function(){
-  var c = document.querySelector(".content");
+  var c = document.getElementById("mainContent");
   if(c) c.scrollTo({top:0, behavior:"smooth"});
 };
 
 window.openModal = function(key){
   window.haptic("medium");
   var MODALS = {
-    profile: { title:"Профиль", items:[
-      {icon:"👤", text:"Гость", sub:"ID: 0", action:"noop"},
-      {icon:"💰", text:"Баланс", sub:"", action:"noop"},
-      {icon:"📈", text:"Статистика", sub:"Всего игр: 0", action:"noop"},
-      {icon:"⭐", text:"VIP статус", sub:"Бронза", action:"noop"},
-      {icon:"🚪", text:"Выйти", sub:"", action:"logout"}
+    notifications: { title:"Уведомления", items:[
+      {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7"/></svg>', text:"Бонус активирован", sub:"+500 ₽ на баланс"},
+      {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>', text:"Новый турнир", sub:"Призовой фонд 100 000 ₽"},
+      {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33"/></svg>', text:"Настройки уведомлений", sub:"Управление"}
     ]},
-    sport: { title:"Спорт", items:[
-      {icon:"⚽", text:"Футбол", sub:"Матчи сегодня"},
-      {icon:"🏀", text:"Баскетбол", sub:"NBA, Евролига"},
-      {icon:"🎾", text:"Теннис", sub:"ATP, WTA"},
-      {icon:"🥊", text:"Бокс и MMA", sub:"UFC, бокс"}
+    soon: { title:"В разработке", items:[
+      {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>', text:"Раздел скоро появится", sub:"Мы работаем над этим"}
     ]}
   };
   var data = MODALS[key]; if(!data) return;
   document.getElementById("modalTitle").innerText = data.title;
   var body = document.getElementById("modalBody");
   var html = "";
+  if(data.text) html += '<div class="modal-text">'+data.text+'</div>';
   if(data.items){
     html += '<div class="modal-list">';
     for(var i=0;i<data.items.length;i++){
       var it = data.items[i];
       var sub = it.sub ? '<div class="mi-sub">'+it.sub+'</div>' : '';
-      var extra = (key==="profile" && it.text==="Баланс")
-        ? '<div class="mi-sub" style="color:#ffd700;font-size:16px;font-weight:900">'+window.balance+' ₽</div>'
-        : sub;
-      html += '<div class="modal-item" onclick="handleModalAction(\''+(it.action||"noop")+'\')"><div class="mi-icon">'+it.icon+'</div><div class="mi-text">'+it.text+extra+'</div></div>';
+      html += '<div class="modal-item" onclick="closeModal()"><div class="mi-icon">'+it.icon+'</div><div class="mi-text">'+it.text+sub+'</div></div>';
     }
     html += '</div>';
   }
@@ -1063,63 +1462,20 @@ window.closeModal = function(){
   window.haptic("light");
   document.getElementById("modal").classList.remove("active");
 };
-window.handleModalAction = function(a){
-  window.closeModal();
-  if(a === "logout") alert("Вы вышли");
+
+window.openSuccess = function(title, text){
+  document.getElementById("successTitle").innerText = title;
+  document.getElementById("successText").innerText = text;
+  document.getElementById("successModal").classList.add("active");
+};
+window.closeSuccess = function(){
+  document.getElementById("successModal").classList.remove("active");
 };
 
-/* LIVE WINS */
-var lwGames = ["Fastbreak","Gates of Olympus","Bunny Jitsu","Pots of Power","Olympus Rivals","9K Yeti","Starlight Princess","Sweet Bonanza","Sugar Rush","Big Bass Bonanza","Le Bandit","Dog House"];
-var lwUsers = ["Jevgeni M.","Ajdar K.","Jelena J.","Nikita","Максим В.","Дмитрий П.","Артём С.","Алексей К.","Мария Л.","Ольга Н.","Иван Ф.","Сергей Т.","Андрей Р.","Екатерина В."];
-function lwRandomAmount(){
-  var r = Math.random();
-  if(r < 0.6) return Math.floor(200 + Math.random()*800);
-  if(r < 0.85) return Math.floor(1000 + Math.random()*4000);
-  if(r < 0.97) return Math.floor(5000 + Math.random()*25000);
-  return Math.floor(50000 + Math.random()*70000);
-}
-function lwFormat(n){
-  return n.toLocaleString("ru-RU") + " ₽";
-}
-function lwAdd(){
-  var row = document.getElementById("liveWinsRow"); if(!row) return;
-  var g = lwGames[Math.floor(Math.random()*lwGames.length)];
-  var u = lwUsers[Math.floor(Math.random()*lwUsers.length)];
-  var a = lwRandomAmount();
-  var el = document.createElement("div");
-  el.className = "lw-card";
-  el.innerHTML = '<div class="lw-img">'+g.charAt(0)+'</div>'+
-    '<div class="lw-info"><div class="lw-game">'+g+'</div><div class="lw-user">'+u+'</div></div>'+
-    '<div class="lw-win">'+lwFormat(a)+'</div>';
-  row.insertBefore(el, row.firstChild);
-  while(row.children.length > 4) row.removeChild(row.lastChild);
-}
-setInterval(lwAdd, 3200);
-
-/* SIDE MENU */
-window.openSideMenu = function(){ window.haptic("medium"); document.getElementById("sideMenu").classList.add("active"); };
-window.closeSideMenu = function(){ document.getElementById("sideMenu").classList.remove("active"); };
-window.sportStub = function(){ window.closeSideMenu(); setTimeout(function(){ window.openModal("sport"); }, 250); };
-
-/* BONUSES */
-window.openBonuses = function(){ window.haptic("medium"); document.getElementById("bonusesScreen").classList.add("active"); };
-window.closeBonuses = function(){ document.getElementById("bonusesScreen").classList.remove("active"); };
-window.useBonus = function(){ window.haptic("medium"); alert("Бонус активирован! 100% + 75 FS начислены на баланс."); };
-window.promoCode = function(){ var c = prompt("Введите промокод:"); if(c) alert("Промокод применён: " + c); };
-
-/* INIT */
-window.updateUI();
-document.getElementById("yearNow").innerText = new Date().getFullYear();
-window.loadBalance();
-setTimeout(lwAdd, 800);
-setTimeout(lwAdd, 1600);
-setTimeout(lwAdd, 2400);
-</script><script>
 window.openPay = function(){
   window.haptic("medium");
   window.updateUI();
   document.getElementById("payModal").classList.add("active");
-  window.renderHistory();
 };
 window.closePay = function(){
   window.haptic("light");
@@ -1134,26 +1490,86 @@ window.switchPayTab = function(tab, el){
   if(el) el.classList.add("active");
   var target = document.getElementById("payTab-" + tab);
   if(target) target.classList.add("active");
-  if(tab === "history") window.renderHistory();
 };
 
 window.payChoose = function(name, code, min){
   window.haptic("medium");
   window.payMethod = {name:name, code:code, min:min};
   window.closePay();
-  window.openSearchReqs();
+  window.openSumScreen();
+};
+window.openSumScreen = function(){
+  document.getElementById("sumName").innerText = window.payMethod.name;
+  document.getElementById("sumMin").innerText = "Минимум " + window.payMethod.min + " ₽";
+  document.getElementById("sumInput").placeholder = "Мин. сумма " + window.payMethod.min + " ₽";
+  document.getElementById("sumInput").value = "";
+  document.getElementById("sumAmount").innerText = "0 ₽";
+  document.getElementById("sumBonus").innerText = "+0 ₽";
+  document.getElementById("sumFs").innerText = "0 FS";
+  document.getElementById("sumContinueBtn").disabled = true;
+  document.getElementById("sumErr").classList.remove("show");
+  document.getElementById("sumInput").className = "sum-input";
+  document.getElementById("bonusToggle").classList.add("on");
+  window.bonusEnabled = true;
+  document.getElementById("sumScreen").classList.add("active");
+};
+window.closeSumScreen = function(){
+  document.getElementById("sumScreen").classList.remove("active");
+};
+window.sumPreset = function(v){
+  document.getElementById("sumInput").value = v;
+  window.sumValidate();
+};
+window.sumValidate = function(){
+  var inp = document.getElementById("sumInput");
+  var err = document.getElementById("sumErr");
+  var btn = document.getElementById("sumContinueBtn");
+  var raw = inp.value.replace(/\D/g, "");
+  inp.value = raw;
+  var n = parseInt(raw);
+  if(!raw || isNaN(n) || n < window.payMethod.min){
+    inp.className = "sum-input error";
+    err.classList.add("show");
+    btn.disabled = true;
+    document.getElementById("sumAmount").innerText = "0 ₽";
+    document.getElementById("sumBonus").innerText = "+0 ₽";
+    document.getElementById("sumFs").innerText = "0 FS";
+    return false;
+  }
+  inp.className = "sum-input ok";
+  err.classList.remove("show");
+  btn.disabled = false;
+  document.getElementById("sumAmount").innerText = n.toLocaleString("ru-RU") + " ₽";
+  if(window.bonusEnabled){
+    document.getElementById("sumBonus").innerText = "+" + n.toLocaleString("ru-RU") + " ₽";
+    document.getElementById("sumFs").innerText = "75 FS";
+  } else {
+    document.getElementById("sumBonus").innerText = "+0 ₽";
+    document.getElementById("sumFs").innerText = "0 FS";
+  }
+  return true;
+};
+window.toggleBonus = function(){
+  window.bonusEnabled = !window.bonusEnabled;
+  document.getElementById("bonusToggle").classList.toggle("on", window.bonusEnabled);
+  window.sumValidate();
+};
+window.sumContinue = function(){
+  if(!window.sumValidate()) return;
+  window.haptic("medium");
+  var sum = parseInt(document.getElementById("sumInput").value);
   var userId = (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.id : 0;
   var userName = (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "Гость";
   try {
     fetch("/api/notify", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({type:"request", userName:userName, userId:userId, amount:min, method:name})
+      body: JSON.stringify({type:"request", userName:userName, userId:userId, amount:sum, method:window.payMethod.name, bonus:window.bonusEnabled})
     });
   } catch(e){}
+  window.closeSumScreen();
+  window.openSearchReqs();
 };
-
-/* ЭКРАН ПОИСКА РЕКВИЗИТОВ */
 window.openSearchReqs = function(){
   window.haptic("medium");
   document.getElementById("searchReqsScreen").classList.add("active");
@@ -1181,12 +1597,11 @@ window.updateSrsTimer = function(){
   if(el) el.innerText = m + ":" + (s<10?"0"+s:s);
 };
 
-/* ВЫВОД ПО КАРТЕ */
+/* ВЫВОД КАРТА */
 window.openWdCard = function(){
   window.haptic("medium");
   document.getElementById("wdCardScreen").classList.add("active");
-  var b = document.getElementById("wdCardBal");
-  if(b) b.innerText = window.balance + " ₽";
+  var b = document.getElementById("wdCardBal"); if(b) b.innerText = window.balance + " ₽";
 };
 window.closeWdCard = function(){
   document.getElementById("wdCardScreen").classList.remove("active");
@@ -1220,37 +1635,26 @@ window.wdCardValidate = function(){
 window.wdCardContinue = function(){
   var fio = document.getElementById("wdCardFio").value.trim();
   var card = document.getElementById("wdCardNum").value.trim();
-  if(!fio){ alert("Введите ФИО"); return; }
-  if(!card || card.replace(/\D/g,"").length < 16){ alert("Введите номер карты (16 цифр)"); return; }
+  if(!fio){ window.showToast("Введите ФИО"); return; }
+  if(!card || card.replace(/\D/g,"").length < 16){ window.showToast("Введите номер карты (16 цифр)"); return; }
   if(!window.wdCardValidate()) return;
   var sum = parseInt(document.getElementById("wdCardSum").value);
   window.haptic("medium");
   try {
-    fetch("/api/notify", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        type: "withdraw",
-        userName: (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "Гость",
-        userId: (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.id : 0,
-        amount: sum, method: "Карта", fio: fio, card: card
-      })
-    });
+    fetch("/api/notify", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({ type:"withdraw", userName: (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "Гость", userId: (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.id : 0, amount: sum, method: "Карта", fio: fio, card: card }) });
   } catch(e){}
   window.balance -= sum;
-  window.addHistory("Вывод на карту", -sum, "Карта");
   window.updateUI();
-  alert("Заявка на вывод " + sum + " ₽ отправлена оператору");
   window.closeWdCard();
   window.closePay();
+  window.openSuccess("Заявка отправлена", "Вывод " + sum.toLocaleString("ru-RU") + " ₽ на карту обрабатывается оператором");
 };
 
-/* ВЫВОД ПО СБП */
+/* ВЫВОД СБП */
 window.openWdSbp = function(){
   window.haptic("medium");
   document.getElementById("wdSbpScreen").classList.add("active");
-  var b = document.getElementById("wdSbpBal");
-  if(b) b.innerText = window.balance + " ₽";
+  var b = document.getElementById("wdSbpBal"); if(b) b.innerText = window.balance + " ₽";
 };
 window.closeWdSbp = function(){
   document.getElementById("wdSbpScreen").classList.remove("active");
@@ -1260,15 +1664,8 @@ window.wdSbpValidatePhone = function(){
   var err = document.getElementById("wdSbpPhoneErr");
   var raw = inp.value.replace(/\D/g, "");
   inp.value = raw;
-  if(raw.length === 10 || raw.length === 11){
-    inp.className = "wd-input ok";
-    err.classList.remove("show");
-    return true;
-  }
-  inp.className = "wd-input error";
-  err.innerText = "Некорректный номер";
-  err.classList.add("show");
-  return false;
+  if(raw.length === 10 || raw.length === 11){ inp.className = "wd-input ok"; err.classList.remove("show"); return true; }
+  inp.className = "wd-input error"; err.innerText = "Некорректный номер"; err.classList.add("show"); return false;
 };
 window.wdSbpValidate = function(){
   var inp = document.getElementById("wdSbpSum");
@@ -1278,871 +1675,115 @@ window.wdSbpValidate = function(){
   var n = parseInt(raw);
   var rec = document.getElementById("wdSbpReceive");
   if(!raw || isNaN(n) || n < 3093){
-    inp.className = "wd-input error";
-    err.innerText = "Минимальная сумма 3093 ₽";
-    err.classList.add("show");
-    if(rec) rec.innerText = "0.00 ₽";
-    return false;
+    inp.className = "wd-input error"; err.innerText = "Минимальная сумма 3093 ₽"; err.classList.add("show");
+    if(rec) rec.innerText = "0.00 ₽"; return false;
   }
   if(n > window.balance){
-    inp.className = "wd-input error";
-    err.innerText = "Недостаточно средств";
-    err.classList.add("show");
-    if(rec) rec.innerText = "0.00 ₽";
-    return false;
+    inp.className = "wd-input error"; err.innerText = "Недостаточно средств"; err.classList.add("show");
+    if(rec) rec.innerText = "0.00 ₽"; return false;
   }
-  inp.className = "wd-input ok";
-  err.classList.remove("show");
-  if(rec) rec.innerText = n.toFixed(2) + " ₽";
-  return true;
+  inp.className = "wd-input ok"; err.classList.remove("show");
+  if(rec) rec.innerText = n.toFixed(2) + " ₽"; return true;
 };
 window.wdSbpContinue = function(){
   var fio = document.getElementById("wdSbpFio").value.trim();
-  if(!fio){ alert("Введите ФИО"); return; }
-  if(!window.wdSbpValidatePhone()){ alert("Некорректный номер телефона"); return; }
+  if(!fio){ window.showToast("Введите ФИО"); return; }
+  if(!window.wdSbpValidatePhone()){ window.showToast("Некорректный номер телефона"); return; }
   if(!window.wdSbpValidate()) return;
   var phone = "+7" + document.getElementById("wdSbpPhone").value.replace(/\D/g, "");
   var sum = parseInt(document.getElementById("wdSbpSum").value);
   window.haptic("medium");
   try {
-    fetch("/api/notify", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        type: "withdraw",
-        userName: (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "Гость",
-        userId: (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.id : 0,
-        amount: sum, method: "СБП", fio: fio, card: phone
-      })
-    });
+    fetch("/api/notify", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({ type:"withdraw", userName: (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "Гость", userId: (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.id : 0, amount: sum, method: "СБП", fio: fio, card: phone }) });
   } catch(e){}
   window.balance -= sum;
-  window.addHistory("Вывод по СБП", -sum, "СБП");
   window.updateUI();
-  alert("Заявка на вывод " + sum + " ₽ по СБП отправлена оператору");
   window.closeWdSbp();
   window.closePay();
+  window.openSuccess("Заявка отправлена", "Вывод " + sum.toLocaleString("ru-RU") + " ₽ по СБП обрабатывается оператором");
 };
 
-/* ИСТОРИЯ */
-window.renderHistory = function(){
-  var list = document.getElementById("histList"); if(!list) return;
-  var hist = window.getHistory();
-  if(!hist.length){
-    list.innerHTML = '<div class="hist-empty">История пуста</div>';
-    return;
-  }
-  var html = "";
-  for(var i=0;i<hist.length;i++){
-    var h = hist[i];
-    var date = new Date(h.date);
-    var dateStr = (date.getDate()<10?"0":"")+date.getDate()+"."+((date.getMonth()+1)<10?"0":"")+(date.getMonth()+1)+" "+date.getHours()+":"+(date.getMinutes()<10?"0":"")+date.getMinutes();
-    var isPlus = h.amount > 0;
-    var ico = isPlus ? "📥" : "📤";
-    html += '<div class="hist-item"><div class="l"><div class="ico">'+ico+'</div><div><div class="nm">'+h.type+'</div><div class="dt">'+dateStr+' '+(h.method||"")+'</div></div></div><div class="amt '+(isPlus?"plus":"minus")+'">'+(isPlus?"+":"")+h.amount+' ₽</div></div>';
-  }
-  list.innerHTML = html;
-};
-</script><script>
-window.SYM = {
-  diamond:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a5f3fc"/><stop offset="0.5" stop-color="#06b6d4"/><stop offset="1" stop-color="#0e7490"/></linearGradient></defs><path d="M32 4 L60 32 L32 60 L4 32 Z" fill="url(#gd)" stroke="#083344" stroke-width="1.5"/></svg>',
-  crown:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="gc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="0.5" stop-color="#eab308"/><stop offset="1" stop-color="#854d0e"/></linearGradient></defs><path d="M8 50 L12 22 L24 34 L32 12 L40 34 L52 22 L56 50 Z" fill="url(#gc)" stroke="#422006" stroke-width="1.5"/><circle cx="12" cy="20" r="3" fill="#fef08a"/><circle cx="32" cy="10" r="3" fill="#fef08a"/><circle cx="52" cy="20" r="3" fill="#fef08a"/></svg>',
-  cherry:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><radialGradient id="gch" cx="0.35" cy="0.3" r="0.7"><stop offset="0" stop-color="#fca5a5"/><stop offset="0.5" stop-color="#dc2626"/><stop offset="1" stop-color="#7f1d1d"/></radialGradient></defs><path d="M20 30 Q28 12 46 8" stroke="#16a34a" stroke-width="3" fill="none"/><path d="M20 30 Q14 12 32 6" stroke="#16a34a" stroke-width="3" fill="none"/><circle cx="18" cy="44" r="12" fill="url(#gch)"/><circle cx="44" cy="46" r="12" fill="url(#gch)"/></svg>',
-  star:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="gs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="1" stop-color="#b45309"/></linearGradient></defs><polygon points="32,4 40,24 62,24 44,38 52,58 32,46 12,58 20,38 2,24 24,24" fill="url(#gs)" stroke="#78350f" stroke-width="1.5"/></svg>',
-  coin:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><radialGradient id="gco" cx="0.35" cy="0.3" r="0.75"><stop offset="0" stop-color="#fef9c3"/><stop offset="0.5" stop-color="#facc15"/><stop offset="1" stop-color="#b45309"/></radialGradient></defs><circle cx="32" cy="32" r="28" fill="url(#gco)" stroke="#422006" stroke-width="2"/><text x="32" y="42" text-anchor="middle" font-size="24" font-weight="900" fill="#78350f">$</text></svg>',
-  seven:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="g7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbcfe8"/><stop offset="0.5" stop-color="#ec4899"/><stop offset="1" stop-color="#831843"/></linearGradient></defs><text x="32" y="48" text-anchor="middle" font-size="48" font-weight="900" fill="url(#g7)" stroke="#500724" stroke-width="1.5">7</text></svg>'
+window.showToast = function(text){
+  var el = document.createElement("div");
+  el.style.cssText = "position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:rgba(30,30,50,.95);color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:700;z-index:99999;border:1px solid rgba(74,111,232,.4);box-shadow:0 10px 40px rgba(0,0,0,.5);font-family:Inter,sans-serif;transition:opacity .3s;";
+  el.innerText = text;
+  document.body.appendChild(el);
+  setTimeout(function(){ el.style.opacity = "0"; }, 1800);
+  setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); }, 2200);
 };
 
-window.renderReels = function(idxs){
-  var syms = ["diamond","crown","cherry","star","coin","seven"];
-  var ids = ["r1","r2","r3"];
-  for(var i=0;i<ids.length;i++){
-    var el = document.getElementById(ids[i]);
-    if(el){
-      var inner = el.querySelector(".reel-inner");
-      if(inner) inner.innerHTML = window.SYM[syms[idxs[i]]];
-    }
-  }
-};
-window.slotResult = [0,0,0];
-window.stopReel = function(idx, clearIv){
-  if(clearIv) clearInterval(clearIv);
-  var id = ["r1","r2","r3"][idx];
-  var el = document.getElementById(id);
-  if(el) el.classList.remove("spin");
-  var syms = ["diamond","crown","cherry","star","coin","seven"];
-  var picked = Math.floor(Math.random()*6);
-  window.slotResult[idx] = picked;
-  if(el){
-    var inner = el.querySelector(".reel-inner");
-    if(inner) inner.innerHTML = window.SYM[syms[picked]];
-  }
-};
-window.finishSlots = function(){
-  var s1 = window.slotResult[0], s2 = window.slotResult[1], s3 = window.slotResult[2];
-  var win = false, amount = 0;
-  if(s1 === s2 && s2 === s3){
-    if(s1 === 5) amount = window.currentBet * 10;
-    else amount = window.currentBet * 5;
-    win = true;
-    var ids = ["r1","r2","r3"];
-    for(var i=0;i<ids.length;i++){
-      var el = document.getElementById(ids[i]);
-      if(el) el.classList.add("win");
-    }
-  } else if(s1 === s2 || s2 === s3 || s1 === s3){
-    amount = window.currentBet * 2;
-    win = true;
-  }
-  if(win){
-    window.balance += amount;
-    window.updateUI();
-    window.addHistory("Выигрыш в слотах", amount, "");
-    window.showResult("Выигрыш +" + amount + " ₽", "win");
-  } else {
-    window.updateUI();
-    window.showResult("Проигрыш", "lose");
-  }
-  setTimeout(function(){
-    var ids = ["r1","r2","r3"];
-    for(var i=0;i<ids.length;i++){
-      var el = document.getElementById(ids[i]);
-      if(el) el.classList.remove("win");
-    }
-  }, 1500);
-};
-window.playSlots = function(){
+/* SIDE MENU */
+window.openSideMenu = function(){ window.haptic("medium"); document.getElementById("sideMenu").classList.add("active"); };
+window.closeSideMenu = function(){ document.getElementById("sideMenu").classList.remove("active"); };
+
+/* SPORT */
+window.openSport = function(){ document.getElementById("sportScreen").classList.add("active"); };
+window.closeSport = function(){ document.getElementById("sportScreen").classList.remove("active"); };
+
+/* PROFILE */
+window.openProfile = function(){ window.updateUI(); document.getElementById("profileScreen").classList.add("active"); };
+window.closeProfile = function(){ document.getElementById("profileScreen").classList.remove("active"); };
+
+/* VIP */
+window.openVip = function(){ window.haptic("medium"); document.getElementById("vipScreen").classList.add("active"); };
+window.closeVip = function(){ document.getElementById("vipScreen").classList.remove("active"); };
+window.buyVip = function(name, price){
   window.haptic("medium");
-  if(!window.checkBet()) return;
+  if(window.balance < price){ window.showToast("Недостаточно средств"); return; }
+  window.balance -= price;
   window.updateUI();
-  var spinBtn = document.getElementById("spinBtn");
-  if(spinBtn) spinBtn.disabled = true;
-  var reelIds = ["r1","r2","r3"];
-  var syms = ["diamond","crown","cherry","star","coin","seven"];
-  for(var i=0;i<reelIds.length;i++){
-    var el = document.getElementById(reelIds[i]);
-    if(el) el.classList.add("spin");
-  }
-  var iv = setInterval(function(){
-    for(var i=0;i<reelIds.length;i++){
-      var el = document.getElementById(reelIds[i]);
-      if(el){
-        var inner = el.querySelector(".reel-inner");
-        if(inner) inner.innerHTML = window.SYM[syms[Math.floor(Math.random()*6)]];
-      }
-    }
-  }, 80);
-  setTimeout(function(){ window.stopReel(0, iv); }, 1300);
-  setTimeout(function(){ window.stopReel(1, null); }, 1700);
-  setTimeout(function(){
-    window.stopReel(2, null);
-    if(spinBtn) spinBtn.disabled = false;
-    window.finishSlots();
-  }, 2100);
+  window.closeVip();
+  window.openSuccess("VIP " + name, "Активирован статус " + name + " на 30 дней");
 };
 
-/* КОСТИ */
-window.dotHTML = function(value){
-  var pos = {
-    1:[[50,50]],
-    2:[[28,28],[72,72]],
-    3:[[28,28],[50,50],[72,72]],
-    4:[[28,28],[72,28],[28,72],[72,72]],
-    5:[[28,28],[72,28],[50,50],[28,72],[72,72]],
-    6:[[28,28],[72,28],[28,50],[72,50],[28,72],[72,72]]
-  };
-  var arr = pos[value] || [];
-  var html = "";
-  for(var i=0;i<arr.length;i++){
-    html += '<div class="dot" style="left:'+arr[i][0]+'%;top:'+arr[i][1]+'%;transform:translate(-50%,-50%)"></div>';
-  }
-  return html;
-};
-window.renderCube = function(id, value){
-  var el = document.getElementById(id); if(!el) return;
-  el.innerHTML = '<div class="cube-face f1">'+window.dotHTML(value)+'</div>'+'<div class="cube-face f2">'+window.dotHTML((value%6)+1)+'</div>'+'<div class="cube-face f3">'+window.dotHTML(((value+1)%6)+1)+'</div>'+'<div class="cube-face f4">'+window.dotHTML(((value+2)%6)+1)+'</div>'+'<div class="cube-face f5">'+window.dotHTML(((value+3)%6)+1)+'</div>'+'<div class="cube-face f6">'+window.dotHTML(((value+4)%6)+1)+'</div>';
-};
-window.setCubeFace = function(id, value){
-  var el = document.getElementById(id); if(!el) return;
-  var rot = {1:"rotateX(0deg) rotateY(0deg)",2:"rotateY(-90deg)",3:"rotateY(180deg)",4:"rotateY(90deg)",5:"rotateX(-90deg)",6:"rotateX(90deg)"};
-  el.style.transform = rot[value] || "rotateX(0deg)";
-};
-window.playDice = function(){
-  window.haptic("medium");
-  if(!window.checkBet()) return;
+/* BONUSES */
+window.openBonuses = function(){ document.getElementById("bonusesScreen").classList.add("active"); };
+window.closeBonuses = function(){ document.getElementById("bonusesScreen").classList.remove("active"); };
+window.useBonus = function(){
+  window.balance += 500;
   window.updateUI();
-  window.showResult("", "");
-  var c1 = document.getElementById("cube1");
-  var c2 = document.getElementById("cube2");
-  if(!c1 || !c2) return;
-  c1.classList.add("rolling");
-  c2.classList.add("rolling");
-  c1.style.transform = "";
-  c2.style.transform = "";
-  setTimeout(function(){
-    c1.classList.remove("rolling");
-    c2.classList.remove("rolling");
-    var p1 = Math.floor(Math.random()*6)+1;
-    var p2 = Math.floor(Math.random()*6)+1;
-    var d1 = Math.floor(Math.random()*6)+1;
-    var d2 = Math.floor(Math.random()*6)+1;
-    window.setCubeFace("cube1", p1);
-    window.setCubeFace("cube2", p2);
-    var ps = p1+p2, ds = d1+d2;
-    if(ps > ds){
-      window.balance += window.currentBet * 2;
-      window.updateUI();
-      window.addHistory("Выигрыш в костях", window.currentBet*2, "");
-      window.showResult("Победа! " + ps + " vs " + ds + "  +" + (window.currentBet*2) + " ₽", "win");
-    } else if(ps === ds){
-      window.balance += window.currentBet;
-      window.updateUI();
-      window.showResult("Ничья " + ps + " vs " + ds, "win");
-    } else {
-      window.updateUI();
-      window.showResult("Проигрыш " + ps + " vs " + ds, "lose");
-    }
-  }, 1400);
+  window.openSuccess("Бонус активирован", "+500 ₽ зачислено на баланс");
 };
-</script><script>
-window.cardValue = function(c){
-  if(c === "A") return 11;
-  if(c === "K" || c === "Q" || c === "J") return 10;
-  return parseInt(c);
-};
-window.calcHand = function(hand){
-  var s = 0, a = 0;
-  for(var i=0;i<hand.length;i++){
-    s += window.cardValue(hand[i].v);
-    if(hand[i].v === "A") a++;
-  }
-  while(s > 21 && a > 0){ s -= 10; a--; }
-  return s;
-};
-window.makeCard = function(suit, value){
-  var red = (suit === "♥" || suit === "♦");
-  return '<div class="card '+(red?"red":"")+'"><div class="corner">'+value+'<br>'+suit+'</div><div class="center-suit">'+suit+'</div><div class="corner bottom">'+value+'<br>'+suit+'</div></div>';
-};
-window.cardBack = function(){ return '<div class="card back"></div>'; };
-window.newCard = function(){
-  var suits = ["♠","♥","♦","♣"];
-  var vals = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
-  var v = vals[Math.floor(Math.random()*13)];
-  var s = suits[Math.floor(Math.random()*4)];
-  return {v:v, s:s, card:window.makeCard(s,v)};
-};
-window.renderChips = function(){
-  var chips = document.getElementById("chips"); if(!chips) return;
-  var html = "";
-  var b = window.bjBet || window.currentBet;
-  var denoms = [1000, 500, 200, 100];
-  var colors = {1000:"gold", 500:"blue", 200:"green", 100:""};
-  var count = 0;
-  for(var i=0;i<denoms.length;i++){
-    var d = denoms[i];
-    while(b >= d && count < 6){
-      html += '<div class="chip '+colors[d]+'" data-val="'+d+'"></div>';
-      b -= d; count++;
-    }
-  }
-  chips.innerHTML = html || '<div class="chip gold" data-val="'+window.currentBet+'"></div>';
-};
-window.renderBJ = function(){
-  var pC = document.getElementById("pCards");
-  var dC = document.getElementById("dCards");
-  var htmlP = "", htmlD = "";
-  for(var i=0;i<window.bjPlayer.length;i++) htmlP += window.bjPlayer[i].card;
-  for(var j=0;j<window.bjDealer.length;j++){
-    htmlD += (j===1 && window.bjActive) ? window.cardBack() : window.bjDealer[j].card;
-  }
-  if(pC) pC.innerHTML = htmlP;
-  if(dC) dC.innerHTML = htmlD;
-  var pS = document.getElementById("pScore");
-  var dS = document.getElementById("dScore");
-  if(pS) pS.innerText = window.calcHand(window.bjPlayer);
-  if(dS) dS.innerText = window.bjActive ? "?" : window.calcHand(window.bjDealer);
-};
-window.endBJ = function(){
-  var startBtn = document.getElementById("bjStartBtn");
-  var actions = document.getElementById("bjActions");
-  if(startBtn){ startBtn.style.display = "block"; startBtn.innerText = "Играть снова"; }
-  if(actions) actions.style.display = "none";
-};
-window.bjStart = function(){
-  if(window.bjActive) return;
-  window.haptic("medium");
-  if(!window.checkBet()) return;
-  window.updateUI();
-  window.bjBet = window.currentBet;
-  window.bjActive = true;
-  window.bjPlayer = [window.newCard(), window.newCard()];
-  window.bjDealer = [window.newCard(), window.newCard()];
-  window.renderBJ();
-  window.renderChips();
-  var startBtn = document.getElementById("bjStartBtn");
-  var actions = document.getElementById("bjActions");
-  if(startBtn) startBtn.style.display = "none";
-  if(actions) actions.style.display = "flex";
-  window.showResult("", "");
-};
-window.bjHit = function(){
-  if(!window.bjActive) return;
-  window.haptic("light");
-  window.bjPlayer.push(window.newCard());
-  window.renderBJ();
-  if(window.calcHand(window.bjPlayer) > 21){
-    window.bjActive = false;
-    window.updateUI();
-    window.showResult("Перебор! Проигрыш", "lose");
-    window.endBJ();
-  }
-};
-window.bjStand = function(){
-  if(!window.bjActive) return;
-  window.haptic("medium");
-  window.bjActive = false;
-  while(window.calcHand(window.bjDealer) < 17){
-    window.bjDealer.push(window.newCard());
-  }
-  window.renderBJ();
-  var ps = window.calcHand(window.bjPlayer), ds = window.calcHand(window.bjDealer);
-  if(ds > 21 || ps > ds){
-    window.balance += window.bjBet * 2;
-    window.updateUI();
-    window.addHistory("Выигрыш в блэкджеке", window.bjBet*2, "");
-    window.showResult("Победа! +" + (window.bjBet*2) + " ₽", "win");
-  } else if(ps === ds){
-    window.balance += window.bjBet;
-    window.updateUI();
-    window.showResult("Ничья", "win");
-  } else {
-    window.updateUI();
-    window.showResult("Проигрыш " + ps + " vs " + ds, "lose");
-  }
-  window.endBJ();
-};
-window.bjDouble = function(){
-  if(!window.bjActive) return;
-  window.haptic("medium");
-  if(window.bjBet > window.balance){ window.showResult("Недостаточно средств", "lose"); return; }
-  window.balance -= window.bjBet;
-  window.bjBet *= 2;
-  window.updateUI();
-  window.renderChips();
-  window.bjPlayer.push(window.newCard());
-  window.renderBJ();
-  if(window.calcHand(window.bjPlayer) > 21){
-    window.bjActive = false;
-    window.showResult("Перебор! Проигрыш", "lose");
-    window.endBJ();
-  } else {
-    window.bjStand();
-  }
-};
+window.promoCode = function(){ var c = prompt("Введите промокод:"); if(c) window.showToast("Промокод " + c + " применён"); };
 
-/* РУЛЕТКА */
-window.rouletteRotation = 0;
-window.playRoulette = function(betType){
-  window.haptic("medium");
-  if(!window.checkBet()) return;
-  window.updateUI();
-  window.showResult("", "");
-  var wheel = document.getElementById("wheel");
-  var ball = document.getElementById("rouletteBall");
-  if(!wheel) return;
-  var spins = 5 + Math.random() * 3;
-  window.rouletteRotation += spins * 360 + Math.random() * 360;
-  wheel.style.transform = "rotate(" + window.rouletteRotation + "deg)";
-  if(ball) ball.classList.add("visible");
-  setTimeout(function(){
-    var n = Math.floor(Math.random()*37);
-    var numEl = document.getElementById("rouletteNum");
-    if(numEl) numEl.innerText = n;
-    var color = n === 0 ? "zero" : (n % 2 === 0 ? "black" : "red");
-    var win = false, mult = 0;
-    if(betType === color){
-      mult = (color === "zero") ? 14 : 2;
-      win = true;
-    }
-    if(win){
-      window.balance += window.currentBet * mult;
-      window.updateUI();
-      window.addHistory("Выигрыш в рулетке", window.currentBet*mult, "Выпало " + n);
-      window.showResult("Выигрыш! " + n + "  +" + (window.currentBet*mult) + " ₽", "win");
-    } else {
-      window.updateUI();
-      window.showResult("Проигрыш. Выпало " + n, "lose");
-    }
-    if(ball) ball.classList.remove("visible");
-  }, 5000);
-};
-</script><script>
-/* МОНЕТКА */
-window.playCoin = function(side){
-  window.haptic("medium");
-  if(!window.checkBet()) return;
-  window.updateUI();
-  window.showResult("", "");
-  var coin = document.getElementById("coin3d");
-  if(!coin) return;
-  coin.classList.remove("flipping");
-  void coin.offsetWidth;
-  coin.classList.add("flipping");
-  try {
-    var AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if(AudioCtx){
-      var ac = new AudioCtx();
-      var osc = ac.createOscillator();
-      var gain = ac.createGain();
-      osc.connect(gain); gain.connect(ac.destination);
-      osc.frequency.setValueAtTime(1200, ac.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(400, ac.currentTime + 0.3);
-      gain.gain.setValueAtTime(0.08, ac.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.3);
-      osc.start(); osc.stop(ac.currentTime + 0.3);
-    }
-  } catch(e){}
-  setTimeout(function(){
-    var result = Math.random() < 0.5 ? "heads" : "tails";
-    coin.style.transform = (result === "tails") ? "rotateY(180deg)" : "rotateY(0deg)";
-    if(result === side){
-      window.balance += window.currentBet * 2;
-      window.updateUI();
-      window.addHistory("Выигрыш в монетке", window.currentBet*2, result === "heads" ? "Орёл" : "Решка");
-      window.showResult("Победа! +" + (window.currentBet*2) + " ₽", "win");
-    } else {
-      window.updateUI();
-      window.showResult("Проигрыш", "lose");
-    }
-  }, 3500);
-};
+/* LIVE WINS */
+var lwGames = ["Fastbreak","Gates of Olympus","Bunny Jitsu","Pots of Power","Olympus Rivals","9K Yeti","Starlight Princess","Sweet Bonanza","Sugar Rush","Big Bass Bonanza","Le Bandit","Dog House"];
+var lwUsers = ["Jevgeni M.","Ajdar K.","Jelena J.","Nikita","Максим В.","Дмитрий П.","Артём С.","Алексей К.","Мария Л.","Ольга Н.","Иван Ф.","Сергей Т.","Андрей Р.","Екатерина В."];
+function lwRandomAmount(){
+  var r = Math.random();
+  if(r < 0.6) return Math.floor(200 + Math.random()*800);
+  if(r < 0.85) return Math.floor(1000 + Math.random()*4000);
+  if(r < 0.97) return Math.floor(5000 + Math.random()*25000);
+  return Math.floor(50000 + Math.random()*70000);
+}
+function lwFormat(n){ return n.toLocaleString("ru-RU") + " ₽"; }
+function lwAdd(){
+  var row = document.getElementById("liveWinsRow"); if(!row) return;
+  var g = lwGames[Math.floor(Math.random()*lwGames.length)];
+  var u = lwUsers[Math.floor(Math.random()*lwUsers.length)];
+  var a = lwRandomAmount();
+  var el = document.createElement("div");
+  el.className = "lw-card";
+  var iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="#6b8cff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>';
+  el.innerHTML = '<div class="lw-top"><d  var iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="#6b8cff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>';
+  el.innerHTML = '<div class="lw-top"><div class="lw-img">'+iconSvg+'</div><div class="lw-info"><div class="lw-game">'+g+'</div><div class="lw-user">'+u+'</div></div></div><div class="lw-win">'+lwFormat(a)+'</div>';
+  row.insertBefore(el, row.firstChild);
+  while(row.children.length > 6) row.removeChild(row.lastChild);
+}
 
-/* ПОКЕР */
-window.evaluateHand = function(cards){
-  var suits = [];
-  for(var i=0;i<cards.length;i++) suits.push(cards[i].s);
-  var flush = true;
-  for(var j=1;j<suits.length;j++){ if(suits[j] !== suits[0]) { flush = false; break; } }
-  var counts = {};
-  for(var k=0;k<cards.length;k++) counts[cards[k].v] = (counts[cards[k].v]||0) + 1;
-  var cnts = [];
-  for(var key in counts) cnts.push(counts[key]);
-  cnts.sort(function(a,b){ return b-a; });
-  if(flush && cnts[0] === 5) return {name:"Флеш-рояль", mult:50};
-  if(cnts[0] === 4) return {name:"Каре", mult:20};
-  if(cnts[0] === 3 && cnts[1] === 2) return {name:"Фулл-хаус", mult:10};
-  if(flush) return {name:"Флеш", mult:7};
-  if(cnts[0] === 3) return {name:"Сет", mult:4};
-  if(cnts[0] === 2 && cnts[1] === 2) return {name:"Две пары", mult:3};
-  if(cnts[0] === 2) return {name:"Пара", mult:2};
-  return {name:"Старшая карта", mult:0};
-};
-window.pokerStart = function(){
-  window.haptic("medium");
-  if(!window.checkBet()) return;
-  window.updateUI();
-  var p1 = window.newCard(), p2 = window.newCard();
-  var t1 = window.newCard(), t2 = window.newCard(), t3 = window.newCard();
-  var pC = document.getElementById("pCards");
-  var tC = document.getElementById("tCards");
-  if(pC) pC.innerHTML = p1.card + p2.card;
-  if(tC) tC.innerHTML = t1.card + t2.card + t3.card;
-  var pS = document.getElementById("pScore");
-  var tS = document.getElementById("tScore");
-  if(pS) pS.innerText = "—";
-  if(tS) tS.innerText = "—";
-  window.showResult("Раздача...", "win");
-  setTimeout(function(){
-    var myHand = [p1, p2, t1, t2, t3];
-    var res = window.evaluateHand(myHand);
-    if(pS) pS.innerText = res.name;
-    if(tS) tS.innerText = "Стол";
-    if(res.mult > 0){
-      var amount = window.currentBet * res.mult;
-      window.balance += amount;
-      window.updateUI();
-      window.addHistory("Покер — " + res.name, amount, "");
-      window.showResult(res.name + "! +" + amount + " ₽", "win");
-    } else {
-      window.updateUI();
-      window.showResult("Старшая карта. Проигрыш", "lose");
-    }
-    var startBtn = document.getElementById("pokerStartBtn");
-    if(startBtn) startBtn.innerText = "Играть снова";
-  }, 1800);
-};
-
-/* AVIAMASTERS — новая механика */
-window.avia = {
-  active:false, animation:null, mult:1, bet:0, x:0, y:0,
-  obstacles:[], planeEl:null, canvas:null, ctx:null, W:0, H:0, startTime:0, crashed:false, cashed:false
-};
-window.aviaStart = function(){
-  var a = window.avia;
-  if(a.active){
-    // «Забрать» нажали в полёте — но у нас самолёт летит сам до конца, поэтому кнопка не нужна
-    return;
-  }
-  window.haptic("medium");
-  if(!window.checkBet()) return;
-  window.updateUI();
-  a.active = true;
-  a.crashed = false;
-  a.cashed = false;
-  a.mult = 1;
-  a.bet = window.currentBet;
-  a.startTime = Date.now();
-  a.x = 0;
-  a.y = 0;
-  var btn = document.getElementById("aviaBtn");
-  var mult = document.getElementById("aviaMult");
-  var status = document.getElementById("aviaStatus");
-  if(btn){ btn.innerText = "В ПОЛЁТЕ"; btn.disabled = true; btn.className = "main-btn"; }
-  if(mult){ mult.style.opacity = "1"; mult.innerText = "x1.00"; mult.style.color = "#fff"; }
-  if(status){ status.innerText = "Самолёт летит..."; }
-  window.showResult("", "");
-  window.aviaInitObstacles();
-  window.aviaTick();
-};
-window.aviaInitObstacles = function(){
-  var a = window.avia;
-  a.obstacles = [];
-  // 12-18 объектов по пути
-  var count = 12 + Math.floor(Math.random()*6);
-  for(var i=0; i<count; i++){
-    // Все расставлены по диагонали вверх-вправо
-    var t = (i + 0.5) / count; // 0..1 по пути
-    var isBomb = Math.random() < 0.35; // 35% бомбы
-    var val = 0;
-    if(!isBomb){
-      // множители 1, 2, 4, 6, 8 (обычные) + редкие 2, 3, 4 с меньшим шансом
-      var r = Math.random();
-      if(r < 0.7){ var arr = [1,2,4,6,8]; val = arr[Math.floor(Math.random()*arr.length)]; }
-      else { var arr2 = [2,3,4]; val = arr2[Math.floor(Math.random()*arr2.length)]; }
-    }
-    a.obstacles.push({ t:t, isBomb:isBomb, val:val, hit:false });
-  }
-};
-window.aviaTick = function(){
-  var a = window.avia;
-  if(!a.active) return;
-  var elapsed = (Date.now() - a.startTime) / 1000;
-  // Путь 6 секунд — за это время самолёт пролетает все препятствия и садится
-  var prog = Math.min(elapsed / 6, 1);
-
-  // Прогресс по X и Y (дуга вверх, потом снижение к палубе)
-  a.x = prog;
-  a.y = Math.sin(prog * Math.PI) * 0.85;
-
-  // Обработка препятствий
-  for(var i=0;i<a.obstacles.length;i++){
-    var o = a.obstacles[i];
-    if(!o.hit && prog >= o.t){
-      o.hit = true;
-      if(o.isBomb){
-        // бомба — делим множитель на 2
-        a.mult = Math.max(0.5, a.mult / 2);
-      } else {
-        // множитель — добавляем (перемножаем)
-        a.mult *= o.val;
-      }
-      var mult = document.getElementById("aviaMult");
-      if(mult){
-        mult.innerText = "x" + a.mult.toFixed(2);
-        if(o.isBomb){ mult.style.color = "#ef4444"; setTimeout(function(){ if(mult) mult.style.color = "#fff"; }, 400); }
-        else { mult.style.color = "#4ade80"; setTimeout(function(){ if(mult) mult.style.color = "#fff"; }, 400); }
-      }
-    }
-  }
-
-  window.aviaDraw(prog, a.y);
-
-  if(prog >= 1){
-    // Приземление на палубу — победа
-    a.active = false;
-    var win = Math.floor(a.bet * a.mult);
-    window.balance += win;
-    window.updateUI();
-    window.addHistory("AVIAMASTERS x" + a.mult.toFixed(2), win, "");
-    var btn = document.getElementById("aviaBtn");
-    var status = document.getElementById("aviaStatus");
-    if(btn){ btn.innerText = "НАЧАТЬ ПОЛЁТ"; btn.disabled = false; }
-    if(status){ status.innerText = "Приземление! x" + a.mult.toFixed(2); }
-    window.showResult("Приземление! Выигрыш +" + win + " ₽", "win");
-    return;
-  }
-
-  a.animation = requestAnimationFrame(window.aviaTick);
-};
-window.aviaDraw = function(prog, y){
-  var a = window.avia;
-  var c = document.getElementById("aviaCanvas"); if(!c) return;
-  var rect = c.getBoundingClientRect();
-  if(c.width !== rect.width || c.height !== rect.height){
-    c.width = rect.width; c.height = rect.height;
-  }
-  var ctx = c.getContext("2d");
-  var W = c.width, H = c.height;
-
-  // фон — небо
-  var sky = ctx.createLinearGradient(0, 0, 0, H);
-  sky.addColorStop(0, "#1e3a8a");
-  sky.addColorStop(0.6, "#3b82f6");
-  sky.addColorStop(1, "#0a0a14");
-  ctx.fillStyle = sky;
-  ctx.fillRect(0, 0, W, H);
-
-  // звёзды
-  ctx.fillStyle = "rgba(255,255,255,.5)";
-  for(var i=0; i<20; i++){
-    var sx = (i * 137) % W;
-    var sy = (i * 89) % (H*0.6);
-    ctx.fillRect(sx, sy, 1, 1);
-  }
-
-  // вода снизу
-  ctx.fillStyle = "#0a3d62";
-  ctx.fillRect(0, H - 30, W, 30);
-
-  // авианосец справа (палуба)
-  ctx.fillStyle = "#5a5a5a";
-  ctx.fillRect(W - 90, H - 55, 90, 25);
-  ctx.fillStyle = "#4a4a4a";
-  ctx.fillRect(W - 90, H - 55, 90, 5);
-  ctx.fillStyle = "#3a3a3a";
-  ctx.fillRect(W - 60, H - 80, 20, 25);
-  // надпись на палубе
-  ctx.fillStyle = "#fff";
-  ctx.font = "9px Inter, sans-serif";
-  ctx.fillText("MAGIC", W - 60, H - 40);
-
-  // препятствия
-  var a2 = a;
-  for(var j=0; j<a2.obstacles.length; j++){
-    var o = a2.obstacles[j];
-    var px = o.t * (W - 100) + 30;
-    var py = H - 60 - Math.sin(o.t * Math.PI) * (H * 0.55);
-    if(o.isBomb){
-      // бомба — чёрный шар
-      ctx.fillStyle = "#1a1a1a";
-      ctx.beginPath();
-      ctx.arc(px, py, 12, 0, Math.PI*2);
-      ctx.fill();
-      ctx.fillStyle = "#ef4444";
-      ctx.beginPath();
-      ctx.arc(px, py, 6, 0, Math.PI*2);
-      ctx.fill();
-      // искра
-      ctx.fillStyle = "#ffaa00";
-      ctx.beginPath();
-      ctx.arc(px + 10, py - 10, 3, 0, Math.PI*2);
-      ctx.fill();
-    } else {
-      // множитель — зелёный ромб с числом
-      ctx.fillStyle = o.val >= 6 ? "#f59e0b" : (o.val >= 4 ? "#22c55e" : "#4a6fe8");
-      ctx.beginPath();
-      ctx.moveTo(px, py-14);
-      ctx.lineTo(px+14, py);
-      ctx.lineTo(px, py+14);
-      ctx.lineTo(px-14, py);
-      ctx.closePath();
-      ctx.fill();
-      ctx.fillStyle = "#fff";
-      ctx.font = "bold 12px Inter, sans-serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText("x" + o.val, px, py);
-    }
-  }
-
-  // самолёт
-  var planeX = prog * (W - 100) + 30;
-  var planeY = H - 60 - y * (H * 0.55);
-  // хвост
-  ctx.fillStyle = "rgba(255,255,255,.3)";
-  ctx.beginPath();
-  ctx.moveTo(planeX - 20, planeY);
-  ctx.lineTo(planeX - 60, planeY + 10);
-  ctx.lineTo(planeX - 60, planeY - 10);
-  ctx.closePath();
-  ctx.fill();
-  // корпус
-  ctx.fillStyle = "#fff";
-  ctx.beginPath();
-  ctx.moveTo(planeX + 20, planeY);
-  ctx.lineTo(planeX - 15, planeY + 10);
-  ctx.lineTo(planeX - 15, planeY - 10);
-  ctx.closePath();
-  ctx.fill();
-  // кабина
-  ctx.fillStyle = "#4a6fe8";
-  ctx.beginPath();
-  ctx.arc(planeX + 5, planeY, 4, 0, Math.PI*2);
-  ctx.fill();
-  ctx.textAlign = "left";
-  ctx.textBaseline = "alphabetic";
-};
-</script><script>
-window.renderGame = function(game){
-  var area = document.getElementById("gameArea");
-  if(!area) return;
-
-  if(game === "slots"){
-    area.innerHTML =
-      '<div class="slot-machine">'+
-        '<div class="slot-top"><div class="slot-brand">MAGIC SPIN</div><div class="slot-lights"><span></span><span></span><span></span></div></div>'+
-        '<div class="slot-window"><div class="reels">'+
-          '<div class="reel" id="r1"><div class="reel-inner"></div></div>'+
-          '<div class="reel" id="r2"><div class="reel-inner"></div></div>'+
-          '<div class="reel" id="r3"><div class="reel-inner"></div></div>'+
-        '</div></div>'+
-        '<div class="slot-controls">'+
-          '<div class="slot-info"><div class="label">Ставка</div><div class="val" id="slotBet">'+window.currentBet+' ₽</div></div>'+
-          '<button class="slot-btn-spin" id="spinBtn" onclick="playSlots()">SPIN</button>'+
-          '<div class="slot-info"><div class="label">Баланс</div><div class="val" id="slotBal">'+window.balance+' ₽</div></div>'+
-        '</div>'+
-        '<div class="slot-legend">'+
-          '<div class="item"><span>7 x3</span><span class="mult">x10</span></div>'+
-          '<div class="item"><span>Любые x3</span><span class="mult">x5</span></div>'+
-          '<div class="item"><span>Любые x2</span><span class="mult">x2</span></div>'+
-        '</div>'+
-      '</div>';
-    window.renderReels([0,1,2]);
-  }
-  else if(game === "dice"){
-    area.innerHTML =
-      '<div class="dice-table">'+
-        '<div class="dice-arena">'+
-          '<div class="cube" id="cube1"></div>'+
-          '<div class="cube" id="cube2"></div>'+
-        '</div>'+
-        '<div style="text-align:center;color:#8a9ab8;font-size:13px;margin-bottom:16px">Сумма твоих костей vs сумма дилера</div>'+
-        '<button class="main-btn" onclick="playDice()">Бросить кости</button>'+
-        '<div class="result-msg" id="result"></div>'+
-      '</div>';
-    window.renderCube("cube1", 3);
-    window.renderCube("cube2", 5);
-  }
-  else if(game === "blackjack"){
-    area.innerHTML =
-      '<div class="card-table">'+
-        '<div class="hand-zone"><div class="hand-title">Дилер <span class="score-badge" id="dScore">?</span></div><div class="cards-zone" id="dCards"></div></div>'+
-        '<div class="hand-zone"><div class="hand-title">Вы <span class="score-badge" id="pScore">0</span></div><div class="cards-zone" id="pCards"></div></div>'+
-        '<div class="chips-zone" id="chips"></div>'+
-      '</div>'+
-      '<div class="actions-row" id="bjActions" style="display:none">'+
-        '<button class="main-btn green" onclick="bjHit()">Взять</button>'+
-        '<button class="main-btn red" onclick="bjStand()">Хватит</button>'+
-        '<button class="main-btn gold" onclick="bjDouble()">x2</button>'+
-      '</div>'+
-      '<button class="main-btn" id="bjStartBtn" onclick="bjStart()" style="margin-top:10px">Раздать карты</button>'+
-      '<div class="result-msg" id="result"></div>';
-  }
-  else if(game === "roulette"){
-    area.innerHTML =
-      '<div class="roulette-table">'+
-        '<div class="roulette-wheel-wrap">'+
-          '<div class="roulette-arrow-top"><svg viewBox="0 0 24 24"><path d="M12 22 L6 8 L18 8 Z"/></svg></div>'+
-          '<div class="roulette-wheel-real" id="wheel">'+
-            '<div class="roulette-center-display" id="rouletteNum">?</div>'+
-            '<div class="roulette-ball" id="rouletteBall"></div>'+
-          '</div>'+
-        '</div>'+
-        '<div class="roulette-bets-grid">'+
-          '<button class="rb-btn red" onclick="playRoulette(\'red\')">Красное <span class="mult-badge">x2</span></button>'+
-          '<button class="rb-btn black" onclick="playRoulette(\'black\')">Чёрное <span class="mult-badge">x2</span></button>'+
-          '<button class="rb-btn green" onclick="playRoulette(\'zero\')">Зеро <span class="mult-badge">x14</span></button>'+
-        '</div>'+
-        '<div class="result-msg" id="result"></div>'+
-      '</div>';
-  }
-  else if(game === "coin"){
-    area.innerHTML =
-      '<div class="coin-arena">'+
-        '<div class="coin-stage">'+
-          '<div class="coin-3d" id="coin3d">'+
-            '<div class="coin-side"><div class="sym">О</div><div class="txt">ОРЁЛ</div></div>'+
-            '<div class="coin-side coin-tails-side"><div class="sym">Р</div><div class="txt">РЕШКА</div></div>'+
-          '</div>'+
-        '</div>'+
-        '<div class="coin-shadow"></div>'+
-        '<div class="roulette-bets-grid" style="margin-top:20px">'+
-          '<button class="rb-btn red" onclick="playCoin(\'heads\')">Орёл <span class="mult-badge">x2</span></button>'+
-          '<button class="rb-btn black" onclick="playCoin(\'tails\')">Решка <span class="mult-badge">x2</span></button>'+
-        '</div>'+
-        '<div class="result-msg" id="result"></div>'+
-      '</div>';
-  }
-  else if(game === "poker"){
-    area.innerHTML =
-      '<div class="card-table">'+
-        '<div class="hand-zone"><div class="hand-title">Стол <span class="score-badge" id="tScore">?</span></div><div class="cards-zone" id="tCards"></div></div>'+
-        '<div class="hand-zone"><div class="hand-title">Ваши карты <span class="score-badge" id="pScore">?</span></div><div class="cards-zone" id="pCards"></div></div>'+
-        '<div class="chips-zone" id="chips"></div>'+
-      '</div>'+
-      '<button class="main-btn" id="pokerStartBtn" onclick="pokerStart()" style="margin-top:10px">Раздать</button>'+
-      '<div class="result-msg" id="result"></div>';
-  }
-  else if(game === "avia"){
-    area.innerHTML =
-      '<div style="width:100%;max-width:400px;text-align:center">'+
-        '<div style="position:relative;width:100%;aspect-ratio:1/1.05;background:#0a0a14;border-radius:20px;overflow:hidden;border:2px solid rgba(74,111,232,.3)">'+
-          '<canvas id="aviaCanvas" style="width:100%;height:100%;display:block"></canvas>'+
-          '<div id="aviaMult" style="position:absolute;top:20px;left:50%;transform:translateX(-50%);font-size:38px;font-weight:900;color:#fff;text-shadow:0 0 20px rgba(74,111,232,.9);opacity:.9;pointer-events:none">x1.00</div>'+
-          '<div id="aviaStatus" style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:13px;color:#fff;font-weight:700;background:rgba(0,0,0,.5);padding:6px 14px;border-radius:20px">Готов к старту</div>'+
-        '</div>'+
-        '<button class="main-btn" id="aviaBtn" onclick="aviaStart()" style="margin-top:14px">НАЧАТЬ ПОЛЁТ</button>'+
-        '<div class="result-msg" id="result"></div>'+
-      '</div>';
-  }
-};
-
-window.openGame = function(game){
-  window.haptic("medium");
-  window.currentGame = game;
-  window.bjActive = false;
-  document.getElementById("gameScreen").classList.add("active");
-  var titles = {slots:"Слоты", dice:"Кости", blackjack:"Блэкджек", roulette:"Рулетка", coin:"Монетка", poker:"Покер", avia:"AVIAMASTERS"};
-  document.getElementById("gameTitle").innerText = titles[game] || "Игра";
-  window.updateUI();
-  window.renderGame(game);
-};
-window.closeGame = function(){
-  window.haptic("light");
-  document.getElementById("gameScreen").classList.remove("active");
-  if(window.avia && window.avia.animation) cancelAnimationFrame(window.avia.animation);
-  window.avia.active = false;
-};
-</script><script>
-/* НИЖНЕЕ МЕНЮ */
+/* BOTTOM NAV */
 window.renderBottomNav = function(){
   var nav = document.getElementById("bottomNav");
   if(!nav) return;
   nav.innerHTML =
-    '<div class="nav-item" onclick="openPay()">'+
-      '<svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20"/></svg>'+
-      '<span>Касса</span>'+
-    '</div>'+
-    '<div class="nav-item" onclick="openModal(\'sport\')">'+
-      '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>'+
-      '<span>Спорт</span>'+
-    '</div>'+
-    '<div class="nav-item" onclick="openBonuses()">'+
-      '<svg viewBox="0 0 24 24"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7"/></svg>'+
-      '<span>Бонусы</span>'+
-      '<span class="badge">4</span>'+
-    '</div>'+
-    '<div class="nav-item active" onclick="scrollTop()">'+
-      '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>'+
-      '<span>Казино</span>'+
-    '</div>'+
-    '<div class="nav-item" onclick="openSideMenu()">'+
-      '<svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>'+
-      '<span>Меню</span>'+
-    '</div>';
+    '<div class="nav-item" onclick="openPay()"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20"/></svg><span>Касса</span></div>'+
+    '<div class="nav-item" onclick="openSport()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg><span>Спорт</span></div>'+
+    '<div class="nav-item" onclick="openBonuses()"><svg viewBox="0 0 24 24"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7"/></svg><span>Бонусы</span><span class="badge">4</span></div>'+
+    '<div class="nav-item active" onclick="scrollTop()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg><span>Казино</span></div>'+
+    '<div class="nav-item" onclick="openSideMenu()"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg><span>Меню</span></div>';
 };
 
-/* BACK BUTTON (Telegram) */
+/* BACK BUTTON */
 if(tg && tg.BackButton){
   tg.BackButton.onClick(function(){
     var g = document.getElementById("gameScreen");
@@ -2153,26 +1794,50 @@ if(tg && tg.BackButton){
     var sm = document.getElementById("sideMenu");
     var wc = document.getElementById("wdCardScreen");
     var ws = document.getElementById("wdSbpScreen");
-    if(g && g.classList.contains("active")) window.closeGame();
+    var sum = document.getElementById("sumScreen");
+    var prof = document.getElementById("profileScreen");
+    var vip = document.getElementById("vipScreen");
+    var sp = document.getElementById("sportScreen");
+    var succ = document.getElementById("successModal");
+    if(succ && succ.classList.contains("active")) window.closeSuccess();
+    else if(g && g.classList.contains("active")) window.closeGame();
     else if(wc && wc.classList.contains("active")) window.closeWdCard();
     else if(ws && ws.classList.contains("active")) window.closeWdSbp();
+    else if(sum && sum.classList.contains("active")) window.closeSumScreen();
     else if(srs && srs.classList.contains("active")) window.closeSearchReqs();
     else if(bon && bon.classList.contains("active")) window.closeBonuses();
     else if(sm && sm.classList.contains("active")) window.closeSideMenu();
+    else if(prof && prof.classList.contains("active")) window.closeProfile();
+    else if(vip && vip.classList.contains("active")) window.closeVip();
+    else if(sp && sp.classList.contains("active")) window.closeSport();
     else if(p && p.classList.contains("active")) window.closePay();
     else if(m && m.classList.contains("active")) window.closeModal();
     else if(tg.close) tg.close();
   });
 }
 
-/* ИНИЦИАЛИЗАЦИЯ */
-(function init(){
-  window.renderBottomNav();
-  window.updateUI();
-  window.loadBalance();
-  var y = document.getElementById("yearNow");
-  if(y) y.innerText = new Date().getFullYear();
-})();
+/* INIT */
+window.renderBottomNav();
+window.updateUI();
+window.loadBalance();
+var y = document.getElementById("yearNow"); if(y) y.innerText = new Date().getFullYear();
+var pid = document.getElementById("profId"); if(pid && tg.initDataUnsafe && tg.initDataUnsafe.user) pid.innerText = tg.initDataUnsafe.user.id || 0;
+setTimeout(lwAdd, 600);
+setTimeout(lwAdd, 1400);
+setTimeout(lwAdd, 2200);
+setTimeout(lwAdd, 3000);
+setInterval(lwAdd, 3500);
+
+window.renderBottomNav();
+window.updateUI();
+window.loadBalance();
+var y = document.getElementById("yearNow"); if(y) y.innerText = new Date().getFullYear();
+var pid = document.getElementById("profId"); if(pid && tg.initDataUnsafe && tg.initDataUnsafe.user) pid.innerText = tg.initDataUnsafe.user.id || 0;
+setTimeout(lwAdd, 600);
+setTimeout(lwAdd, 1400);
+setTimeout(lwAdd, 2200);
+setTimeout(lwAdd, 3000);
+setInterval(lwAdd, 3500);
 
 console.log("%c MAGIC SPIN ready","color:#4a6fe8;font-size:18px;font-weight:900;padding:4px 8px");
 </script>
