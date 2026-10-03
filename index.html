@@ -11,9 +11,9 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:#0a0a14;color:#fff;-webkit-font-smoothing:antialiased}
 body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}
-.svg-icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block}
+svg{display:block}
 
-.loader{position:fixed;inset:0;z-index:99999;background:linear-gradient(180deg,#0a0a14 0%,#141428 50%,#1a1a3a 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:30px;transition:opacity .8s ease,visibility .8s ease}
+.loader{position:fixed;inset:0;z-index:99999;background:linear-gradient(180deg,#0a0a14 0%,#141428 50%,#1a1a3a 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:30px;transition:opacity .6s ease,visibility .6s ease}
 .loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
 .loader-logo{font-size:44px;font-weight:900;background:linear-gradient(135deg,#4a6fe8,#6b8cff,#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:6px;filter:drop-shadow(0 0 30px rgba(74,111,232,.8));animation:loaderPulse 2s ease-in-out infinite}
 @keyframes loaderPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
@@ -24,662 +24,248 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .loader-ring::after{inset:12px;border-bottom-color:#6b8cff;border-left-color:#6b8cff;animation:ringSpin 1.5s linear infinite reverse}
 @keyframes ringSpin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
 .loader-bar{width:200px;height:3px;background:rgba(74,111,232,.2);border-radius:2px;overflow:hidden}
-.loader-fill{width:0;height:100%;background:linear-gradient(90deg,#4a6fe8,#6b8cff);animation:fillBar 2s ease-in-out forwards;box-shadow:0 0 15px #4a6fe8}
+.loader-fill{width:0;height:100%;background:linear-gradient(90deg,#4a6fe8,#6b8cff);animation:fillBar 1.8s ease-in-out forwards;box-shadow:0 0 15px #4a6fe8}
 @keyframes fillBar{0%{width:0}100%{width:100%}}
 
-.bg{position:fixed;inset:0;z-index:-5;background:#0a0a14}
-.aurora{position:fixed;inset:-30%;z-index:-4;pointer-events:none;background:radial-gradient(ellipse at 20% 20%,rgba(74,111,232,.35) 0%,transparent 45%),radial-gradient(ellipse at 80% 70%,rgba(107,140,255,.25) 0%,transparent 45%);animation:auroraMove 20s ease-in-out infinite alternate;filter:blur(50px)}
-@keyframes auroraMove{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-30px,20px) scale(1.15)}}
-
 .app{position:relative;z-index:10;width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden}
-
-/* TOP BAR */
 .top-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;flex-shrink:0;gap:10px}
-.top-logo{font-size:22px;font-weight:900;font-style:italic;color:#4a6fe8;letter-spacing:-1px;line-height:.9;font-family:'Inter',sans-serif}
+.top-logo{font-size:22px;font-weight:900;font-style:italic;color:#4a6fe8;letter-spacing:-1px;line-height:.9}
 .top-logo .sub{font-size:11px;font-weight:500;font-style:italic;color:#8a9ab8;display:block;letter-spacing:0}
 .top-balance{display:flex;flex-direction:column;align-items:flex-end;gap:2px;cursor:pointer}
 .top-balance .rub{font-size:12px;color:#8a9ab8;font-weight:600}
 .top-balance .val{font-size:15px;font-weight:800;color:#fff}
 .deposit-btn-top{background:#2196f3;color:#fff;border:none;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(33,150,243,.5)}
-.top-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#ff8a00,#ff5e00);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;border:2px solid rgba(255,255,255,.15)}
+.top-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#4a6fe8,#2a4fc8);display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid rgba(255,255,255,.15);overflow:hidden}
+.top-avatar svg{width:22px;height:22px;fill:#fff}
 
-/* BOTTOM NAV */
+.content{flex:1;overflow-y:auto;padding-bottom:100px;scrollbar-width:none}
+.content::-webkit-scrollbar{display:none}
+
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#0f0f1e;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-around;align-items:flex-end;padding:8px 0 calc(8px + env(safe-area-inset-bottom));z-index:100}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;color:#6b7280;font-size:10px;font-weight:700;cursor:pointer;flex:1;padding:6px 0;position:relative}
 .nav-item.active{color:#fff}
 .nav-item svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .nav-item .badge{position:absolute;top:2px;right:calc(50% - 18px);background:#ef4444;color:#fff;font-size:9px;font-weight:900;padding:2px 5px;border-radius:8px;min-width:16px;text-align:center}
 </style><style>
-.content{flex:1;overflow-y:auto;padding-bottom:100px;scrollbar-width:none}
-.content::-webkit-scrollbar{display:none}
-
-/* === БОЛЬШИЕ БАННЕРЫ СВЕРХУ === */
 .big-games{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:4px 16px 24px}
 .big-card{border-radius:16px;position:relative;overflow:hidden;cursor:pointer;aspect-ratio:1/1.15;box-shadow:0 10px 30px rgba(0,0,0,.6);transition:transform .15s}
 .big-card:active{transform:scale(.97)}
-.big-card .bg-img{position:absolute;inset:0;background-size:cover;background-position:center}
-.big-card .overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.75) 100%);pointer-events:none}
+.big-card .bg-img{position:absolute;inset:0}
+.big-card .overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.85) 100%);pointer-events:none}
 .big-card .title{position:absolute;bottom:28px;left:12px;right:12px;font-size:16px;font-weight:900;color:#fff;text-align:center;letter-spacing:.5px;text-shadow:0 2px 8px rgba(0,0,0,.9);line-height:1.1}
-.big-card .provider{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:3px 10px;font-size:9px;color:#c9d5e8;font-weight:700;letter-spacing:1px;backdrop-filter:blur(4px)}
+.big-card .provider{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:3px 10px;font-size:9px;color:#c9d5e8;font-weight:700;letter-spacing:1px;backdrop-filter:blur(4px)}
+.big-card .icon-svg{position:absolute;top:14%;left:50%;transform:translateX(-50%);width:80px;height:80px;filter:drop-shadow(0 6px 16px rgba(0,0,0,.7))}
 
-/* SPACE XY банер */
-.bg-space{background:radial-gradient(ellipse at 30% 40%,#f0c060 0%,#8a5a20 40%,#1a1a3a 100%),linear-gradient(135deg,#5a3a80,#1a1a3a)}
-.bg-space::before{content:'🚀';position:absolute;top:15%;left:50%;transform:translateX(-50%) rotate(-15deg);font-size:64px;filter:drop-shadow(0 0 20px rgba(240,192,96,.8))}
-
-/* AVIAMASTERS банер */
-.bg-avia{background:linear-gradient(180deg,#4a9eff 0%,#6bc4ff 50%,#2c6dd6 100%)}
-.bg-avia::before{content:'✈️';position:absolute;top:18%;left:50%;transform:translateX(-50%) rotate(-10deg);font-size:64px;filter:drop-shadow(0 0 20px rgba(255,255,255,.5))}
-
-/* === СЕКЦИИ === */
 .section-block{padding:0 16px 24px}
 .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .section-head h3{font-size:20px;font-weight:900;color:#fff}
 .section-head .nav-btns{display:flex;align-items:center;gap:8px}
 .section-head .all-btn{background:#1a1a2e;border:1px solid rgba(255,255,255,.08);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:10px;cursor:pointer}
-.section-head .arr-btn{width:36px;height:36px;border-radius:10px;background:#1a1a2e;border:1px solid rgba(255,255,255,.08);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.section-head .arr-btn{width:36px;height:36px;border-radius:10px;background:#1a1a2e;border:1px solid rgba(255,255,255,.08);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:900}
 
 .games-row{display:flex;gap:10px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:4px;scrollbar-width:none}
 .games-row::-webkit-scrollbar{display:none}
 .game-tile{flex-shrink:0;width:140px;aspect-ratio:1/1.35;border-radius:14px;position:relative;overflow:hidden;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.5);transition:transform .15s}
 .game-tile:active{transform:scale(.95)}
-.game-tile .bg-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.game-tile .bg-img{position:absolute;inset:0}
 .game-tile .overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.85) 100%);pointer-events:none}
 .game-tile .title{position:absolute;bottom:26px;left:8px;right:8px;font-size:13px;font-weight:900;color:#fff;line-height:1.1;text-align:center;letter-spacing:.3px;text-shadow:0 2px 6px rgba(0,0,0,.9)}
-.game-tile .provider{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:2px 8px;font-size:8px;color:#c9d5e8;font-weight:700;letter-spacing:.8px;white-space:nowrap;backdrop-filter:blur(4px)}
+.game-tile .provider{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:2px 8px;font-size:8px;color:#c9d5e8;font-weight:700;letter-spacing:.8px;white-space:nowrap;backdrop-filter:blur(4px)}
+.game-tile .icon-svg{position:absolute;top:16%;left:50%;transform:translateX(-50%);width:56px;height:56px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.7))}
 
-/* Фоны карточек игр */
-.bg-slots{background:linear-gradient(180deg,#f59e0b 0%,#b45309 60%,#1a1a3a 100%)}
-.bg-slots::before{content:'🎰';position:absolute;top:20%;left:50%;transform:translateX(-50%);font-size:56px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
-.bg-dice{background:linear-gradient(180deg,#10b981 0%,#047857 60%,#1a1a3a 100%)}
-.bg-dice::before{content:'🎲';position:absolute;top:20%;left:50%;transform:translateX(-50%);font-size:56px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
-.bg-blackjack{background:linear-gradient(180deg,#dc2626 0%,#7f1d1d 60%,#1a1a3a 100%)}
-.bg-blackjack::before{content:'🃏';position:absolute;top:20%;left:50%;transform:translateX(-50%);font-size:56px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
-.bg-roulette{background:linear-gradient(180deg,#ec4899 0%,#831843 60%,#1a1a3a 100%)}
-.bg-roulette::before{content:'🎡';position:absolute;top:20%;left:50%;transform:translateX(-50%);font-size:56px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
-.bg-coin{background:linear-gradient(180deg,#facc15 0%,#a16207 60%,#1a1a3a 100%)}
-.bg-coin::before{content:'🪙';position:absolute;top:20%;left:50%;transform:translateX(-50%);font-size:56px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
-.bg-poker{background:linear-gradient(180deg,#6366f1 0%,#3730a3 60%,#1a1a3a 100%)}
-.bg-poker::before{content:'♠';position:absolute;top:15%;left:50%;transform:translateX(-50%);font-size:60px;color:#fff;text-shadow:0 4px 12px rgba(0,0,0,.5)}
-.bg-avia{background:linear-gradient(180deg,#3b82f6 0%,#1e40af 60%,#1a1a3a 100%)}
-.bg-avia::before{content:'✈️';position:absolute;top:20%;left:50%;transform:translateX(-50%);font-size:56px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
+/* Фоны карточек */
+.bg-space{background:radial-gradient(circle at 50% 40%,#3a2a6e 0%,#1a1a3a 60%,#0a0a14 100%)}
+.bg-avia{background:linear-gradient(180deg,#3b82f6 0%,#1e40af 60%,#0a0a14 100%)}
+.bg-slots{background:linear-gradient(180deg,#f59e0b 0%,#b45309 60%,#0a0a14 100%)}
+.bg-dice{background:linear-gradient(180deg,#10b981 0%,#047857 60%,#0a0a14 100%)}
+.bg-blackjack{background:linear-gradient(180deg,#dc2626 0%,#7f1d1d 60%,#0a0a14 100%)}
+.bg-roulette{background:linear-gradient(180deg,#ec4899 0%,#831843 60%,#0a0a14 100%)}
+.bg-coin{background:linear-gradient(180deg,#facc15 0%,#a16207 60%,#0a0a14 100%)}
+.bg-poker{background:linear-gradient(180deg,#6366f1 0%,#3730a3 60%,#0a0a14 100%)}
+
+.icon-rocket{color:#fff}
+.icon-plane{color:#fff}
+.icon-slot{color:#fff}
+.icon-dice{color:#fff}
+.icon-cards{color:#fff}
+.icon-wheel{color:#fff}
+.icon-coin{color:#fff}
+.icon-spade{color:#fff}
 </style><style>
+/* ЭКРАН ИГРЫ */
 .game-screen{position:fixed;inset:0;background:#0a0a14;z-index:600;display:none;flex-direction:column;overflow:hidden}
-.game-screen.active{display:flex;animation:screenIn .3s cubic-bezier(.4,0,.2,1)}
-@keyframes screenIn{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
-
+.game-screen.active{display:flex;animation:screenIn .25s}
+@keyframes screenIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
 .game-header{display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;background:#0a0a14;flex-shrink:0;z-index:5}
 .game-header .left{display:flex;align-items:center;gap:14px}
 .game-back{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.08);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.game-back svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .game-title{font-size:18px;font-weight:900}
 .game-balance{background:rgba(255,255,255,.08);padding:8px 14px;border-radius:12px;font-size:14px;font-weight:800;color:#ffd700}
-
 .game-body{flex:1;display:flex;flex-direction:column;overflow-y:auto;scrollbar-width:none}
 .game-body::-webkit-scrollbar{display:none}
 .game-stage{flex:1;display:flex;align-items:center;justify-content:center;padding:10px}
 .game-panel{background:#0f0f1e;border-top:1px solid rgba(255,255,255,.06);padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom));flex-shrink:0}
-
-/* Ставки внизу */
 .bet-label{font-size:11px;color:#6b7280;letter-spacing:2px;text-align:center;font-weight:700;margin-bottom:10px;text-transform:uppercase}
 .bet-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
 .bet-btn{padding:12px 4px;border-radius:12px;background:#1a1a2e;border:1px solid rgba(255,255,255,.08);color:#fff;font-size:13px;font-weight:700;cursor:pointer;text-align:center;transition:all .15s}
 .bet-btn.active{background:linear-gradient(135deg,#4a6fe8,#6b8cff);border-color:transparent;box-shadow:0 4px 20px rgba(74,111,232,.5)}
-
 .main-btn{padding:16px 36px;border-radius:14px;border:none;background:linear-gradient(135deg,#4a6fe8,#6b8cff);color:#fff;font-size:16px;font-weight:800;cursor:pointer;letter-spacing:1px;text-transform:uppercase;box-shadow:0 8px 25px rgba(74,111,232,.5);width:100%;transition:all .15s}
 .main-btn:active{transform:scale(.97)}
 .main-btn:disabled{background:#2a2a3a;color:#6b7280;cursor:not-allowed;box-shadow:none}
 .main-btn.red{background:linear-gradient(135deg,#ef4444,#b91c1c);box-shadow:0 8px 25px rgba(239,68,68,.4)}
 .main-btn.green{background:linear-gradient(135deg,#22c55e,#15803d);box-shadow:0 8px 25px rgba(34,197,94,.4)}
 .main-btn.gold{background:linear-gradient(135deg,#f59e0b,#d97706);box-shadow:0 8px 25px rgba(245,158,11,.5)}
-
 .actions-row{display:flex;gap:8px;margin-top:12px}
 .actions-row .main-btn{flex:1;padding:14px 6px;font-size:13px}
-
 .result-msg{font-size:20px;font-weight:900;text-align:center;margin-top:14px;min-height:26px;transition:all .2s}
 .result-msg.win{color:#4ade80;text-shadow:0 0 20px rgba(74,222,128,.6)}
 .result-msg.lose{color:#ef4444;text-shadow:0 0 20px rgba(239,68,68,.6)}
-.result-msg.gold{color:#ffd700;text-shadow:0 0 25px rgba(255,215,0,.8)}
-</style><style>
-/* ==== СЛОТЫ — АВТОМАТ ==== */
-.slot-machine{
-  width:100%;max-width:360px;
-  background:
-    linear-gradient(180deg,#2a1f4a 0%,#1a1230 100%);
-  border-radius:24px;
-  padding:20px 16px 24px;
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.8),
-    inset 0 2px 0 rgba(255,255,255,.1),
-    inset 0 -4px 10px rgba(0,0,0,.5);
-  border:2px solid #3a2a5e;
-  position:relative;
-}
-.slot-machine::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:60px;
-  background:linear-gradient(180deg,rgba(255,255,255,.08),transparent);
-  border-radius:24px 24px 0 0;pointer-events:none;
-}
-.slot-top{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:14px;padding:0 4px;
-}
-.slot-brand{
-  font-size:14px;font-weight:900;letter-spacing:2px;
-  background:linear-gradient(135deg,#ffd700,#f59e0b);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
+
+/* СЛОТЫ */
+.slot-machine{width:100%;max-width:360px;background:linear-gradient(180deg,#2a1f4a 0%,#1a1230 100%);border-radius:24px;padding:20px 16px 24px;box-shadow:0 20px 60px rgba(0,0,0,.8),inset 0 2px 0 rgba(255,255,255,.1),inset 0 -4px 10px rgba(0,0,0,.5);border:2px solid #3a2a5e;position:relative}
+.slot-machine::before{content:'';position:absolute;top:0;left:0;right:0;height:60px;background:linear-gradient(180deg,rgba(255,255,255,.08),transparent);border-radius:24px 24px 0 0;pointer-events:none}
+.slot-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding:0 4px}
+.slot-brand{font-size:14px;font-weight:900;letter-spacing:2px;background:linear-gradient(135deg,#ffd700,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .slot-lights{display:flex;gap:6px}
-.slot-lights span{
-  width:8px;height:8px;border-radius:50%;background:#4ade80;
-  box-shadow:0 0 10px rgba(74,222,128,.9);
-  animation:lightBlink 1.5s ease-in-out infinite;
-}
+.slot-lights span{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px rgba(74,222,128,.9);animation:lightBlink 1.5s ease-in-out infinite}
 .slot-lights span:nth-child(2){animation-delay:.3s;background:#ffd700;box-shadow:0 0 10px rgba(255,215,0,.9)}
 .slot-lights span:nth-child(3){animation-delay:.6s;background:#ef4444;box-shadow:0 0 10px rgba(239,68,68,.9)}
 @keyframes lightBlink{0%,100%{opacity:1}50%{opacity:.3}}
-
-.slot-window{
-  background:linear-gradient(180deg,#0a0514,#1a0d2e);
-  border-radius:16px;
-  padding:14px 8px;
-  box-shadow:
-    inset 0 4px 20px rgba(0,0,0,.9),
-    inset 0 -2px 10px rgba(0,0,0,.6),
-    0 0 0 2px #3a2a5e;
-  position:relative;
-  overflow:hidden;
-  margin-bottom:16px;
-}
-.slot-window::before,.slot-window::after{
-  content:'';position:absolute;left:0;right:0;height:20px;pointer-events:none;z-index:3;
-}
+.slot-window{background:linear-gradient(180deg,#0a0514,#1a0d2e);border-radius:16px;padding:14px 8px;box-shadow:inset 0 4px 20px rgba(0,0,0,.9),0 0 0 2px #3a2a5e;position:relative;overflow:hidden;margin-bottom:16px}
+.slot-window::before,.slot-window::after{content:'';position:absolute;left:0;right:0;height:20px;pointer-events:none;z-index:3}
 .slot-window::before{top:0;background:linear-gradient(180deg,rgba(0,0,0,.95),transparent)}
 .slot-window::after{bottom:0;background:linear-gradient(0deg,rgba(0,0,0,.95),transparent)}
-
 .reels{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;position:relative}
-.reel{
-  aspect-ratio:1/1.3;
-  background:linear-gradient(180deg,#1a0d2e,#0a0514);
-  border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  border:1px solid rgba(140,80,255,.2);
-  position:relative;overflow:hidden;
-  box-shadow:inset 0 0 20px rgba(0,0,0,.9);
-}
-.reel-inner{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  transition:transform .3s ease-out;
-}
-.reel.spin .reel-inner{
-  animation:reelScroll .12s linear infinite;
-}
-@keyframes reelScroll{
-  0%{transform:translateY(-40%);opacity:.5}
-  50%{opacity:1}
-  100%{transform:translateY(40%);opacity:.5}
-}
-.reel.win{
-  border-color:#ffd700;
-  box-shadow:0 0 30px rgba(255,215,0,.9),inset 0 0 20px rgba(255,215,0,.5);
-  animation:reelWin .4s ease-in-out infinite alternate;
-}
+.reel{aspect-ratio:1/1.3;background:linear-gradient(180deg,#1a0d2e,#0a0514);border-radius:12px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(140,80,255,.2);position:relative;overflow:hidden;box-shadow:inset 0 0 20px rgba(0,0,0,.9)}
+.reel-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.reel.spin .reel-inner{animation:reelScroll .12s linear infinite}
+@keyframes reelScroll{0%{transform:translateY(-40%);opacity:.5}50%{opacity:1}100%{transform:translateY(40%);opacity:.5}}
+.reel.win{border-color:#ffd700;box-shadow:0 0 30px rgba(255,215,0,.9),inset 0 0 20px rgba(255,215,0,.5);animation:reelWin .4s ease-in-out infinite alternate}
 @keyframes reelWin{0%{transform:scale(1)}100%{transform:scale(1.04)}}
 .reel-inner svg{width:70%;height:70%;filter:drop-shadow(0 4px 8px rgba(0,0,0,.7))}
-
 .slot-controls{display:flex;align-items:center;gap:12px;justify-content:center}
-.slot-btn-spin{
-  width:78px;height:78px;border-radius:50%;
-  background:
-    radial-gradient(circle at 30% 30%,#6b8cff,#4a6fe8 60%,#2a4fc8 100%);
-  border:4px solid #1a1a3a;
-  color:#fff;font-size:14px;font-weight:900;letter-spacing:1px;
-  cursor:pointer;
-  box-shadow:
-    0 8px 25px rgba(74,111,232,.6),
-    inset 0 2px 4px rgba(255,255,255,.4),
-    inset 0 -6px 12px rgba(0,0,0,.3);
-  transition:all .1s;
-  position:relative;
-}
+.slot-btn-spin{width:78px;height:78px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#6b8cff,#4a6fe8 60%,#2a4fc8 100%);border:4px solid #1a1a3a;color:#fff;font-size:14px;font-weight:900;letter-spacing:1px;cursor:pointer;box-shadow:0 8px 25px rgba(74,111,232,.6),inset 0 2px 4px rgba(255,255,255,.4),inset 0 -6px 12px rgba(0,0,0,.3);transition:all .1s;position:relative}
 .slot-btn-spin:active{transform:scale(.94)}
-.slot-btn-spin:disabled{
-  background:radial-gradient(circle at 30% 30%,#3a3a4a,#2a2a3a 60%,#1a1a2a 100%);
-  box-shadow:inset 0 2px 4px rgba(0,0,0,.4);
-  cursor:not-allowed;
-}
-.slot-btn-spin::after{
-  content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);
-  width:60%;height:12px;
-  background:radial-gradient(ellipse,rgba(255,255,255,.5),transparent);
-  border-radius:50%;pointer-events:none;
-}
-.slot-info{
-  flex:1;text-align:center;
-}
+.slot-btn-spin:disabled{background:radial-gradient(circle at 30% 30%,#3a3a4a,#2a2a3a 60%,#1a1a2a 100%);box-shadow:inset 0 2px 4px rgba(0,0,0,.4);cursor:not-allowed}
+.slot-info{flex:1;text-align:center}
 .slot-info .label{font-size:10px;color:#6b7280;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
 .slot-info .val{font-size:18px;font-weight:900;color:#ffd700}
-
-/* Легенда выигрышей */
-.slot-legend{
-  margin-top:16px;padding:10px 12px;
-  background:rgba(0,0,0,.4);
-  border-radius:12px;
-  display:flex;justify-content:space-around;gap:4px;
-  font-size:10px;color:#8a9ab8;font-weight:700;text-align:center;
-  border:1px solid rgba(255,255,255,.06);
-}
+.slot-legend{margin-top:16px;padding:10px 12px;background:rgba(0,0,0,.4);border-radius:12px;display:flex;justify-content:space-around;gap:4px;font-size:10px;color:#8a9ab8;font-weight:700;text-align:center;border:1px solid rgba(255,255,255,.06)}
 .slot-legend .item{display:flex;flex-direction:column;align-items:center;gap:2px}
 .slot-legend .item .mult{color:#ffd700;font-weight:900;font-size:11px}
-</style><style>
-/* ==== КОСТИ — 3D ПОЛЁТ ==== */
-.dice-table{
-  width:100%;max-width:360px;
-  background:
-    radial-gradient(ellipse at 50% 30%,rgba(74,111,232,.15),transparent 60%),
-    linear-gradient(180deg,#0f0f28 0%,#0a0a14 100%);
-  border-radius:24px;
-  padding:30px 20px;
-  box-shadow:inset 0 0 60px rgba(74,111,232,.15);
-  border:1px solid rgba(74,111,232,.15);
-  position:relative;
-  overflow:hidden;
-}
-.dice-table::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% 100%,rgba(74,111,232,.2),transparent 60%);
-  pointer-events:none;
-}
-.dice-arena{
-  display:flex;justify-content:center;gap:40px;
-  perspective:1200px;
-  margin-bottom:30px;
-  min-height:140px;
-  align-items:center;
-}
-.cube{
-  width:80px;height:80px;
-  position:relative;
-  transform-style:preserve-3d;
-  transition:transform 1.4s cubic-bezier(.3,.6,.4,1);
-  transform:rotateX(-20deg) rotateY(20deg);
-}
-.cube.rolling{
-  animation:diceThrow 1.4s cubic-bezier(.3,.6,.4,1) forwards;
-}
+
+/* КОСТИ */
+.dice-table{width:100%;max-width:360px;background:radial-gradient(ellipse at 50% 30%,rgba(74,111,232,.15),transparent 60%),linear-gradient(180deg,#0f0f28 0%,#0a0a14 100%);border-radius:24px;padding:30px 20px;box-shadow:inset 0 0 60px rgba(74,111,232,.15);border:1px solid rgba(74,111,232,.15);position:relative;overflow:hidden;text-align:center}
+.dice-arena{display:flex;justify-content:center;gap:40px;perspective:1200px;margin-bottom:30px;min-height:140px;align-items:center}
+.cube{width:80px;height:80px;position:relative;transform-style:preserve-3d;transition:transform 1.4s cubic-bezier(.3,.6,.4,1);transform:rotateX(-20deg) rotateY(20deg)}
+.cube.rolling{animation:diceThrow 1.4s cubic-bezier(.3,.6,.4,1) forwards}
 @keyframes diceThrow{
-  0%{transform:translate(0,0) rotateX(0) rotateY(0) rotateZ(0)}
-  25%{transform:translate(-30px,-80px) rotateX(180deg) rotateY(180deg) rotateZ(90deg)}
-  50%{transform:translate(20px,-50px) rotateX(360deg) rotateY(540deg) rotateZ(180deg)}
-  75%{transform:translate(-10px,-20px) rotateX(540deg) rotateY(720deg) rotateZ(270deg)}
-  100%{transform:translate(0,0) rotateX(720deg) rotateY(900deg) rotateZ(360deg)}
-}
-.cube-face{
-  position:absolute;width:80px;height:80px;
-  background:linear-gradient(135deg,#ffffff 0%,#e8e8e8 50%,#d0d0d0 100%);
-  border-radius:12px;
-  box-shadow:
-    inset 0 0 20px rgba(0,0,0,.15),
-    inset 0 2px 4px rgba(255,255,255,.9),
-    0 4px 12px rgba(0,0,0,.4);
-  display:flex;align-items:center;justify-content:center;
-  border:1px solid #bbb;
-  backface-visibility:hidden;
-}
+0%{transform:translate(0,0) rotateX(0) rotateY(0) rotateZ(0)}
+25%{transform:translate(-30px,-80px) rotateX(180deg) rotateY(180deg) rotateZ(90deg)}
+50%{transform:translate(20px,-50px) rotateX(360deg) rotateY(540deg) rotateZ(180deg)}
+75%{transform:translate(-10px,-20px) rotateX(540deg) rotateY(720deg) rotateZ(270deg)}
+100%{transform:translate(0,0) rotateX(720deg) rotateY(900deg) rotateZ(360deg)}}
+.cube-face{position:absolute;width:80px;height:80px;background:linear-gradient(135deg,#ffffff 0%,#e8e8e8 50%,#d0d0d0 100%);border-radius:12px;box-shadow:inset 0 0 20px rgba(0,0,0,.15),inset 0 2px 4px rgba(255,255,255,.9),0 4px 12px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;border:1px solid #bbb;backface-visibility:hidden}
 .cube-face.f1{transform:rotateY(0deg) translateZ(40px)}
 .cube-face.f2{transform:rotateY(90deg) translateZ(40px)}
 .cube-face.f3{transform:rotateY(180deg) translateZ(40px)}
 .cube-face.f4{transform:rotateY(-90deg) translateZ(40px)}
 .cube-face.f5{transform:rotateX(90deg) translateZ(40px)}
 .cube-face.f6{transform:rotateX(-90deg) translateZ(40px)}
-.dot{
-  position:absolute;width:12px;height:12px;
-  background:radial-gradient(circle at 30% 30%,#3a2a5e,#1a0d2e);
-  border-radius:50%;
-  box-shadow:inset 0 2px 3px rgba(0,0,0,.7);
-}
-
-.dice-shadow{
-  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
-  width:200px;height:20px;
-  background:radial-gradient(ellipse,rgba(0,0,0,.6),transparent 70%);
-  filter:blur(8px);
-}
-
-/* ==== МОНЕТКА — 3D ГЛУБИНА ==== */
-.coin-arena{
-  width:100%;max-width:360px;
-  background:
-    radial-gradient(ellipse at 50% 60%,rgba(250,204,21,.1),transparent 60%),
-    linear-gradient(180deg,#0f0f28 0%,#0a0a14 100%);
-  border-radius:24px;
-  padding:40px 20px 30px;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-  border:1px solid rgba(250,204,21,.15);
-}
-.coin-stage{
-  perspective:1200px;
-  display:flex;justify-content:center;
-  margin-bottom:20px;
-  height:180px;
-  align-items:center;
-}
-.coin-3d{
-  width:130px;height:130px;
-  position:relative;
-  transform-style:preserve-3d;
-  transition:transform .3s;
-}
-.coin-3d.flipping{
-  animation:coinFlip 3.5s cubic-bezier(.4,.6,.4,1) forwards;
-}
-@keyframes coinFlip{
-  0%{transform:rotateY(0) translateY(0) rotateX(0)}
-  20%{transform:rotateY(720deg) translateY(-90px) rotateX(-20deg)}
-  40%{transform:rotateY(1440deg) translateY(0) rotateX(0)}
-  60%{transform:rotateY(2160deg) translateY(-60px) rotateX(10deg)}
-  80%{transform:rotateY(2880deg) translateY(0) rotateX(0)}
-  100%{transform:rotateY(3600deg) translateY(0) rotateX(0)}
-}
-.coin-side{
-  position:absolute;inset:0;
-  border-radius:50%;
-  backface-visibility:hidden;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:
-    radial-gradient(circle at 30% 25%,rgba(255,255,255,.95) 0%,rgba(255,255,255,0) 35%),
-    radial-gradient(circle at 70% 75%,rgba(120,53,15,.6) 0%,rgba(0,0,0,0) 45%),
-    radial-gradient(circle at 50% 50%,#ffe680 0%,#ffd700 30%,#c8951a 65%,#8b6914 100%);
-  border:4px solid #a97d14;
-  box-shadow:
-    0 0 50px rgba(255,215,0,.7),
-    inset 0 0 30px rgba(139,105,20,.8),
-    inset 0 6px 12px rgba(255,255,255,.6),
-    inset 0 -8px 18px rgba(0,0,0,.4);
-  color:#3a2808;
-  text-shadow:0 2px 3px rgba(0,0,0,.4);
-}
-.coin-side::before{
-  content:'';position:absolute;inset:10px;
-  border-radius:50%;
-  border:2px dashed rgba(120,53,15,.5);
-}
-.coin-side::after{
-  content:'';position:absolute;inset:16px;
-  border-radius:50%;
-  border:1px solid rgba(120,53,15,.4);
-}
-.coin-tails-side{transform:rotateY(180deg)}
-.coin-side .sym{font-size:50px;font-weight:900;line-height:1;font-family:'Inter'}
-.coin-side .txt{font-size:9px;letter-spacing:4px;font-weight:900;margin-top:6px}
-.coin-shadow{
-  width:140px;height:16px;
-  background:radial-gradient(ellipse,rgba(0,0,0,.7),transparent 70%);
-  margin:0 auto;
-  filter:blur(6px);
-  transition:all .3s;
-}
-.coin-3d.flipping + .coin-shadow{
-  animation:coinShadow 3.5s cubic-bezier(.4,.6,.4,1) forwards;
-}
-@keyframes coinShadow{
-  0%,100%{transform:scaleX(1);opacity:1}
-  20%{transform:scaleX(.4);opacity:.3}
-  40%{transform:scaleX(1);opacity:1}
-  60%{transform:scaleX(.5);opacity:.4}
-  80%{transform:scaleX(1);opacity:1}
-}
+.dot{position:absolute;width:12px;height:12px;background:radial-gradient(circle at 30% 30%,#3a2a5e,#1a0d2e);border-radius:50%;box-shadow:inset 0 2px 3px rgba(0,0,0,.7)}
 </style><style>
-/* ==== РУЛЕТКА — реалистичная ==== */
-.roulette-table{
-  width:100%;max-width:360px;
-  background:
-    radial-gradient(ellipse at 50% 50%,rgba(22,163,74,.15),transparent 60%),
-    linear-gradient(180deg,#0a2e1a 0%,#052e1a 100%);
-  border-radius:24px;
-  padding:24px 16px 20px;
-  border:2px solid rgba(34,197,94,.2);
-  box-shadow:inset 0 0 60px rgba(0,0,0,.6);
-  position:relative;
-  text-align:center;
-}
-.roulette-wheel-wrap{
-  position:relative;
-  width:240px;height:240px;
-  margin:0 auto 20px;
-}
-.roulette-arrow-top{
-  position:absolute;top:-8px;left:50%;transform:translateX(-50%);
-  z-index:10;color:#ffd700;
-  filter:drop-shadow(0 0 10px rgba(255,215,0,.9));
-}
-.roulette-arrow-top svg{width:26px;height:26px}
-.roulette-wheel-real{
-  width:100%;height:100%;
-  border-radius:50%;
-  position:relative;
-  transition:transform 5s cubic-bezier(.15,.7,.3,1);
-  box-shadow:
-    0 0 40px rgba(255,215,0,.4),
-    inset 0 0 40px rgba(0,0,0,.7);
-  border:6px solid #8b6914;
-  background:
-    radial-gradient(circle at 50% 50%,#1a0d2e 0%,#1a0d2e 22%,transparent 22%),
-    conic-gradient(from 0deg,
-      #16a34a 0deg 9.73deg,
-      #dc2626 9.73deg 19.46deg,#1a0d2e 19.46deg 29.19deg,
-      #dc2626 29.19deg 38.92deg,#1a0d2e 38.92deg 48.65deg,
-      #dc2626 48.65deg 58.38deg,#1a0d2e 58.38deg 68.11deg,
-      #dc2626 68.11deg 77.84deg,#1a0d2e 77.84deg 87.57deg,
-      #dc2626 87.57deg 97.3deg,#1a0d2e 97.3deg 107.03deg,
-      #dc2626 107.03deg 116.76deg,#1a0d2e 116.76deg 126.49deg,
-      #dc2626 126.49deg 136.22deg,#1a0d2e 136.22deg 145.95deg,
-      #dc2626 145.95deg 155.68deg,#1a0d2e 155.68deg 165.41deg,
-      #dc2626 165.41deg 175.14deg,#1a0d2e 175.14deg 184.87deg,
-      #dc2626 184.87deg 194.6deg,#1a0d2e 194.6deg 204.33deg,
-      #dc2626 204.33deg 214.06deg,#1a0d2e 214.06deg 223.79deg,
-      #dc2626 223.79deg 233.52deg,#1a0d2e 233.52deg 243.25deg,
-      #dc2626 243.25deg 252.98deg,#1a0d2e 252.98deg 262.71deg,
-      #dc2626 262.71deg 272.44deg,#1a0d2e 272.44deg 282.17deg,
-      #dc2626 282.17deg 291.9deg,#1a0d2e 291.9deg 301.63deg,
-      #dc2626 301.63deg 311.36deg,#1a0d2e 311.36deg 321.09deg,
-      #dc2626 321.09deg 330.82deg,#1a0d2e 330.82deg 340.55deg,
-      #dc2626 340.55deg 350.28deg,#16a34a 350.28deg 360deg
-    );
-}
-.roulette-center-display{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:70px;height:70px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,#3a1d5c,#0a0514);
-  border:3px solid #ffd700;
-  display:flex;align-items:center;justify-content:center;
-  font-size:26px;font-weight:900;color:#ffd700;
-  box-shadow:0 0 25px rgba(255,215,0,.7),inset 0 0 15px rgba(0,0,0,.8);
-  z-index:5;
-  text-shadow:0 0 10px rgba(255,215,0,.9);
-}
-.roulette-ball{
-  position:absolute;
-  width:14px;height:14px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,#fff,#c0c0c0 60%,#808080);
-  box-shadow:0 0 15px rgba(255,255,255,.9),0 2px 6px rgba(0,0,0,.6);
-  z-index:6;
-  opacity:0;
-  transition:opacity .3s;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-}
-.roulette-ball.visible{opacity:1}
+/* МОНЕТКА */
+.coin-arena{width:100%;max-width:360px;background:radial-gradient(ellipse at 50% 60%,rgba(250,204,21,.1),transparent 60%),linear-gradient(180deg,#0f0f28 0%,#0a0a14 100%);border-radius:24px;padding:40px 20px 30px;text-align:center;position:relative;overflow:hidden;border:1px solid rgba(250,204,21,.15)}
+.coin-stage{perspective:1200px;display:flex;justify-content:center;margin-bottom:20px;height:180px;align-items:center}
+.coin-3d{width:130px;height:130px;position:relative;transform-style:preserve-3d;transition:transform .3s}
+.coin-3d.flipping{animation:coinFlip 3.5s cubic-bezier(.4,.6,.4,1) forwards}
+@keyframes coinFlip{
+0%{transform:rotateY(0) translateY(0) rotateX(0)}
+20%{transform:rotateY(720deg) translateY(-90px) rotateX(-20deg)}
+40%{transform:rotateY(1440deg) translateY(0) rotateX(0)}
+60%{transform:rotateY(2160deg) translateY(-60px) rotateX(10deg)}
+80%{transform:rotateY(2880deg) translateY(0) rotateX(0)}
+100%{transform:rotateY(3600deg) translateY(0) rotateX(0)}}
+.coin-side{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.95) 0%,rgba(255,255,255,0) 35%),radial-gradient(circle at 70% 75%,rgba(120,53,15,.6) 0%,rgba(0,0,0,0) 45%),radial-gradient(circle at 50% 50%,#ffe680 0%,#ffd700 30%,#c8951a 65%,#8b6914 100%);border:4px solid #a97d14;box-shadow:0 0 50px rgba(255,215,0,.7),inset 0 0 30px rgba(139,105,20,.8),inset 0 6px 12px rgba(255,255,255,.6),inset 0 -8px 18px rgba(0,0,0,.4);color:#3a2808}
+.coin-side::before{content:'';position:absolute;inset:10px;border-radius:50%;border:2px dashed rgba(120,53,15,.5)}
+.coin-side::after{content:'';position:absolute;inset:16px;border-radius:50%;border:1px solid rgba(120,53,15,.4)}
+.coin-tails-side{transform:rotateY(180deg)}
+.coin-side .sym{font-size:50px;font-weight:900;line-height:1}
+.coin-side .txt{font-size:9px;letter-spacing:4px;font-weight:900;margin-top:6px}
+.coin-shadow{width:140px;height:16px;background:radial-gradient(ellipse,rgba(0,0,0,.7),transparent 70%);margin:0 auto;filter:blur(6px)}
 
-.roulette-bets-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:8px;
-}
-.rb-btn{
-  padding:14px 10px;border-radius:14px;
-  border:2px solid;
-  font-weight:900;font-size:14px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  transition:all .15s;
-  text-transform:uppercase;letter-spacing:1px;
-}
+/* РУЛЕТКА */
+.roulette-table{width:100%;max-width:360px;background:radial-gradient(ellipse at 50% 50%,rgba(22,163,74,.15),transparent 60%),linear-gradient(180deg,#0a2e1a 0%,#052e1a 100%);border-radius:24px;padding:24px 16px 20px;border:2px solid rgba(34,197,94,.2);box-shadow:inset 0 0 60px rgba(0,0,0,.6);position:relative;text-align:center}
+.roulette-wheel-wrap{position:relative;width:240px;height:240px;margin:0 auto 20px}
+.roulette-arrow-top{position:absolute;top:-8px;left:50%;transform:translateX(-50%);z-index:10;color:#ffd700;filter:drop-shadow(0 0 10px rgba(255,215,0,.9))}
+.roulette-arrow-top svg{width:26px;height:26px;fill:currentColor}
+.roulette-wheel-real{width:100%;height:100%;border-radius:50%;position:relative;transition:transform 5s cubic-bezier(.15,.7,.3,1);box-shadow:0 0 40px rgba(255,215,0,.4),inset 0 0 40px rgba(0,0,0,.7);border:6px solid #8b6914;background:conic-gradient(from 0deg,#16a34a 0deg 9.73deg,#dc2626 9.73deg 19.46deg,#1a0d2e 19.46deg 29.19deg,#dc2626 29.19deg 38.92deg,#1a0d2e 38.92deg 48.65deg,#dc2626 48.65deg 58.38deg,#1a0d2e 58.38deg 68.11deg,#dc2626 68.11deg 77.84deg,#1a0d2e 77.84deg 87.57deg,#dc2626 87.57deg 97.3deg,#1a0d2e 97.3deg 107.03deg,#dc2626 107.03deg 116.76deg,#1a0d2e 116.76deg 126.49deg,#dc2626 126.49deg 136.22deg,#1a0d2e 136.22deg 145.95deg,#dc2626 145.95deg 155.68deg,#1a0d2e 155.68deg 165.41deg,#dc2626 165.41deg 175.14deg,#1a0d2e 175.14deg 184.87deg,#dc2626 184.87deg 194.6deg,#1a0d2e 194.6deg 204.33deg,#dc2626 204.33deg 214.06deg,#1a0d2e 214.06deg 223.79deg,#dc2626 223.79deg 233.52deg,#1a0d2e 233.52deg 243.25deg,#dc2626 243.25deg 252.98deg,#1a0d2e 252.98deg 262.71deg,#dc2626 262.71deg 272.44deg,#1a0d2e 272.44deg 282.17deg,#dc2626 282.17deg 291.9deg,#1a0d2e 291.9deg 301.63deg,#dc2626 301.63deg 311.36deg,#1a0d2e 311.36deg 321.09deg,#dc2626 321.09deg 330.82deg,#1a0d2e 330.82deg 340.55deg,#dc2626 340.55deg 350.28deg,#16a34a 350.28deg 360deg)}
+.roulette-center-display{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3a1d5c,#0a0514);border:3px solid #ffd700;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#ffd700;box-shadow:0 0 25px rgba(255,215,0,.7),inset 0 0 15px rgba(0,0,0,.8);z-index:5}
+.roulette-ball{position:absolute;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,#c0c0c0 60%,#808080);box-shadow:0 0 15px rgba(255,255,255,.9),0 2px 6px rgba(0,0,0,.6);z-index:6;opacity:0;transition:opacity .3s;top:20px;left:50%;transform:translateX(-50%)}
+.roulette-ball.visible{opacity:1}
+.roulette-bets-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.rb-btn{padding:14px 10px;border-radius:14px;border:2px solid;font-weight:900;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;text-transform:uppercase;letter-spacing:1px}
 .rb-btn:active{transform:scale(.96)}
 .rb-btn.red{background:linear-gradient(135deg,#dc2626,#7f1d1d);border-color:#ef4444;color:#fff;box-shadow:0 4px 15px rgba(220,38,38,.4)}
 .rb-btn.black{background:linear-gradient(135deg,#1a1a2e,#0a0a14);border-color:#3a3a5e;color:#fff;box-shadow:0 4px 15px rgba(0,0,0,.4)}
 .rb-btn.green{background:linear-gradient(135deg,#16a34a,#052e1a);border-color:#22c55e;color:#fff;box-shadow:0 4px 15px rgba(22,163,74,.4);grid-column:span 2}
 .rb-btn .mult-badge{background:rgba(0,0,0,.4);border-radius:8px;padding:2px 8px;font-size:11px}
 
-/* ==== БЛЭКДЖЕК / ПОКЕР — ЗЕЛЁНЫЙ СТОЛ ==== */
-.card-table{
-  width:100%;max-width:400px;
-  background:
-    radial-gradient(ellipse at 50% 50%,#0d5c2e 0%,#064220 60%,#032414 100%);
-  border-radius:200px 200px 20px 20px;
-  padding:26px 18px;
-  position:relative;
-  overflow:hidden;
-  box-shadow:
-    inset 0 0 80px rgba(0,0,0,.7),
-    0 20px 60px rgba(0,0,0,.8),
-    0 0 0 6px #4a2f0f,
-    0 0 0 10px #2a1a05;
-  border:1px solid rgba(0,0,0,.5);
-  min-height:340px;
-}
-.card-table::before{
-  content:'';position:absolute;inset:14px;
-  border-radius:180px 180px 14px 14px;
-  border:1px dashed rgba(255,215,0,.15);
-  pointer-events:none;
-}
-.card-table::after{
-  content:'MAGIC SPIN';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-size:32px;font-weight:900;letter-spacing:8px;
-  color:rgba(255,215,0,.06);
-  pointer-events:none;
-  white-space:nowrap;
-}
-.hand-zone{
-  position:relative;z-index:2;
-  margin-bottom:16px;
-}
-.hand-title{
-  font-size:11px;color:#ffd700;letter-spacing:2px;font-weight:800;
-  text-transform:uppercase;
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:10px;padding:0 4px;
-  text-shadow:0 2px 4px rgba(0,0,0,.8);
-}
-.hand-title .score-badge{
-  background:rgba(0,0,0,.5);
-  border:1px solid rgba(255,215,0,.4);
-  border-radius:8px;
-  padding:3px 10px;
-  font-size:13px;color:#ffd700;
-  font-weight:900;
-}
-.cards-zone{
-  display:flex;gap:6px;min-height:100px;align-items:center;justify-content:center;flex-wrap:wrap;
-  padding:6px;
-}
-.chips-zone{
-  position:absolute;
-  bottom:12px;right:12px;
-  display:flex;
-  z-index:3;
-}
-.chip{
-  width:32px;height:32px;border-radius:50%;
-  background:
-    radial-gradient(circle at 30% 30%,rgba(255,255,255,.4),transparent 50%),
-    radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#dc2626 20%,#dc2626 40%,#fff 40%,#fff 50%,#dc2626 50%,#dc2626 65%,#fff 65%,#fff 75%,#dc2626 75%);
-  border:2px solid #7f1d1d;
-  margin-left:-14px;
-  box-shadow:0 3px 8px rgba(0,0,0,.6),inset 0 0 6px rgba(0,0,0,.4);
-  position:relative;
-}
-.chip::after{
-  content:attr(data-val);
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:9px;font-weight:900;color:#fff;
-  text-shadow:0 1px 2px rgba(0,0,0,.9);
-}
+/* СТОЛ (блэкджек/покер) */
+.card-table{width:100%;max-width:400px;background:radial-gradient(ellipse at 50% 50%,#0d5c2e 0%,#064220 60%,#032414 100%);border-radius:200px 200px 20px 20px;padding:26px 18px;position:relative;overflow:hidden;box-shadow:inset 0 0 80px rgba(0,0,0,.7),0 20px 60px rgba(0,0,0,.8),0 0 0 6px #4a2f0f,0 0 0 10px #2a1a05;border:1px solid rgba(0,0,0,.5);min-height:340px}
+.card-table::before{content:'';position:absolute;inset:14px;border-radius:180px 180px 14px 14px;border:1px dashed rgba(255,215,0,.15);pointer-events:none}
+.hand-zone{position:relative;z-index:2;margin-bottom:16px}
+.hand-title{font-size:11px;color:#ffd700;letter-spacing:2px;font-weight:800;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:0 4px}
+.hand-title .score-badge{background:rgba(0,0,0,.5);border:1px solid rgba(255,215,0,.4);border-radius:8px;padding:3px 10px;font-size:13px;color:#ffd700;font-weight:900}
+.cards-zone{display:flex;gap:6px;min-height:100px;align-items:center;justify-content:center;flex-wrap:wrap;padding:6px}
+.chips-zone{position:absolute;bottom:12px;right:12px;display:flex;z-index:3}
+.chip{width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.4),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#dc2626 20%,#dc2626 40%,#fff 40%,#fff 50%,#dc2626 50%,#dc2626 65%,#fff 65%,#fff 75%,#dc2626 75%);border:2px solid #7f1d1d;margin-left:-14px;box-shadow:0 3px 8px rgba(0,0,0,.6);position:relative}
+.chip::after{content:attr(data-val);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.9)}
 .chip.gold{background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.5),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#d4af37 20%,#d4af37 40%,#fff 40%,#fff 50%,#d4af37 50%,#d4af37 65%,#fff 65%,#fff 75%,#d4af37 75%);border-color:#8b6914}
 .chip.blue{background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.5),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#2563eb 20%,#2563eb 40%,#fff 40%,#fff 50%,#2563eb 50%,#2563eb 65%,#fff 65%,#fff 75%,#2563eb 75%);border-color:#1e40af}
 .chip.green{background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.5),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#16a34a 20%,#16a34a 40%,#fff 40%,#fff 50%,#16a34a 50%,#16a34a 65%,#fff 65%,#fff 75%,#16a34a 75%);border-color:#14532d}
-.chip.black{background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.3),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#1a1a2e 20%,#1a1a2e 40%,#fff 40%,#fff 50%,#1a1a2e 50%,#1a1a2e 65%,#fff 65%,#fff 75%,#1a1a2e 75%);border-color:#000}
 
-/* Карта */
-.card{
-  width:60px;height:88px;
-  border-radius:8px;
-  background:linear-gradient(145deg,#ffffff,#f0f0f0);
-  display:flex;flex-direction:column;justify-content:space-between;
-  padding:5px;
-  box-shadow:0 6px 18px rgba(0,0,0,.7),inset 0 2px 4px rgba(255,255,255,.9),0 0 0 1px rgba(0,0,0,.1);
-  color:#1a0d2e;font-weight:900;position:relative;
-  animation:cardDeal .4s ease-out;
-  flex-shrink:0;
-}
-@keyframes cardDeal{
-  0%{opacity:0;transform:translateY(-60px) rotate(-15deg) scale(.7)}
-  100%{opacity:1;transform:translateY(0) rotate(0) scale(1)}
-}
+/* Карты */
+.card{width:60px;height:88px;border-radius:8px;background:linear-gradient(145deg,#ffffff,#f0f0f0);display:flex;flex-direction:column;justify-content:space-between;padding:5px;box-shadow:0 6px 18px rgba(0,0,0,.7),inset 0 2px 4px rgba(255,255,255,.9);color:#1a0d2e;font-weight:900;position:relative;animation:cardDeal .4s ease-out;flex-shrink:0}
+@keyframes cardDeal{0%{opacity:0;transform:translateY(-60px) rotate(-15deg) scale(.7)}100%{opacity:1;transform:translateY(0) rotate(0) scale(1)}}
 .card.red{color:#dc2626}
 .card .corner{font-size:11px;line-height:1;display:flex;flex-direction:column;align-items:center;font-weight:900}
 .card .corner.bottom{transform:rotate(180deg)}
 .card .center-suit{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:24px;opacity:.9}
-.card.back{
-  background:
-    repeating-linear-gradient(45deg,#5b21b6 0px,#5b21b6 8px,#7c3aed 8px,#7c3aed 16px);
-  border:2px solid #a855f7;
-  position:relative;overflow:hidden;
-}
+.card.back{background:repeating-linear-gradient(45deg,#5b21b6 0px,#5b21b6 8px,#7c3aed 8px,#7c3aed 16px);border:2px solid #a855f7;position:relative;overflow:hidden}
 .card.back::before{content:'';position:absolute;inset:5px;border:2px solid rgba(255,255,255,.4);border-radius:5px}
-.card.back::after{content:'★';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(255,255,255,.5);font-size:20px}
 </style><style>
-/* ==== ПЛАТЁЖКА ==== */
+/* ПЛАТЁЖКА */
 .pay-modal{display:none;position:fixed;inset:0;background:#0a0a14;z-index:950;overflow-y:auto;padding-bottom:env(safe-area-inset-bottom)}
 .pay-modal.active{display:block;animation:fadeIn .25s}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
 .pay-top{display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 14px) 18px 14px}
 .pay-close{background:none;border:none;color:#fff;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px}
 .pay-close .x{font-size:20px;line-height:1}
 .pay-user{display:flex;align-items:center;gap:10px}
 .pay-user-info{text-align:right;font-size:11px;color:#8a9ab8}
 .pay-user-info .bal{color:#fff;font-size:14px;font-weight:800;display:block;margin-top:2px}
-.pay-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#ff8a00,#ff5e00);display:flex;align-items:center;justify-content:center;font-size:20px}
-
+.pay-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#4a6fe8,#2a4fc8);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pay-avatar svg{width:20px;height:20px;fill:#fff}
 .pay-title{display:flex;justify-content:space-between;align-items:center;padding:0 18px 20px}
 .pay-title h2{font-size:26px;font-weight:900}
 .pay-title .close-x{background:none;border:none;color:#8a9ab8;font-size:26px;cursor:pointer;line-height:1}
-
 .pay-tabs{display:flex;gap:6px;padding:0 18px 20px}
-.pay-tab{flex:1;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,.04);color:#8a9ab8;font-size:14px;font-weight:800;cursor:pointer;text-align:center;transition:all .2s;border:none}
+.pay-tab{flex:1;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,.04);color:#8a9ab8;font-size:14px;font-weight:800;cursor:pointer;text-align:center;transition:all .2s;border:none;font-family:'Inter',sans-serif}
 .pay-tab.active{background:#1a1a2e;color:#fff}
-
 .pay-content{display:none}
 .pay-content.active{display:block;animation:fadeIn .25s}
-
 .pay-bonus-banner{margin:0 18px 20px;border-radius:16px;background:linear-gradient(135deg,#7c3aed 0%,#a855f7 50%,#c084fc 100%);padding:20px;position:relative;overflow:hidden;min-height:100px;display:flex;align-items:center}
 .pay-bonus-banner::before{content:'';position:absolute;top:-30%;right:-20%;width:180px;height:180px;background:radial-gradient(circle,rgba(255,255,255,.25),transparent 70%);pointer-events:none}
 .pay-bonus-banner .txt{font-size:15px;font-weight:900;color:#fff;position:relative;z-index:1;line-height:1.3;max-width:75%}
-.pay-bonus-banner .decor{position:absolute;right:10px;bottom:-10px;font-size:64px;opacity:.65;transform:rotate(-15deg);pointer-events:none}
-
+.pay-bonus-banner .decor{position:absolute;right:10px;bottom:-10px;width:70px;height:70px;opacity:.6;transform:rotate(-15deg);pointer-events:none;fill:#ffd700}
 .pay-balance-row{display:flex;justify-content:space-between;align-items:center;padding:0 18px 22px}
 .pay-balance-row .lbl{font-size:13px;color:#8a9ab8;font-weight:600;margin-bottom:4px}
 .pay-balance-row .val{font-size:20px;font-weight:900;color:#fff}
 .pay-rub-select{display:flex;align-items:center;gap:8px;background:#1a1a2e;padding:10px 14px;border-radius:12px;font-weight:800;color:#fff;cursor:pointer;font-size:14px}
-.pay-rub-select .flag{font-size:18px}
-
 .pay-section-title{font-size:18px;font-weight:900;padding:0 18px 14px;color:#fff}
 .pay-section-title.crypto{padding-top:20px;border-top:1px solid rgba(255,255,255,.06);margin:16px 18px 14px;padding-left:0;padding-right:0}
-
 .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px}
 .pay-card{background:#1a1a2e;border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:flex-end;min-height:110px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
 .pay-card:active{transform:scale(.96)}
@@ -688,7 +274,6 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .pay-card .min{font-size:11px;color:#8a9ab8;font-weight:600}
 .pay-card .bonus-tag{display:flex;align-items:center;gap:4px;background:rgba(140,80,255,.15);border-radius:20px;padding:4px 10px;font-size:10px;font-weight:800;color:#c084fc;align-self:flex-start;margin-top:6px}
 .pay-card .logo{width:56px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.4);position:relative;overflow:hidden}
-
 .logo-card{background:linear-gradient(135deg,#1a4b8c 0%,#0d3d7a 50%,#062c5e 100%);color:#fff;padding:0}
 .logo-card .visa-txt{position:absolute;top:6px;left:8px;font-size:11px;font-weight:900;font-style:italic;color:#fff}
 .logo-card .card-num{position:absolute;bottom:8px;left:8px;font-size:8px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:1px}
@@ -696,27 +281,22 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .logo-card .mc span{width:12px;height:12px;border-radius:50%;display:block}
 .logo-card .mc span:first-child{background:#eb001b}
 .logo-card .mc span:last-child{background:#f79e1b;margin-left:-5px;mix-blend-mode:screen}
-
 .logo-sbp{background:#fff;position:relative}
 .logo-sbp .sbp-icon{width:32px;height:32px;position:relative}
 .logo-sbp .sbp-icon::before{content:'';position:absolute;width:0;height:0;border-style:solid;border-width:0 0 16px 16px;border-color:transparent transparent #5b8def transparent;top:0;left:0}
 .logo-sbp .sbp-icon::after{content:'';position:absolute;width:0;height:0;border-style:solid;border-width:16px 16px 0 0;border-color:#f5a623 transparent transparent transparent;top:0;right:0}
 .logo-sbp .sbp-icon span{display:block;position:absolute;bottom:0;left:0;right:0;height:18px;background:linear-gradient(135deg,#f5a623 0%,#5b8def 100%);clip-path:polygon(0 100%,50% 0,100% 100%)}
-
-.logo-ton{background:radial-gradient(circle at 30% 30%,#5fd0ff 0%,#2ca5e0 40%,#0088cc 70%,#005f99 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:24px;font-weight:900;box-shadow:0 6px 20px rgba(44,165,224,.6),inset 0 2px 8px rgba(255,255,255,.3),inset 0 -4px 10px rgba(0,0,0,.3)}
-.logo-ton::before{display:none}
-.logo-usdt{background:radial-gradient(circle at 30% 30%,#3ec49a 0%,#26a17b 40%,#007a54 70%,#004d34 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:24px;font-weight:900;box-shadow:0 6px 20px rgba(38,161,123,.6),inset 0 2px 8px rgba(255,255,255,.3),inset 0 -4px 10px rgba(0,0,0,.3)}
-.logo-usdt::before{display:none}
-.logo-trx{background:radial-gradient(circle at 30% 30%,#ff5757 0%,#dc2626 40%,#991b1b 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:24px;font-weight:900;box-shadow:0 6px 20px rgba(220,38,38,.6),inset 0 2px 8px rgba(255,255,255,.3),inset 0 -4px 10px rgba(0,0,0,.3)}
-.logo-trx::before{display:none}
-.logo-eth{background:radial-gradient(circle at 30% 30%,#a5b4fc 0%,#6366f1 40%,#4338ca 70%,#312e81 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:24px;font-weight:900;box-shadow:0 6px 20px rgba(99,102,241,.6),inset 0 2px 8px rgba(255,255,255,.3),inset 0 -4px 10px rgba(0,0,0,.3)}
-.logo-eth::before{display:none}
+.logo-ton{background:radial-gradient(circle at 30% 30%,#5fd0ff 0%,#2ca5e0 40%,#0088cc 70%,#005f99 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:24px;font-weight:900}
+.logo-usdt{background:radial-gradient(circle at 30% 30%,#3ec49a 0%,#26a17b 40%,#007a54 70%,#004d34 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:24px;font-weight:900}
+.logo-trx{background:radial-gradient(circle at 30% 30%,#ff5757 0%,#dc2626 40%,#991b1b 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:24px;font-weight:900}
+.logo-eth{background:radial-gradient(circle at 30% 30%,#a5b4fc 0%,#6366f1 40%,#4338ca 70%,#312e81 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:24px;font-weight:900}
 
 /* ВЫВОД */
 .wd-form{padding:0 18px 30px}
 .wd-select{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer;font-weight:700}
 .wd-select .left{display:flex;align-items:center;gap:12px}
-.wd-select .icon{width:32px;height:32px;border-radius:8px;background:#2a2a4e;display:flex;align-items:center;justify-content:center;font-size:16px}
+.wd-select .icon{width:32px;height:32px;border-radius:8px;background:#2a2a4e;display:flex;align-items:center;justify-content:center}
+.wd-select .icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2}
 .wd-select .chev{color:#8a9ab8;font-size:18px}
 .wd-input{width:100%;background:#1a1a2e;border:1.5px solid transparent;border-radius:14px;padding:16px;color:#fff;font-size:15px;font-weight:600;outline:none;margin-bottom:12px;font-family:'Inter',sans-serif;transition:border-color .2s}
 .wd-input::placeholder{color:#6b7280;font-weight:500}
@@ -734,16 +314,18 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .hist-list{padding:0 18px 30px}
 .hist-item{background:#1a1a2e;border-radius:14px;padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
 .hist-item .l{display:flex;align-items:center;gap:12px}
-.hist-item .ico{width:38px;height:38px;border-radius:10px;background:rgba(140,80,255,.15);display:flex;align-items:center;justify-content:center;font-size:18px}
+.hist-item .ico{width:38px;height:38px;border-radius:10px;background:rgba(74,111,232,.15);display:flex;align-items:center;justify-content:center}
+.hist-item .ico svg{width:18px;height:18px;fill:none;stroke:#6b8cff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .hist-item .nm{font-size:14px;font-weight:800;color:#fff;margin-bottom:2px}
 .hist-item .dt{font-size:11px;color:#8a9ab8}
 .hist-item .amt{font-size:15px;font-weight:900}
 .hist-item .amt.plus{color:#4ade80}
 .hist-item .amt.minus{color:#ef4444}
 .hist-empty{text-align:center;padding:60px 20px;color:#6b7280}
-.hist-empty .ic{font-size:48px;margin-bottom:12px;opacity:.5}
+.hist-empty .ic{margin-bottom:12px;display:flex;justify-content:center;opacity:.5}
+.hist-empty .ic svg{width:56px;height:56px;fill:none;stroke:#6b7280;stroke-width:1.5}
 
-/* ==== ЭКРАН ПОИСКА РЕКВИЗИТОВ ==== */
+/* ЭКРАН ПОИСКА РЕКВИЗИТОВ */
 .search-reqs-screen{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 40%,#1a1a3a 0%,#0a0a14 70%);z-index:970;display:none;align-items:center;justify-content:center;padding:20px;text-align:center}
 .search-reqs-screen.active{display:flex;animation:fadeIn .35s}
 .srs-content{max-width:340px;width:100%;display:flex;flex-direction:column;align-items:center}
@@ -751,7 +333,8 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .srs-ring{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;border-top-color:#4a6fe8;border-right-color:#4a6fe8;animation:srsSpin 1.2s linear infinite}
 .srs-ring-inner{position:absolute;inset:16px;border-radius:50%;border:3px solid transparent;border-bottom-color:#6b8cff;border-left-color:#6b8cff;animation:srsSpin 1.8s linear infinite reverse}
 @keyframes srsSpin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-.srs-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:44px;filter:drop-shadow(0 0 20px rgba(74,111,232,.8));animation:srsPulse 2s ease-in-out infinite}
+.srs-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;animation:srsPulse 2s ease-in-out infinite}
+.srs-icon svg{width:100%;height:100%;fill:none;stroke:#6b8cff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 20px rgba(74,111,232,.8))}
 @keyframes srsPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.15)}}
 .srs-title{font-size:24px;font-weight:900;color:#fff;margin-bottom:10px}
 .srs-subtitle{font-size:14px;color:#8a9ab8;margin-bottom:28px;line-height:1.5}
@@ -761,7 +344,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .srs-status{font-size:13px;color:#c9d5e8;font-weight:600;animation:srsDots 1.5s ease-in-out infinite}
 @keyframes srsDots{0%,100%{opacity:.6}50%{opacity:1}}
 
-/* ==== МОДАЛКА ==== */
+/* МОДАЛКА */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:900;display:none;align-items:flex-end;justify-content:center}
 .modal.active{display:flex;animation:fadeIn .25s}
 .modal-sheet{background:linear-gradient(180deg,#1a1a2e,#0f0f1e);border-radius:24px 24px 0 0;padding:22px 20px calc(30px + env(safe-area-inset-bottom));max-width:500px;width:100%;max-height:80vh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.4,0,.2,1)}
@@ -772,10 +355,11 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 .modal-list{display:flex;flex-direction:column;gap:8px}
 .modal-item{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);cursor:pointer;font-weight:700;font-size:14px;color:#fff}
 .modal-item:active{background:rgba(74,111,232,.2);transform:scale(.98)}
-.modal-item .mi-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#4a6fe8,#6b8cff);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.modal-item .mi-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#4a6fe8,#6b8cff);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.modal-item .mi-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .modal-item .mi-text{flex:1}
 .modal-item .mi-sub{font-size:11px;color:#8a9ab8;font-weight:500;margin-top:2px}
-.modal-close{margin-top:14px;width:100%;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:none;color:#8a9ab8;font-weight:800;font-size:14px;cursor:pointer}
+.modal-close{margin-top:14px;width:100%;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:none;color:#8a9ab8;font-weight:800;font-size:14px;cursor:pointer;font-family:'Inter',sans-serif}
 </style>
 </head><body>
 
@@ -786,38 +370,37 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
   <div class="loader-bar"><div class="loader-fill"></div></div>
 </div>
 
-<div class="bg"></div>
-<div class="aurora"></div>
-
 <div class="app">
   <div class="top-bar">
-    <div class="top-logo">Ton<span class="sub">play</span></div>
+    <div class="top-logo">Magic<span class="sub">Spin</span></div>
     <div class="top-balance" onclick="openPay()">
-      <div class="rub">RUB ▾</div>
+      <div class="rub">RUB</div>
       <div class="val" id="balance">10000 ₽</div>
     </div>
     <button class="deposit-btn-top" onclick="openPay()">Пополнить</button>
-    <div class="top-avatar" onclick="openModal('profile')">🐸</div>
+    <div class="top-avatar" onclick="openModal('profile')">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+    </div>
   </div>
 
   <div class="content">
-    <!-- БОЛЬШИЕ БАННЕРЫ -->
     <div class="big-games">
       <div class="big-card" onclick="openGame('slots')">
         <div class="bg-img bg-space"></div>
+        <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#f0c060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6 L38 24 L56 20 L42 34 L50 52 L32 42 L14 52 L22 34 L8 20 L26 24 Z" fill="rgba(240,192,96,.15)"/></svg>
         <div class="overlay"></div>
         <div class="title">SPACE XY</div>
         <div class="provider">BGAMING</div>
       </div>
       <div class="big-card" onclick="openGame('avia')">
         <div class="bg-img bg-avia"></div>
+        <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><path d="M56 20 L40 32 L48 44 L42 46 L32 36 L22 40 L18 34 L30 28 L22 14 L28 12 L38 24 L52 16 Z"/></svg>
         <div class="overlay"></div>
         <div class="title">AVIAMASTERS</div>
         <div class="provider">BGAMING</div>
       </div>
     </div>
 
-    <!-- СЕКЦИЯ: СЛОТЫ -->
     <div class="section-block">
       <div class="section-head">
         <h3>Слоты</h3>
@@ -830,24 +413,28 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
       <div class="games-row" id="slotsRow">
         <div class="game-tile" onclick="openGame('slots')">
           <div class="bg-img bg-slots"></div>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><rect x="10" y="14" width="44" height="36" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="22" cy="32" r="3"/><circle cx="32" cy="32" r="3"/><circle cx="42" cy="32" r="3"/></svg>
           <div class="overlay"></div>
           <div class="title">СЛОТЫ</div>
           <div class="provider">MAGIC SPIN</div>
         </div>
         <div class="game-tile" onclick="openGame('dice')">
           <div class="bg-img bg-dice"></div>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><rect x="10" y="10" width="44" height="44" rx="8" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="22" cy="22" r="3"/><circle cx="42" cy="42" r="3"/></svg>
           <div class="overlay"></div>
           <div class="title">КОСТИ</div>
           <div class="provider">MAGIC SPIN</div>
         </div>
         <div class="game-tile" onclick="openGame('coin')">
           <div class="bg-img bg-coin"></div>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="3"/><text x="32" y="42" text-anchor="middle" font-size="24" font-weight="900" fill="currentColor" stroke="none">O</text></svg>
           <div class="overlay"></div>
           <div class="title">МОНЕТКА</div>
           <div class="provider">MAGIC SPIN</div>
         </div>
         <div class="game-tile" onclick="openGame('roulette')">
           <div class="bg-img bg-roulette"></div>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="3"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="8"/></svg>
           <div class="overlay"></div>
           <div class="title">РУЛЕТКА</div>
           <div class="provider">MAGIC SPIN</div>
@@ -855,7 +442,6 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
       </div>
     </div>
 
-    <!-- СЕКЦИЯ: LIVE-ИГРЫ -->
     <div class="section-block">
       <div class="section-head">
         <h3>Live-игры</h3>
@@ -868,18 +454,21 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
       <div class="games-row" id="liveRow">
         <div class="game-tile" onclick="openGame('blackjack')">
           <div class="bg-img bg-blackjack"></div>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><rect x="18" y="8" width="28" height="44" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><text x="32" y="38" text-anchor="middle" font-size="18" font-weight="900" fill="currentColor" stroke="none">A</text></svg>
           <div class="overlay"></div>
           <div class="title">БЛЭКДЖЕК</div>
           <div class="provider">LIVE</div>
         </div>
         <div class="game-tile" onclick="openGame('poker')">
           <div class="bg-img bg-poker"></div>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><path d="M32 8 C22 20 14 26 14 36 C14 44 20 48 26 46 L26 56 L38 56 L38 46 C44 48 50 44 50 36 C50 26 42 20 32 8 Z"/></svg>
           <div class="overlay"></div>
           <div class="title">ПОКЕР</div>
           <div class="provider">LIVE</div>
         </div>
         <div class="game-tile" onclick="openGame('roulette')">
           <div class="bg-img bg-roulette"></div>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="3"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="8"/></svg>
           <div class="overlay"></div>
           <div class="title">РУЛЕТКА</div>
           <div class="provider">LIVE</div>
@@ -887,7 +476,6 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
       </div>
     </div>
 
-    <!-- СЕКЦИЯ: БЫСТРЫЕ ИГРЫ -->
     <div class="section-block">
       <div class="section-head">
         <h3>Быстрые игры</h3>
@@ -900,20 +488,23 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
       <div class="games-row" id="fastRow">
         <div class="game-tile" onclick="openGame('coin')">
           <div class="bg-img bg-coin"></div>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="3"/><text x="32" y="42" text-anchor="middle" font-size="24" font-weight="900" fill="currentColor" stroke="none">O</text></svg>
           <div class="overlay"></div>
           <div class="title">МОНЕТКА</div>
           <div class="provider">MAGIC SPIN</div>
         </div>
         <div class="game-tile" onclick="openGame('dice')">
           <div class="bg-img bg-dice"></div>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><rect x="10" y="10" width="44" height="44" rx="8" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="22" cy="22" r="3"/><circle cx="42" cy="42" r="3"/></svg>
           <div class="overlay"></div>
           <div class="title">КОСТИ</div>
           <div class="provider">MAGIC SPIN</div>
         </div>
         <div class="game-tile" onclick="openGame('avia')">
           <div class="bg-img bg-avia"></div>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="rgba(255,255,255,.9)"><path d="M56 20 L40 32 L48 44 L42 46 L32 36 L22 40 L18 34 L30 28 L22 14 L28 12 L38 24 L52 16 Z"/></svg>
           <div class="overlay"></div>
-          <div class="title">AVIAMASTERS</div>
+          <div class="title">AVIA</div>
           <div class="provider">BGAMING</div>
         </div>
       </div>
@@ -921,7 +512,6 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
   </div>
 </div>
 
-<!-- НИЖНЕЕ МЕНЮ -->
 <div class="bottom-nav">
   <div class="nav-item" onclick="openPay()">
     <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20"/></svg>
@@ -932,7 +522,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
     <span>Спорт</span>
   </div>
   <div class="nav-item" onclick="openModal('bonuses')">
-    <svg viewBox="0 0 24 24"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7"/></svg>
     <span>Бонусы</span>
     <span class="badge">4</span>
   </div>
@@ -944,20 +534,20 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
     <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     <span>Меню</span>
   </div>
-</div><div class="game-screen" id="gameScreen">
+</div>
+
+<div class="game-screen" id="gameScreen">
   <div class="game-header">
     <div class="left">
       <button class="game-back" onclick="closeGame()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       </button>
       <div class="game-title" id="gameTitle">Игра</div>
     </div>
     <div class="game-balance" id="gameBalance">10000 ₽</div>
   </div>
-
   <div class="game-body">
     <div class="game-stage" id="gameArea"></div>
-
     <div class="game-panel">
       <div class="bet-label">Ставка</div>
       <div class="bet-row">
@@ -978,8 +568,8 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
   <div class="pay-top">
     <button class="pay-close" onclick="closePay()"><span class="x">×</span> Назад</button>
     <div class="pay-user">
-      <div class="pay-user-info">RUB ▾<span class="bal" id="payBal">0 ₽</span></div>
-      <div class="pay-avatar">🐸</div>
+      <div class="pay-user-info">RUB<span class="bal" id="payBal">0 ₽</span></div>
+      <div class="pay-avatar"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></div>
     </div>
   </div>
   <div class="pay-title">
@@ -987,23 +577,22 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
     <button class="close-x" onclick="closePay()">×</button>
   </div>
   <div class="pay-tabs">
-    <div class="pay-tab active" onclick="switchPayTab('deposit', this)">Депозит</div>
-    <div class="pay-tab" onclick="switchPayTab('withdraw', this)">Вывод</div>
-    <div class="pay-tab" onclick="switchPayTab('history', this)">История</div>
+    <button class="pay-tab active" onclick="switchPayTab('deposit', this)">Депозит</button>
+    <button class="pay-tab" onclick="switchPayTab('withdraw', this)">Вывод</button>
+    <button class="pay-tab" onclick="switchPayTab('history', this)">История</button>
   </div>
 
-  <!-- ДЕПОЗИТ -->
   <div class="pay-content active" id="payTab-deposit">
     <div class="pay-bonus-banner">
       <div class="txt">До +7% на первое крипто-пополнение в рамках дня!</div>
-      <div class="decor">🎁</div>
+      <svg class="decor" viewBox="0 0 64 64" fill="#ffd700"><path d="M20 12h24v8H20zM16 24h32v28H16zM28 24h8v28h-8z"/></svg>
     </div>
     <div class="pay-balance-row">
       <div>
         <div class="lbl">Ваш баланс</div>
         <div class="val" id="payBal2">0 ₽</div>
       </div>
-      <div class="pay-rub-select"><span class="flag">🇷🇺</span> RUB <span style="opacity:.5">▾</span></div>
+      <div class="pay-rub-select">RUB</div>
     </div>
     <div class="pay-section-title">Банковский платёж</div>
     <div class="pay-grid">
@@ -1019,11 +608,11 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
     <div class="pay-section-title crypto">Криптовалюта</div>
     <div class="pay-grid">
       <div class="pay-card" onclick="payChoose('TON','ton',100)">
-        <div class="left"><div class="name">TON<br><span style="font-size:12px;color:#8a9ab8">(Toncoin)</span></div><div class="bonus-tag">🎁 +7%</div></div>
-        <div class="logo logo-ton">◈</div>
+        <div class="left"><div class="name">TON<br><span style="font-size:12px;color:#8a9ab8">(Toncoin)</span></div><div class="bonus-tag">+7%</div></div>
+        <div class="logo logo-ton">TON</div>
       </div>
       <div class="pay-card" onclick="payChoose('USDT','usdt',100)">
-        <div class="left"><div class="name">USDT<br><span style="font-size:12px;color:#8a9ab8">(Toncoin)</span></div><div class="bonus-tag">🎁 +7%</div></div>
+        <div class="left"><div class="name">USDT<br><span style="font-size:12px;color:#8a9ab8">(Toncoin)</span></div><div class="bonus-tag">+7%</div></div>
         <div class="logo logo-usdt">₮</div>
       </div>
       <div class="pay-card" onclick="payChoose('USDT TRC20','usdt-trc',100)">
@@ -1032,20 +621,22 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
       </div>
       <div class="pay-card" onclick="payChoose('TRX','trx',100)">
         <div class="left"><div class="name">TRX<br><span style="font-size:12px;color:#8a9ab8">(Tron)</span></div></div>
-        <div class="logo logo-trx">◭</div>
+        <div class="logo logo-trx">TRX</div>
       </div>
       <div class="pay-card" onclick="payChoose('ETH','eth',100)">
         <div class="left"><div class="name">ETH<br><span style="font-size:12px;color:#8a9ab8">(Ethereum)</span></div></div>
-        <div class="logo logo-eth">◆</div>
+        <div class="logo logo-eth">ETH</div>
       </div>
     </div>
   </div>
 
-  <!-- ВЫВОД -->
   <div class="pay-content" id="payTab-withdraw">
     <div class="wd-form">
       <div class="wd-select" onclick="switchWdMethod()">
-        <div class="left"><div class="icon">💳</div><div id="wdMethodName">Перевод на карту</div></div>
+        <div class="left">
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+          <div id="wdMethodName">Перевод на карту</div>
+        </div>
         <div class="chev">⇅</div>
       </div>
       <input type="text" class="wd-input" id="wdFio" placeholder="ФИО">
@@ -1061,11 +652,10 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
     </div>
   </div>
 
-  <!-- ИСТОРИЯ -->
   <div class="pay-content" id="payTab-history">
     <div class="hist-list" id="histList">
       <div class="hist-empty">
-        <div class="ic">📜</div>
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/><line x1="9" y1="11" x2="13" y2="11"/></svg></div>
         <div>История пуста</div>
       </div>
     </div>
@@ -1078,7 +668,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
     <div class="srs-spinner">
       <div class="srs-ring"></div>
       <div class="srs-ring-inner"></div>
-      <div class="srs-icon">🔍</div>
+      <div class="srs-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
     </div>
     <div class="srs-title">Поиск реквизитов</div>
     <div class="srs-subtitle">Пожалуйста, не закрывайте приложение</div>
@@ -1086,7 +676,7 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
       <span id="srsTimer">10:00</span>
       <span class="srs-timer-label">до истечения ссылки</span>
     </div>
-    <div class="srs-status" id="srsStatus">Связываемся с оператором...</div>
+    <div class="srs-status" id="srsStatus">Связываемся с оператором</div>
   </div>
 </div>
 
@@ -1099,354 +689,376 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
     <button class="modal-close" onclick="closeModal()">Закрыть</button>
   </div>
 </div><script>
-const tg = (window.Telegram && window.Telegram.WebApp) ? window.Telegram.WebApp : {
-  ready:()=>{}, expand:()=>{}, close:()=>{},
-  setHeaderColor:()=>{}, setBackgroundColor:()=>{},
-  HapticFeedback:null, BackButton:null, openTelegramLink:null,
-  initDataUnsafe:{user:{id:0, first_name:'Гость', username:'guest'}}
-};
-try{ tg.ready(); tg.expand(); tg.setHeaderColor('#0a0a14'); tg.setBackgroundColor('#0a0a14'); }catch(e){}
+"use strict";
+window.onerror = function(m, u, l){ console.error("ERR:", m, "line:", l); return false; };
+
+var tg;
+try {
+  tg = (window.Telegram && window.Telegram.WebApp) ? window.Telegram.WebApp : null;
+} catch(e){ tg = null; }
+if(!tg){
+  tg = { ready:function(){}, expand:function(){}, close:function(){},
+         setHeaderColor:function(){}, setBackgroundColor:function(){},
+         HapticFeedback:null, BackButton:null, openTelegramLink:null,
+         initDataUnsafe:{user:{id:0, first_name:"Гость", username:"guest"}} };
+}
+try { tg.ready(); tg.expand(); tg.setHeaderColor("#0a0a14"); tg.setBackgroundColor("#0a0a14"); } catch(e){}
 
 /* ============ STATE ============ */
-let balance = 10000;
-let currentBet = 100;
-let currentGame = '';
-let bjBet = 0, bjPlayer = [], bjDealer = [], bjActive = false;
-let payMethod = {name:'Перевод на карту', code:'card', min:3093};
-let bonusEnabled = true;
-let wdMethod = 'card';
+var balance = 10000;
+var currentBet = 100;
+var currentGame = "";
+var bjBet = 0, bjPlayer = [], bjDealer = [], bjActive = false;
+var payMethod = {name:"Перевод на карту", code:"card", min:3093};
+var bonusEnabled = true;
+var wdMethod = "card";
 
 /* ============ LOADER ============ */
-setTimeout(()=>{document.getElementById('loader').classList.add('hidden');}, 2200);
+setTimeout(function(){
+  var l = document.getElementById("loader");
+  if(l) l.classList.add("hidden");
+}, 2000);
 
 /* ============ BALANCE + SAVE ============ */
 function loadBalance(){
-  const saved = localStorage.getItem('ms_balance');
-  const history = localStorage.getItem('ms_history');
-  if(saved) balance = parseInt(saved);
+  try {
+    var saved = localStorage.getItem("ms_balance");
+    if(saved) balance = parseInt(saved);
+  } catch(e){}
   updateUI();
 }
 function saveBalance(){
-  localStorage.setItem('ms_balance', balance);
+  try { localStorage.setItem("ms_balance", balance); } catch(e){}
 }
 function saveHistory(item){
-  let hist = JSON.parse(localStorage.getItem('ms_history') || '[]');
-  hist.unshift(item);
-  if(hist.length > 50) hist = hist.slice(0,50);
-  localStorage.setItem('ms_history', JSON.stringify(hist));
+  try {
+    var hist = JSON.parse(localStorage.getItem("ms_history") || "[]");
+    hist.unshift(item);
+    if(hist.length > 50) hist = hist.slice(0,50);
+    localStorage.setItem("ms_history", JSON.stringify(hist));
+  } catch(e){}
 }
 function getHistory(){
-  return JSON.parse(localStorage.getItem('ms_history') || '[]');
+  try { return JSON.parse(localStorage.getItem("ms_history") || "[]"); }
+  catch(e){ return []; }
+}
+function addHistory(type, amount, method){
+  saveHistory({type: type, amount: amount, date: Date.now(), method: method || ""});
 }
 function updateUI(){
-  const el = document.getElementById('balance'); if(el) el.innerText = balance + ' ₽';
-  const gb = document.getElementById('gameBalance'); if(gb) gb.innerText = balance + ' ₽';
-  const pb = document.getElementById('payBal'); if(pb) pb.innerText = balance + ' ₽';
-  const pb2 = document.getElementById('payBal2'); if(pb2) pb2.innerText = balance + ' ₽';
-  const wd = document.getElementById('wdBal'); if(wd) wd.innerText = balance + ' ₽';
+  var b = document.getElementById("balance"); if(b) b.innerText = balance + " ₽";
+  var gb = document.getElementById("gameBalance"); if(gb) gb.innerText = balance + " ₽";
+  var pb = document.getElementById("payBal"); if(pb) pb.innerText = balance + " ₽";
+  var pb2 = document.getElementById("payBal2"); if(pb2) pb2.innerText = balance + " ₽";
+  var wd = document.getElementById("wdBal"); if(wd) wd.innerText = balance + " ₽";
+  var sb = document.getElementById("slotBet"); if(sb) sb.innerText = currentBet + " ₽";
+  var sl = document.getElementById("slotBal"); if(sl) sl.innerText = balance + " ₽";
   saveBalance();
 }
 
 /* ============ HELPERS ============ */
 function haptic(t){
-  if(!tg.HapticFeedback) return;
-  if(t==='light') tg.HapticFeedback.impactOccurred('light');
-  if(t==='medium') tg.HapticFeedback.impactOccurred('medium');
+  if(!tg || !tg.HapticFeedback) return;
+  try {
+    if(t === "light") tg.HapticFeedback.impactOccurred("light");
+    if(t === "medium") tg.HapticFeedback.impactOccurred("medium");
+  } catch(e){}
 }
 function setBet(v, el){
-  haptic('light');
+  haptic("light");
   currentBet = v;
-  document.querySelectorAll('.bet-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
+  var btns = document.querySelectorAll(".bet-btn");
+  for(var i=0;i<btns.length;i++) btns[i].classList.remove("active");
+  if(el) el.classList.add("active");
+  updateUI();
 }
 function showResult(text, type){
-  const r = document.getElementById('result');
-  if(r){ r.innerText = text; r.className = 'result-msg ' + (type || ''); }
+  var r = document.getElementById("result");
+  if(r){ r.innerText = text; r.className = "result-msg " + (type || ""); }
 }
 function checkBet(){
   if(currentBet > balance){
-    showResult('Недостаточно средств','lose');
+    showResult("Недостаточно средств","lose");
     return false;
   }
   balance -= currentBet;
   return true;
 }
 function scrollRow(id, dir){
-  haptic('light');
-  const el = document.getElementById(id);
-  if(el) el.scrollBy({left: dir * 160, behavior:'smooth'});
+  haptic("light");
+  var el = document.getElementById(id);
+  if(el) el.scrollBy({left: dir * 160, behavior: "smooth"});
 }
 
 /* ============ МОДАЛКИ ============ */
-const MODALS = {
-  menu: { title:'Меню', items:[
-    {icon:'🏠', text:'Главная', sub:'На главный экран', action:'home'},
-    {icon:'👤', text:'Профиль', sub:'Ваш аккаунт', action:'profile'},
-    {icon:'⚙️', text:'Настройки', sub:'Язык, звук, уведомления', action:'settings'},
-    {icon:'📊', text:'История игр', sub:'Последние ставки', action:'history'},
-    {icon:'🎁', text:'Промокод', sub:'Ввести код', action:'promo'},
-    {icon:'💬', text:'Поддержка', sub:'Чат с оператором', action:'support'}
+var MODALS = {
+  menu: { title:"Меню", items:[
+    {text:"Главная", sub:"На главный экран", action:"home"},
+    {text:"Профиль", sub:"Ваш аккаунт", action:"profile"},
+    {text:"Настройки", sub:"Язык, звук, уведомления", action:"settings"},
+    {text:"История игр", sub:"Последние ставки", action:"history"},
+    {text:"Промокод", sub:"Ввести код", action:"promo"},
+    {text:"Поддержка", sub:"Чат с оператором", action:"support"}
   ]},
-  bonuses: { title:'Бонусы', items:[
-    {icon:'🎰', text:'100 FS', sub:'Фриспины для слотов', action:'bonus_fs'},
-    {icon:'💯', text:'100% депозит', sub:'Первый депозит', action:'bonus_dep'},
-    {icon:'🎟️', text:'Кэшбэк 10%', sub:'Каждую неделю', action:'bonus_cb'},
-    {icon:'🏆', text:'Турниры', sub:'Играй и зарабатывай', action:'tournaments'}
+  bonuses: { title:"Бонусы", items:[
+    {text:"100 FS", sub:"Фриспины для слотов", action:"bonus_fs"},
+    {text:"100% депозит", sub:"Первый депозит", action:"bonus_dep"},
+    {text:"Кэшбэк 10%", sub:"Каждую неделю", action:"bonus_cb"},
+    {text:"Турниры", sub:"Играй и зарабатывай", action:"tournaments"}
   ]},
-  sport: { title:'Спорт', items:[
-    {icon:'⚽', text:'Футбол', sub:'Матчи сегодня', action:'sport_football'},
-    {icon:'🏀', text:'Баскетбол', sub:'NBA, Евролига', action:'sport_basket'},
-    {icon:'🎾', text:'Теннис', sub:'ATP, WTA', action:'sport_tennis'},
-    {icon:'🥊', text:'Бокс/MMA', sub:'UFC, бокс', action:'sport_box'}
+  sport: { title:"Спорт", items:[
+    {text:"Футбол", sub:"Матчи сегодня", action:"sport_football"},
+    {text:"Баскетбол", sub:"NBA, Евролига", action:"sport_basket"},
+    {text:"Теннис", sub:"ATP, WTA", action:"sport_tennis"},
+    {text:"Бокс и MMA", sub:"UFC, бокс", action:"sport_box"}
   ]},
-  balance: { title:'Баланс', items:[
-    {icon:'💰', text:'Баланс', sub:'', action:'noop'},
-    {icon:'📥', text:'Пополнить', sub:'Внести средства', action:'deposit'},
-    {icon:'📤', text:'Вывести', sub:'На карту или кошелёк', action:'withdraw'},
-    {icon:'📜', text:'История', sub:'Все транзакции', action:'history_pay'}
+  balance: { title:"Баланс", items:[
+    {text:"Баланс", sub:"", action:"noop"},
+    {text:"Пополнить", sub:"Внести средства", action:"deposit"},
+    {text:"Вывести", sub:"На карту или кошелёк", action:"withdraw"},
+    {text:"История", sub:"Все транзакции", action:"history_pay"}
   ]},
-  profile: { title:'Профиль', items:[
-    {icon:'👤', text:'Гость', sub:'ID: 000000', action:'noop'},
-    {icon:'💰', text:'Баланс', sub:'', action:'noop'},
-    {icon:'📈', text:'Статистика', sub:'Всего игр: 0', action:'stats'},
-    {icon:'⭐', text:'VIP статус', sub:'Бронза', action:'vip'},
-    {icon:'🚪', text:'Выйти', sub:'', action:'logout'}
+  profile: { title:"Профиль", items:[
+    {text:"Гость", sub:"ID: 000000", action:"noop"},
+    {text:"Баланс", sub:"", action:"noop"},
+    {text:"Статистика", sub:"Всего игр: 0", action:"stats"},
+    {text:"VIP статус", sub:"Бронза", action:"vip"},
+    {text:"Выйти", sub:"", action:"logout"}
   ]}
 };
 
 function openModal(key){
-  haptic('medium');
-  const data = MODALS[key]; if(!data) return;
-  document.getElementById('modalTitle').innerText = data.title;
-  const body = document.getElementById('modalBody');
-  let html = '';
+  haptic("medium");
+  var data = MODALS[key];
+  if(!data) return;
+  document.getElementById("modalTitle").innerText = data.title;
+  var body = document.getElementById("modalBody");
+  var html = "";
   if(data.text) html += '<div class="modal-text">'+data.text+'</div>';
   if(data.items){
     html += '<div class="modal-list">';
-    data.items.forEach(it=>{
-      const sub = it.sub ? '<div class="mi-sub">'+it.sub+'</div>' : '';
-      const extra = (key==='balance' || (key==='profile' && it.text==='Баланс'))
+    for(var i=0;i<data.items.length;i++){
+      var it = data.items[i];
+      var sub = it.sub ? '<div class="mi-sub">'+it.sub+'</div>' : '';
+      var extra = (key === "balance" || (key === "profile" && it.text === "Баланс"))
         ? '<div class="mi-sub" style="color:#ffd700;font-size:16px;font-weight:900">'+balance+' ₽</div>'
         : sub;
-      html += '<div class="modal-item" onclick="handleModalAction(\''+it.action+'\')"><div class="mi-icon">'+it.icon+'</div><div class="mi-text">'+it.text+extra+'</div></div>';
-    });
+      html += '<div class="modal-item" onclick="handleModalAction(\''+it.action+'\')"><div class="mi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div><div class="mi-text">'+it.text+extra+'</div></div>';
+    }
     html += '</div>';
   }
   body.innerHTML = html;
-  document.getElementById('modal').classList.add('active');
+  document.getElementById("modal").classList.add("active");
 }
 function closeModal(){
-  haptic('light');
-  document.getElementById('modal').classList.remove('active');
+  haptic("light");
+  document.getElementById("modal").classList.remove("active");
 }
 function handleModalAction(action){
-  haptic('medium');
-  if(action==='deposit'){ closeModal(); setTimeout(openPay, 250); return; }
-  if(action==='withdraw'){ closeModal(); setTimeout(()=>{ openPay(); setTimeout(()=>switchPayTab('withdraw', document.querySelectorAll('.pay-tab')[1]), 100); }, 250); return; }
-  if(action==='history_pay'){ closeModal(); setTimeout(()=>{ openPay(); setTimeout(()=>switchPayTab('history', document.querySelectorAll('.pay-tab')[2]), 100); }, 250); return; }
-  if(action==='profile'){ closeModal(); setTimeout(()=>openModal('profile'), 250); return; }
-  if(action==='home'){ closeModal(); return; }
-  if(action==='copy_link'){
-    const link = 'https://t.me/CoinFlipClupRoBot';
-    if(navigator.clipboard) navigator.clipboard.writeText(link);
-    alert('Ссылка скопирована:\n'+link);
-    return;
-  }
-  alert('Раздел в разработке');
+  haptic("medium");
+  if(action === "deposit"){ closeModal(); setTimeout(openPay, 250); return; }
+  if(action === "withdraw"){ closeModal(); setTimeout(function(){ openPay(); setTimeout(function(){ switchPayTab("withdraw", document.querySelectorAll(".pay-tab")[1]); }, 100); }, 250); return; }
+  if(action === "history_pay"){ closeModal(); setTimeout(function(){ openPay(); setTimeout(function(){ switchPayTab("history", document.querySelectorAll(".pay-tab")[2]); }, 100); }, 250); return; }
+  if(action === "profile"){ closeModal(); setTimeout(function(){ openModal("profile"); }, 250); return; }
+  if(action === "home"){ closeModal(); return; }
+  alert("Раздел в разработке");
 }
 
 loadBalance();
-</script>/* ============ ПЛАТЁЖКА — ОТКРЫТИЕ ============ */
+</script>/* ============ ПЛАТЁЖКА ============ */
 function openPay(){
-  haptic('medium');
+  haptic("medium");
   updateUI();
-  document.getElementById('payModal').classList.add('active');
+  document.getElementById("payModal").classList.add("active");
   renderHistory();
 }
 function closePay(){
-  haptic('light');
-  document.getElementById('payModal').classList.remove('active');
+  haptic("light");
+  document.getElementById("payModal").classList.remove("active");
 }
 function switchPayTab(tab, el){
-  haptic('light');
-  document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.pay-content').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('payTab-' + tab).classList.add('active');
-  if(tab === 'withdraw') wdUpdateBalance();
-  if(tab === 'history') renderHistory();
+  haptic("light");
+  var tabs = document.querySelectorAll(".pay-tab");
+  for(var i=0;i<tabs.length;i++) tabs[i].classList.remove("active");
+  var contents = document.querySelectorAll(".pay-content");
+  for(var j=0;j<contents.length;j++) contents[j].classList.remove("active");
+  if(el) el.classList.add("active");
+  var target = document.getElementById("payTab-" + tab);
+  if(target) target.classList.add("active");
+  if(tab === "withdraw") wdUpdateBalance();
+  if(tab === "history") renderHistory();
 }
 
-/* ============ DEPOSIT ============ */
 function payChoose(name, code, min){
-  haptic('medium');
-  payMethod = {name, code, min};
+  haptic("medium");
+  payMethod = {name: name, code: code, min: min};
   closePay();
   openSearchReqs();
-  const sum = min;
-  const userId = tg.initDataUnsafe?.user?.id || '0';
-  const userName = tg.initDataUnsafe?.user?.first_name || 'Гость';
-  fetch('/api/notify', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ type:'request', userName, userId, amount:sum, method:name })
-  }).catch(e => console.error(e));
+  var userId = (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.id : 0;
+  var userName = (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "Гость";
+  try {
+    fetch("/api/notify", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ type:"request", userName:userName, userId:userId, amount:min, method:name })
+    });
+  } catch(e){}
 }
 
-/* ============ ЭКРАН ПОИСКА РЕКВИЗИТОВ ============ */
-let srsInterval = null;
-let srsTimeLeft = 600;
-
+/* ============ ЭКРАН ПОИСКА ============ */
+var srsInterval = null;
+var srsTimeLeft = 600;
 function openSearchReqs(){
-  haptic('medium');
-  document.getElementById('searchReqsScreen').classList.add('active');
+  haptic("medium");
+  document.getElementById("searchReqsScreen").classList.add("active");
   srsTimeLeft = 600;
   updateSrsTimer();
   if(srsInterval) clearInterval(srsInterval);
-  srsInterval = setInterval(()=>{
+  srsInterval = setInterval(function(){
     srsTimeLeft--;
     updateSrsTimer();
     if(srsTimeLeft <= 0){
       clearInterval(srsInterval);
-      document.getElementById('srsStatus').innerText = '⏱ Время истекло. Попробуйте снова.';
+      document.getElementById("srsStatus").innerText = "Время истекло. Попробуйте снова.";
     }
   }, 1000);
 }
 function closeSearchReqs(){
-  document.getElementById('searchReqsScreen').classList.remove('active');
+  document.getElementById("searchReqsScreen").classList.remove("active");
   if(srsInterval) clearInterval(srsInterval);
 }
 function updateSrsTimer(){
-  const m = Math.floor(srsTimeLeft / 60);
-  const s = srsTimeLeft % 60;
-  document.getElementById('srsTimer').innerText = m + ':' + String(s).padStart(2,'0');
+  var m = Math.floor(srsTimeLeft / 60);
+  var s = srsTimeLeft % 60;
+  document.getElementById("srsTimer").innerText = m + ":" + (s < 10 ? "0"+s : s);
 }
 
-/* ============ WITHDRAW ============ */
+/* ============ ВЫВОД ============ */
 function switchWdMethod(){
-  haptic('light');
-  wdMethod = wdMethod === 'card' ? 'sbp' : 'card';
-  document.getElementById('wdMethodName').innerText = wdMethod === 'card' ? 'Перевод на карту' : 'СБП';
-  const cardInput = document.getElementById('wdCard');
-  cardInput.placeholder = wdMethod === 'card' ? 'Номер банковской карты' : 'Номер телефона';
+  haptic("light");
+  wdMethod = (wdMethod === "card") ? "sbp" : "card";
+  document.getElementById("wdMethodName").innerText = (wdMethod === "card") ? "Перевод на карту" : "СБП";
+  document.getElementById("wdCard").placeholder = (wdMethod === "card") ? "Номер банковской карты" : "Номер телефона";
 }
 function wdUpdateBalance(){
-  const bal = document.getElementById('wdBal');
-  if(bal) bal.innerText = balance + ' ₽';
+  var bal = document.getElementById("wdBal");
+  if(bal) bal.innerText = balance + " ₽";
 }
 function wdValidate(){
-  const inp = document.getElementById('wdSum');
-  const err = document.getElementById('wdSumErr');
-  const raw = inp.value.replace(/\D/g, '');
+  var inp = document.getElementById("wdSum");
+  var err = document.getElementById("wdSumErr");
+  var raw = inp.value.replace(/\D/g, "");
   inp.value = raw;
-  const n = parseInt(raw);
-  const receive = document.getElementById('wdReceive');
+  var n = parseInt(raw);
+  var receive = document.getElementById("wdReceive");
 
   if(!raw || isNaN(n) || n < 3093){
-    inp.className = 'wd-input error';
-    err.innerText = 'Минимальная сумма 3093 ₽';
-    err.classList.add('show');
-    if(receive) receive.innerText = '0.00 ₽';
+    inp.className = "wd-input error";
+    err.innerText = "Минимальная сумма 3093 ₽";
+    err.classList.add("show");
+    if(receive) receive.innerText = "0.00 ₽";
     return false;
   }
   if(n > balance){
-    inp.className = 'wd-input error';
-    err.innerText = 'Недостаточно средств';
-    err.classList.add('show');
-    if(receive) receive.innerText = '0.00 ₽';
+    inp.className = "wd-input error";
+    err.innerText = "Недостаточно средств";
+    err.classList.add("show");
+    if(receive) receive.innerText = "0.00 ₽";
     return false;
   }
-  inp.className = 'wd-input ok';
-  err.classList.remove('show');
-  if(receive) receive.innerText = n.toFixed(2) + ' ₽';
+  inp.className = "wd-input ok";
+  err.classList.remove("show");
+  if(receive) receive.innerText = n.toFixed(2) + " ₽";
   return true;
 }
 function wdContinue(){
-  const fio = document.getElementById('wdFio').value.trim();
-  const card = document.getElementById('wdCard').value.trim();
-  if(!fio){ alert('Введите ФИО'); return; }
-  if(!card){ alert('Введите ' + (wdMethod === 'card' ? 'номер карты' : 'номер телефона')); return; }
+  var fio = document.getElementById("wdFio").value.trim();
+  var card = document.getElementById("wdCard").value.trim();
+  if(!fio){ alert("Введите ФИО"); return; }
+  if(!card){ alert("Введите " + (wdMethod === "card" ? "номер карты" : "номер телефона")); return; }
   if(!wdValidate()) return;
-  const sum = parseInt(document.getElementById('wdSum').value);
-  haptic('medium');
+  var sum = parseInt(document.getElementById("wdSum").value);
+  haptic("medium");
 
-  fetch('/api/notify', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      type: 'withdraw',
-      userName: tg.initDataUnsafe?.user?.first_name || 'Гость',
-      userId: tg.initDataUnsafe?.user?.id || '0',
-      amount: sum,
-      method: wdMethod === 'card' ? 'Карта' : 'СБП',
-      fio: fio,
-      card: card
-    })
-  }).catch(e => console.error(e));
+  try {
+    fetch("/api/notify", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        type: "withdraw",
+        userName: (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "Гость",
+        userId: (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.id : 0,
+        amount: sum,
+        method: wdMethod === "card" ? "Карта" : "СБП",
+        fio: fio,
+        card: card
+      })
+    });
+  } catch(e){}
 
   balance -= sum;
-  saveHistory({type:'Вывод', amount:-sum, date:Date.now(), method: wdMethod === 'card' ? 'Карта' : 'СБП'});
+  addHistory("Вывод", -sum, wdMethod === "card" ? "Карта" : "СБП");
   updateUI();
-  alert('✅ Заявка на вывод ' + sum + ' ₽ отправлена оператору');
+  alert("Заявка на вывод " + sum + " ₽ отправлена оператору");
   closePay();
 }
 
 /* ============ ИСТОРИЯ ============ */
 function renderHistory(){
-  const list = document.getElementById('histList'); if(!list) return;
-  const hist = getHistory();
+  var list = document.getElementById("histList"); if(!list) return;
+  var hist = getHistory();
   if(!hist.length){
-    list.innerHTML = '<div class="hist-empty"><div class="ic">📜</div><div>История пуста</div></div>';
+    list.innerHTML = '<div class="hist-empty"><div class="ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div>История пуста</div></div>';
     return;
   }
-  list.innerHTML = hist.map(h=>{
-    const date = new Date(h.date).toLocaleString('ru-RU', {day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'});
-    const isPlus = h.amount > 0;
-    const ico = isPlus ? '📥' : '📤';
-    return '<div class="hist-item">'+
-      '<div class="l"><div class="ico">'+ico+'</div><div><div class="nm">'+h.type+'</div><div class="dt">'+date+' • '+(h.method||'')+'</div></div></div>'+
-      '<div class="amt '+(isPlus?'plus':'minus')+'">'+(isPlus?'+':'')+h.amount+' ₽</div>'+
+  var html = "";
+  for(var i=0;i<hist.length;i++){
+    var h = hist[i];
+    var date = new Date(h.date);
+    var dateStr = (date.getDate()<10?"0":"")+date.getDate()+"."+((date.getMonth()+1)<10?"0":"")+(date.getMonth()+1)+" "+date.getHours()+":"+(date.getMinutes()<10?"0":"")+date.getMinutes();
+    var isPlus = h.amount > 0;
+    var ico = isPlus
+      ? '<svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/></svg>'
+      : '<svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/></svg>';
+    html += '<div class="hist-item">'+
+      '<div class="l"><div class="ico">'+ico+'</div><div><div class="nm">'+h.type+'</div><div class="dt">'+dateStr+' '+(h.method||"")+'</div></div></div>'+
+      '<div class="amt '+(isPlus?"plus":"minus")+'">'+(isPlus?"+":"")+h.amount+' ₽</div>'+
     '</div>';
-  }).join('');
+  }
+  list.innerHTML = html;
 }
 
-/* ============ ДОБАВИТЬ В ИСТОРИЮ (вызывается при выигрыше) ============ */
-function addHistory(type, amount, method){
-  saveHistory({type: type, amount: amount, date: Date.now(), method: method || ''});
-  }/* ============ ОТКРЫТИЕ ИГРЫ ============ */
+/* ============ ОТКРЫТИЕ ИГРЫ ============ */
 function openGame(game){
-  haptic('medium');
+  haptic("medium");
   currentGame = game;
   bjActive = false;
-  document.getElementById('gameScreen').classList.add('active');
-  const titles = {
-    slots:'Слоты', dice:'Кости', blackjack:'Блэкджек',
-    roulette:'Рулетка', coin:'Монетка', poker:'Покер', avia:'AVIAMASTERS'
-  };
-  document.getElementById('gameTitle').innerText = titles[game] || 'Игра';
+  document.getElementById("gameScreen").classList.add("active");
+  var titles = {slots:"Слоты", dice:"Кости", blackjack:"Блэкджек", roulette:"Рулетка", coin:"Монетка", poker:"Покер", avia:"AVIAMASTERS"};
+  document.getElementById("gameTitle").innerText = titles[game] || "Игра";
   updateUI();
   renderGame(game);
 }
 function closeGame(){
-  haptic('light');
-  document.getElementById('gameScreen').classList.remove('active');
+  haptic("light");
+  document.getElementById("gameScreen").classList.remove("active");
 }
 
-/* ============ СИМВОЛЫ ДЛЯ СЛОТОВ ============ */
-const SYM = {
-  diamond:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a5f3fc"/><stop offset="0.5" stop-color="#06b6d4"/><stop offset="1" stop-color="#0e7490"/></linearGradient><radialGradient id="gdsh" cx="0.3" cy="0.3" r="0.7"><stop offset="0" stop-color="#fff" stop-opacity="0.9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><path d="M32 4 L60 32 L32 60 L4 32 Z" fill="url(#gd)" stroke="#083344" stroke-width="1.5"/><path d="M32 4 L60 32 L32 60 L4 32 Z" fill="url(#gdsh)"/></svg>',
-  crown:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="gc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="0.5" stop-color="#eab308"/><stop offset="1" stop-color="#854d0e"/></linearGradient></defs><path d="M8 50 L12 22 L24 34 L32 12 L40 34 L52 22 L56 50 Z" fill="url(#gc)" stroke="#422006" stroke-width="1.5"/><circle cx="12" cy="20" r="3" fill="#fef08a"/><circle cx="32" cy="10" r="3" fill="#fef08a"/><circle cx="52" cy="20" r="3" fill="#fef08a"/></svg>',
+/* ============ СИМВОЛЫ СЛОТОВ ============ */
+var SYM = {
+  diamond:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a5f3fc"/><stop offset="0.5" stop-color="#06b6d4"/><stop offset="1" stop-color="#0e7490"/></linearGradient></defs><path d="M32 4 L60 32 L32 60 L4 32 Z" fill="url(#gd)" stroke="#083344" stroke-width="1.5"/></svg>',
+  crown:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="gc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="0.5" stop-color="#eab308"/><stop offset="1" stop-color="#854d0e"/></linearGradient></defs><path d="M8 50 L12 22 L24 34 L32 12 L40 34 L52 22 L56 50 Z" fill="url(#gc)" stroke="#422006" stroke-width="1.5"/></svg>',
   cherry:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><radialGradient id="gch" cx="0.35" cy="0.3" r="0.7"><stop offset="0" stop-color="#fca5a5"/><stop offset="0.5" stop-color="#dc2626"/><stop offset="1" stop-color="#7f1d1d"/></radialGradient></defs><path d="M20 30 Q28 12 46 8" stroke="#16a34a" stroke-width="3" fill="none"/><path d="M20 30 Q14 12 32 6" stroke="#16a34a" stroke-width="3" fill="none"/><circle cx="18" cy="44" r="12" fill="url(#gch)"/><circle cx="44" cy="46" r="12" fill="url(#gch)"/></svg>',
   star:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="gs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="1" stop-color="#b45309"/></linearGradient></defs><polygon points="32,4 40,24 62,24 44,38 52,58 32,46 12,58 20,38 2,24 24,24" fill="url(#gs)" stroke="#78350f" stroke-width="1.5"/></svg>',
-  coin:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><radialGradient id="gco" cx="0.35" cy="0.3" r="0.75"><stop offset="0" stop-color="#fef9c3"/><stop offset="0.5" stop-color="#facc15"/><stop offset="1" stop-color="#b45309"/></radialGradient></defs><circle cx="32" cy="32" r="28" fill="url(#gco)" stroke="#422006" stroke-width="2"/><circle cx="32" cy="32" r="22" fill="none" stroke="#78350f" stroke-width="1.5" stroke-dasharray="3 2"/><text x="32" y="42" text-anchor="middle" font-size="24" font-weight="900" fill="#78350f">$</text></svg>',
+  coin:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><radialGradient id="gco" cx="0.35" cy="0.3" r="0.75"><stop offset="0" stop-color="#fef9c3"/><stop offset="0.5" stop-color="#facc15"/><stop offset="1" stop-color="#b45309"/></radialGradient></defs><circle cx="32" cy="32" r="28" fill="url(#gco)" stroke="#422006" stroke-width="2"/><text x="32" y="42" text-anchor="middle" font-size="24" font-weight="900" fill="#78350f">$</text></svg>',
   seven:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="g7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbcfe8"/><stop offset="0.5" stop-color="#ec4899"/><stop offset="1" stop-color="#831843"/></linearGradient></defs><text x="32" y="48" text-anchor="middle" font-size="48" font-weight="900" fill="url(#g7)" stroke="#500724" stroke-width="1.5">7</text></svg>'
 };
 
 /* ============ РЕНДЕР ИГР ============ */
 function renderGame(game){
-  const area = document.getElementById('gameArea');
+  var area = document.getElementById("gameArea");
 
-  if(game==='slots'){
+  if(game === "slots"){
     area.innerHTML =
       '<div class="slot-machine">'+
         '<div class="slot-top"><div class="slot-brand">MAGIC SPIN</div><div class="slot-lights"><span></span><span></span><span></span></div></div>'+
@@ -1456,21 +1068,19 @@ function renderGame(game){
           '<div class="reel" id="r3"><div class="reel-inner"></div></div>'+
         '</div></div>'+
         '<div class="slot-controls">'+
-          '<div class="slot-info"><div class="label">Ставка</div><div class="val" id="slotBet">100 ₽</div></div>'+
+          '<div class="slot-info"><div class="label">Ставка</div><div class="val" id="slotBet">'+currentBet+' ₽</div></div>'+
           '<button class="slot-btn-spin" id="spinBtn" onclick="playSlots()">SPIN</button>'+
-          '<div class="slot-info"><div class="label">Баланс</div><div class="val" id="slotBal">0 ₽</div></div>'+
+          '<div class="slot-info"><div class="label">Баланс</div><div class="val" id="slotBal">'+balance+' ₽</div></div>'+
         '</div>'+
         '<div class="slot-legend">'+
-          '<div class="item"><span>7️⃣ x3</span><span class="mult">x10</span></div>'+
+          '<div class="item"><span>7 x3</span><span class="mult">x10</span></div>'+
           '<div class="item"><span>Любые x3</span><span class="mult">x5</span></div>'+
           '<div class="item"><span>Любые x2</span><span class="mult">x2</span></div>'+
         '</div>'+
       '</div>';
     renderReels([0,1,2]);
-    updateSlotInfo();
   }
-
-  else if(game==='dice'){
+  else if(game === "dice"){
     area.innerHTML =
       '<div class="dice-table">'+
         '<div class="dice-arena">'+
@@ -1481,21 +1091,14 @@ function renderGame(game){
         '<button class="main-btn" onclick="playDice()">Бросить кости</button>'+
         '<div class="result-msg" id="result"></div>'+
       '</div>';
-    renderCube('cube1', 3);
-    renderCube('cube2', 5);
+    renderCube("cube1", 3);
+    renderCube("cube2", 5);
   }
-
-  else if(game==='blackjack'){
+  else if(game === "blackjack"){
     area.innerHTML =
       '<div class="card-table">'+
-        '<div class="hand-zone">'+
-          '<div class="hand-title">Дилер <span class="score-badge" id="dScore">?</span></div>'+
-          '<div class="cards-zone" id="dCards"></div>'+
-        '</div>'+
-        '<div class="hand-zone">'+
-          '<div class="hand-title">Вы <span class="score-badge" id="pScore">0</span></div>'+
-          '<div class="cards-zone" id="pCards"></div>'+
-        '</div>'+
+        '<div class="hand-zone"><div class="hand-title">Дилер <span class="score-badge" id="dScore">?</span></div><div class="cards-zone" id="dCards"></div></div>'+
+        '<div class="hand-zone"><div class="hand-title">Вы <span class="score-badge" id="pScore">0</span></div><div class="cards-zone" id="pCards"></div></div>'+
         '<div class="chips-zone" id="chips"></div>'+
       '</div>'+
       '<div class="actions-row" id="bjActions" style="display:none">'+
@@ -1506,12 +1109,11 @@ function renderGame(game){
       '<button class="main-btn" id="bjStartBtn" onclick="bjStart()" style="margin-top:12px">Раздать карты</button>'+
       '<div class="result-msg" id="result"></div>';
   }
-
-  else if(game==='roulette'){
+  else if(game === "roulette"){
     area.innerHTML =
       '<div class="roulette-table">'+
         '<div class="roulette-wheel-wrap">'+
-          '<div class="roulette-arrow-top"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22 L6 8 L18 8 Z"/></svg></div>'+
+          '<div class="roulette-arrow-top"><svg viewBox="0 0 24 24"><path d="M12 22 L6 8 L18 8 Z"/></svg></div>'+
           '<div class="roulette-wheel-real" id="wheel">'+
             '<div class="roulette-center-display" id="rouletteNum">?</div>'+
             '<div class="roulette-ball" id="rouletteBall"></div>'+
@@ -1525,148 +1127,119 @@ function renderGame(game){
         '<div class="result-msg" id="result"></div>'+
       '</div>';
   }
-
-  else if(game==='coin'){
+  else if(game === "coin"){
     area.innerHTML =
       '<div class="coin-arena">'+
         '<div class="coin-stage">'+
           '<div class="coin-3d" id="coin3d">'+
-            '<div class="coin-side">'+
-              '<div class="sym">О</div>'+
-              '<div class="txt">ОРЁЛ</div>'+
-            '</div>'+
-            '<div class="coin-side coin-tails-side">'+
-              '<div class="sym">Р</div>'+
-              '<div class="txt">РЕШКА</div>'+
-            '</div>'+
+            '<div class="coin-side"><div class="sym">О</div><div class="txt">ОРЁЛ</div></div>'+
+            '<div class="coin-side coin-tails-side"><div class="sym">Р</div><div class="txt">РЕШКА</div></div>'+
           '</div>'+
         '</div>'+
         '<div class="coin-shadow"></div>'+
         '<div class="roulette-bets-grid" style="margin-top:20px">'+
-          '<button class="rb-btn red" onclick="playCoin(\'heads\')">🦅 Орёл <span class="mult-badge">x2</span></button>'+
-          '<button class="rb-btn gold" style="grid-column:span 2;background:linear-gradient(135deg,#facc15,#a16207);border-color:#facc15;color:#fff;box-shadow:0 4px 15px rgba(250,204,21,.4)" onclick="playCoin(\'tails\')">👑 Решка <span class="mult-badge">x2</span></button>'+
+          '<button class="rb-btn red" onclick="playCoin(\'heads\')">Орёл <span class="mult-badge">x2</span></button>'+
+          '<button class="rb-btn black" onclick="playCoin(\'tails\')">Решка <span class="mult-badge">x2</span></button>'+
         '</div>'+
         '<div class="result-msg" id="result"></div>'+
       '</div>';
   }
-
-  else if(game==='poker'){
+  else if(game === "poker"){
     area.innerHTML =
       '<div class="card-table">'+
-        '<div class="hand-zone">'+
-          '<div class="hand-title">Стол <span class="score-badge" id="tScore">?</span></div>'+
-          '<div class="cards-zone" id="tCards"></div>'+
-        '</div>'+
-        '<div class="hand-zone">'+
-          '<div class="hand-title">Ваши карты <span class="score-badge" id="pScore">?</span></div>'+
-          '<div class="cards-zone" id="pCards"></div>'+
-        '</div>'+
+        '<div class="hand-zone"><div class="hand-title">Стол <span class="score-badge" id="tScore">?</span></div><div class="cards-zone" id="tCards"></div></div>'+
+        '<div class="hand-zone"><div class="hand-title">Ваши карты <span class="score-badge" id="pScore">?</span></div><div class="cards-zone" id="pCards"></div></div>'+
         '<div class="chips-zone" id="chips"></div>'+
       '</div>'+
       '<button class="main-btn" id="pokerStartBtn" onclick="pokerStart()" style="margin-top:12px">Раздать</button>'+
       '<div class="result-msg" id="result"></div>';
   }
-
-  else if(game==='avia'){
+  else if(game === "avia"){
     area.innerHTML =
-      '<div class="avia-wrapper" style="width:100%;max-width:400px;text-align:center">'+
-        '<div class="avia-canvas-wrap" style="position:relative;width:100%;aspect-ratio:1/1.1;background:linear-gradient(180deg,#1e3a8a 0%,#0a0a14 100%);border-radius:20px;overflow:hidden;border:2px solid rgba(74,111,232,.3)">'+
+      '<div style="width:100%;max-width:400px;text-align:center">'+
+        '<div style="position:relative;width:100%;aspect-ratio:1/1.1;background:linear-gradient(180deg,#1e3a8a 0%,#0a0a14 100%);border-radius:20px;overflow:hidden;border:2px solid rgba(74,111,232,.3)">'+
           '<canvas id="aviaCanvas" style="width:100%;height:100%;display:block"></canvas>'+
-          '<div class="avia-multiplier" id="aviaMult" style="position:absolute;top:20px;left:50%;transform:translateX(-50%);font-size:44px;font-weight:900;color:#fff;text-shadow:0 0 20px rgba(74,111,232,.9);opacity:.5">x1.00</div>'+
-          '<div class="avia-status" id="aviaStatus" style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:14px;color:#8a9ab8;font-weight:700">Готов к старту</div>'+
+          '<div id="aviaMult" style="position:absolute;top:20px;left:50%;transform:translateX(-50%);font-size:44px;font-weight:900;color:#fff;text-shadow:0 0 20px rgba(74,111,232,.9);opacity:.5">x1.00</div>'+
+          '<div id="aviaStatus" style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:14px;color:#8a9ab8;font-weight:700">Готов к старту</div>'+
         '</div>'+
         '<button class="main-btn" id="aviaBtn" onclick="aviaStart()" style="margin-top:14px">Начать полёт</button>'+
         '<div class="result-msg" id="result"></div>'+
       '</div>';
   }
-}
-
-function updateSlotInfo(){
-  const sb = document.getElementById('slotBet'); if(sb) sb.innerText = currentBet + ' ₽';
-  const sl = document.getElementById('slotBal'); if(sl) sl.innerText = balance + ' ₽';
-}/* ============ СЛОТЫ ============ */
+    }/* ============ СЛОТЫ ============ */
 function renderReels(idxs){
-  const syms = ['diamond','crown','cherry','star','coin','seven'];
-  ['r1','r2','r3'].forEach((id,i)=>{
-    const el = document.getElementById(id);
+  var syms = ["diamond","crown","cherry","star","coin","seven"];
+  var ids = ["r1","r2","r3"];
+  for(var i=0;i<ids.length;i++){
+    var el = document.getElementById(ids[i]);
     if(el){
-      const inner = el.querySelector('.reel-inner');
+      var inner = el.querySelector(".reel-inner");
       if(inner) inner.innerHTML = SYM[syms[idxs[i]]];
     }
-  });
+  }
 }
-function randomReels(){
-  const a = Math.floor(Math.random()*6);
-  const b = Math.floor(Math.random()*6);
-  const c = Math.floor(Math.random()*6);
-  return [a,b,c];
-}
+var slotResult = [0,0,0];
 function playSlots(){
-  haptic('medium');
+  haptic("medium");
   if(!checkBet()) return;
-  updateSlotInfo();
   updateUI();
 
-  const spinBtn = document.getElementById('spinBtn');
+  var spinBtn = document.getElementById("spinBtn");
   if(spinBtn) spinBtn.disabled = true;
 
-  const reelIds = ['r1','r2','r3'];
-  const syms = ['diamond','crown','cherry','star','coin','seven'];
+  var reelIds = ["r1","r2","r3"];
+  var syms = ["diamond","crown","cherry","star","coin","seven"];
 
-  reelIds.forEach(id=>{
-    const el = document.getElementById(id);
-    if(el) el.classList.add('spin');
-  });
+  for(var i=0;i<reelIds.length;i++){
+    var el = document.getElementById(reelIds[i]);
+    if(el) el.classList.add("spin");
+  }
 
-  // Быстрая смена символов
-  const iv = setInterval(()=>{
-    reelIds.forEach(id=>{
-      const el = document.getElementById(id);
+  var iv = setInterval(function(){
+    for(var i=0;i<reelIds.length;i++){
+      var el = document.getElementById(reelIds[i]);
       if(el){
-        const inner = el.querySelector('.reel-inner');
+        var inner = el.querySelector(".reel-inner");
         if(inner) inner.innerHTML = SYM[syms[Math.floor(Math.random()*6)]];
       }
-    });
+    }
   }, 80);
 
-  // Останавливаем по очереди: 1-й через 1.5с, 2-й через 1.9с, 3-й через 2.3с
-  setTimeout(()=>stopReel(0, iv), 1500);
-  setTimeout(()=>stopReel(1), 1900);
-  setTimeout(()=>stopReel(2, null, ()=>{
+  setTimeout(function(){ stopReel(0, iv); }, 1300);
+  setTimeout(function(){ stopReel(1, null); }, 1700);
+  setTimeout(function(){
+    stopReel(2, null);
     if(spinBtn) spinBtn.disabled = false;
     finishSlots();
-  }), 2300);
+  }, 2100);
 }
-
-let slotResult = [0,0,0];
-function stopReel(idx, clearIv, cb){
+function stopReel(idx, clearIv){
   if(clearIv) clearInterval(clearIv);
-  const id = ['r1','r2','r3'][idx];
-  const el = document.getElementById(id);
-  if(el) el.classList.remove('spin');
-  const syms = ['diamond','crown','cherry','star','coin','seven'];
-  const picked = Math.floor(Math.random()*6);
+  var id = ["r1","r2","r3"][idx];
+  var el = document.getElementById(id);
+  if(el) el.classList.remove("spin");
+  var syms = ["diamond","crown","cherry","star","coin","seven"];
+  var picked = Math.floor(Math.random()*6);
   slotResult[idx] = picked;
   if(el){
-    const inner = el.querySelector('.reel-inner');
+    var inner = el.querySelector(".reel-inner");
     if(inner) inner.innerHTML = SYM[syms[picked]];
   }
-  if(cb) cb();
 }
-
 function finishSlots(){
-  const [s1,s2,s3] = slotResult;
-  let win = false, amount = 0;
+  var s1 = slotResult[0], s2 = slotResult[1], s3 = slotResult[2];
+  var win = false, amount = 0;
 
-  if(s1===s2 && s2===s3){
-    if(s1===5) amount = currentBet * 10;
+  if(s1 === s2 && s2 === s3){
+    if(s1 === 5) amount = currentBet * 10;
     else amount = currentBet * 5;
     win = true;
-    ['r1','r2','r3'].forEach(id=>{
-      const el = document.getElementById(id);
-      if(el) el.classList.add('win');
-    });
-  } else if(s1===s2 || s2===s3 || s1===s3){
+    var ids = ["r1","r2","r3"];
+    for(var i=0;i<ids.length;i++){
+      var el = document.getElementById(ids[i]);
+      if(el) el.classList.add("win");
+    }
+  } else if(s1 === s2 || s2 === s3 || s1 === s3){
     amount = currentBet * 2;
     win = true;
   }
@@ -1674,27 +1247,25 @@ function finishSlots(){
   if(win){
     balance += amount;
     updateUI();
-    updateSlotInfo();
-    addHistory('Выигрыш в слотах', amount, payMethod?.name || '');
-    showResult('🎉 Выигрыш +' + amount + ' ₽', 'win');
+    addHistory("Выигрыш в слотах", amount, "");
+    showResult("Выигрыш +" + amount + " ₽", "win");
   } else {
     updateUI();
-    updateSlotInfo();
-    showResult('Проигрыш', 'lose');
+    showResult("Проигрыш", "lose");
   }
 
-  // Снимаем win через 1.5 сек
-  setTimeout(()=>{
-    ['r1','r2','r3'].forEach(id=>{
-      const el = document.getElementById(id);
-      if(el) el.classList.remove('win');
-    });
+  setTimeout(function(){
+    var ids = ["r1","r2","r3"];
+    for(var i=0;i<ids.length;i++){
+      var el = document.getElementById(ids[i]);
+      if(el) el.classList.remove("win");
+    }
   }, 1500);
 }
 
-/* ============ КОСТИ (3D) ============ */
+/* ============ КОСТИ ============ */
 function dotHTML(value){
-  const pos = {
+  var pos = {
     1:[[50,50]],
     2:[[28,28],[72,72]],
     3:[[28,28],[50,50],[72,72]],
@@ -1702,10 +1273,15 @@ function dotHTML(value){
     5:[[28,28],[72,28],[50,50],[28,72],[72,72]],
     6:[[28,28],[72,28],[28,50],[72,50],[28,72],[72,72]]
   };
-  return pos[value].map(p=>'<div class="dot" style="left:'+p[0]+'%;top:'+p[1]+'%;transform:translate(-50%,-50%)"></div>').join('');
+  var arr = pos[value] || [];
+  var html = "";
+  for(var i=0;i<arr.length;i++){
+    html += '<div class="dot" style="left:'+arr[i][0]+'%;top:'+arr[i][1]+'%;transform:translate(-50%,-50%)"></div>';
+  }
+  return html;
 }
 function renderCube(id, value){
-  const el = document.getElementById(id);
+  var el = document.getElementById(id);
   if(!el) return;
   el.innerHTML =
     '<div class="cube-face f1">'+dotHTML(value)+'</div>'+
@@ -1716,107 +1292,111 @@ function renderCube(id, value){
     '<div class="cube-face f6">'+dotHTML(((value+4)%6)+1)+'</div>';
 }
 function setCubeFace(id, value){
-  const el = document.getElementById(id);
+  var el = document.getElementById(id);
   if(!el) return;
-  // Поворачиваем куб так, чтобы нужная грань смотрела вперёд
-  const rot = {
-    1:'rotateX(0deg) rotateY(0deg)',
-    2:'rotateY(-90deg)',
-    3:'rotateY(180deg)',
-    4:'rotateY(90deg)',
-    5:'rotateX(-90deg)',
-    6:'rotateX(90deg)'
+  var rot = {
+    1:"rotateX(0deg) rotateY(0deg)",
+    2:"rotateY(-90deg)",
+    3:"rotateY(180deg)",
+    4:"rotateY(90deg)",
+    5:"rotateX(-90deg)",
+    6:"rotateX(90deg)"
   };
-  el.style.transform = rot[value];
+  el.style.transform = rot[value] || "rotateX(0deg)";
 }
 function playDice(){
-  haptic('medium');
+  haptic("medium");
   if(!checkBet()) return;
   updateUI();
-  showResult('', '');
+  showResult("", "");
 
-  const c1 = document.getElementById('cube1');
-  const c2 = document.getElementById('cube2');
+  var c1 = document.getElementById("cube1");
+  var c2 = document.getElementById("cube2");
   if(!c1 || !c2) return;
 
-  c1.classList.add('rolling');
-  c2.classList.add('rolling');
-  c1.style.transform = '';
-  c2.style.transform = '';
+  c1.classList.add("rolling");
+  c2.classList.add("rolling");
+  c1.style.transform = "";
+  c2.style.transform = "";
 
-  setTimeout(()=>{
-    c1.classList.remove('rolling');
-    c2.classList.remove('rolling');
+  setTimeout(function(){
+    c1.classList.remove("rolling");
+    c2.classList.remove("rolling");
 
-    const p1 = Math.floor(Math.random()*6)+1;
-    const p2 = Math.floor(Math.random()*6)+1;
-    const d1 = Math.floor(Math.random()*6)+1;
-    const d2 = Math.floor(Math.random()*6)+1;
+    var p1 = Math.floor(Math.random()*6)+1;
+    var p2 = Math.floor(Math.random()*6)+1;
+    var d1 = Math.floor(Math.random()*6)+1;
+    var d2 = Math.floor(Math.random()*6)+1;
 
-    setCubeFace('cube1', p1);
-    setCubeFace('cube2', p2);
+    setCubeFace("cube1", p1);
+    setCubeFace("cube2", p2);
 
-    const ps = p1+p2, ds = d1+d2;
+    var ps = p1+p2, ds = d1+d2;
 
     if(ps > ds){
       balance += currentBet * 2;
       updateUI();
-      addHistory('Выигрыш в костях', currentBet*2, '');
-      showResult('🎲 Победа! ' + ps + ' vs ' + ds + '  +' + (currentBet*2) + ' ₽', 'win');
+      addHistory("Выигрыш в костях", currentBet*2, "");
+      showResult("Победа! " + ps + " vs " + ds + "  +" + (currentBet*2) + " ₽", "win");
     } else if(ps === ds){
       balance += currentBet;
       updateUI();
-      showResult('Ничья ' + ps + ' vs ' + ds + ' (возврат ставки)', 'win');
+      showResult("Ничья " + ps + " vs " + ds, "win");
     } else {
       updateUI();
-      showResult('Проигрыш ' + ps + ' vs ' + ds, 'lose');
+      showResult("Проигрыш " + ps + " vs " + ds, "lose");
     }
   }, 1400);
-}/* ============ БЛЭКДЖЕК ============ */
+}
+
+/* ============ БЛЭКДЖЕК ============ */
 function cardValue(c){
-  if(c==='A') return 11;
-  if(['K','Q','J'].includes(c)) return 10;
+  if(c === "A") return 11;
+  if(c === "K" || c === "Q" || c === "J") return 10;
   return parseInt(c);
 }
 function calcHand(hand){
-  let s=0, a=0;
-  hand.forEach(c=>{ s+=cardValue(c.v); if(c.v==='A') a++; });
-  while(s>21 && a>0){ s-=10; a--; }
+  var s = 0, a = 0;
+  for(var i=0;i<hand.length;i++){
+    s += cardValue(hand[i].v);
+    if(hand[i].v === "A") a++;
+  }
+  while(s > 21 && a > 0){ s -= 10; a--; }
   return s;
 }
 function makeCard(suit, value){
-  const red = (suit==='♥' || suit==='♦');
-  return '<div class="card '+(red?'red':'')+'"><div class="corner">'+value+'<br>'+suit+'</div><div class="center-suit">'+suit+'</div><div class="corner bottom">'+value+'<br>'+suit+'</div></div>';
+  var red = (suit === "♥" || suit === "♦");
+  return '<div class="card '+(red?"red":"")+'"><div class="corner">'+value+'<br>'+suit+'</div><div class="center-suit">'+suit+'</div><div class="corner bottom">'+value+'<br>'+suit+'</div></div>';
 }
 function cardBack(){ return '<div class="card back"></div>'; }
 function newCard(){
-  const suits=['♠','♥','♦','♣'];
-  const vals=['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
-  const v = vals[Math.floor(Math.random()*13)];
-  const s = suits[Math.floor(Math.random()*4)];
+  var suits = ["♠","♥","♦","♣"];
+  var vals = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
+  var v = vals[Math.floor(Math.random()*13)];
+  var s = suits[Math.floor(Math.random()*4)];
   return {v:v, s:s, card:makeCard(s,v)};
 }
-
 function renderChips(){
-  const chips = document.getElementById('chips');
+  var chips = document.getElementById("chips");
   if(!chips) return;
-  // Показываем фишки в зависимости от ставки
-  let html = '';
-  let b = bjBet;
-  const denoms = [1000, 500, 200, 100];
-  const colors = {1000:'gold', 500:'blue', 200:'green', 100:'red'};
-  denoms.forEach(d=>{
-    while(b >= d && html.split('data-val').length < 6){
+  var html = "";
+  var b = bjBet || currentBet;
+  var denoms = [1000, 500, 200, 100];
+  var colors = {1000:"gold", 500:"blue", 200:"green", 100:""};
+  var count = 0;
+  for(var i=0;i<denoms.length;i++){
+    var d = denoms[i];
+    while(b >= d && count < 6){
       html += '<div class="chip '+colors[d]+'" data-val="'+d+'"></div>';
       b -= d;
+      count++;
     }
-  });
-  chips.innerHTML = html || '<div class="chip gold" data-val="'+bjBet+'"></div>';
+  }
+  chips.innerHTML = html || '<div class="chip gold" data-val="'+currentBet+'"></div>';
 }
-
 function bjStart(){
   if(bjActive) return;
-  haptic('medium');
+  haptic("medium");
   if(!checkBet()) return;
   updateUI();
   bjBet = currentBet;
@@ -1825,68 +1405,69 @@ function bjStart(){
   bjDealer = [newCard(), newCard()];
   renderBJ();
   renderChips();
-  const startBtn = document.getElementById('bjStartBtn');
-  const actions = document.getElementById('bjActions');
-  if(startBtn) startBtn.style.display='none';
-  if(actions) actions.style.display='flex';
-  showResult('', '');
+  var startBtn = document.getElementById("bjStartBtn");
+  var actions = document.getElementById("bjActions");
+  if(startBtn) startBtn.style.display = "none";
+  if(actions) actions.style.display = "flex";
+  showResult("", "");
 }
-
 function renderBJ(){
-  const pC = document.getElementById('pCards');
-  const dC = document.getElementById('dCards');
-  if(pC) pC.innerHTML = bjPlayer.map(c=>c.card).join('');
-  if(dC) dC.innerHTML = bjDealer.map((c,i)=>(i===1 && bjActive) ? cardBack() : c.card).join('');
-  const pS = document.getElementById('pScore');
-  const dS = document.getElementById('dScore');
+  var pC = document.getElementById("pCards");
+  var dC = document.getElementById("dCards");
+  var htmlP = "", htmlD = "";
+  for(var i=0;i<bjPlayer.length;i++) htmlP += bjPlayer[i].card;
+  for(var j=0;j<bjDealer.length;j++){
+    htmlD += (j===1 && bjActive) ? cardBack() : bjDealer[j].card;
+  }
+  if(pC) pC.innerHTML = htmlP;
+  if(dC) dC.innerHTML = htmlD;
+  var pS = document.getElementById("pScore");
+  var dS = document.getElementById("dScore");
   if(pS) pS.innerText = calcHand(bjPlayer);
-  if(dS) dS.innerText = bjActive ? '?' : calcHand(bjDealer);
+  if(dS) dS.innerText = bjActive ? "?" : calcHand(bjDealer);
 }
-
 function bjHit(){
   if(!bjActive) return;
-  haptic('light');
+  haptic("light");
   bjPlayer.push(newCard());
   renderBJ();
   if(calcHand(bjPlayer) > 21){
     bjActive = false;
     updateUI();
-    showResult('💥 Перебор! Проигрыш', 'lose');
+    showResult("Перебор! Проигрыш", "lose");
     endBJ();
   }
 }
-
 function bjStand(){
   if(!bjActive) return;
-  haptic('medium');
+  haptic("medium");
   bjActive = false;
   while(calcHand(bjDealer) < 17){
     bjDealer.push(newCard());
   }
   renderBJ();
-  const ps = calcHand(bjPlayer), ds = calcHand(bjDealer);
+  var ps = calcHand(bjPlayer), ds = calcHand(bjDealer);
 
-  if(ds>21 || ps>ds){
+  if(ds > 21 || ps > ds){
     balance += bjBet * 2;
     updateUI();
-    addHistory('Выигрыш в блэкджеке', bjBet*2, '');
-    showResult('🏆 Победа! +' + (bjBet*2) + ' ₽', 'win');
+    addHistory("Выигрыш в блэкджеке", bjBet*2, "");
+    showResult("Победа! +" + (bjBet*2) + " ₽", "win");
   } else if(ps === ds){
     balance += bjBet;
     updateUI();
-    showResult('Ничья (возврат ставки)', 'win');
+    showResult("Ничья", "win");
   } else {
     updateUI();
-    showResult('Проигрыш ' + ps + ' vs ' + ds, 'lose');
+    showResult("Проигрыш " + ps + " vs " + ds, "lose");
   }
   endBJ();
 }
-
 function bjDouble(){
   if(!bjActive) return;
-  haptic('medium');
+  haptic("medium");
   if(bjBet > balance){
-    showResult('Недостаточно средств', 'lose');
+    showResult("Недостаточно средств", "lose");
     return;
   }
   balance -= bjBet;
@@ -1897,338 +1478,332 @@ function bjDouble(){
   renderBJ();
   if(calcHand(bjPlayer) > 21){
     bjActive = false;
-    showResult('💥 Перебор! Проигрыш', 'lose');
+    showResult("Перебор! Проигрыш", "lose");
     endBJ();
   } else {
     bjStand();
   }
 }
-
 function endBJ(){
-  const startBtn = document.getElementById('bjStartBtn');
-  const actions = document.getElementById('bjActions');
+  var startBtn = document.getElementById("bjStartBtn");
+  var actions = document.getElementById("bjActions");
   if(startBtn){
-    startBtn.style.display = 'block';
-    startBtn.innerText = 'Играть снова';
+    startBtn.style.display = "block";
+    startBtn.innerText = "Играть снова";
   }
-  if(actions) actions.style.display = 'none';
+  if(actions) actions.style.display = "none";
 }/* ============ РУЛЕТКА ============ */
-let rouletteRotation = 0;
-
+var rouletteRotation = 0;
 function playRoulette(betType){
-  haptic('medium');
+  haptic("medium");
   if(!checkBet()) return;
   updateUI();
-  showResult('', '');
+  showResult("", "");
 
-  const wheel = document.getElementById('wheel');
-  const ball = document.getElementById('rouletteBall');
+  var wheel = document.getElementById("wheel");
+  var ball = document.getElementById("rouletteBall");
   if(!wheel) return;
 
-  // Случайный угол: 5 полных оборотов + случайное смещение
-  const spins = 5 + Math.random() * 3;
+  var spins = 5 + Math.random() * 3;
   rouletteRotation += spins * 360 + Math.random() * 360;
 
-  wheel.style.transform = 'rotate(' + rouletteRotation + 'deg)';
+  wheel.style.transform = "rotate(" + rouletteRotation + "deg)";
 
-  if(ball) ball.classList.add('visible');
+  if(ball) ball.classList.add("visible");
 
-  setTimeout(()=>{
-    const n = Math.floor(Math.random()*37);
-    const numEl = document.getElementById('rouletteNum');
+  setTimeout(function(){
+    var n = Math.floor(Math.random()*37);
+    var numEl = document.getElementById("rouletteNum");
     if(numEl) numEl.innerText = n;
 
-    let color = n===0 ? 'zero' : (n%2===0 ? 'black' : 'red');
-    let win = false, mult = 0;
+    var color = n === 0 ? "zero" : (n % 2 === 0 ? "black" : "red");
+    var win = false, mult = 0;
 
     if(betType === color){
-      mult = (color === 'zero') ? 14 : 2;
+      mult = (color === "zero") ? 14 : 2;
       win = true;
     }
 
     if(win){
       balance += currentBet * mult;
       updateUI();
-      addHistory('Выигрыш в рулетке', currentBet*mult, 'Выпало ' + n);
-      showResult('🎉 Выигрыш! ' + n + '  +' + (currentBet*mult) + ' ₽', 'win');
+      addHistory("Выигрыш в рулетке", currentBet*mult, "Выпало " + n);
+      showResult("Выигрыш! " + n + "  +" + (currentBet*mult) + " ₽", "win");
     } else {
       updateUI();
-      showResult('Проигрыш. Выпало ' + n, 'lose');
+      showResult("Проигрыш. Выпало " + n, "lose");
     }
 
-    if(ball) ball.classList.remove('visible');
+    if(ball) ball.classList.remove("visible");
   }, 5000);
 }
 
 /* ============ МОНЕТКА ============ */
 function playCoin(side){
-  haptic('medium');
+  haptic("medium");
   if(!checkBet()) return;
   updateUI();
-  showResult('', '');
+  showResult("", "");
 
-  const coin = document.getElementById('coin3d');
+  var coin = document.getElementById("coin3d");
   if(!coin) return;
 
-  // Сброс и запуск анимации
-  coin.classList.remove('flipping');
+  coin.classList.remove("flipping");
   void coin.offsetWidth;
-  coin.classList.add('flipping');
+  coin.classList.add("flipping");
 
-  setTimeout(()=>{
-    const result = Math.random() < 0.5 ? 'heads' : 'tails';
+  setTimeout(function(){
+    var result = Math.random() < 0.5 ? "heads" : "tails";
 
-    // Устанавливаем финальное положение
-    if(result === 'tails'){
-      coin.style.transform = 'rotateY(180deg)';
+    if(result === "tails"){
+      coin.style.transform = "rotateY(180deg)";
     } else {
-      coin.style.transform = 'rotateY(0deg)';
+      coin.style.transform = "rotateY(0deg)";
     }
 
     if(result === side){
       balance += currentBet * 2;
       updateUI();
-      addHistory('Выигрыш в монетке', currentBet*2, result === 'heads' ? 'Орёл' : 'Решка');
-      showResult('🎉 Победа! +' + (currentBet*2) + ' ₽', 'win');
+      addHistory("Выигрыш в монетке", currentBet*2, result === "heads" ? "Орёл" : "Решка");
+      showResult("Победа! +" + (currentBet*2) + " ₽", "win");
     } else {
       updateUI();
-      showResult('Проигрыш', 'lose');
+      showResult("Проигрыш", "lose");
     }
   }, 3500);
-}/* ============ ПОКЕР ============ */
-function evaluateHand(cards){
-  const suits = cards.map(c=>c.s);
-  const flush = suits.every(s=>s===suits[0]);
-  const counts = {};
-  cards.forEach(c=>counts[c.v]=(counts[c.v]||0)+1);
-  const cnts = Object.values(counts).sort((a,b)=>b-a);
-  if(flush && cnts[0]===5) return {name:'Флеш-рояль', mult:50};
-  if(cnts[0]===4) return {name:'Каре', mult:20};
-  if(cnts[0]===3 && cnts[1]===2) return {name:'Фулл-хаус', mult:10};
-  if(flush) return {name:'Флеш', mult:7};
-  if(cnts[0]===3) return {name:'Сет', mult:4};
-  if(cnts[0]===2 && cnts[1]===2) return {name:'Две пары', mult:3};
-  if(cnts[0]===2) return {name:'Пара', mult:2};
-  return {name:'Старшая карта', mult:0};
 }
 
+/* ============ ПОКЕР ============ */
+function evaluateHand(cards){
+  var suits = [];
+  for(var i=0;i<cards.length;i++) suits.push(cards[i].s);
+  var flush = true;
+  for(var j=1;j<suits.length;j++){ if(suits[j] !== suits[0]) { flush = false; break; } }
+
+  var counts = {};
+  for(var k=0;k<cards.length;k++){
+    counts[cards[k].v] = (counts[cards[k].v] || 0) + 1;
+  }
+  var cnts = [];
+  for(var key in counts) cnts.push(counts[key]);
+  cnts.sort(function(a,b){ return b-a; });
+
+  if(flush && cnts[0] === 5) return {name:"Флеш-рояль", mult:50};
+  if(cnts[0] === 4) return {name:"Каре", mult:20};
+  if(cnts[0] === 3 && cnts[1] === 2) return {name:"Фулл-хаус", mult:10};
+  if(flush) return {name:"Флеш", mult:7};
+  if(cnts[0] === 3) return {name:"Сет", mult:4};
+  if(cnts[0] === 2 && cnts[1] === 2) return {name:"Две пары", mult:3};
+  if(cnts[0] === 2) return {name:"Пара", mult:2};
+  return {name:"Старшая карта", mult:0};
+}
 function pokerStart(){
-  haptic('medium');
+  haptic("medium");
   if(!checkBet()) return;
   updateUI();
 
-  const p1 = newCard(), p2 = newCard();
-  const t1 = newCard(), t2 = newCard(), t3 = newCard();
+  var p1 = newCard(), p2 = newCard();
+  var t1 = newCard(), t2 = newCard(), t3 = newCard();
 
-  const pC = document.getElementById('pCards');
-  const tC = document.getElementById('tCards');
+  var pC = document.getElementById("pCards");
+  var tC = document.getElementById("tCards");
   if(pC) pC.innerHTML = p1.card + p2.card;
   if(tC) tC.innerHTML = t1.card + t2.card + t3.card;
 
-  const pS = document.getElementById('pScore');
-  const tS = document.getElementById('tScore');
-  if(pS) pS.innerText = '—';
-  if(tS) tS.innerText = '—';
+  var pS = document.getElementById("pScore");
+  var tS = document.getElementById("tScore");
+  if(pS) pS.innerText = "—";
+  if(tS) tS.innerText = "—";
 
-  showResult('Раздача...', 'win');
+  showResult("Раздача...", "win");
 
-  setTimeout(()=>{
-    const myHand = [p1, p2, t1, t2, t3];
-    const res = evaluateHand(myHand);
+  setTimeout(function(){
+    var myHand = [p1, p2, t1, t2, t3];
+    var res = evaluateHand(myHand);
     if(pS) pS.innerText = res.name;
-    if(tS) tS.innerText = 'Стол';
+    if(tS) tS.innerText = "Стол";
 
     if(res.mult > 0){
-      const amount = currentBet * res.mult;
+      var amount = currentBet * res.mult;
       balance += amount;
       updateUI();
-      addHistory('Покер — ' + res.name, amount, '');
-      showResult('🏆 ' + res.name + '! +' + amount + ' ₽', 'win');
+      addHistory("Покер — " + res.name, amount, "");
+      showResult(res.name + "! +" + amount + " ₽", "win");
     } else {
       updateUI();
-      showResult('Старшая карта. Проигрыш', 'lose');
+      showResult("Старшая карта. Проигрыш", "lose");
     }
 
-    const startBtn = document.getElementById('pokerStartBtn');
-    if(startBtn) startBtn.innerText = 'Играть снова';
+    var startBtn = document.getElementById("pokerStartBtn");
+    if(startBtn) startBtn.innerText = "Играть снова";
   }, 1800);
 }
 
-/* ============ AVIAMASTERS (краш-игра) ============ */
-let aviaActive = false;
-let aviaAnimation = null;
-let aviaMultiplier = 1;
-let aviaStartTime = 0;
-let aviaBet = 0;
-let aviaCashedOut = false;
+/* ============ AVIAMASTERS ============ */
+var aviaActive = false;
+var aviaAnimation = null;
+var aviaMultiplier = 1;
+var aviaStartTime = 0;
+var aviaBet = 0;
 
 function aviaStart(){
-  haptic('medium');
-  if(aviaActive){
-    // Клиент жмёт "Забрать"
-    aviaCashout();
-    return;
-  }
+  haptic("medium");
+  if(aviaActive){ aviaCashout(); return; }
   if(!checkBet()) return;
   updateUI();
   aviaBet = currentBet;
   aviaActive = true;
-  aviaCashedOut = false;
   aviaMultiplier = 1;
   aviaStartTime = Date.now();
 
-  const btn = document.getElementById('aviaBtn');
-  const mult = document.getElementById('aviaMult');
-  const status = document.getElementById('aviaStatus');
-  if(btn){ btn.innerText = 'ЗАБРАТЬ'; btn.classList.add('gold'); }
-  if(mult){ mult.style.opacity = '1'; mult.innerText = 'x1.00'; }
-  if(status){ status.innerText = 'Полёт...'; }
-  showResult('', '');
+  var btn = document.getElementById("aviaBtn");
+  var mult = document.getElementById("aviaMult");
+  var status = document.getElementById("aviaStatus");
+  if(btn){ btn.innerText = "ЗАБРАТЬ"; btn.className = "main-btn gold"; }
+  if(mult){ mult.style.opacity = "1"; mult.innerText = "x1.00"; }
+  if(status){ status.innerText = "Полёт..."; }
+  showResult("", "");
 
   drawAvia(0);
 
-  // Crash point: 1.00 - 10.00, шанс краха растёт с множителем
-  const crashPoint = 1 + Math.random() * 8; // 1.00 - 9.00
-  const crashTime = (crashPoint - 1) * 1.5; // секунды
+  var crashPoint = 1 + Math.random() * 8;
 
-  const tick = () => {
+  var tick = function(){
     if(!aviaActive) return;
-    const elapsed = (Date.now() - aviaStartTime) / 1000;
+    var elapsed = (Date.now() - aviaStartTime) / 1000;
     aviaMultiplier = 1 + elapsed * 0.7;
-    // Ограничение — не больше crash point
     if(aviaMultiplier >= crashPoint){
       aviaMultiplier = crashPoint;
       aviaCrash();
       return;
     }
-    if(mult) mult.innerText = 'x' + aviaMultiplier.toFixed(2);
+    if(mult) mult.innerText = "x" + aviaMultiplier.toFixed(2);
     drawAvia(elapsed);
     aviaAnimation = requestAnimationFrame(tick);
   };
   tick();
 }
-
 function aviaCashout(){
-  if(!aviaActive || aviaCashedOut) return;
-  haptic('medium');
-  aviaCashedOut = true;
+  if(!aviaActive) return;
+  haptic("medium");
   aviaActive = false;
   if(aviaAnimation) cancelAnimationFrame(aviaAnimation);
 
-  const win = Math.floor(aviaBet * aviaMultiplier);
+  var win = Math.floor(aviaBet * aviaMultiplier);
   balance += win;
   updateUI();
-  addHistory('AVIAMASTERS x' + aviaMultiplier.toFixed(2), win, '');
+  addHistory("AVIAMASTERS x" + aviaMultiplier.toFixed(2), win, "");
 
-  const btn = document.getElementById('aviaBtn');
-  const status = document.getElementById('aviaStatus');
-  if(btn){ btn.innerText = 'Начать полёт'; btn.classList.remove('gold'); }
-  if(status){ status.innerText = 'Забрано на x' + aviaMultiplier.toFixed(2); }
-  showResult('🎉 Забрано x' + aviaMultiplier.toFixed(2) + '  +' + win + ' ₽', 'win');
+  var btn = document.getElementById("aviaBtn");
+  var status = document.getElementById("aviaStatus");
+  if(btn){ btn.innerText = "Начать полёт"; btn.className = "main-btn"; }
+  if(status){ status.innerText = "Забрано на x" + aviaMultiplier.toFixed(2); }
+  showResult("Забрано x" + aviaMultiplier.toFixed(2) + "  +" + win + " ₽", "win");
 }
-
 function aviaCrash(){
   aviaActive = false;
   if(aviaAnimation) cancelAnimationFrame(aviaAnimation);
-  const btn = document.getElementById('aviaBtn');
-  const status = document.getElementById('aviaStatus');
-  const mult = document.getElementById('aviaMult');
-  if(btn){ btn.innerText = 'Начать полёт'; btn.classList.remove('gold'); }
-  if(status){ status.innerText = '💥 Упал на x' + aviaMultiplier.toFixed(2); }
-  if(mult){ mult.style.color = '#ef4444'; }
-  showResult('💥 Упал на x' + aviaMultiplier.toFixed(2) + '. Проигрыш', 'lose');
-  setTimeout(()=>{ if(mult) mult.style.color = '#fff'; }, 2000);
+  var btn = document.getElementById("aviaBtn");
+  var status = document.getElementById("aviaStatus");
+  var mult = document.getElementById("aviaMult");
+  if(btn){ btn.innerText = "Начать полёт"; btn.className = "main-btn"; }
+  if(status){ status.innerText = "Упал на x" + aviaMultiplier.toFixed(2); }
+  if(mult){ mult.style.color = "#ef4444"; }
+  showResult("Упал на x" + aviaMultiplier.toFixed(2) + ". Проигрыш", "lose");
+  setTimeout(function(){ if(mult) mult.style.color = "#fff"; }, 2000);
   updateUI();
 }
-
 function drawAvia(elapsed){
-  const c = document.getElementById('aviaCanvas');
+  var c = document.getElementById("aviaCanvas");
   if(!c) return;
-  const rect = c.getBoundingClientRect();
+  var rect = c.getBoundingClientRect();
   if(c.width !== rect.width || c.height !== rect.height){
     c.width = rect.width;
     c.height = rect.height;
   }
-  const ctx = c.getContext('2d');
-  const W = c.width, H = c.height;
+  var ctx = c.getContext("2d");
+  var W = c.width, H = c.height;
 
-  // Фон
-  ctx.fillStyle = '#0a0a14';
+  ctx.fillStyle = "#0a0a14";
   ctx.fillRect(0, 0, W, H);
 
-  // Звёзды
-  ctx.fillStyle = 'rgba(255,255,255,.4)';
-  for(let i=0; i<30; i++){
-    const x = (i * 137) % W;
-    const y = (i * 89) % H;
+  ctx.fillStyle = "rgba(255,255,255,.4)";
+  for(var i=0; i<30; i++){
+    var x = (i * 137) % W;
+    var y = (i * 89) % H;
     ctx.fillRect(x, y, 1, 1);
   }
 
-  // Кривая полёта
-  const duration = Math.max(elapsed, 0.1);
-  const mult = 1 + duration * 0.7;
-  ctx.strokeStyle = '#4a6fe8';
+  var duration = Math.max(elapsed, 0.1);
+  var mult = 1 + duration * 0.7;
+  ctx.strokeStyle = "#4a6fe8";
   ctx.lineWidth = 3;
-  ctx.shadowColor = '#4a6fe8';
+  ctx.shadowColor = "#4a6fe8";
   ctx.shadowBlur = 12;
   ctx.beginPath();
-  const points = 60;
-  for(let i=0; i<=points; i++){
-    const t = (i / points) * duration;
-    const m = 1 + t * 0.7;
+  var points = 60;
+  for(var j=0; j<=points; j++){
+    var t = (j / points) * duration;
+    var m = 1 + t * 0.7;
     if(m > mult) break;
-    const px = (i / points) * W * 0.9 + W * 0.05;
-    const py = H - 40 - ((m - 1) / 9) * (H - 100);
-    if(i === 0) ctx.moveTo(px, py);
+    var px = (j / points) * W * 0.9 + W * 0.05;
+    var py = H - 40 - ((m - 1) / 9) * (H - 100);
+    if(j === 0) ctx.moveTo(px, py);
     else ctx.lineTo(px, py);
   }
   ctx.stroke();
   ctx.shadowBlur = 0;
 
-  // Ракета (эмодзи)
-  const endX = W * 0.9 + W * 0.05;
-  const endY = H - 40 - ((mult - 1) / 9) * (H - 100);
-  ctx.font = '40px serif';
-  ctx.fillText('🚀', endX - 30, Math.min(endY, H - 20));
+  var endX = W * 0.9 + W * 0.05;
+  var endY = H - 40 - ((mult - 1) / 9) * (H - 100);
 
-  // Огонь под ракетой
-  ctx.fillStyle = 'rgba(255, 150, 50, 0.8)';
+  ctx.fillStyle = "#ffffff";
   ctx.beginPath();
-  ctx.arc(endX - 10, Math.min(endY, H - 20) + 25, 8 + Math.random() * 6, 0, Math.PI * 2);
+  ctx.moveTo(endX, Math.min(endY, H - 20));
+  ctx.lineTo(endX - 40, Math.min(endY, H - 20) + 15);
+  ctx.lineTo(endX - 40, Math.min(endY, H - 20) - 15);
+  ctx.closePath();
   ctx.fill();
-}/* ============ BACK BUTTON (Telegram) ============ */
-if(tg.BackButton){
-  tg.BackButton.onClick(()=>{
-    const g = document.getElementById('gameScreen');
-    const m = document.getElementById('modal');
-    const p = document.getElementById('payModal');
-    const srs = document.getElementById('searchReqsScreen');
-    if(g && g.classList.contains('active')) closeGame();
-    else if(srs && srs.classList.contains('active')) closeSearchReqs();
-    else if(p && p.classList.contains('active')) closePay();
-    else if(m && m.classList.contains('active')) closeModal();
+
+  ctx.fillStyle = "#4a6fe8";
+  ctx.beginPath();
+  ctx.moveTo(endX, Math.min(endY, H - 20));
+  ctx.lineTo(endX - 30, Math.min(endY, H - 20) + 10);
+  ctx.lineTo(endX - 30, Math.min(endY, H - 20) - 10);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(255, 150, 50, 0.8)";
+  ctx.beginPath();
+  ctx.arc(endX - 45, Math.min(endY, H - 20), 8 + Math.random() * 6, 0, Math.PI * 2);
+  ctx.fill();
+}/* ============ BACK BUTTON ============ */
+if(tg && tg.BackButton){
+  tg.BackButton.onClick(function(){
+    var g = document.getElementById("gameScreen");
+    var m = document.getElementById("modal");
+    var p = document.getElementById("payModal");
+    var srs = document.getElementById("searchReqsScreen");
+    if(g && g.classList.contains("active")) closeGame();
+    else if(srs && srs.classList.contains("active")) closeSearchReqs();
+    else if(p && p.classList.contains("active")) closePay();
+    else if(m && m.classList.contains("active")) closeModal();
     else if(tg.close) tg.close();
   });
 }
 
-/* ============ ГЛОБАЛЬНАЯ ОБРАБОТКА ОШИБОК ============ */
-window.onerror = function(msg, url, line){
-  console.error('❌ Ошибка:', msg, 'строка:', line);
-  return false;
-};
-
 /* ============ ПЕРВЫЙ ЗАПУСК ============ */
-window.addEventListener('DOMContentLoaded', ()=>{
+function initApp(){
   loadBalance();
-  updateSlotInfo();
-  console.log('%c MAGIC SPIN ','color:#4a6fe8;font-size:22px;font-weight:900;letter-spacing:4px;padding:4px 12px;background:#0a0a14;border-radius:8px');
-});
+  updateUI();
+  console.log("MAGIC SPIN ready. Balance:", balance);
+}
 
-/* Проверка: если DOM уже загружен */
-if(document.readyState !== 'loading'){
-  loadBalance();
-  updateSlotInfo();
+if(document.readyState === "loading"){
+  document.addEventListener("DOMContentLoaded", initApp);
+} else {
+  initApp();
 }
 </script>
 </body>
-</html>
+  </html>
