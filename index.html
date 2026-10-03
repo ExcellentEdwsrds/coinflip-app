@@ -3,290 +3,783 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#0d0518">
+<meta name="theme-color" content="#0a0a14">
 <title>Magic Spin</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
-html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:#0d0518;color:#fff;-webkit-font-smoothing:antialiased}
+html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:#0a0a14;color:#fff;-webkit-font-smoothing:antialiased}
 body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}
 .svg-icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block}
-.loader{position:fixed;inset:0;z-index:99999;background:linear-gradient(180deg,#1a0d2e 0%,#2a1548 50%,#3a1d5c 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:30px;transition:opacity .8s ease,visibility .8s ease}
+
+.loader{position:fixed;inset:0;z-index:99999;background:linear-gradient(180deg,#0a0a14 0%,#141428 50%,#1a1a3a 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:30px;transition:opacity .8s ease,visibility .8s ease}
 .loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.loader-logo{font-size:44px;font-weight:900;background:linear-gradient(135deg,#a855f7,#c084fc,#e9d5ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:6px;filter:drop-shadow(0 0 30px rgba(168,85,247,.8));animation:loaderPulse 2s ease-in-out infinite}
+.loader-logo{font-size:44px;font-weight:900;background:linear-gradient(135deg,#4a6fe8,#6b8cff,#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:6px;filter:drop-shadow(0 0 30px rgba(74,111,232,.8));animation:loaderPulse 2s ease-in-out infinite}
 @keyframes loaderPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
-.loader-sub{font-size:12px;color:#a78bfa;letter-spacing:6px;font-weight:600;text-transform:uppercase;margin-top:-16px}
+.loader-sub{font-size:12px;color:#6b8cff;letter-spacing:6px;font-weight:600;text-transform:uppercase;margin-top:-16px}
 .loader-ring{width:80px;height:80px;position:relative}
 .loader-ring::before,.loader-ring::after{content:'';position:absolute;inset:0;border-radius:50%;border:3px solid transparent}
-.loader-ring::before{border-top-color:#a855f7;border-right-color:#a855f7;animation:ringSpin 1s linear infinite}
-.loader-ring::after{inset:12px;border-bottom-color:#c084fc;border-left-color:#c084fc;animation:ringSpin 1.5s linear infinite reverse}
+.loader-ring::before{border-top-color:#4a6fe8;border-right-color:#4a6fe8;animation:ringSpin 1s linear infinite}
+.loader-ring::after{inset:12px;border-bottom-color:#6b8cff;border-left-color:#6b8cff;animation:ringSpin 1.5s linear infinite reverse}
 @keyframes ringSpin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-.loader-bar{width:200px;height:3px;background:rgba(168,85,247,.2);border-radius:2px;overflow:hidden}
-.loader-fill{width:0;height:100%;background:linear-gradient(90deg,#a855f7,#c084fc);animation:fillBar 2s ease-in-out forwards;box-shadow:0 0 15px #a855f7}
+.loader-bar{width:200px;height:3px;background:rgba(74,111,232,.2);border-radius:2px;overflow:hidden}
+.loader-fill{width:0;height:100%;background:linear-gradient(90deg,#4a6fe8,#6b8cff);animation:fillBar 2s ease-in-out forwards;box-shadow:0 0 15px #4a6fe8}
 @keyframes fillBar{0%{width:0}100%{width:100%}}
-.bg{position:fixed;inset:0;z-index:-5;background:linear-gradient(180deg,#1a0d2e 0%,#2a1548 50%,#3a1d5c 100%)}
-.aurora{position:fixed;inset:-30%;z-index:-4;pointer-events:none;background:radial-gradient(ellipse at 20% 20%,rgba(140,80,255,.5) 0%,transparent 45%),radial-gradient(ellipse at 80% 70%,rgba(200,80,255,.4) 0%,transparent 45%);animation:auroraMove 20s ease-in-out infinite alternate;filter:blur(50px)}
+
+.bg{position:fixed;inset:0;z-index:-5;background:#0a0a14}
+.aurora{position:fixed;inset:-30%;z-index:-4;pointer-events:none;background:radial-gradient(ellipse at 20% 20%,rgba(74,111,232,.35) 0%,transparent 45%),radial-gradient(ellipse at 80% 70%,rgba(107,140,255,.25) 0%,transparent 45%);animation:auroraMove 20s ease-in-out infinite alternate;filter:blur(50px)}
 @keyframes auroraMove{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-30px,20px) scale(1.15)}}
-.stars{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
-.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:0;animation:twinkle linear infinite}
-@keyframes twinkle{0%,100%{opacity:0}50%{opacity:.9}}
-.particles{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.particle{position:absolute;width:2px;height:2px;border-radius:50%;opacity:0;animation:floatUp linear infinite;box-shadow:0 0 10px currentColor}
-@keyframes floatUp{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) scale(1);opacity:0}}
+
 .app{position:relative;z-index:10;width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden}
-.top-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;flex-shrink:0;gap:8px}
-.logo-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;color:#a855f7;cursor:pointer}
-.balance-pill{background:rgba(40,25,70,.85);border:1px solid rgba(140,80,255,.4);padding:8px 12px;border-radius:12px;display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;backdrop-filter:blur(20px);color:#fff;cursor:pointer}
-.balance-pill .val{color:#fff;font-weight:800}
-.deposit-btn{background:linear-gradient(135deg,#4ade80,#22c55e);color:#0a2e15;border:none;padding:10px 16px;border-radius:12px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 4px 15px rgba(74,222,128,.4)}
-.bell-btn{width:42px;height:42px;border-radius:12px;background:rgba(40,25,70,.85);border:1px solid rgba(140,80,255,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;color:#c084fc}
-.bell-btn .badge{position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;font-size:10px;font-weight:900;padding:2px 6px;border-radius:10px;min-width:18px;text-align:center}
-.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#6366f1);display:flex;align-items:center;justify-content:center;border:2px solid rgba(140,80,255,.5);cursor:pointer;color:#fff}
+
+/* TOP BAR */
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;flex-shrink:0;gap:10px}
+.top-logo{font-size:22px;font-weight:900;font-style:italic;color:#4a6fe8;letter-spacing:-1px;line-height:.9;font-family:'Inter',sans-serif}
+.top-logo .sub{font-size:11px;font-weight:500;font-style:italic;color:#8a9ab8;display:block;letter-spacing:0}
+.top-balance{display:flex;flex-direction:column;align-items:flex-end;gap:2px;cursor:pointer}
+.top-balance .rub{font-size:12px;color:#8a9ab8;font-weight:600}
+.top-balance .val{font-size:15px;font-weight:800;color:#fff}
+.deposit-btn-top{background:#2196f3;color:#fff;border:none;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(33,150,243,.5)}
+.top-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#ff8a00,#ff5e00);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;border:2px solid rgba(255,255,255,.15)}
+
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#0f0f1e;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-around;align-items:flex-end;padding:8px 0 calc(8px + env(safe-area-inset-bottom));z-index:100}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;color:#6b7280;font-size:10px;font-weight:700;cursor:pointer;flex:1;padding:6px 0;position:relative}
+.nav-item.active{color:#fff}
+.nav-item svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .badge{position:absolute;top:2px;right:calc(50% - 18px);background:#ef4444;color:#fff;font-size:9px;font-weight:900;padding:2px 5px;border-radius:8px;min-width:16px;text-align:center}
+</style><style>
 .content{flex:1;overflow-y:auto;padding-bottom:100px;scrollbar-width:none}
 .content::-webkit-scrollbar{display:none}
-.banner{margin:0 14px 16px;border-radius:20px;background:linear-gradient(135deg,#5b21b6 0%,#7c3aed 50%,#a855f7 100%);padding:22px 20px;position:relative;overflow:hidden;box-shadow:0 10px 40px rgba(124,58,237,.5);min-height:180px;display:flex;flex-direction:column;justify-content:center;cursor:pointer}
-.banner::before{content:'';position:absolute;top:-40%;right:-20%;width:220px;height:220px;background:radial-gradient(circle,rgba(255,215,0,.3),transparent 70%);animation:bannerPulse 4s ease-in-out infinite}
-@keyframes bannerPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.2);opacity:1}}
-.banner-tag{font-size:14px;font-weight:800;color:#ffd700;position:relative;z-index:2;margin-bottom:4px}
-.banner-title{font-size:20px;font-weight:900;color:#fff;position:relative;z-index:2;margin-bottom:4px}
-.banner-sub{font-size:12px;color:rgba(255,255,255,.8);position:relative;z-index:2;margin-bottom:16px}
-.banner-btn{background:linear-gradient(135deg,#a855f7,#8b5cf6);color:#fff;border:none;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 6px 20px rgba(168,85,247,.5);position:relative;z-index:2;align-self:flex-start}
-.banner-gift{position:absolute;right:-20px;bottom:-20px;opacity:.35;pointer-events:none;color:#ffd700}
-.search-row{display:flex;gap:8px;padding:0 14px 12px}
-.search-wrap{flex:1;position:relative}
-.search-wrap .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:#a78bfa;pointer-events:none}
-.search-input{width:100%;background:rgba(40,25,70,.7);border:1px solid rgba(140,80,255,.3);border-radius:14px;padding:12px 16px 12px 42px;color:#fff;font-size:14px;outline:none}
-.search-input::placeholder{color:#a78bfa}
-.filter-btn{background:rgba(40,25,70,.7);border:1px solid rgba(140,80,255,.3);border-radius:14px;padding:12px 16px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px}
-.filter-btn .chev{width:14px;height:14px;color:#a78bfa}
-.section{padding:0 14px;margin-bottom:18px}
-.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.section-title{font-size:17px;font-weight:900;display:flex;align-items:center;gap:8px}
-.section-title .crown{width:20px;height:20px;color:#ffd700}
-.games-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.game-card{background:linear-gradient(145deg,rgba(40,25,70,.9),rgba(25,15,45,.9));border:1px solid rgba(140,80,255,.3);border-radius:18px;overflow:hidden;cursor:pointer;position:relative;transition:all .2s;box-shadow:0 6px 25px rgba(0,0,0,.5)}
-.game-card:active{transform:scale(.96);border-color:#c084fc;box-shadow:0 0 35px rgba(192,132,252,.7)}
-.game-card .game-img{width:100%;height:120px;object-fit:cover;display:block;background:linear-gradient(135deg,#5b21b6,#a855f7)}
-.game-card .game-name{font-size:13px;font-weight:800;color:#fff;padding:10px 12px 4px;line-height:1.2}
-.game-card .game-tag{font-size:10px;color:#a78bfa;padding:0 12px 10px;font-weight:600}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(20,10,35,.98);backdrop-filter:blur(24px);border-top:1px solid rgba(140,80,255,.3);display:flex;justify-content:space-around;align-items:center;padding:10px 0 18px;z-index:100;padding-bottom:calc(10px + env(safe-area-inset-bottom))}
-.nav-item{text-align:center;font-size:10px;color:#7a5aa0;flex:1;cursor:pointer;font-weight:700;position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0}
-.nav-item.active{color:#c084fc}
-.nav-item.center{position:relative;margin-top:-20px}
-.nav-item.center .nav-circle{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#6366f1);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(168,85,247,.6);border:4px solid #0d0518;color:#fff}
-          </style><style>
-.game-screen{position:fixed;inset:0;background:rgba(10,5,20,.98);backdrop-filter:blur(30px);z-index:600;display:none;flex-direction:column;padding:env(safe-area-inset-top) 20px calc(20px + env(safe-area-inset-bottom));overflow-y:auto}
+
+/* === БОЛЬШИЕ БАННЕРЫ СВЕРХУ === */
+.big-games{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:4px 16px 24px}
+.big-card{border-radius:16px;position:relative;overflow:hidden;cursor:pointer;aspect-ratio:1/1.15;box-shadow:0 10px 30px rgba(0,0,0,.6);transition:transform .15s}
+.big-card:active{transform:scale(.97)}
+.big-card .bg-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.big-card .overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.75) 100%);pointer-events:none}
+.big-card .title{position:absolute;bottom:28px;left:12px;right:12px;font-size:16px;font-weight:900;color:#fff;text-align:center;letter-spacing:.5px;text-shadow:0 2px 8px rgba(0,0,0,.9);line-height:1.1}
+.big-card .provider{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:3px 10px;font-size:9px;color:#c9d5e8;font-weight:700;letter-spacing:1px;backdrop-filter:blur(4px)}
+
+/* SPACE XY банер */
+.bg-space{background:radial-gradient(ellipse at 30% 40%,#f0c060 0%,#8a5a20 40%,#1a1a3a 100%),linear-gradient(135deg,#5a3a80,#1a1a3a)}
+.bg-space::before{content:'🚀';position:absolute;top:15%;left:50%;transform:translateX(-50%) rotate(-15deg);font-size:64px;filter:drop-shadow(0 0 20px rgba(240,192,96,.8))}
+
+/* AVIAMASTERS банер */
+.bg-avia{background:linear-gradient(180deg,#4a9eff 0%,#6bc4ff 50%,#2c6dd6 100%)}
+.bg-avia::before{content:'✈️';position:absolute;top:18%;left:50%;transform:translateX(-50%) rotate(-10deg);font-size:64px;filter:drop-shadow(0 0 20px rgba(255,255,255,.5))}
+
+/* === СЕКЦИИ === */
+.section-block{padding:0 16px 24px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.section-head h3{font-size:20px;font-weight:900;color:#fff}
+.section-head .nav-btns{display:flex;align-items:center;gap:8px}
+.section-head .all-btn{background:#1a1a2e;border:1px solid rgba(255,255,255,.08);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:10px;cursor:pointer}
+.section-head .arr-btn{width:36px;height:36px;border-radius:10px;background:#1a1a2e;border:1px solid rgba(255,255,255,.08);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+.games-row{display:flex;gap:10px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:4px;scrollbar-width:none}
+.games-row::-webkit-scrollbar{display:none}
+.game-tile{flex-shrink:0;width:140px;aspect-ratio:1/1.35;border-radius:14px;position:relative;overflow:hidden;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.5);transition:transform .15s}
+.game-tile:active{transform:scale(.95)}
+.game-tile .bg-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.game-tile .overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.85) 100%);pointer-events:none}
+.game-tile .title{position:absolute;bottom:26px;left:8px;right:8px;font-size:13px;font-weight:900;color:#fff;line-height:1.1;text-align:center;letter-spacing:.3px;text-shadow:0 2px 6px rgba(0,0,0,.9)}
+.game-tile .provider{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:2px 8px;font-size:8px;color:#c9d5e8;font-weight:700;letter-spacing:.8px;white-space:nowrap;backdrop-filter:blur(4px)}
+
+/* Фоны карточек игр */
+.bg-slots{background:linear-gradient(180deg,#f59e0b 0%,#b45309 60%,#1a1a3a 100%)}
+.bg-slots::before{content:'🎰';position:absolute;top:20%;left:50%;transform:translateX(-50%);font-size:56px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
+.bg-dice{background:linear-gradient(180deg,#10b981 0%,#047857 60%,#1a1a3a 100%)}
+.bg-dice::before{content:'🎲';position:absolute;top:20%;left:50%;transform:translateX(-50%);font-size:56px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
+.bg-blackjack{background:linear-gradient(180deg,#dc2626 0%,#7f1d1d 60%,#1a1a3a 100%)}
+.bg-blackjack::before{content:'🃏';position:absolute;top:20%;left:50%;transform:translateX(-50%);font-size:56px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
+.bg-roulette{background:linear-gradient(180deg,#ec4899 0%,#831843 60%,#1a1a3a 100%)}
+.bg-roulette::before{content:'🎡';position:absolute;top:20%;left:50%;transform:translateX(-50%);font-size:56px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
+.bg-coin{background:linear-gradient(180deg,#facc15 0%,#a16207 60%,#1a1a3a 100%)}
+.bg-coin::before{content:'🪙';position:absolute;top:20%;left:50%;transform:translateX(-50%);font-size:56px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
+.bg-poker{background:linear-gradient(180deg,#6366f1 0%,#3730a3 60%,#1a1a3a 100%)}
+.bg-poker::before{content:'♠';position:absolute;top:15%;left:50%;transform:translateX(-50%);font-size:60px;color:#fff;text-shadow:0 4px 12px rgba(0,0,0,.5)}
+.bg-avia{background:linear-gradient(180deg,#3b82f6 0%,#1e40af 60%,#1a1a3a 100%)}
+.bg-avia::before{content:'✈️';position:absolute;top:20%;left:50%;transform:translateX(-50%);font-size:56px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
+</style><style>
+.game-screen{position:fixed;inset:0;background:#0a0a14;z-index:600;display:none;flex-direction:column;overflow:hidden}
 .game-screen.active{display:flex;animation:screenIn .3s cubic-bezier(.4,0,.2,1)}
 @keyframes screenIn{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
-.game-header{display:flex;align-items:center;justify-content:space-between;padding:20px 0 24px}
+
+.game-header{display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;background:#0a0a14;flex-shrink:0;z-index:5}
 .game-header .left{display:flex;align-items:center;gap:14px}
-.game-back{width:44px;height:44px;border-radius:14px;background:rgba(40,25,70,.8);border:1px solid rgba(140,80,255,.4);color:#c084fc;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.game-title{font-size:22px;font-weight:900}
-.game-balance{background:rgba(40,25,70,.8);border:1px solid rgba(140,80,255,.4);padding:8px 14px;border-radius:12px;font-size:14px;font-weight:800;color:#ffd700}
-.game-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 0;min-height:0}
-.game-field{width:100%;max-width:340px;background:linear-gradient(145deg,rgba(40,25,70,.9),rgba(25,15,45,.9));border:1px solid rgba(140,80,255,.4);border-radius:24px;padding:30px 22px;text-align:center;box-shadow:0 0 40px rgba(168,85,247,.2)}
-.reels{display:flex;justify-content:center;gap:12px;margin-bottom:26px}
-.reel{width:80px;height:100px;background:linear-gradient(145deg,#2a1548,#0a0514);border-radius:16px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(168,85,247,.5);box-shadow:inset 0 3px 15px rgba(0,0,0,.8);transition:all .3s;position:relative;overflow:hidden}
-.reel.spinning{animation:reelSpin .08s linear infinite}
-@keyframes reelSpin{0%{transform:translateY(-100%);opacity:.3}100%{transform:translateY(100%);opacity:1}}
-.reel.win{border-color:#ffd700;box-shadow:0 0 35px rgba(255,215,0,.9),inset 0 0 20px rgba(255,215,0,.4);animation:winPulse .5s ease-in-out infinite alternate}
-@keyframes winPulse{0%{transform:scale(1)}100%{transform:scale(1.08)}}
-.reel svg{width:64px;height:64px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}
-.dice-stage{display:flex;justify-content:center;gap:30px;margin:30px 0;perspective:900px}
-.cube{width:90px;height:90px;position:relative;transform-style:preserve-3d;transition:transform 1.8s cubic-bezier(.3,.8,.4,1.1)}
-.cube.rolling{animation:cubeSpin 1s linear infinite}
-@keyframes cubeSpin{0%{transform:rotateX(0) rotateY(0)}100%{transform:rotateX(360deg) rotateY(360deg)}}
-.face{position:absolute;width:90px;height:90px;background:linear-gradient(135deg,#ffffff,#e8e8e8);border-radius:14px;box-shadow:inset 0 0 20px rgba(0,0,0,.15),0 6px 20px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;border:1px solid #bbb}
-.face.f1{transform:rotateY(0deg) translateZ(45px)}
-.face.f2{transform:rotateY(90deg) translateZ(45px)}
-.face.f3{transform:rotateY(180deg) translateZ(45px)}
-.face.f4{transform:rotateY(-90deg) translateZ(45px)}
-.face.f5{transform:rotateX(90deg) translateZ(45px)}
-.face.f6{transform:rotateX(-90deg) translateZ(45px)}
-.dot{position:absolute;width:14px;height:14px;background:radial-gradient(circle at 30% 30%,#4a2a6e,#1a0d2e);border-radius:50%;box-shadow:inset 0 2px 3px rgba(0,0,0,.6)}
-.card-area{display:flex;flex-direction:column;gap:14px;width:100%;max-width:340px;margin-bottom:20px}
-.hand{background:rgba(40,25,70,.7);border:1px solid rgba(140,80,255,.3);border-radius:16px;padding:14px}
-.hand-title{font-size:12px;color:#a78bfa;letter-spacing:2px;margin-bottom:10px;display:flex;justify-content:space-between;font-weight:800;text-transform:uppercase}
-.hand-title span{color:#ffd700;font-size:18px}
-.cards{display:flex;gap:6px;flex-wrap:wrap;min-height:94px;align-items:center;justify-content:center}
-.playing-card{width:62px;height:88px;background:linear-gradient(145deg,#ffffff,#f5f5f5);border-radius:10px;display:flex;flex-direction:column;justify-content:space-between;padding:5px;box-shadow:0 8px 25px rgba(0,0,0,.55),inset 0 2px 4px rgba(255,255,255,.9);color:#1a0d2e;font-weight:900;position:relative;animation:cardDeal .35s ease-out}
-@keyframes cardDeal{0%{opacity:0;transform:translateY(-40px) rotate(-15deg)}100%{opacity:1;transform:translateY(0) rotate(0)}}
-.playing-card.red{color:#dc2626}
-.playing-card .corner{font-size:12px;line-height:1;font-weight:900;display:flex;flex-direction:column;align-items:center}
-.playing-card .corner.bottom{transform:rotate(180deg)}
-.playing-card .center-suit{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:26px;opacity:.9}
-.playing-card.back{background:linear-gradient(135deg,#5b21b6,#7c3aed);border:2px solid #a855f7;position:relative;overflow:hidden}
-.playing-card.back::before{content:'';position:absolute;inset:6px;border:2px solid rgba(255,255,255,.4);border-radius:6px}
-.playing-card.back::after{content:'';position:absolute;top:50%;left:50%;width:18px;height:18px;background:rgba(255,255,255,.3);transform:translate(-50%,-50%) rotate(45deg)}
-.roulette-wrap{position:relative;width:240px;height:240px;margin:0 auto 20px;padding-top:22px}
-.roulette-arrow{position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:10;color:#ffd700;filter:drop-shadow(0 0 12px rgba(255,215,0,.9));line-height:0}
-.roulette-arrow svg{width:30px;height:30px}
-.roulette-wheel{width:100%;height:100%;border-radius:50%;background:conic-gradient(from 0deg,#dc2626 0deg 9.73deg,#1a0d2e 9.73deg 19.46deg,#dc2626 19.46deg 29.19deg,#1a0d2e 29.19deg 38.92deg,#dc2626 38.92deg 48.65deg,#1a0d2e 48.65deg 58.38deg,#dc2626 58.38deg 68.11deg,#1a0d2e 68.11deg 77.84deg,#dc2626 77.84deg 87.57deg,#1a0d2e 87.57deg 97.3deg,#dc2626 97.3deg 107.03deg,#1a0d2e 107.03deg 116.76deg,#dc2626 116.76deg 126.49deg,#1a0d2e 126.49deg 136.22deg,#dc2626 136.22deg 145.95deg,#1a0d2e 145.95deg 155.68deg,#dc2626 155.68deg 165.41deg,#1a0d2e 165.41deg 175.14deg,#dc2626 175.14deg 184.87deg,#1a0d2e 184.87deg 194.6deg,#dc2626 194.6deg 204.33deg,#1a0d2e 204.33deg 214.06deg,#dc2626 214.06deg 223.79deg,#1a0d2e 223.79deg 233.52deg,#dc2626 233.52deg 243.25deg,#1a0d2e 243.25deg 252.98deg,#dc2626 252.98deg 262.71deg,#1a0d2e 262.71deg 272.44deg,#dc2626 272.44deg 282.17deg,#1a0d2e 282.17deg 291.9deg,#dc2626 291.9deg 301.63deg,#1a0d2e 301.63deg 311.36deg,#dc2626 311.36deg 321.09deg,#1a0d2e 321.09deg 330.82deg,#dc2626 330.82deg 340.55deg,#1a0d2e 340.55deg 350.28deg,#16a34a 350.28deg 360deg);border-radius:50%;border:4px solid #ffd700;box-shadow:0 0 40px rgba(255,215,0,.5),inset 0 0 30px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;position:relative;transition:transform 4s cubic-bezier(.17,.67,.3,1)}
-.roulette-center{width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3a1d5c,#1a0d2e);border:3px solid #ffd700;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:#ffd700;box-shadow:0 0 20px rgba(255,215,0,.5)}
-.roulette-bets{display:flex;flex-direction:column;gap:8px;margin-top:8px}
-.bet-choice{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;border-radius:14px;border:2px solid;font-weight:800;cursor:pointer;font-size:15px;letter-spacing:1px}
-.bet-choice .swatch{width:18px;height:18px;border-radius:50%;box-shadow:inset 0 0 6px rgba(0,0,0,.5)}
-.bet-choice.red{background:linear-gradient(135deg,rgba(220,38,38,.25),rgba(220,38,38,.05));border-color:#dc2626;color:#fff}
-.bet-choice.black{background:linear-gradient(135deg,rgba(26,13,46,.6),rgba(26,13,46,.2));border-color:#a855f7;color:#fff}
-.bet-choice.zero{background:linear-gradient(135deg,rgba(22,163,74,.25),rgba(22,163,74,.05));border-color:#16a34a;color:#4ade80}
-.bet-choice .mult{margin-left:auto;font-size:12px;opacity:.8}
-.coin-stage{perspective:1400px;display:flex;justify-content:center;margin:20px 0 10px;padding:20px 0}
-.coin{position:relative;width:150px;height:150px;transform-style:preserve-3d;transition:transform 4s cubic-bezier(.25,.7,.4,1)}
-.coin-face{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.95) 0%,rgba(255,255,255,0) 40%),radial-gradient(circle at 70% 80%,rgba(120,53,15,.7) 0%,rgba(0,0,0,0) 45%),radial-gradient(circle at 50% 50%,#ffe680 0%,#ffd700 35%,#c8951a 70%,#8b6914 100%);border:5px solid #a97d14;box-shadow:0 0 60px rgba(255,215,0,.9),inset 0 0 40px rgba(139,105,20,.7),inset 0 6px 12px rgba(255,255,255,.6),inset 0 -8px 18px rgba(0,0,0,.35);color:#3a2808;text-shadow:0 2px 3px rgba(0,0,0,.35)}
-.coin-face::before{content:'';position:absolute;inset:10px;border-radius:50%;border:2px dashed rgba(120,53,15,.5)}
-.coin-tails{transform:rotateY(180deg)}
-.coin-symbol{font-size:58px;font-weight:900;line-height:1}
-.coin-text{font-size:11px;letter-spacing:5px;font-weight:900;margin-top:6px}
-.coin.rolling{animation:coinSpin 4s cubic-bezier(.25,.7,.4,1) forwards}
-@keyframes coinSpin{0%{transform:rotateY(0deg) translateY(0)}25%{transform:rotateY(900deg) translateY(-70px)}50%{transform:rotateY(1800deg) translateY(0)}75%{transform:rotateY(2700deg) translateY(-40px)}100%{transform:rotateY(3600deg) translateY(0)}}
-.coin-shadow{width:120px;height:14px;background:radial-gradient(ellipse,rgba(0,0,0,.6),transparent 70%);margin:6px auto 0}
-.result-msg{font-size:20px;font-weight:900;text-align:center;margin-top:20px;min-height:30px}
+.game-back{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.08);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.game-title{font-size:18px;font-weight:900}
+.game-balance{background:rgba(255,255,255,.08);padding:8px 14px;border-radius:12px;font-size:14px;font-weight:800;color:#ffd700}
+
+.game-body{flex:1;display:flex;flex-direction:column;overflow-y:auto;scrollbar-width:none}
+.game-body::-webkit-scrollbar{display:none}
+.game-stage{flex:1;display:flex;align-items:center;justify-content:center;padding:10px}
+.game-panel{background:#0f0f1e;border-top:1px solid rgba(255,255,255,.06);padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom));flex-shrink:0}
+
+/* Ставки внизу */
+.bet-label{font-size:11px;color:#6b7280;letter-spacing:2px;text-align:center;font-weight:700;margin-bottom:10px;text-transform:uppercase}
+.bet-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.bet-btn{padding:12px 4px;border-radius:12px;background:#1a1a2e;border:1px solid rgba(255,255,255,.08);color:#fff;font-size:13px;font-weight:700;cursor:pointer;text-align:center;transition:all .15s}
+.bet-btn.active{background:linear-gradient(135deg,#4a6fe8,#6b8cff);border-color:transparent;box-shadow:0 4px 20px rgba(74,111,232,.5)}
+
+.main-btn{padding:16px 36px;border-radius:14px;border:none;background:linear-gradient(135deg,#4a6fe8,#6b8cff);color:#fff;font-size:16px;font-weight:800;cursor:pointer;letter-spacing:1px;text-transform:uppercase;box-shadow:0 8px 25px rgba(74,111,232,.5);width:100%;transition:all .15s}
+.main-btn:active{transform:scale(.97)}
+.main-btn:disabled{background:#2a2a3a;color:#6b7280;cursor:not-allowed;box-shadow:none}
+.main-btn.red{background:linear-gradient(135deg,#ef4444,#b91c1c);box-shadow:0 8px 25px rgba(239,68,68,.4)}
+.main-btn.green{background:linear-gradient(135deg,#22c55e,#15803d);box-shadow:0 8px 25px rgba(34,197,94,.4)}
+.main-btn.gold{background:linear-gradient(135deg,#f59e0b,#d97706);box-shadow:0 8px 25px rgba(245,158,11,.5)}
+
+.actions-row{display:flex;gap:8px;margin-top:12px}
+.actions-row .main-btn{flex:1;padding:14px 6px;font-size:13px}
+
+.result-msg{font-size:20px;font-weight:900;text-align:center;margin-top:14px;min-height:26px;transition:all .2s}
 .result-msg.win{color:#4ade80;text-shadow:0 0 20px rgba(74,222,128,.6)}
 .result-msg.lose{color:#ef4444;text-shadow:0 0 20px rgba(239,68,68,.6)}
-.bet-label{font-size:10px;color:#a78bfa;letter-spacing:3px;text-align:center;font-weight:700;margin-bottom:10px;text-transform:uppercase}
-.bet-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;max-width:340px;margin:0 auto}
-.bet-btn{padding:12px 4px;border-radius:12px;background:rgba(40,25,70,.7);border:1px solid rgba(168,85,247,.4);color:#fff;font-size:13px;font-weight:700;cursor:pointer;text-align:center}
-.bet-btn.active{background:linear-gradient(135deg,#a855f7,#6366f1);border-color:transparent;box-shadow:0 4px 20px rgba(139,92,246,.5)}
-.main-btn{padding:16px 36px;border-radius:14px;border:none;background:linear-gradient(135deg,#a855f7,#6366f1);color:#fff;font-size:15px;font-weight:800;cursor:pointer;letter-spacing:1px;text-transform:uppercase;box-shadow:0 8px 25px rgba(168,85,247,.5);width:100%;max-width:340px;margin-top:16px}
-.main-btn:disabled{background:linear-gradient(135deg,#3a1a1a,#6b0f1a);cursor:not-allowed;box-shadow:none}
-.main-btn.red{background:linear-gradient(135deg,#ef4444,#b91c1c)}
-.main-btn.green{background:linear-gradient(135deg,#22c55e,#15803d)}
-.actions-row{display:flex;gap:8px;width:100%;max-width:340px;margin-top:16px}
-.actions-row .main-btn{flex:1;padding:14px 6px;font-size:12px;max-width:none;margin-top:0}
+.result-msg.gold{color:#ffd700;text-shadow:0 0 25px rgba(255,215,0,.8)}
 </style><style>
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:900;display:none;align-items:flex-end;justify-content:center}
-.modal.active{display:flex;animation:fadeIn .25s}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal-sheet{background:linear-gradient(180deg,#2a1548,#1a0d2e);border:1px solid rgba(168,85,247,.4);border-radius:24px 24px 0 0;padding:22px 20px calc(30px + env(safe-area-inset-bottom));max-width:500px;width:100%;max-height:80vh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.4,0,.2,1)}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-handle{width:44px;height:4px;background:rgba(168,85,247,.4);border-radius:2px;margin:0 auto 16px}
-.modal-title{font-size:20px;font-weight:900;margin-bottom:14px;text-align:center}
-.modal-text{font-size:14px;color:#c9b8e8;margin-bottom:18px;line-height:1.5;text-align:center}
-.modal-list{display:flex;flex-direction:column;gap:8px}
-.modal-item{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:rgba(40,25,70,.6);border:1px solid rgba(140,80,255,.25);cursor:pointer;font-weight:700;font-size:14px;color:#fff}
-.modal-item:active{background:rgba(168,85,247,.3);transform:scale(.97)}
-.modal-item .mi-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#a855f7,#6366f1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
-.modal-item .mi-text{flex:1}
-.modal-item .mi-sub{font-size:11px;color:#a78bfa;font-weight:500;margin-top:2px}
-.modal-close{margin-top:14px;width:100%;padding:14px;border-radius:14px;background:rgba(40,25,70,.6);border:1px solid rgba(140,80,255,.3);color:#c084fc;font-weight:800;font-size:14px;cursor:pointer}
-.pay-modal{display:none;position:fixed;inset:0;background:#0d0518;z-index:950;overflow-y:auto;padding:env(safe-area-inset-top) 0 calc(30px + env(safe-area-inset-bottom))}
+/* ==== СЛОТЫ — АВТОМАТ ==== */
+.slot-machine{
+  width:100%;max-width:360px;
+  background:
+    linear-gradient(180deg,#2a1f4a 0%,#1a1230 100%);
+  border-radius:24px;
+  padding:20px 16px 24px;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.8),
+    inset 0 2px 0 rgba(255,255,255,.1),
+    inset 0 -4px 10px rgba(0,0,0,.5);
+  border:2px solid #3a2a5e;
+  position:relative;
+}
+.slot-machine::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:60px;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),transparent);
+  border-radius:24px 24px 0 0;pointer-events:none;
+}
+.slot-top{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:14px;padding:0 4px;
+}
+.slot-brand{
+  font-size:14px;font-weight:900;letter-spacing:2px;
+  background:linear-gradient(135deg,#ffd700,#f59e0b);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.slot-lights{display:flex;gap:6px}
+.slot-lights span{
+  width:8px;height:8px;border-radius:50%;background:#4ade80;
+  box-shadow:0 0 10px rgba(74,222,128,.9);
+  animation:lightBlink 1.5s ease-in-out infinite;
+}
+.slot-lights span:nth-child(2){animation-delay:.3s;background:#ffd700;box-shadow:0 0 10px rgba(255,215,0,.9)}
+.slot-lights span:nth-child(3){animation-delay:.6s;background:#ef4444;box-shadow:0 0 10px rgba(239,68,68,.9)}
+@keyframes lightBlink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.slot-window{
+  background:linear-gradient(180deg,#0a0514,#1a0d2e);
+  border-radius:16px;
+  padding:14px 8px;
+  box-shadow:
+    inset 0 4px 20px rgba(0,0,0,.9),
+    inset 0 -2px 10px rgba(0,0,0,.6),
+    0 0 0 2px #3a2a5e;
+  position:relative;
+  overflow:hidden;
+  margin-bottom:16px;
+}
+.slot-window::before,.slot-window::after{
+  content:'';position:absolute;left:0;right:0;height:20px;pointer-events:none;z-index:3;
+}
+.slot-window::before{top:0;background:linear-gradient(180deg,rgba(0,0,0,.95),transparent)}
+.slot-window::after{bottom:0;background:linear-gradient(0deg,rgba(0,0,0,.95),transparent)}
+
+.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;position:relative}
+.reel{
+  aspect-ratio:1/1.3;
+  background:linear-gradient(180deg,#1a0d2e,#0a0514);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(140,80,255,.2);
+  position:relative;overflow:hidden;
+  box-shadow:inset 0 0 20px rgba(0,0,0,.9);
+}
+.reel-inner{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .3s ease-out;
+}
+.reel.spin .reel-inner{
+  animation:reelScroll .12s linear infinite;
+}
+@keyframes reelScroll{
+  0%{transform:translateY(-40%);opacity:.5}
+  50%{opacity:1}
+  100%{transform:translateY(40%);opacity:.5}
+}
+.reel.win{
+  border-color:#ffd700;
+  box-shadow:0 0 30px rgba(255,215,0,.9),inset 0 0 20px rgba(255,215,0,.5);
+  animation:reelWin .4s ease-in-out infinite alternate;
+}
+@keyframes reelWin{0%{transform:scale(1)}100%{transform:scale(1.04)}}
+.reel-inner svg{width:70%;height:70%;filter:drop-shadow(0 4px 8px rgba(0,0,0,.7))}
+
+.slot-controls{display:flex;align-items:center;gap:12px;justify-content:center}
+.slot-btn-spin{
+  width:78px;height:78px;border-radius:50%;
+  background:
+    radial-gradient(circle at 30% 30%,#6b8cff,#4a6fe8 60%,#2a4fc8 100%);
+  border:4px solid #1a1a3a;
+  color:#fff;font-size:14px;font-weight:900;letter-spacing:1px;
+  cursor:pointer;
+  box-shadow:
+    0 8px 25px rgba(74,111,232,.6),
+    inset 0 2px 4px rgba(255,255,255,.4),
+    inset 0 -6px 12px rgba(0,0,0,.3);
+  transition:all .1s;
+  position:relative;
+}
+.slot-btn-spin:active{transform:scale(.94)}
+.slot-btn-spin:disabled{
+  background:radial-gradient(circle at 30% 30%,#3a3a4a,#2a2a3a 60%,#1a1a2a 100%);
+  box-shadow:inset 0 2px 4px rgba(0,0,0,.4);
+  cursor:not-allowed;
+}
+.slot-btn-spin::after{
+  content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);
+  width:60%;height:12px;
+  background:radial-gradient(ellipse,rgba(255,255,255,.5),transparent);
+  border-radius:50%;pointer-events:none;
+}
+.slot-info{
+  flex:1;text-align:center;
+}
+.slot-info .label{font-size:10px;color:#6b7280;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.slot-info .val{font-size:18px;font-weight:900;color:#ffd700}
+
+/* Легенда выигрышей */
+.slot-legend{
+  margin-top:16px;padding:10px 12px;
+  background:rgba(0,0,0,.4);
+  border-radius:12px;
+  display:flex;justify-content:space-around;gap:4px;
+  font-size:10px;color:#8a9ab8;font-weight:700;text-align:center;
+  border:1px solid rgba(255,255,255,.06);
+}
+.slot-legend .item{display:flex;flex-direction:column;align-items:center;gap:2px}
+.slot-legend .item .mult{color:#ffd700;font-weight:900;font-size:11px}
+</style><style>
+/* ==== КОСТИ — 3D ПОЛЁТ ==== */
+.dice-table{
+  width:100%;max-width:360px;
+  background:
+    radial-gradient(ellipse at 50% 30%,rgba(74,111,232,.15),transparent 60%),
+    linear-gradient(180deg,#0f0f28 0%,#0a0a14 100%);
+  border-radius:24px;
+  padding:30px 20px;
+  box-shadow:inset 0 0 60px rgba(74,111,232,.15);
+  border:1px solid rgba(74,111,232,.15);
+  position:relative;
+  overflow:hidden;
+}
+.dice-table::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 100%,rgba(74,111,232,.2),transparent 60%);
+  pointer-events:none;
+}
+.dice-arena{
+  display:flex;justify-content:center;gap:40px;
+  perspective:1200px;
+  margin-bottom:30px;
+  min-height:140px;
+  align-items:center;
+}
+.cube{
+  width:80px;height:80px;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform 1.4s cubic-bezier(.3,.6,.4,1);
+  transform:rotateX(-20deg) rotateY(20deg);
+}
+.cube.rolling{
+  animation:diceThrow 1.4s cubic-bezier(.3,.6,.4,1) forwards;
+}
+@keyframes diceThrow{
+  0%{transform:translate(0,0) rotateX(0) rotateY(0) rotateZ(0)}
+  25%{transform:translate(-30px,-80px) rotateX(180deg) rotateY(180deg) rotateZ(90deg)}
+  50%{transform:translate(20px,-50px) rotateX(360deg) rotateY(540deg) rotateZ(180deg)}
+  75%{transform:translate(-10px,-20px) rotateX(540deg) rotateY(720deg) rotateZ(270deg)}
+  100%{transform:translate(0,0) rotateX(720deg) rotateY(900deg) rotateZ(360deg)}
+}
+.cube-face{
+  position:absolute;width:80px;height:80px;
+  background:linear-gradient(135deg,#ffffff 0%,#e8e8e8 50%,#d0d0d0 100%);
+  border-radius:12px;
+  box-shadow:
+    inset 0 0 20px rgba(0,0,0,.15),
+    inset 0 2px 4px rgba(255,255,255,.9),
+    0 4px 12px rgba(0,0,0,.4);
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid #bbb;
+  backface-visibility:hidden;
+}
+.cube-face.f1{transform:rotateY(0deg) translateZ(40px)}
+.cube-face.f2{transform:rotateY(90deg) translateZ(40px)}
+.cube-face.f3{transform:rotateY(180deg) translateZ(40px)}
+.cube-face.f4{transform:rotateY(-90deg) translateZ(40px)}
+.cube-face.f5{transform:rotateX(90deg) translateZ(40px)}
+.cube-face.f6{transform:rotateX(-90deg) translateZ(40px)}
+.dot{
+  position:absolute;width:12px;height:12px;
+  background:radial-gradient(circle at 30% 30%,#3a2a5e,#1a0d2e);
+  border-radius:50%;
+  box-shadow:inset 0 2px 3px rgba(0,0,0,.7);
+}
+
+.dice-shadow{
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+  width:200px;height:20px;
+  background:radial-gradient(ellipse,rgba(0,0,0,.6),transparent 70%);
+  filter:blur(8px);
+}
+
+/* ==== МОНЕТКА — 3D ГЛУБИНА ==== */
+.coin-arena{
+  width:100%;max-width:360px;
+  background:
+    radial-gradient(ellipse at 50% 60%,rgba(250,204,21,.1),transparent 60%),
+    linear-gradient(180deg,#0f0f28 0%,#0a0a14 100%);
+  border-radius:24px;
+  padding:40px 20px 30px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(250,204,21,.15);
+}
+.coin-stage{
+  perspective:1200px;
+  display:flex;justify-content:center;
+  margin-bottom:20px;
+  height:180px;
+  align-items:center;
+}
+.coin-3d{
+  width:130px;height:130px;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .3s;
+}
+.coin-3d.flipping{
+  animation:coinFlip 3.5s cubic-bezier(.4,.6,.4,1) forwards;
+}
+@keyframes coinFlip{
+  0%{transform:rotateY(0) translateY(0) rotateX(0)}
+  20%{transform:rotateY(720deg) translateY(-90px) rotateX(-20deg)}
+  40%{transform:rotateY(1440deg) translateY(0) rotateX(0)}
+  60%{transform:rotateY(2160deg) translateY(-60px) rotateX(10deg)}
+  80%{transform:rotateY(2880deg) translateY(0) rotateX(0)}
+  100%{transform:rotateY(3600deg) translateY(0) rotateX(0)}
+}
+.coin-side{
+  position:absolute;inset:0;
+  border-radius:50%;
+  backface-visibility:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:
+    radial-gradient(circle at 30% 25%,rgba(255,255,255,.95) 0%,rgba(255,255,255,0) 35%),
+    radial-gradient(circle at 70% 75%,rgba(120,53,15,.6) 0%,rgba(0,0,0,0) 45%),
+    radial-gradient(circle at 50% 50%,#ffe680 0%,#ffd700 30%,#c8951a 65%,#8b6914 100%);
+  border:4px solid #a97d14;
+  box-shadow:
+    0 0 50px rgba(255,215,0,.7),
+    inset 0 0 30px rgba(139,105,20,.8),
+    inset 0 6px 12px rgba(255,255,255,.6),
+    inset 0 -8px 18px rgba(0,0,0,.4);
+  color:#3a2808;
+  text-shadow:0 2px 3px rgba(0,0,0,.4);
+}
+.coin-side::before{
+  content:'';position:absolute;inset:10px;
+  border-radius:50%;
+  border:2px dashed rgba(120,53,15,.5);
+}
+.coin-side::after{
+  content:'';position:absolute;inset:16px;
+  border-radius:50%;
+  border:1px solid rgba(120,53,15,.4);
+}
+.coin-tails-side{transform:rotateY(180deg)}
+.coin-side .sym{font-size:50px;font-weight:900;line-height:1;font-family:'Inter'}
+.coin-side .txt{font-size:9px;letter-spacing:4px;font-weight:900;margin-top:6px}
+.coin-shadow{
+  width:140px;height:16px;
+  background:radial-gradient(ellipse,rgba(0,0,0,.7),transparent 70%);
+  margin:0 auto;
+  filter:blur(6px);
+  transition:all .3s;
+}
+.coin-3d.flipping + .coin-shadow{
+  animation:coinShadow 3.5s cubic-bezier(.4,.6,.4,1) forwards;
+}
+@keyframes coinShadow{
+  0%,100%{transform:scaleX(1);opacity:1}
+  20%{transform:scaleX(.4);opacity:.3}
+  40%{transform:scaleX(1);opacity:1}
+  60%{transform:scaleX(.5);opacity:.4}
+  80%{transform:scaleX(1);opacity:1}
+}
+</style><style>
+/* ==== РУЛЕТКА — реалистичная ==== */
+.roulette-table{
+  width:100%;max-width:360px;
+  background:
+    radial-gradient(ellipse at 50% 50%,rgba(22,163,74,.15),transparent 60%),
+    linear-gradient(180deg,#0a2e1a 0%,#052e1a 100%);
+  border-radius:24px;
+  padding:24px 16px 20px;
+  border:2px solid rgba(34,197,94,.2);
+  box-shadow:inset 0 0 60px rgba(0,0,0,.6);
+  position:relative;
+  text-align:center;
+}
+.roulette-wheel-wrap{
+  position:relative;
+  width:240px;height:240px;
+  margin:0 auto 20px;
+}
+.roulette-arrow-top{
+  position:absolute;top:-8px;left:50%;transform:translateX(-50%);
+  z-index:10;color:#ffd700;
+  filter:drop-shadow(0 0 10px rgba(255,215,0,.9));
+}
+.roulette-arrow-top svg{width:26px;height:26px}
+.roulette-wheel-real{
+  width:100%;height:100%;
+  border-radius:50%;
+  position:relative;
+  transition:transform 5s cubic-bezier(.15,.7,.3,1);
+  box-shadow:
+    0 0 40px rgba(255,215,0,.4),
+    inset 0 0 40px rgba(0,0,0,.7);
+  border:6px solid #8b6914;
+  background:
+    radial-gradient(circle at 50% 50%,#1a0d2e 0%,#1a0d2e 22%,transparent 22%),
+    conic-gradient(from 0deg,
+      #16a34a 0deg 9.73deg,
+      #dc2626 9.73deg 19.46deg,#1a0d2e 19.46deg 29.19deg,
+      #dc2626 29.19deg 38.92deg,#1a0d2e 38.92deg 48.65deg,
+      #dc2626 48.65deg 58.38deg,#1a0d2e 58.38deg 68.11deg,
+      #dc2626 68.11deg 77.84deg,#1a0d2e 77.84deg 87.57deg,
+      #dc2626 87.57deg 97.3deg,#1a0d2e 97.3deg 107.03deg,
+      #dc2626 107.03deg 116.76deg,#1a0d2e 116.76deg 126.49deg,
+      #dc2626 126.49deg 136.22deg,#1a0d2e 136.22deg 145.95deg,
+      #dc2626 145.95deg 155.68deg,#1a0d2e 155.68deg 165.41deg,
+      #dc2626 165.41deg 175.14deg,#1a0d2e 175.14deg 184.87deg,
+      #dc2626 184.87deg 194.6deg,#1a0d2e 194.6deg 204.33deg,
+      #dc2626 204.33deg 214.06deg,#1a0d2e 214.06deg 223.79deg,
+      #dc2626 223.79deg 233.52deg,#1a0d2e 233.52deg 243.25deg,
+      #dc2626 243.25deg 252.98deg,#1a0d2e 252.98deg 262.71deg,
+      #dc2626 262.71deg 272.44deg,#1a0d2e 272.44deg 282.17deg,
+      #dc2626 282.17deg 291.9deg,#1a0d2e 291.9deg 301.63deg,
+      #dc2626 301.63deg 311.36deg,#1a0d2e 311.36deg 321.09deg,
+      #dc2626 321.09deg 330.82deg,#1a0d2e 330.82deg 340.55deg,
+      #dc2626 340.55deg 350.28deg,#16a34a 350.28deg 360deg
+    );
+}
+.roulette-center-display{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:70px;height:70px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,#3a1d5c,#0a0514);
+  border:3px solid #ffd700;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;font-weight:900;color:#ffd700;
+  box-shadow:0 0 25px rgba(255,215,0,.7),inset 0 0 15px rgba(0,0,0,.8);
+  z-index:5;
+  text-shadow:0 0 10px rgba(255,215,0,.9);
+}
+.roulette-ball{
+  position:absolute;
+  width:14px;height:14px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,#fff,#c0c0c0 60%,#808080);
+  box-shadow:0 0 15px rgba(255,255,255,.9),0 2px 6px rgba(0,0,0,.6);
+  z-index:6;
+  opacity:0;
+  transition:opacity .3s;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+}
+.roulette-ball.visible{opacity:1}
+
+.roulette-bets-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:8px;
+}
+.rb-btn{
+  padding:14px 10px;border-radius:14px;
+  border:2px solid;
+  font-weight:900;font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all .15s;
+  text-transform:uppercase;letter-spacing:1px;
+}
+.rb-btn:active{transform:scale(.96)}
+.rb-btn.red{background:linear-gradient(135deg,#dc2626,#7f1d1d);border-color:#ef4444;color:#fff;box-shadow:0 4px 15px rgba(220,38,38,.4)}
+.rb-btn.black{background:linear-gradient(135deg,#1a1a2e,#0a0a14);border-color:#3a3a5e;color:#fff;box-shadow:0 4px 15px rgba(0,0,0,.4)}
+.rb-btn.green{background:linear-gradient(135deg,#16a34a,#052e1a);border-color:#22c55e;color:#fff;box-shadow:0 4px 15px rgba(22,163,74,.4);grid-column:span 2}
+.rb-btn .mult-badge{background:rgba(0,0,0,.4);border-radius:8px;padding:2px 8px;font-size:11px}
+
+/* ==== БЛЭКДЖЕК / ПОКЕР — ЗЕЛЁНЫЙ СТОЛ ==== */
+.card-table{
+  width:100%;max-width:400px;
+  background:
+    radial-gradient(ellipse at 50% 50%,#0d5c2e 0%,#064220 60%,#032414 100%);
+  border-radius:200px 200px 20px 20px;
+  padding:26px 18px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,.7),
+    0 20px 60px rgba(0,0,0,.8),
+    0 0 0 6px #4a2f0f,
+    0 0 0 10px #2a1a05;
+  border:1px solid rgba(0,0,0,.5);
+  min-height:340px;
+}
+.card-table::before{
+  content:'';position:absolute;inset:14px;
+  border-radius:180px 180px 14px 14px;
+  border:1px dashed rgba(255,215,0,.15);
+  pointer-events:none;
+}
+.card-table::after{
+  content:'MAGIC SPIN';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:32px;font-weight:900;letter-spacing:8px;
+  color:rgba(255,215,0,.06);
+  pointer-events:none;
+  white-space:nowrap;
+}
+.hand-zone{
+  position:relative;z-index:2;
+  margin-bottom:16px;
+}
+.hand-title{
+  font-size:11px;color:#ffd700;letter-spacing:2px;font-weight:800;
+  text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:10px;padding:0 4px;
+  text-shadow:0 2px 4px rgba(0,0,0,.8);
+}
+.hand-title .score-badge{
+  background:rgba(0,0,0,.5);
+  border:1px solid rgba(255,215,0,.4);
+  border-radius:8px;
+  padding:3px 10px;
+  font-size:13px;color:#ffd700;
+  font-weight:900;
+}
+.cards-zone{
+  display:flex;gap:6px;min-height:100px;align-items:center;justify-content:center;flex-wrap:wrap;
+  padding:6px;
+}
+.chips-zone{
+  position:absolute;
+  bottom:12px;right:12px;
+  display:flex;
+  z-index:3;
+}
+.chip{
+  width:32px;height:32px;border-radius:50%;
+  background:
+    radial-gradient(circle at 30% 30%,rgba(255,255,255,.4),transparent 50%),
+    radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#dc2626 20%,#dc2626 40%,#fff 40%,#fff 50%,#dc2626 50%,#dc2626 65%,#fff 65%,#fff 75%,#dc2626 75%);
+  border:2px solid #7f1d1d;
+  margin-left:-14px;
+  box-shadow:0 3px 8px rgba(0,0,0,.6),inset 0 0 6px rgba(0,0,0,.4);
+  position:relative;
+}
+.chip::after{
+  content:attr(data-val);
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:900;color:#fff;
+  text-shadow:0 1px 2px rgba(0,0,0,.9);
+}
+.chip.gold{background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.5),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#d4af37 20%,#d4af37 40%,#fff 40%,#fff 50%,#d4af37 50%,#d4af37 65%,#fff 65%,#fff 75%,#d4af37 75%);border-color:#8b6914}
+.chip.blue{background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.5),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#2563eb 20%,#2563eb 40%,#fff 40%,#fff 50%,#2563eb 50%,#2563eb 65%,#fff 65%,#fff 75%,#2563eb 75%);border-color:#1e40af}
+.chip.green{background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.5),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#16a34a 20%,#16a34a 40%,#fff 40%,#fff 50%,#16a34a 50%,#16a34a 65%,#fff 65%,#fff 75%,#16a34a 75%);border-color:#14532d}
+.chip.black{background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.3),transparent 50%),radial-gradient(circle at 50% 50%,#fff 0%,#fff 20%,#1a1a2e 20%,#1a1a2e 40%,#fff 40%,#fff 50%,#1a1a2e 50%,#1a1a2e 65%,#fff 65%,#fff 75%,#1a1a2e 75%);border-color:#000}
+
+/* Карта */
+.card{
+  width:60px;height:88px;
+  border-radius:8px;
+  background:linear-gradient(145deg,#ffffff,#f0f0f0);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:5px;
+  box-shadow:0 6px 18px rgba(0,0,0,.7),inset 0 2px 4px rgba(255,255,255,.9),0 0 0 1px rgba(0,0,0,.1);
+  color:#1a0d2e;font-weight:900;position:relative;
+  animation:cardDeal .4s ease-out;
+  flex-shrink:0;
+}
+@keyframes cardDeal{
+  0%{opacity:0;transform:translateY(-60px) rotate(-15deg) scale(.7)}
+  100%{opacity:1;transform:translateY(0) rotate(0) scale(1)}
+}
+.card.red{color:#dc2626}
+.card .corner{font-size:11px;line-height:1;display:flex;flex-direction:column;align-items:center;font-weight:900}
+.card .corner.bottom{transform:rotate(180deg)}
+.card .center-suit{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:24px;opacity:.9}
+.card.back{
+  background:
+    repeating-linear-gradient(45deg,#5b21b6 0px,#5b21b6 8px,#7c3aed 8px,#7c3aed 16px);
+  border:2px solid #a855f7;
+  position:relative;overflow:hidden;
+}
+.card.back::before{content:'';position:absolute;inset:5px;border:2px solid rgba(255,255,255,.4);border-radius:5px}
+.card.back::after{content:'★';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(255,255,255,.5);font-size:20px}
+</style><style>
+/* ==== ПЛАТЁЖКА ==== */
+.pay-modal{display:none;position:fixed;inset:0;background:#0a0a14;z-index:950;overflow-y:auto;padding-bottom:env(safe-area-inset-bottom)}
 .pay-modal.active{display:block;animation:fadeIn .25s}
-.pay-top{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;position:sticky;top:0;background:#0d0518;z-index:5}
-.pay-close{background:none;border:none;color:#fff;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px}
-.pay-close .x{font-size:22px;line-height:1}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.pay-top{display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 14px) 18px 14px}
+.pay-close{background:none;border:none;color:#fff;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px}
+.pay-close .x{font-size:20px;line-height:1}
 .pay-user{display:flex;align-items:center;gap:10px}
-.pay-user-info{text-align:right;font-size:11px;color:#9a8ab8}
+.pay-user-info{text-align:right;font-size:11px;color:#8a9ab8}
 .pay-user-info .bal{color:#fff;font-size:14px;font-weight:800;display:block;margin-top:2px}
 .pay-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#ff8a00,#ff5e00);display:flex;align-items:center;justify-content:center;font-size:20px}
-.pay-title{display:flex;justify-content:space-between;align-items:center;padding:8px 18px 18px;border-bottom:1px solid rgba(255,255,255,.06)}
-.pay-title h2{font-size:24px;font-weight:900}
-.pay-title .close-x{background:none;border:none;color:#9a8ab8;font-size:26px;cursor:pointer;line-height:1}
-.pay-region{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;font-size:14px;color:#c9b8e8}
-.pay-region .val{display:flex;align-items:center;gap:8px;background:rgba(40,25,70,.6);padding:8px 12px;border-radius:10px;font-weight:700;color:#fff;border:1px solid rgba(140,80,255,.2)}
-.pay-region .flag{font-size:16px}
-.pay-section-title{font-size:20px;font-weight:900;padding:8px 18px 14px;color:#fff}
-.pay-section-title.crypto{padding-top:24px;border-top:1px solid rgba(255,255,255,.06);margin-top:16px}
+
+.pay-title{display:flex;justify-content:space-between;align-items:center;padding:0 18px 20px}
+.pay-title h2{font-size:26px;font-weight:900}
+.pay-title .close-x{background:none;border:none;color:#8a9ab8;font-size:26px;cursor:pointer;line-height:1}
+
+.pay-tabs{display:flex;gap:6px;padding:0 18px 20px}
+.pay-tab{flex:1;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,.04);color:#8a9ab8;font-size:14px;font-weight:800;cursor:pointer;text-align:center;transition:all .2s;border:none}
+.pay-tab.active{background:#1a1a2e;color:#fff}
+
+.pay-content{display:none}
+.pay-content.active{display:block;animation:fadeIn .25s}
+
+.pay-bonus-banner{margin:0 18px 20px;border-radius:16px;background:linear-gradient(135deg,#7c3aed 0%,#a855f7 50%,#c084fc 100%);padding:20px;position:relative;overflow:hidden;min-height:100px;display:flex;align-items:center}
+.pay-bonus-banner::before{content:'';position:absolute;top:-30%;right:-20%;width:180px;height:180px;background:radial-gradient(circle,rgba(255,255,255,.25),transparent 70%);pointer-events:none}
+.pay-bonus-banner .txt{font-size:15px;font-weight:900;color:#fff;position:relative;z-index:1;line-height:1.3;max-width:75%}
+.pay-bonus-banner .decor{position:absolute;right:10px;bottom:-10px;font-size:64px;opacity:.65;transform:rotate(-15deg);pointer-events:none}
+
+.pay-balance-row{display:flex;justify-content:space-between;align-items:center;padding:0 18px 22px}
+.pay-balance-row .lbl{font-size:13px;color:#8a9ab8;font-weight:600;margin-bottom:4px}
+.pay-balance-row .val{font-size:20px;font-weight:900;color:#fff}
+.pay-rub-select{display:flex;align-items:center;gap:8px;background:#1a1a2e;padding:10px 14px;border-radius:12px;font-weight:800;color:#fff;cursor:pointer;font-size:14px}
+.pay-rub-select .flag{font-size:18px}
+
+.pay-section-title{font-size:18px;font-weight:900;padding:0 18px 14px;color:#fff}
+.pay-section-title.crypto{padding-top:20px;border-top:1px solid rgba(255,255,255,.06);margin:16px 18px 14px;padding-left:0;padding-right:0}
+
 .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px}
-.pay-card{background:#1a0f2e;border:1px solid rgba(140,80,255,.15);border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:flex-end;min-height:110px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
-.pay-card:active{transform:scale(.96);border-color:#a855f7}
-.pay-card .left{display:flex;flex-direction:column;justify-content:space-between;height:100%;gap:18px}
-.pay-card .name{font-size:15px;font-weight:800;color:#fff}
-.pay-card .min{font-size:12px;color:#8a7aab;font-weight:600}
-.pay-card .bonus-tag{display:flex;align-items:center;gap:4px;background:rgba(140,80,255,.15);border:1px solid rgba(168,85,247,.4);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:800;color:#c084fc;align-self:flex-start;margin-top:6px}
-.pay-card .logo{width:60px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;flex-shrink:0;position:relative;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.25)}
-.pay-card .logo::before{content:'';position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0));border-radius:10px 10px 50% 50%;pointer-events:none}
-.pay-card .logo::after{content:'';position:absolute;inset:0;border-radius:10px;box-shadow:inset 0 -2px 6px rgba(0,0,0,.35),inset 0 2px 4px rgba(255,255,255,.15);pointer-events:none}
-.logo-tpay{background:linear-gradient(135deg,#ffe066 0%,#ffc93c 40%,#e8a400 100%);color:#1a1a1a;flex-direction:column;gap:1px}
-.logo-tpay .tpay-box{background:#1a1a1a;color:#ffd93b;padding:2px 6px;border-radius:4px;font-size:11px;font-weight:900;letter-spacing:.5px}
-.logo-tpay .tpay-txt{font-size:13px;font-weight:900;color:#1a1a1a;letter-spacing:-.5px}
-.logo-sber{background:linear-gradient(135deg,#2ecc40 0%,#21a038 50%,#0d7a22 100%);color:#fff;gap:3px}
-.logo-sber .sber-s{font-size:20px;font-weight:900;text-shadow:0 2px 4px rgba(0,0,0,.3)}
-.logo-sber .sber-t{font-size:9px;font-weight:800;letter-spacing:.5px;position:absolute;bottom:6px;right:8px;opacity:.9}
-.logo-alfa{background:linear-gradient(135deg,#ff3b30 0%,#ef3124 50%,#b81e14 100%);color:#fff}
-.logo-alfa .alfa-a{font-size:26px;font-weight:900;font-family:Georgia,serif;text-shadow:0 2px 4px rgba(0,0,0,.4);line-height:1}
-.logo-alfa .alfa-bar{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);width:20px;height:3px;background:#fff;border-radius:2px}
-.logo-vtb{background:linear-gradient(135deg,#1a3d8f 0%,#0a2977 50%,#051c4d 100%);color:#fff}
-.logo-vtb .vtb-lines{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:2px}
-.logo-vtb .vtb-lines span{display:block;height:3px;background:#4da6ff;border-radius:2px;box-shadow:0 0 4px rgba(77,166,255,.6)}
-.logo-vtb .vtb-lines span:nth-child(1){width:14px}
-.logo-vtb .vtb-lines span:nth-child(2){width:10px}
-.logo-vtb .vtb-lines span:nth-child(3){width:6px}
-.logo-vtb .vtb-txt{position:absolute;bottom:8px;right:8px;font-size:14px;font-weight:900;letter-spacing:-.5px}
-.logo-psb{background:linear-gradient(135deg,#ffffff 0%,#f0f0f0 100%);color:#003791;position:relative}
-.logo-psb::before{content:'';position:absolute;top:8px;left:8px;width:18px;height:18px;background:linear-gradient(135deg,#ec6608,#ff8a00);border-radius:3px;transform:rotate(-10deg);box-shadow:0 2px 4px rgba(236,102,8,.4)}
-.logo-psb .psb-txt{position:absolute;bottom:8px;right:8px;font-size:13px;font-weight:900;color:#003791}
-.logo-gazprom{background:linear-gradient(135deg,#1e88e5 0%,#0d47a1 50%,#062e6e 100%);color:#fff;overflow:hidden}
-.logo-gazprom::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;border:2px solid rgba(255,255,255,.5);box-shadow:0 0 10px rgba(255,255,255,.3)}
-.logo-gazprom::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.7)}
-.logo-gazprom .gaz-txt{position:absolute;bottom:4px;left:50%;transform:translateX(-50%);font-size:8px;font-weight:800;letter-spacing:.5px;white-space:nowrap}
-.logo-1click{background:linear-gradient(135deg,#f5b400 0%,#e88b00 50%,#ef3124 100%);color:#fff;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;padding:6px}
-.logo-1click .cell{background:rgba(255,255,255,.25);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;backdrop-filter:blur(2px)}
-.logo-sky{background:linear-gradient(135deg,#ffffff 0%,#e8e8e8 50%,#d0d0d0 100%);color:#0066cc;flex-direction:column;gap:2px}
-.logo-sky .sky-txt{font-size:13px;font-weight:900;color:#0066cc;letter-spacing:-.5px;line-height:1}
-.logo-sky .sky-sub{font-size:8px;font-weight:800;color:#1a3d8f;letter-spacing:1px}
-.logo-ton{background:radial-gradient(circle at 30% 30%,#5fd0ff 0%,#2ca5e0 40%,#0088cc 70%,#005f99 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:26px;font-weight:900;box-shadow:0 6px 20px rgba(44,165,224,.6),inset 0 2px 8px rgba(255,255,255,.3),inset 0 -4px 10px rgba(0,0,0,.3)}
+.pay-card{background:#1a1a2e;border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:flex-end;min-height:110px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
+.pay-card:active{transform:scale(.96)}
+.pay-card .left{display:flex;flex-direction:column;justify-content:space-between;height:100%;gap:18px;flex:1}
+.pay-card .name{font-size:14px;font-weight:800;color:#fff}
+.pay-card .min{font-size:11px;color:#8a9ab8;font-weight:600}
+.pay-card .bonus-tag{display:flex;align-items:center;gap:4px;background:rgba(140,80,255,.15);border-radius:20px;padding:4px 10px;font-size:10px;font-weight:800;color:#c084fc;align-self:flex-start;margin-top:6px}
+.pay-card .logo{width:56px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.4);position:relative;overflow:hidden}
+
+.logo-card{background:linear-gradient(135deg,#1a4b8c 0%,#0d3d7a 50%,#062c5e 100%);color:#fff;padding:0}
+.logo-card .visa-txt{position:absolute;top:6px;left:8px;font-size:11px;font-weight:900;font-style:italic;color:#fff}
+.logo-card .card-num{position:absolute;bottom:8px;left:8px;font-size:8px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:1px}
+.logo-card .mc{position:absolute;bottom:6px;right:6px;display:flex}
+.logo-card .mc span{width:12px;height:12px;border-radius:50%;display:block}
+.logo-card .mc span:first-child{background:#eb001b}
+.logo-card .mc span:last-child{background:#f79e1b;margin-left:-5px;mix-blend-mode:screen}
+
+.logo-sbp{background:#fff;position:relative}
+.logo-sbp .sbp-icon{width:32px;height:32px;position:relative}
+.logo-sbp .sbp-icon::before{content:'';position:absolute;width:0;height:0;border-style:solid;border-width:0 0 16px 16px;border-color:transparent transparent #5b8def transparent;top:0;left:0}
+.logo-sbp .sbp-icon::after{content:'';position:absolute;width:0;height:0;border-style:solid;border-width:16px 16px 0 0;border-color:#f5a623 transparent transparent transparent;top:0;right:0}
+.logo-sbp .sbp-icon span{display:block;position:absolute;bottom:0;left:0;right:0;height:18px;background:linear-gradient(135deg,#f5a623 0%,#5b8def 100%);clip-path:polygon(0 100%,50% 0,100% 100%)}
+
+.logo-ton{background:radial-gradient(circle at 30% 30%,#5fd0ff 0%,#2ca5e0 40%,#0088cc 70%,#005f99 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:24px;font-weight:900;box-shadow:0 6px 20px rgba(44,165,224,.6),inset 0 2px 8px rgba(255,255,255,.3),inset 0 -4px 10px rgba(0,0,0,.3)}
 .logo-ton::before{display:none}
-.logo-ton::after{display:none}
-.logo-ton .ton-icon{font-size:30px;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.4)}
-.logo-usdt{background:radial-gradient(circle at 30% 30%,#3ec49a 0%,#26a17b 40%,#007a54 70%,#004d34 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:26px;font-weight:900;box-shadow:0 6px 20px rgba(38,161,123,.6),inset 0 2px 8px rgba(255,255,255,.3),inset 0 -4px 10px rgba(0,0,0,.3)}
+.logo-usdt{background:radial-gradient(circle at 30% 30%,#3ec49a 0%,#26a17b 40%,#007a54 70%,#004d34 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:24px;font-weight:900;box-shadow:0 6px 20px rgba(38,161,123,.6),inset 0 2px 8px rgba(255,255,255,.3),inset 0 -4px 10px rgba(0,0,0,.3)}
 .logo-usdt::before{display:none}
-.logo-usdt::after{display:none}
-.logo-usdt .usdt-icon{font-size:28px;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.4)}
-.pay-step2{display:none;position:fixed;inset:0;background:#0d0518;z-index:960;overflow-y:auto;padding:env(safe-area-inset-top) 0 140px 0}
-.pay-step2.active{display:block;animation:fadeIn .25s}
-.step2-header{display:flex;justify-content:space-between;align-items:center;padding:16px 18px}
-.step2-header .back{background:none;border:none;color:#fff;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px}
-.step2-header .back .arr{font-size:22px;line-height:1}
-.step2-header .close-x{background:none;border:none;color:#9a8ab8;font-size:26px;cursor:pointer;line-height:1}
-.step2-title{font-size:26px;font-weight:900;padding:8px 18px 22px}
-.step2-method{display:flex;align-items:center;gap:14px;background:#1a0f2e;border:1px solid rgba(140,80,255,.2);border-radius:14px;padding:14px 16px;margin:0 18px 20px}
-.step2-method .logo{width:44px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;flex-shrink:0;background:#2a1548;color:#fff}
-.step2-method .name{flex:1;font-size:15px;font-weight:800}
-.step2-method .chev{color:#8a7aab;font-size:20px}
-.step2-sum-label{font-size:13px;color:#c9b8e8;padding:0 18px 8px}
-.step2-input-wrap{margin:0 18px 8px;position:relative}
-.step2-input{width:100%;background:#1a0f2e;border:2px solid #ff6a00;border-radius:14px;padding:18px 16px;color:#fff;font-size:18px;font-weight:700;outline:none;font-family:'Inter',sans-serif;transition:border-color .2s}
-.step2-input::placeholder{color:#8a7aab;font-weight:600}
-.step2-input.error{border-color:#ff6a00}
-.step2-input.ok{border-color:#2196f3}
-.step2-error{color:#ff6a00;font-size:13px;padding:0 18px 12px;display:none}
-.step2-error.show{display:block}
-.step2-presets{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 18px 20px}
-.step2-preset{background:#1a0f2e;border:1px solid rgba(140,80,255,.15);border-radius:12px;padding:14px 6px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;text-align:center;transition:all .15s}
-.step2-preset:active{background:#2a1548;border-color:#a855f7}
-.step2-bonus{margin:0 18px 20px;background:linear-gradient(135deg,#1a2470,#0f1847);border:1px solid rgba(70,120,220,.4);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden}
-.step2-bonus::after{content:'';position:absolute;right:-30px;bottom:-40px;width:140px;height:140px;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.15),transparent 70%);pointer-events:none;transform:rotate(45deg)}
-.step2-bonus .info{flex:1;position:relative;z-index:1}
-.step2-bonus .title{font-size:14px;font-weight:800;color:#fff;margin-bottom:4px}
-.step2-bonus .cond{font-size:11px;color:#8ab0ff;display:flex;align-items:center;gap:6px}
-.step2-bonus .toggle{width:52px;height:30px;background:#2a3570;border-radius:15px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;z-index:1}
-.step2-bonus .toggle.on{background:#4a6fe8}
-.step2-bonus .toggle::after{content:'';position:absolute;top:3px;left:3px;width:24px;height:24px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 2px 6px rgba(0,0,0,.4)}
-.step2-bonus .toggle.on::after{transform:translateX(22px)}
-.step2-continue{position:fixed;bottom:0;left:0;right:0;padding:16px 18px calc(20px + env(safe-area-inset-bottom));background:#0d0518;border-top:1px solid rgba(255,255,255,.06);z-index:5}
-.step2-continue .to-label{font-size:13px;color:#8a7aab;margin-bottom:8px}
-.step2-continue .btn{width:100%;padding:16px;border-radius:14px;border:none;background:#2a2a3a;color:#8a7aab;font-size:16px;font-weight:800;cursor:pointer;transition:all .2s}
-.step2-continue .btn.active{background:#2196f3;color:#fff;box-shadow:0 6px 25px rgba(33,150,243,.5)}
-.search-reqs-screen{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 40%,#2a1548 0%,#0d0518 70%);z-index:970;display:none;align-items:center;justify-content:center;padding:20px;text-align:center}
+.logo-trx{background:radial-gradient(circle at 30% 30%,#ff5757 0%,#dc2626 40%,#991b1b 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:24px;font-weight:900;box-shadow:0 6px 20px rgba(220,38,38,.6),inset 0 2px 8px rgba(255,255,255,.3),inset 0 -4px 10px rgba(0,0,0,.3)}
+.logo-trx::before{display:none}
+.logo-eth{background:radial-gradient(circle at 30% 30%,#a5b4fc 0%,#6366f1 40%,#4338ca 70%,#312e81 100%);color:#fff;border-radius:50%!important;width:56px!important;height:56px!important;font-size:24px;font-weight:900;box-shadow:0 6px 20px rgba(99,102,241,.6),inset 0 2px 8px rgba(255,255,255,.3),inset 0 -4px 10px rgba(0,0,0,.3)}
+.logo-eth::before{display:none}
+
+/* ВЫВОД */
+.wd-form{padding:0 18px 30px}
+.wd-select{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer;font-weight:700}
+.wd-select .left{display:flex;align-items:center;gap:12px}
+.wd-select .icon{width:32px;height:32px;border-radius:8px;background:#2a2a4e;display:flex;align-items:center;justify-content:center;font-size:16px}
+.wd-select .chev{color:#8a9ab8;font-size:18px}
+.wd-input{width:100%;background:#1a1a2e;border:1.5px solid transparent;border-radius:14px;padding:16px;color:#fff;font-size:15px;font-weight:600;outline:none;margin-bottom:12px;font-family:'Inter',sans-serif;transition:border-color .2s}
+.wd-input::placeholder{color:#6b7280;font-weight:500}
+.wd-input.ok{border-color:#2196f3}
+.wd-input.error{border-color:#ff6a00}
+.wd-err{color:#ff6a00;font-size:13px;margin-top:-8px;margin-bottom:12px;display:none}
+.wd-err.show{display:block}
+.wd-hint{font-size:13px;color:#8a9ab8;margin-bottom:16px;padding-left:4px}
+.wd-hint .val{color:#fff;font-weight:700}
+.wd-summary{background:#1a1a2e;border-radius:14px;padding:16px;margin-bottom:16px}
+.wd-summary .row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:14px;color:#8a9ab8}
+.wd-summary .row .v{color:#fff;font-weight:800;font-size:15px}
+
+/* ИСТОРИЯ */
+.hist-list{padding:0 18px 30px}
+.hist-item{background:#1a1a2e;border-radius:14px;padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.hist-item .l{display:flex;align-items:center;gap:12px}
+.hist-item .ico{width:38px;height:38px;border-radius:10px;background:rgba(140,80,255,.15);display:flex;align-items:center;justify-content:center;font-size:18px}
+.hist-item .nm{font-size:14px;font-weight:800;color:#fff;margin-bottom:2px}
+.hist-item .dt{font-size:11px;color:#8a9ab8}
+.hist-item .amt{font-size:15px;font-weight:900}
+.hist-item .amt.plus{color:#4ade80}
+.hist-item .amt.minus{color:#ef4444}
+.hist-empty{text-align:center;padding:60px 20px;color:#6b7280}
+.hist-empty .ic{font-size:48px;margin-bottom:12px;opacity:.5}
+
+/* ==== ЭКРАН ПОИСКА РЕКВИЗИТОВ ==== */
+.search-reqs-screen{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 40%,#1a1a3a 0%,#0a0a14 70%);z-index:970;display:none;align-items:center;justify-content:center;padding:20px;text-align:center}
 .search-reqs-screen.active{display:flex;animation:fadeIn .35s}
 .srs-content{max-width:340px;width:100%;display:flex;flex-direction:column;align-items:center}
 .srs-spinner{position:relative;width:140px;height:140px;margin-bottom:32px}
-.srs-ring{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;border-top-color:#a855f7;border-right-color:#a855f7;animation:srsSpin 1.2s linear infinite}
-.srs-ring-inner{position:absolute;inset:16px;border-radius:50%;border:3px solid transparent;border-bottom-color:#c084fc;border-left-color:#c084fc;animation:srsSpin 1.8s linear infinite reverse}
+.srs-ring{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;border-top-color:#4a6fe8;border-right-color:#4a6fe8;animation:srsSpin 1.2s linear infinite}
+.srs-ring-inner{position:absolute;inset:16px;border-radius:50%;border:3px solid transparent;border-bottom-color:#6b8cff;border-left-color:#6b8cff;animation:srsSpin 1.8s linear infinite reverse}
 @keyframes srsSpin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-.srs-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:44px;filter:drop-shadow(0 0 20px rgba(168,85,247,.8));animation:srsPulse 2s ease-in-out infinite}
+.srs-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:44px;filter:drop-shadow(0 0 20px rgba(74,111,232,.8));animation:srsPulse 2s ease-in-out infinite}
 @keyframes srsPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.15)}}
-.srs-title{font-size:24px;font-weight:900;color:#fff;margin-bottom:10px;letter-spacing:1px}
-.srs-subtitle{font-size:14px;color:#a78bfa;margin-bottom:28px;line-height:1.5}
-.srs-timer{background:rgba(40,25,70,.7);border:1px solid rgba(168,85,247,.4);border-radius:16px;padding:14px 24px;margin-bottom:20px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(10px)}
+.srs-title{font-size:24px;font-weight:900;color:#fff;margin-bottom:10px}
+.srs-subtitle{font-size:14px;color:#8a9ab8;margin-bottom:28px;line-height:1.5}
+.srs-timer{background:rgba(26,26,46,.9);border:1px solid rgba(74,111,232,.4);border-radius:16px;padding:14px 24px;margin-bottom:20px;display:flex;flex-direction:column;gap:4px}
 .srs-timer #srsTimer{font-size:28px;font-weight:900;color:#ffd700;font-variant-numeric:tabular-nums;text-shadow:0 0 20px rgba(255,215,0,.5)}
-.srs-timer-label{font-size:11px;color:#8a7aab;letter-spacing:1px;text-transform:uppercase;font-weight:700}
-.srs-status{font-size:13px;color:#c9b8e8;font-weight:600;animation:srsDots 1.5s ease-in-out infinite}
+.srs-timer-label{font-size:11px;color:#8a9ab8;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.srs-status{font-size:13px;color:#c9d5e8;font-weight:600;animation:srsDots 1.5s ease-in-out infinite}
 @keyframes srsDots{0%,100%{opacity:.6}50%{opacity:1}}
+
+/* ==== МОДАЛКА ==== */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:900;display:none;align-items:flex-end;justify-content:center}
+.modal.active{display:flex;animation:fadeIn .25s}
+.modal-sheet{background:linear-gradient(180deg,#1a1a2e,#0f0f1e);border-radius:24px 24px 0 0;padding:22px 20px calc(30px + env(safe-area-inset-bottom));max-width:500px;width:100%;max-height:80vh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.4,0,.2,1)}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-handle{width:44px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 16px}
+.modal-title{font-size:20px;font-weight:900;margin-bottom:14px;text-align:center}
+.modal-text{font-size:14px;color:#c9d5e8;margin-bottom:18px;line-height:1.5;text-align:center}
+.modal-list{display:flex;flex-direction:column;gap:8px}
+.modal-item{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);cursor:pointer;font-weight:700;font-size:14px;color:#fff}
+.modal-item:active{background:rgba(74,111,232,.2);transform:scale(.98)}
+.modal-item .mi-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#4a6fe8,#6b8cff);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.modal-item .mi-text{flex:1}
+.modal-item .mi-sub{font-size:11px;color:#8a9ab8;font-weight:500;margin-top:2px}
+.modal-close{margin-top:14px;width:100%;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:none;color:#8a9ab8;font-weight:800;font-size:14px;cursor:pointer}
 </style>
-</head>
-<body><div class="loader" id="loader">
+</head><body>
+
+<div class="loader" id="loader">
   <div class="loader-logo">MAGIC SPIN</div>
   <div class="loader-sub">CASINO</div>
   <div class="loader-ring"></div>
@@ -295,121 +788,195 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
 
 <div class="bg"></div>
 <div class="aurora"></div>
-<div class="stars" id="stars"></div>
-<div class="particles" id="particles"></div>
 
 <div class="app">
   <div class="top-bar">
-    <div class="logo-icon" onclick="openModal('menu')">
-      <svg viewBox="0 0 24 24" fill="currentColor" style="width:32px;height:32px"><path d="M12 2L15 9H9L12 2Z"/><path d="M12 7L16 14H8L12 7Z"/><circle cx="12" cy="18" r="3"/></svg>
+    <div class="top-logo">Ton<span class="sub">play</span></div>
+    <div class="top-balance" onclick="openPay()">
+      <div class="rub">RUB ▾</div>
+      <div class="val" id="balance">10000 ₽</div>
     </div>
-    <div class="balance-pill" onclick="openModal('balance')">
-      <span class="val" id="balance">10000</span><span>₽</span>
-    </div>
-    <button class="deposit-btn" onclick="openPay()">Пополнить</button>
-    <div class="bell-btn" onclick="openModal('notifications')">
-      <svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-      <span class="badge">2</span>
-    </div>
-    <div class="avatar" onclick="openModal('profile')">
-      <svg class="svg-icon" viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    </div>
+    <button class="deposit-btn-top" onclick="openPay()">Пополнить</button>
+    <div class="top-avatar" onclick="openModal('profile')">🐸</div>
   </div>
 
   <div class="content">
-    <div class="banner" onclick="openPay()">
-      <div class="banner-tag">100FS + 100%</div>
-      <div class="banner-title">Приветственный бонус</div>
-      <div class="banner-sub">Стартуй с преимуществом</div>
-      <button class="banner-btn">Пополнить</button>
-      <div class="banner-gift"><svg viewBox="0 0 24 24" fill="currentColor" style="width:160px;height:160px"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
+    <!-- БОЛЬШИЕ БАННЕРЫ -->
+    <div class="big-games">
+      <div class="big-card" onclick="openGame('slots')">
+        <div class="bg-img bg-space"></div>
+        <div class="overlay"></div>
+        <div class="title">SPACE XY</div>
+        <div class="provider">BGAMING</div>
+      </div>
+      <div class="big-card" onclick="openGame('avia')">
+        <div class="bg-img bg-avia"></div>
+        <div class="overlay"></div>
+        <div class="title">AVIAMASTERS</div>
+        <div class="provider">BGAMING</div>
+      </div>
     </div>
 
-    <div class="search-row">
-      <div class="search-wrap">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" class="search-input" placeholder="Поиск" id="searchInput" oninput="filterGames()">
+    <!-- СЕКЦИЯ: СЛОТЫ -->
+    <div class="section-block">
+      <div class="section-head">
+        <h3>Слоты</h3>
+        <div class="nav-btns">
+          <button class="all-btn">Все</button>
+          <button class="arr-btn" onclick="scrollRow('slotsRow', -1)">‹</button>
+          <button class="arr-btn" onclick="scrollRow('slotsRow', 1)">›</button>
+        </div>
       </div>
-      <button class="filter-btn" onclick="openModal('providers')">Провайдеры<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="games-row" id="slotsRow">
+        <div class="game-tile" onclick="openGame('slots')">
+          <div class="bg-img bg-slots"></div>
+          <div class="overlay"></div>
+          <div class="title">СЛОТЫ</div>
+          <div class="provider">MAGIC SPIN</div>
+        </div>
+        <div class="game-tile" onclick="openGame('dice')">
+          <div class="bg-img bg-dice"></div>
+          <div class="overlay"></div>
+          <div class="title">КОСТИ</div>
+          <div class="provider">MAGIC SPIN</div>
+        </div>
+        <div class="game-tile" onclick="openGame('coin')">
+          <div class="bg-img bg-coin"></div>
+          <div class="overlay"></div>
+          <div class="title">МОНЕТКА</div>
+          <div class="provider">MAGIC SPIN</div>
+        </div>
+        <div class="game-tile" onclick="openGame('roulette')">
+          <div class="bg-img bg-roulette"></div>
+          <div class="overlay"></div>
+          <div class="title">РУЛЕТКА</div>
+          <div class="provider">MAGIC SPIN</div>
+        </div>
+      </div>
     </div>
 
-    <div class="section">
-      <div class="section-header">
-        <div class="section-title">
-          <svg class="crown" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18l2-10 5 5 2-8 2 8 5-5 2 10H3z"/></svg>
-          Популярные игры
+    <!-- СЕКЦИЯ: LIVE-ИГРЫ -->
+    <div class="section-block">
+      <div class="section-head">
+        <h3>Live-игры</h3>
+        <div class="nav-btns">
+          <button class="all-btn">Все</button>
+          <button class="arr-btn" onclick="scrollRow('liveRow', -1)">‹</button>
+          <button class="arr-btn" onclick="scrollRow('liveRow', 1)">›</button>
         </div>
       </div>
-      <div class="games-grid" id="gamesGrid">
-        <div class="game-card" data-name="слоты slots" onclick="openGame('slots')">
-          <img src="slots.jpg" class="game-img" onerror="this.style.display='none'">
-          <div class="game-name">Слоты</div><div class="game-tag">от 50 ₽</div>
+      <div class="games-row" id="liveRow">
+        <div class="game-tile" onclick="openGame('blackjack')">
+          <div class="bg-img bg-blackjack"></div>
+          <div class="overlay"></div>
+          <div class="title">БЛЭКДЖЕК</div>
+          <div class="provider">LIVE</div>
         </div>
-        <div class="game-card" data-name="кости dice" onclick="openGame('dice')">
-          <img src="dice.jpg" class="game-img" onerror="this.style.display='none'">
-          <div class="game-name">Кости</div><div class="game-tag">от 50 ₽</div>
+        <div class="game-tile" onclick="openGame('poker')">
+          <div class="bg-img bg-poker"></div>
+          <div class="overlay"></div>
+          <div class="title">ПОКЕР</div>
+          <div class="provider">LIVE</div>
         </div>
-        <div class="game-card" data-name="блэкджек blackjack" onclick="openGame('blackjack')">
-          <img src="blackjack.jpg" class="game-img" onerror="this.style.display='none'">
-          <div class="game-name">Блэкджек</div><div class="game-tag">от 50 ₽</div>
+        <div class="game-tile" onclick="openGame('roulette')">
+          <div class="bg-img bg-roulette"></div>
+          <div class="overlay"></div>
+          <div class="title">РУЛЕТКА</div>
+          <div class="provider">LIVE</div>
         </div>
-        <div class="game-card" data-name="рулетка roulette" onclick="openGame('roulette')">
-          <img src="roulette.jpg" class="game-img" onerror="this.style.display='none'">
-          <div class="game-name">Рулетка</div><div class="game-tag">от 50 ₽</div>
+      </div>
+    </div>
+
+    <!-- СЕКЦИЯ: БЫСТРЫЕ ИГРЫ -->
+    <div class="section-block">
+      <div class="section-head">
+        <h3>Быстрые игры</h3>
+        <div class="nav-btns">
+          <button class="all-btn">Все</button>
+          <button class="arr-btn" onclick="scrollRow('fastRow', -1)">‹</button>
+          <button class="arr-btn" onclick="scrollRow('fastRow', 1)">›</button>
         </div>
-        <div class="game-card" data-name="монетка coin" onclick="openGame('coin')">
-          <img src="coin.jpg" class="game-img" onerror="this.style.display='none'">
-          <div class="game-name">Монетка</div><div class="game-tag">от 50 ₽</div>
+      </div>
+      <div class="games-row" id="fastRow">
+        <div class="game-tile" onclick="openGame('coin')">
+          <div class="bg-img bg-coin"></div>
+          <div class="overlay"></div>
+          <div class="title">МОНЕТКА</div>
+          <div class="provider">MAGIC SPIN</div>
         </div>
-        <div class="game-card" data-name="покер poker" onclick="openGame('poker')">
-          <img src="poker.jpg" class="game-img" onerror="this.style.display='none'">
-          <div class="game-name">Покер</div><div class="game-tag">от 50 ₽</div>
+        <div class="game-tile" onclick="openGame('dice')">
+          <div class="bg-img bg-dice"></div>
+          <div class="overlay"></div>
+          <div class="title">КОСТИ</div>
+          <div class="provider">MAGIC SPIN</div>
+        </div>
+        <div class="game-tile" onclick="openGame('avia')">
+          <div class="bg-img bg-avia"></div>
+          <div class="overlay"></div>
+          <div class="title">AVIAMASTERS</div>
+          <div class="provider">BGAMING</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- НИЖНЕЕ МЕНЮ -->
 <div class="bottom-nav">
-  <div class="nav-item" onclick="openModal('menu')"><svg class="svg-icon" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>Меню</div>
-  <div class="nav-item" onclick="openModal('bonuses')"><svg class="svg-icon" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>Бонусы</div>
-  <div class="nav-item center active"><div class="nav-circle"><svg class="svg-icon" viewBox="0 0 24 24" style="width:28px;height:28px"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div>Казино</div>
-  <div class="nav-item" onclick="openModal('chat')"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Чат</div>
-  <div class="nav-item" onclick="openModal('invite')"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Пригласить</div>
-</div>
-
-<div class="game-screen" id="gameScreen">
+  <div class="nav-item" onclick="openPay()">
+    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20"/></svg>
+    <span>Касса</span>
+  </div>
+  <div class="nav-item" onclick="openModal('sport')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+    <span>Спорт</span>
+  </div>
+  <div class="nav-item" onclick="openModal('bonuses')">
+    <svg viewBox="0 0 24 24"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+    <span>Бонусы</span>
+    <span class="badge">4</span>
+  </div>
+  <div class="nav-item active">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+    <span>Казино</span>
+  </div>
+  <div class="nav-item" onclick="openModal('menu')">
+    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <span>Меню</span>
+  </div>
+</div><div class="game-screen" id="gameScreen">
   <div class="game-header">
     <div class="left">
-      <button class="game-back" onclick="closeGame()"><svg class="svg-icon" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+      <button class="game-back" onclick="closeGame()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      </button>
       <div class="game-title" id="gameTitle">Игра</div>
     </div>
     <div class="game-balance" id="gameBalance">10000 ₽</div>
   </div>
-  <div class="game-area" id="gameArea"></div>
-  <div class="bet-label">Ставка</div>
-  <div class="bet-row">
-    <div class="bet-btn" onclick="setBet(50,this)">50</div>
-    <div class="bet-btn active" onclick="setBet(100,this)">100</div>
-    <div class="bet-btn" onclick="setBet(200,this)">200</div>
-    <div class="bet-btn" onclick="setBet(300,this)">300</div>
-    <div class="bet-btn" onclick="setBet(400,this)">400</div>
-    <div class="bet-btn" onclick="setBet(500,this)">500</div>
-    <div class="bet-btn" onclick="setBet(700,this)">700</div>
-    <div class="bet-btn" onclick="setBet(1000,this)">1000</div>
-  </div>
-</div><div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
-  <div class="modal-sheet">
-    <div class="modal-handle"></div>
-    <div class="modal-title" id="modalTitle">Заголовок</div>
-    <div id="modalBody"></div>
-    <button class="modal-close" onclick="closeModal()">Закрыть</button>
-  </div>
-</div>
 
+  <div class="game-body">
+    <div class="game-stage" id="gameArea"></div>
+
+    <div class="game-panel">
+      <div class="bet-label">Ставка</div>
+      <div class="bet-row">
+        <div class="bet-btn" onclick="setBet(50,this)">50</div>
+        <div class="bet-btn active" onclick="setBet(100,this)">100</div>
+        <div class="bet-btn" onclick="setBet(200,this)">200</div>
+        <div class="bet-btn" onclick="setBet(500,this)">500</div>
+        <div class="bet-btn" onclick="setBet(1000,this)">1K</div>
+        <div class="bet-btn" onclick="setBet(2000,this)">2K</div>
+        <div class="bet-btn" onclick="setBet(5000,this)">5K</div>
+        <div class="bet-btn" onclick="setBet(10000,this)">10K</div>
+      </div>
+      <div class="result-msg" id="result"></div>
+    </div>
+  </div>
+</div><!-- ПЛАТЁЖКА -->
 <div class="pay-modal" id="payModal">
   <div class="pay-top">
-    <button class="pay-close" onclick="closePay()"><span class="x">×</span> Закрыть</button>
+    <button class="pay-close" onclick="closePay()"><span class="x">×</span> Назад</button>
     <div class="pay-user">
       <div class="pay-user-info">RUB ▾<span class="bal" id="payBal">0 ₽</span></div>
       <div class="pay-avatar">🐸</div>
@@ -419,104 +986,93 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
     <h2>Кошелёк</h2>
     <button class="close-x" onclick="closePay()">×</button>
   </div>
-  <div class="pay-region">
-    <span>Регион оплаты ❔</span>
-    <span class="val"><span class="flag">🇷🇺</span> RUB ▾</span>
+  <div class="pay-tabs">
+    <div class="pay-tab active" onclick="switchPayTab('deposit', this)">Депозит</div>
+    <div class="pay-tab" onclick="switchPayTab('withdraw', this)">Вывод</div>
+    <div class="pay-tab" onclick="switchPayTab('history', this)">История</div>
   </div>
-  <div class="pay-section-title">Банковский платёж</div>
-  <div class="pay-grid">
-    <div class="pay-card" onclick="payChoose('T-PAY','tpay',200)">
-      <div class="left"><div class="name">T-PAY</div><div class="min">от 200 ₽</div></div>
-      <div class="logo logo-tpay"><div class="tpay-box">T</div><div class="tpay-txt">Pay</div></div>
+
+  <!-- ДЕПОЗИТ -->
+  <div class="pay-content active" id="payTab-deposit">
+    <div class="pay-bonus-banner">
+      <div class="txt">До +7% на первое крипто-пополнение в рамках дня!</div>
+      <div class="decor">🎁</div>
     </div>
-    <div class="pay-card" onclick="payChoose('SberPay','sber',1000)">
-      <div class="left"><div class="name">SberPay</div><div class="min">от 1 000 ₽</div></div>
-      <div class="logo logo-sber"><div class="sber-s">S</div><div class="sber-t">PAY</div></div>
+    <div class="pay-balance-row">
+      <div>
+        <div class="lbl">Ваш баланс</div>
+        <div class="val" id="payBal2">0 ₽</div>
+      </div>
+      <div class="pay-rub-select"><span class="flag">🇷🇺</span> RUB <span style="opacity:.5">▾</span></div>
     </div>
-    <div class="pay-card" onclick="payChoose('Альфа-Банк','alfa',1000)">
-      <div class="left"><div class="name">Альфа-Банк</div><div class="min">от 1 000 ₽</div></div>
-      <div class="logo logo-alfa"><div class="alfa-a">A</div><div class="alfa-bar"></div></div>
+    <div class="pay-section-title">Банковский платёж</div>
+    <div class="pay-grid">
+      <div class="pay-card" onclick="payChoose('Перевод на карту','card',3093)">
+        <div class="left"><div class="name">Перевод на карту</div><div class="min">от 3 093 ₽</div></div>
+        <div class="logo logo-card"><div class="visa-txt">VISA</div><div class="card-num">•••• 1234</div><div class="mc"><span></span><span></span></div></div>
+      </div>
+      <div class="pay-card" onclick="payChoose('СБП','sbp',3093)">
+        <div class="left"><div class="name">СБП</div><div class="min">от 3 093 ₽</div></div>
+        <div class="logo logo-sbp"><div class="sbp-icon"><span></span></div></div>
+      </div>
     </div>
-    <div class="pay-card" onclick="payChoose('ВТБ','vtb',1000)">
-      <div class="left"><div class="name">ВТБ</div><div class="min">от 1 000 ₽</div></div>
-      <div class="logo logo-vtb"><div class="vtb-lines"><span></span><span></span><span></span></div><div class="vtb-txt">ВТБ</div></div>
-    </div>
-    <div class="pay-card" onclick="payChoose('ПСБ','psb',1000)">
-      <div class="left"><div class="name">ПСБ Банк</div><div class="min">от 1 000 ₽</div></div>
-      <div class="logo logo-psb"><div class="psb-txt">ПСБ</div></div>
-    </div>
-    <div class="pay-card" onclick="payChoose('Газпромбанк','gaz',1000)">
-      <div class="left"><div class="name">Газпромбанк</div><div class="min">от 1 000 ₽</div></div>
-      <div class="logo logo-gazprom"><div class="gaz-txt">ГАЗПРОМ</div></div>
-    </div>
-    <div class="pay-card" onclick="payChoose('1 клик','1click',200)">
-      <div class="left"><div class="name">1 клик</div><div class="min">от 200 ₽</div></div>
-      <div class="logo logo-1click"><div class="cell">T</div><div class="cell">S</div><div class="cell">X</div><div class="cell">A</div></div>
-    </div>
-    <div class="pay-card" onclick="payChoose('Sky Pay','sky',5000)">
-      <div class="left"><div class="name">Sky Pay</div><div class="min">от 5 000 ₽</div></div>
-      <div class="logo logo-sky"><div class="sky-txt">SKY</div><div class="sky-sub">PAY</div></div>
+    <div class="pay-section-title crypto">Криптовалюта</div>
+    <div class="pay-grid">
+      <div class="pay-card" onclick="payChoose('TON','ton',100)">
+        <div class="left"><div class="name">TON<br><span style="font-size:12px;color:#8a9ab8">(Toncoin)</span></div><div class="bonus-tag">🎁 +7%</div></div>
+        <div class="logo logo-ton">◈</div>
+      </div>
+      <div class="pay-card" onclick="payChoose('USDT','usdt',100)">
+        <div class="left"><div class="name">USDT<br><span style="font-size:12px;color:#8a9ab8">(Toncoin)</span></div><div class="bonus-tag">🎁 +7%</div></div>
+        <div class="logo logo-usdt">₮</div>
+      </div>
+      <div class="pay-card" onclick="payChoose('USDT TRC20','usdt-trc',100)">
+        <div class="left"><div class="name">USDT<br><span style="font-size:12px;color:#8a9ab8">(TRC20)</span></div></div>
+        <div class="logo logo-usdt">₮</div>
+      </div>
+      <div class="pay-card" onclick="payChoose('TRX','trx',100)">
+        <div class="left"><div class="name">TRX<br><span style="font-size:12px;color:#8a9ab8">(Tron)</span></div></div>
+        <div class="logo logo-trx">◭</div>
+      </div>
+      <div class="pay-card" onclick="payChoose('ETH','eth',100)">
+        <div class="left"><div class="name">ETH<br><span style="font-size:12px;color:#8a9ab8">(Ethereum)</span></div></div>
+        <div class="logo logo-eth">◆</div>
+      </div>
     </div>
   </div>
-  <div class="pay-section-title crypto">Криптовалюта</div>
-  <div class="pay-grid">
-    <div class="pay-card" onclick="payChoose('TON','ton',100)">
-      <div class="left">
-        <div class="name">TON<br><span style="font-size:12px;color:#9a8ab8">(Toncoin)</span></div>
-        <div class="bonus-tag">🎁 +7%</div>
+
+  <!-- ВЫВОД -->
+  <div class="pay-content" id="payTab-withdraw">
+    <div class="wd-form">
+      <div class="wd-select" onclick="switchWdMethod()">
+        <div class="left"><div class="icon">💳</div><div id="wdMethodName">Перевод на карту</div></div>
+        <div class="chev">⇅</div>
       </div>
-      <div class="logo logo-ton"><span class="ton-icon">◈</span></div>
+      <input type="text" class="wd-input" id="wdFio" placeholder="ФИО">
+      <input type="text" class="wd-input" id="wdCard" placeholder="Номер банковской карты" inputmode="numeric">
+      <input type="tel" class="wd-input error" id="wdSum" placeholder="Минимальная сумма 3093 ₽" inputmode="numeric" oninput="wdValidate()">
+      <div class="wd-err show" id="wdSumErr">Минимальная сумма 3093 ₽</div>
+      <div class="wd-hint">Ваш текущий баланс: <span class="val" id="wdBal">0 ₽</span></div>
+      <div class="wd-summary">
+        <div class="row"><span>На счет поступит:</span><span class="v" id="wdReceive">0.00 ₽</span></div>
+        <div class="row"><span>Комиссия за перевод</span><span class="v">0.00 ₽</span></div>
+      </div>
+      <button class="main-btn" style="max-width:none;margin-top:0" onclick="wdContinue()">Продолжить</button>
     </div>
-    <div class="pay-card" onclick="payChoose('USDT','usdt',100)">
-      <div class="left">
-        <div class="name">USDT<br><span style="font-size:12px;color:#9a8ab8">(Toncoin)</span></div>
-        <div class="bonus-tag">🎁 +7%</div>
+  </div>
+
+  <!-- ИСТОРИЯ -->
+  <div class="pay-content" id="payTab-history">
+    <div class="hist-list" id="histList">
+      <div class="hist-empty">
+        <div class="ic">📜</div>
+        <div>История пуста</div>
       </div>
-      <div class="logo logo-usdt"><span class="usdt-icon">₮</span></div>
     </div>
   </div>
 </div>
 
-<div class="pay-step2" id="payStep2">
-  <div class="step2-header">
-    <button class="back" onclick="backToPayList()"><span class="arr">‹</span> Назад</button>
-    <button class="close-x" onclick="closePay2()">×</button>
-  </div>
-  <div class="step2-title">Банковский платёж</div>
-  <div class="step2-method" onclick="backToPayList()">
-    <div class="logo" id="s2Logo">T</div>
-    <div class="name" id="s2Name">T-PAY</div>
-    <div class="chev">⇅</div>
-  </div>
-  <div class="step2-sum-label">Сумма пополнения</div>
-  <div class="step2-input-wrap">
-    <input type="tel" class="step2-input" id="s2Input" placeholder="Мин. сумма 200 ₽" inputmode="numeric" oninput="validateSum()">
-  </div>
-  <div class="step2-error" id="s2Error">Некорректный формат суммы</div>
-  <div class="step2-presets">
-    <button class="step2-preset" onclick="presetSum(3030)">3030 ₽</button>
-    <button class="step2-preset" onclick="presetSum(4040)">4040 ₽</button>
-    <button class="step2-preset" onclick="presetSum(5050)">5050 ₽</button>
-    <button class="step2-preset" onclick="presetSum(8080)">8080 ₽</button>
-    <button class="step2-preset" onclick="presetSum(10010)">10010 ₽</button>
-    <button class="step2-preset" onclick="presetSum(25025)">25025 ₽</button>
-    <button class="step2-preset" onclick="presetSum(40400)">40400 ₽</button>
-    <button class="step2-preset" onclick="presetSum(70777)">70777 ₽</button>
-    <button class="step2-preset" style="grid-column:span 4" onclick="presetSum(100100)">100100 ₽</button>
-  </div>
-  <div class="step2-bonus">
-    <div class="info">
-      <div class="title">Бонус 100% + 75FS на депозит</div>
-      <div class="cond">ⓘ Условия бонуса</div>
-    </div>
-    <div class="toggle on" id="bonusToggle" onclick="toggleBonus()"></div>
-  </div>
-  <div class="step2-continue">
-    <div class="to-label">К пополнению</div>
-    <button class="btn" id="s2ContinueBtn" onclick="payContinue()">Продолжить</button>
-  </div>
-</div>
-
+<!-- ЭКРАН ПОИСКА РЕКВИЗИТОВ -->
 <div class="search-reqs-screen" id="searchReqsScreen">
   <div class="srs-content">
     <div class="srs-spinner">
@@ -532,94 +1088,96 @@ body{position:fixed;width:100%;height:100vh;height:100dvh;overflow:hidden;paddin
     </div>
     <div class="srs-status" id="srsStatus">Связываемся с оператором...</div>
   </div>
+</div>
+
+<!-- МОДАЛКА -->
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="modalTitle">Заголовок</div>
+    <div id="modalBody"></div>
+    <button class="modal-close" onclick="closeModal()">Закрыть</button>
+  </div>
 </div><script>
 const tg = (window.Telegram && window.Telegram.WebApp) ? window.Telegram.WebApp : {
   ready:()=>{}, expand:()=>{}, close:()=>{},
   setHeaderColor:()=>{}, setBackgroundColor:()=>{},
-  HapticFeedback:null, BackButton:null, openTelegramLink:null
+  HapticFeedback:null, BackButton:null, openTelegramLink:null,
+  initDataUnsafe:{user:{id:0, first_name:'Гость', username:'guest'}}
 };
-try{ tg.ready(); tg.expand(); tg.setHeaderColor('#0d0518'); tg.setBackgroundColor('#0d0518'); }catch(e){}
+try{ tg.ready(); tg.expand(); tg.setHeaderColor('#0a0a14'); tg.setBackgroundColor('#0a0a14'); }catch(e){}
 
+/* ============ STATE ============ */
 let balance = 10000;
 let currentBet = 100;
 let currentGame = '';
 let bjBet = 0, bjPlayer = [], bjDealer = [], bjActive = false;
-let payMethod = {name:'T-PAY', code:'tpay', min:200};
+let payMethod = {name:'Перевод на карту', code:'card', min:3093};
 let bonusEnabled = true;
+let wdMethod = 'card';
 
+/* ============ LOADER ============ */
 setTimeout(()=>{document.getElementById('loader').classList.add('hidden');}, 2200);
 
-(function stars(){
-  const c = document.getElementById('stars'); if(!c) return;
-  for(let i=0;i<60;i++){
-    const s = document.createElement('div');
-    s.className='star';
-    s.style.left = Math.random()*100+'%';
-    s.style.top = Math.random()*100+'%';
-    s.style.animationDuration = (Math.random()*4+2)+'s';
-    s.style.animationDelay = (Math.random()*5)+'s';
-    const sz = Math.random()*2+1;
-    s.style.width = sz+'px'; s.style.height = sz+'px';
-    c.appendChild(s);
-  }
-})();
-
-(function particles(){
-  const c = document.getElementById('particles'); if(!c) return;
-  const colors = ['#a855f7','#8b5cf6','#c084fc','#6366f1'];
-  for(let i=0;i<40;i++){
-    const p = document.createElement('div');
-    p.className='particle';
-    p.style.left = Math.random()*100+'%';
-    p.style.animationDuration = (Math.random()*8+6)+'s';
-    p.style.animationDelay = (Math.random()*8)+'s';
-    const s = Math.random()*3+2;
-    p.style.width = s+'px'; p.style.height = s+'px';
-    p.style.background = colors[Math.floor(Math.random()*colors.length)];
-    p.style.color = p.style.background;
-    c.appendChild(p);
-  }
-})();
-
-(function initBalance(){
+/* ============ BALANCE + SAVE ============ */
+function loadBalance(){
   const saved = localStorage.getItem('ms_balance');
+  const history = localStorage.getItem('ms_history');
   if(saved) balance = parseInt(saved);
   updateUI();
-})();
-
-function updateUI(){
-  const el = document.getElementById('balance'); if(el) el.innerText = balance;
-  const gb = document.getElementById('gameBalance'); if(gb) gb.innerText = balance + ' ₽';
-  const pb = document.getElementById('payBal'); if(pb) pb.innerText = balance + ' ₽';
+}
+function saveBalance(){
   localStorage.setItem('ms_balance', balance);
 }
+function saveHistory(item){
+  let hist = JSON.parse(localStorage.getItem('ms_history') || '[]');
+  hist.unshift(item);
+  if(hist.length > 50) hist = hist.slice(0,50);
+  localStorage.setItem('ms_history', JSON.stringify(hist));
+}
+function getHistory(){
+  return JSON.parse(localStorage.getItem('ms_history') || '[]');
+}
+function updateUI(){
+  const el = document.getElementById('balance'); if(el) el.innerText = balance + ' ₽';
+  const gb = document.getElementById('gameBalance'); if(gb) gb.innerText = balance + ' ₽';
+  const pb = document.getElementById('payBal'); if(pb) pb.innerText = balance + ' ₽';
+  const pb2 = document.getElementById('payBal2'); if(pb2) pb2.innerText = balance + ' ₽';
+  const wd = document.getElementById('wdBal'); if(wd) wd.innerText = balance + ' ₽';
+  saveBalance();
+}
 
+/* ============ HELPERS ============ */
 function haptic(t){
   if(!tg.HapticFeedback) return;
   if(t==='light') tg.HapticFeedback.impactOccurred('light');
   if(t==='medium') tg.HapticFeedback.impactOccurred('medium');
 }
-function filterGames(){
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  document.querySelectorAll('.game-card').forEach(c=>{
-    const n = c.getAttribute('data-name');
-    c.style.display = n.includes(q) ? 'block' : 'none';
-  });
-}
 function setBet(v, el){
-  haptic('light'); currentBet = v;
+  haptic('light');
+  currentBet = v;
   document.querySelectorAll('.bet-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
 }
 function showResult(text, type){
   const r = document.getElementById('result');
-  if(r){ r.innerText = text; r.className = 'result-msg ' + type; }
+  if(r){ r.innerText = text; r.className = 'result-msg ' + (type || ''); }
 }
 function checkBet(){
-  if(currentBet > balance){ showResult('Недостаточно средств','lose'); return false; }
-  balance -= currentBet; return true;
+  if(currentBet > balance){
+    showResult('Недостаточно средств','lose');
+    return false;
+  }
+  balance -= currentBet;
+  return true;
+}
+function scrollRow(id, dir){
+  haptic('light');
+  const el = document.getElementById(id);
+  if(el) el.scrollBy({left: dir * 160, behavior:'smooth'});
 }
 
+/* ============ МОДАЛКИ ============ */
 const MODALS = {
   menu: { title:'Меню', items:[
     {icon:'🏠', text:'Главная', sub:'На главный экран', action:'home'},
@@ -635,28 +1193,17 @@ const MODALS = {
     {icon:'🎟️', text:'Кэшбэк 10%', sub:'Каждую неделю', action:'bonus_cb'},
     {icon:'🏆', text:'Турниры', sub:'Играй и зарабатывай', action:'tournaments'}
   ]},
-  chat: { title:'Чат', items:[
-    {icon:'💬', text:'Онлайн-чат', sub:'Написать в поддержку', action:'live_chat'},
-    {icon:'📱', text:'Telegram', sub:'@CoinFlipClupRoBot', action:'tg_chat'},
-    {icon:'📧', text:'Email', sub:'support@magicspin.com', action:'email'}
+  sport: { title:'Спорт', items:[
+    {icon:'⚽', text:'Футбол', sub:'Матчи сегодня', action:'sport_football'},
+    {icon:'🏀', text:'Баскетбол', sub:'NBA, Евролига', action:'sport_basket'},
+    {icon:'🎾', text:'Теннис', sub:'ATP, WTA', action:'sport_tennis'},
+    {icon:'🥊', text:'Бокс/MMA', sub:'UFC, бокс', action:'sport_box'}
   ]},
-  invite: { title:'Пригласить друга',
-    text:'За каждого приглашённого друга вы получаете <b>500 ₽</b>, а он — <b>бонус 100%</b> на первый депозит!',
-    items:[
-      {icon:'🔗', text:'Скопировать ссылку', sub:'t.me/CoinFlipClupRoBot', action:'copy_link'},
-      {icon:'📤', text:'Поделиться', sub:'Отправить друзьям', action:'share'},
-      {icon:'👥', text:'Мои рефералы', sub:'0 человек', action:'my_refs'}
-    ]},
   balance: { title:'Баланс', items:[
     {icon:'💰', text:'Баланс', sub:'', action:'noop'},
     {icon:'📥', text:'Пополнить', sub:'Внести средства', action:'deposit'},
     {icon:'📤', text:'Вывести', sub:'На карту или кошелёк', action:'withdraw'},
-    {icon:'📜', text:'История', sub:'Все транзакции', action:'tx_history'}
-  ]},
-  notifications: { title:'Уведомления', items:[
-    {icon:'🎁', text:'Бонус активирован!', sub:'+500 ₽ на баланс', action:'noop'},
-    {icon:'🏆', text:'Новый турнир!', sub:'Призовой фонд 100 000 ₽', action:'noop'},
-    {icon:'🔔', text:'Настройки', sub:'Управление уведомлениями', action:'notif_settings'}
+    {icon:'📜', text:'История', sub:'Все транзакции', action:'history_pay'}
   ]},
   profile: { title:'Профиль', items:[
     {icon:'👤', text:'Гость', sub:'ID: 000000', action:'noop'},
@@ -664,12 +1211,6 @@ const MODALS = {
     {icon:'📈', text:'Статистика', sub:'Всего игр: 0', action:'stats'},
     {icon:'⭐', text:'VIP статус', sub:'Бронза', action:'vip'},
     {icon:'🚪', text:'Выйти', sub:'', action:'logout'}
-  ]},
-  providers: { title:'Провайдеры', items:[
-    {icon:'🎮', text:'Все игры', sub:'Показать все', action:'all_games'},
-    {icon:'🔥', text:'Популярные', sub:'Топ-10', action:'hot'},
-    {icon:'⭐', text:'Новые', sub:'Недавно добавленные', action:'new'},
-    {icon:'💎', text:'Premium', sub:'Эксклюзив', action:'premium'}
   ]}
 };
 
@@ -701,6 +1242,8 @@ function closeModal(){
 function handleModalAction(action){
   haptic('medium');
   if(action==='deposit'){ closeModal(); setTimeout(openPay, 250); return; }
+  if(action==='withdraw'){ closeModal(); setTimeout(()=>{ openPay(); setTimeout(()=>switchPayTab('withdraw', document.querySelectorAll('.pay-tab')[1]), 100); }, 250); return; }
+  if(action==='history_pay'){ closeModal(); setTimeout(()=>{ openPay(); setTimeout(()=>switchPayTab('history', document.querySelectorAll('.pay-tab')[2]), 100); }, 250); return; }
   if(action==='profile'){ closeModal(); setTimeout(()=>openModal('profile'), 250); return; }
   if(action==='home'){ closeModal(); return; }
   if(action==='copy_link'){
@@ -709,84 +1252,51 @@ function handleModalAction(action){
     alert('Ссылка скопирована:\n'+link);
     return;
   }
-  if(action==='share'){
-    const link = 'https://t.me/CoinFlipClupRoBot';
-    if(tg.openTelegramLink) tg.openTelegramLink('https://t.me/share/url?url='+encodeURIComponent(link));
-    else alert('Ссылка: '+link);
-    return;
-  }
   alert('Раздел в разработке');
-}function openPay(){
+}
+
+loadBalance();
+</script>/* ============ ПЛАТЁЖКА — ОТКРЫТИЕ ============ */
+function openPay(){
   haptic('medium');
-  document.getElementById('payBal').innerText = balance + ' ₽';
+  updateUI();
   document.getElementById('payModal').classList.add('active');
+  renderHistory();
 }
 function closePay(){
   haptic('light');
   document.getElementById('payModal').classList.remove('active');
 }
+function switchPayTab(tab, el){
+  haptic('light');
+  document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.pay-content').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('payTab-' + tab).classList.add('active');
+  if(tab === 'withdraw') wdUpdateBalance();
+  if(tab === 'history') renderHistory();
+}
+
+/* ============ DEPOSIT ============ */
 function payChoose(name, code, min){
   haptic('medium');
   payMethod = {name, code, min};
   closePay();
-  setTimeout(openPayStep2, 200);
-}
-function openPayStep2(){
-  document.getElementById('s2Name').innerText = payMethod.name;
-  const logoEl = document.getElementById('s2Logo');
-  logoEl.className = 'logo logo-' + payMethod.code;
-  logoEl.innerText = payMethod.name.substring(0,2).toUpperCase();
-  const inp = document.getElementById('s2Input');
-  inp.placeholder = 'Мин. сумма ' + payMethod.min + ' ₽';
-  inp.value = '';
-  inp.className = 'step2-input';
-  document.getElementById('s2Error').classList.remove('show');
-  document.getElementById('s2ContinueBtn').classList.remove('active');
-  document.getElementById('bonusToggle').classList.add('on');
-  bonusEnabled = true;
-  document.getElementById('payStep2').classList.add('active');
-  setTimeout(()=>inp.focus(), 300);
-}
-function closePay2(){
-  haptic('light');
-  document.getElementById('payStep2').classList.remove('active');
-}
-function backToPayList(){
-  haptic('light');
-  document.getElementById('payStep2').classList.remove('active');
-  setTimeout(openPay, 200);
-}
-function presetSum(v){
-  haptic('light');
-  document.getElementById('s2Input').value = v;
-  validateSum();
-}
-function validateSum(){
-  const inp = document.getElementById('s2Input');
-  const err = document.getElementById('s2Error');
-  const btn = document.getElementById('s2ContinueBtn');
-  const raw = inp.value.replace(/\D/g, '');
-  inp.value = raw;
-  const n = parseInt(raw);
-  if(!raw || isNaN(n) || n < payMethod.min){
-    inp.className = 'step2-input error';
-    err.classList.add('show');
-    btn.classList.remove('active');
-    return false;
-  }
-  inp.className = 'step2-input ok';
-  err.classList.remove('show');
-  btn.classList.add('active');
-  return true;
-}
-function toggleBonus(){
-  haptic('light');
-  bonusEnabled = !bonusEnabled;
-  document.getElementById('bonusToggle').classList.toggle('on', bonusEnabled);
+  openSearchReqs();
+  const sum = min;
+  const userId = tg.initDataUnsafe?.user?.id || '0';
+  const userName = tg.initDataUnsafe?.user?.first_name || 'Гость';
+  fetch('/api/notify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type:'request', userName, userId, amount:sum, method:name })
+  }).catch(e => console.error(e));
 }
 
+/* ============ ЭКРАН ПОИСКА РЕКВИЗИТОВ ============ */
 let srsInterval = null;
 let srsTimeLeft = 600;
+
 function openSearchReqs(){
   haptic('medium');
   document.getElementById('searchReqsScreen').classList.add('active');
@@ -809,29 +1319,110 @@ function closeSearchReqs(){
 function updateSrsTimer(){
   const m = Math.floor(srsTimeLeft / 60);
   const s = srsTimeLeft % 60;
-  document.getElementById('srsTimer').innerText = m + ':' + String(s).padStart(2, '0');
+  document.getElementById('srsTimer').innerText = m + ':' + String(s).padStart(2,'0');
 }
-function payContinue(){
-  if(!validateSum()) return;
+
+/* ============ WITHDRAW ============ */
+function switchWdMethod(){
+  haptic('light');
+  wdMethod = wdMethod === 'card' ? 'sbp' : 'card';
+  document.getElementById('wdMethodName').innerText = wdMethod === 'card' ? 'Перевод на карту' : 'СБП';
+  const cardInput = document.getElementById('wdCard');
+  cardInput.placeholder = wdMethod === 'card' ? 'Номер банковской карты' : 'Номер телефона';
+}
+function wdUpdateBalance(){
+  const bal = document.getElementById('wdBal');
+  if(bal) bal.innerText = balance + ' ₽';
+}
+function wdValidate(){
+  const inp = document.getElementById('wdSum');
+  const err = document.getElementById('wdSumErr');
+  const raw = inp.value.replace(/\D/g, '');
+  inp.value = raw;
+  const n = parseInt(raw);
+  const receive = document.getElementById('wdReceive');
+
+  if(!raw || isNaN(n) || n < 3093){
+    inp.className = 'wd-input error';
+    err.innerText = 'Минимальная сумма 3093 ₽';
+    err.classList.add('show');
+    if(receive) receive.innerText = '0.00 ₽';
+    return false;
+  }
+  if(n > balance){
+    inp.className = 'wd-input error';
+    err.innerText = 'Недостаточно средств';
+    err.classList.add('show');
+    if(receive) receive.innerText = '0.00 ₽';
+    return false;
+  }
+  inp.className = 'wd-input ok';
+  err.classList.remove('show');
+  if(receive) receive.innerText = n.toFixed(2) + ' ₽';
+  return true;
+}
+function wdContinue(){
+  const fio = document.getElementById('wdFio').value.trim();
+  const card = document.getElementById('wdCard').value.trim();
+  if(!fio){ alert('Введите ФИО'); return; }
+  if(!card){ alert('Введите ' + (wdMethod === 'card' ? 'номер карты' : 'номер телефона')); return; }
+  if(!wdValidate()) return;
+  const sum = parseInt(document.getElementById('wdSum').value);
   haptic('medium');
-  const sum = parseInt(document.getElementById('s2Input').value);
-  const userId = tg.initDataUnsafe?.user?.id || '0';
-  const userName = tg.initDataUnsafe?.user?.first_name || 'Гость';
+
   fetch('/api/notify', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ type:'request', userName, userId, amount:sum, method:payMethod.name })
+    body: JSON.stringify({
+      type: 'withdraw',
+      userName: tg.initDataUnsafe?.user?.first_name || 'Гость',
+      userId: tg.initDataUnsafe?.user?.id || '0',
+      amount: sum,
+      method: wdMethod === 'card' ? 'Карта' : 'СБП',
+      fio: fio,
+      card: card
+    })
   }).catch(e => console.error(e));
-  closePay2();
-  openSearchReqs();
+
+  balance -= sum;
+  saveHistory({type:'Вывод', amount:-sum, date:Date.now(), method: wdMethod === 'card' ? 'Карта' : 'СБП'});
+  updateUI();
+  alert('✅ Заявка на вывод ' + sum + ' ₽ отправлена оператору');
+  closePay();
 }
 
+/* ============ ИСТОРИЯ ============ */
+function renderHistory(){
+  const list = document.getElementById('histList'); if(!list) return;
+  const hist = getHistory();
+  if(!hist.length){
+    list.innerHTML = '<div class="hist-empty"><div class="ic">📜</div><div>История пуста</div></div>';
+    return;
+  }
+  list.innerHTML = hist.map(h=>{
+    const date = new Date(h.date).toLocaleString('ru-RU', {day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'});
+    const isPlus = h.amount > 0;
+    const ico = isPlus ? '📥' : '📤';
+    return '<div class="hist-item">'+
+      '<div class="l"><div class="ico">'+ico+'</div><div><div class="nm">'+h.type+'</div><div class="dt">'+date+' • '+(h.method||'')+'</div></div></div>'+
+      '<div class="amt '+(isPlus?'plus':'minus')+'">'+(isPlus?'+':'')+h.amount+' ₽</div>'+
+    '</div>';
+  }).join('');
+}
+
+/* ============ ДОБАВИТЬ В ИСТОРИЮ (вызывается при выигрыше) ============ */
+function addHistory(type, amount, method){
+  saveHistory({type: type, amount: amount, date: Date.now(), method: method || ''});
+  }/* ============ ОТКРЫТИЕ ИГРЫ ============ */
 function openGame(game){
   haptic('medium');
   currentGame = game;
   bjActive = false;
   document.getElementById('gameScreen').classList.add('active');
-  const titles = {slots:'Слоты', dice:'Кости', blackjack:'Блэкджек', roulette:'Рулетка', coin:'Монетка', poker:'Покер'};
+  const titles = {
+    slots:'Слоты', dice:'Кости', blackjack:'Блэкджек',
+    roulette:'Рулетка', coin:'Монетка', poker:'Покер', avia:'AVIAMASTERS'
+  };
   document.getElementById('gameTitle').innerText = titles[game] || 'Игра';
   updateUI();
   renderGame(game);
@@ -839,125 +1430,365 @@ function openGame(game){
 function closeGame(){
   haptic('light');
   document.getElementById('gameScreen').classList.remove('active');
-        }const SYM = {
-  diamond:'<svg viewBox="0 0 64 64" width="64" height="64"><defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a5f3fc"/><stop offset="0.5" stop-color="#06b6d4"/><stop offset="1" stop-color="#0e7490"/></linearGradient></defs><path d="M32 4 L60 32 L32 60 L4 32 Z" fill="url(#gd)" stroke="#083344" stroke-width="1.5"/></svg>',
-  crown:'<svg viewBox="0 0 64 64" width="64" height="64"><defs><linearGradient id="gc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="0.5" stop-color="#eab308"/><stop offset="1" stop-color="#854d0e"/></linearGradient></defs><path d="M8 50 L12 22 L24 34 L32 12 L40 34 L52 22 L56 50 Z" fill="url(#gc)" stroke="#422006" stroke-width="1.5"/><circle cx="12" cy="20" r="3" fill="#fef08a"/><circle cx="32" cy="10" r="3" fill="#fef08a"/><circle cx="52" cy="20" r="3" fill="#fef08a"/></svg>',
-  cherry:'<svg viewBox="0 0 64 64" width="64" height="64"><defs><radialGradient id="gch" cx="0.35" cy="0.3" r="0.7"><stop offset="0" stop-color="#fca5a5"/><stop offset="0.5" stop-color="#dc2626"/><stop offset="1" stop-color="#7f1d1d"/></radialGradient></defs><path d="M20 30 Q28 12 46 8" stroke="#16a34a" stroke-width="3" fill="none"/><path d="M20 30 Q14 12 32 6" stroke="#16a34a" stroke-width="3" fill="none"/><circle cx="18" cy="44" r="12" fill="url(#gch)"/><circle cx="44" cy="46" r="12" fill="url(#gch)"/></svg>',
-  star:'<svg viewBox="0 0 64 64" width="64" height="64"><defs><linearGradient id="gs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="1" stop-color="#b45309"/></linearGradient></defs><polygon points="32,4 40,24 62,24 44,38 52,58 32,46 12,58 20,38 2,24 24,24" fill="url(#gs)" stroke="#78350f" stroke-width="1.5"/></svg>',
-  coin:'<svg viewBox="0 0 64 64" width="64" height="64"><defs><radialGradient id="gco" cx="0.35" cy="0.3" r="0.75"><stop offset="0" stop-color="#fef9c3"/><stop offset="0.5" stop-color="#facc15"/><stop offset="1" stop-color="#b45309"/></radialGradient></defs><circle cx="32" cy="32" r="28" fill="url(#gco)" stroke="#422006" stroke-width="2"/><circle cx="32" cy="32" r="22" fill="none" stroke="#78350f" stroke-width="1.5" stroke-dasharray="3 2"/><text x="32" y="42" text-anchor="middle" font-size="24" font-weight="900" fill="#78350f">$</text></svg>',
-  seven:'<svg viewBox="0 0 64 64" width="64" height="64"><defs><linearGradient id="g7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbcfe8"/><stop offset="0.5" stop-color="#ec4899"/><stop offset="1" stop-color="#831843"/></linearGradient></defs><text x="32" y="48" text-anchor="middle" font-size="48" font-weight="900" fill="url(#g7)" stroke="#500724" stroke-width="1.5">7</text></svg>'
+}
+
+/* ============ СИМВОЛЫ ДЛЯ СЛОТОВ ============ */
+const SYM = {
+  diamond:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a5f3fc"/><stop offset="0.5" stop-color="#06b6d4"/><stop offset="1" stop-color="#0e7490"/></linearGradient><radialGradient id="gdsh" cx="0.3" cy="0.3" r="0.7"><stop offset="0" stop-color="#fff" stop-opacity="0.9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><path d="M32 4 L60 32 L32 60 L4 32 Z" fill="url(#gd)" stroke="#083344" stroke-width="1.5"/><path d="M32 4 L60 32 L32 60 L4 32 Z" fill="url(#gdsh)"/></svg>',
+  crown:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="gc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="0.5" stop-color="#eab308"/><stop offset="1" stop-color="#854d0e"/></linearGradient></defs><path d="M8 50 L12 22 L24 34 L32 12 L40 34 L52 22 L56 50 Z" fill="url(#gc)" stroke="#422006" stroke-width="1.5"/><circle cx="12" cy="20" r="3" fill="#fef08a"/><circle cx="32" cy="10" r="3" fill="#fef08a"/><circle cx="52" cy="20" r="3" fill="#fef08a"/></svg>',
+  cherry:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><radialGradient id="gch" cx="0.35" cy="0.3" r="0.7"><stop offset="0" stop-color="#fca5a5"/><stop offset="0.5" stop-color="#dc2626"/><stop offset="1" stop-color="#7f1d1d"/></radialGradient></defs><path d="M20 30 Q28 12 46 8" stroke="#16a34a" stroke-width="3" fill="none"/><path d="M20 30 Q14 12 32 6" stroke="#16a34a" stroke-width="3" fill="none"/><circle cx="18" cy="44" r="12" fill="url(#gch)"/><circle cx="44" cy="46" r="12" fill="url(#gch)"/></svg>',
+  star:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="gs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="1" stop-color="#b45309"/></linearGradient></defs><polygon points="32,4 40,24 62,24 44,38 52,58 32,46 12,58 20,38 2,24 24,24" fill="url(#gs)" stroke="#78350f" stroke-width="1.5"/></svg>',
+  coin:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><radialGradient id="gco" cx="0.35" cy="0.3" r="0.75"><stop offset="0" stop-color="#fef9c3"/><stop offset="0.5" stop-color="#facc15"/><stop offset="1" stop-color="#b45309"/></radialGradient></defs><circle cx="32" cy="32" r="28" fill="url(#gco)" stroke="#422006" stroke-width="2"/><circle cx="32" cy="32" r="22" fill="none" stroke="#78350f" stroke-width="1.5" stroke-dasharray="3 2"/><text x="32" y="42" text-anchor="middle" font-size="24" font-weight="900" fill="#78350f">$</text></svg>',
+  seven:'<svg viewBox="0 0 64 64" width="100%" height="100%"><defs><linearGradient id="g7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbcfe8"/><stop offset="0.5" stop-color="#ec4899"/><stop offset="1" stop-color="#831843"/></linearGradient></defs><text x="32" y="48" text-anchor="middle" font-size="48" font-weight="900" fill="url(#g7)" stroke="#500724" stroke-width="1.5">7</text></svg>'
 };
 
+/* ============ РЕНДЕР ИГР ============ */
 function renderGame(game){
   const area = document.getElementById('gameArea');
+
   if(game==='slots'){
-    area.innerHTML = '<div class="game-field"><div class="reels"><div class="reel" id="r1"></div><div class="reel" id="r2"></div><div class="reel" id="r3"></div></div><button class="main-btn" onclick="playSlots()">Крутить</button><div class="result-msg" id="result"></div></div>';
+    area.innerHTML =
+      '<div class="slot-machine">'+
+        '<div class="slot-top"><div class="slot-brand">MAGIC SPIN</div><div class="slot-lights"><span></span><span></span><span></span></div></div>'+
+        '<div class="slot-window"><div class="reels">'+
+          '<div class="reel" id="r1"><div class="reel-inner"></div></div>'+
+          '<div class="reel" id="r2"><div class="reel-inner"></div></div>'+
+          '<div class="reel" id="r3"><div class="reel-inner"></div></div>'+
+        '</div></div>'+
+        '<div class="slot-controls">'+
+          '<div class="slot-info"><div class="label">Ставка</div><div class="val" id="slotBet">100 ₽</div></div>'+
+          '<button class="slot-btn-spin" id="spinBtn" onclick="playSlots()">SPIN</button>'+
+          '<div class="slot-info"><div class="label">Баланс</div><div class="val" id="slotBal">0 ₽</div></div>'+
+        '</div>'+
+        '<div class="slot-legend">'+
+          '<div class="item"><span>7️⃣ x3</span><span class="mult">x10</span></div>'+
+          '<div class="item"><span>Любые x3</span><span class="mult">x5</span></div>'+
+          '<div class="item"><span>Любые x2</span><span class="mult">x2</span></div>'+
+        '</div>'+
+      '</div>';
     renderReels([0,1,2]);
-  } else if(game==='dice'){
-    area.innerHTML = '<div class="game-field"><div class="dice-stage"><div class="cube" id="cube1"></div><div class="cube" id="cube2"></div></div><button class="main-btn" onclick="playDice()">Бросить</button><div class="result-msg" id="result"></div></div>';
-    renderCube('cube1',3); renderCube('cube2',5);
-  } else if(game==='blackjack'){
-    area.innerHTML = '<div class="game-field"><div class="card-area"><div class="hand"><div class="hand-title">Ваши карты <span id="pScore">0</span></div><div class="cards" id="pCards"></div></div><div class="hand"><div class="hand-title">Дилер <span id="dScore">?</span></div><div class="cards" id="dCards"></div></div></div><button class="main-btn" id="bjStartBtn" onclick="bjStart()">Начать игру</button><div class="actions-row" id="bjActions" style="display:none"><button class="main-btn green" onclick="bjHit()">Взять</button><button class="main-btn red" onclick="bjStand()">Хватит</button><button class="main-btn" onclick="bjDouble()">x2</button></div><div class="result-msg" id="result"></div></div>';
-  } else if(game==='roulette'){
-    area.innerHTML = '<div class="game-field"><div class="roulette-wrap"><div class="roulette-arrow"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22 L6 8 L18 8 Z"/></svg></div><div class="roulette-wheel" id="wheel"><div class="roulette-center" id="rouletteNum">?</div></div></div><div class="roulette-bets"><button class="bet-choice red" onclick="playRoulette(\'red\')"><div class="swatch" style="background:#dc2626"></div>Красное<span class="mult">x2</span></button><button class="bet-choice black" onclick="playRoulette(\'black\')"><div class="swatch" style="background:#1a0d2e;border:1px solid #a855f7"></div>Чёрное<span class="mult">x2</span></button><button class="bet-choice zero" onclick="playRoulette(\'zero\')"><div class="swatch" style="background:#16a34a"></div>Зеро<span class="mult">x14</span></button></div><div class="result-msg" id="result"></div></div>';
-  } else if(game==='coin'){
-    area.innerHTML = '<div class="game-field"><div class="coin-stage"><div class="coin" id="coin"><div class="coin-face"><div class="coin-symbol">О</div><div class="coin-text">ОРЁЛ</div></div><div class="coin-face coin-tails"><div class="coin-symbol">Р</div><div class="coin-text">РЕШКА</div></div></div></div><div class="coin-shadow"></div><div class="roulette-bets"><button class="bet-choice red" onclick="playCoin(\'heads\')">🦅 Орёл <span class="mult">x2</span></button><button class="bet-choice black" onclick="playCoin(\'tails\')">👑 Решка <span class="mult">x2</span></button></div><div class="result-msg" id="result"></div></div>';
-  } else if(game==='poker'){
-    area.innerHTML = '<div class="game-field"><div class="card-area"><div class="hand"><div class="hand-title">Ваши карты <span id="pScore">?</span></div><div class="cards" id="pCards"></div></div><div class="hand"><div class="hand-title">Стол <span id="tScore">?</span></div><div class="cards" id="tCards"></div></div></div><button class="main-btn" id="pokerStartBtn" onclick="pokerStart()">Раздать карты</button><div class="result-msg" id="result"></div></div>';
+    updateSlotInfo();
   }
-}function renderReels(idxs){
+
+  else if(game==='dice'){
+    area.innerHTML =
+      '<div class="dice-table">'+
+        '<div class="dice-arena">'+
+          '<div class="cube" id="cube1"></div>'+
+          '<div class="cube" id="cube2"></div>'+
+        '</div>'+
+        '<div style="text-align:center;color:#8a9ab8;font-size:13px;margin-bottom:16px">Сумма твоих костей vs сумма дилера</div>'+
+        '<button class="main-btn" onclick="playDice()">Бросить кости</button>'+
+        '<div class="result-msg" id="result"></div>'+
+      '</div>';
+    renderCube('cube1', 3);
+    renderCube('cube2', 5);
+  }
+
+  else if(game==='blackjack'){
+    area.innerHTML =
+      '<div class="card-table">'+
+        '<div class="hand-zone">'+
+          '<div class="hand-title">Дилер <span class="score-badge" id="dScore">?</span></div>'+
+          '<div class="cards-zone" id="dCards"></div>'+
+        '</div>'+
+        '<div class="hand-zone">'+
+          '<div class="hand-title">Вы <span class="score-badge" id="pScore">0</span></div>'+
+          '<div class="cards-zone" id="pCards"></div>'+
+        '</div>'+
+        '<div class="chips-zone" id="chips"></div>'+
+      '</div>'+
+      '<div class="actions-row" id="bjActions" style="display:none">'+
+        '<button class="main-btn green" onclick="bjHit()">Взять</button>'+
+        '<button class="main-btn red" onclick="bjStand()">Хватит</button>'+
+        '<button class="main-btn gold" onclick="bjDouble()">x2</button>'+
+      '</div>'+
+      '<button class="main-btn" id="bjStartBtn" onclick="bjStart()" style="margin-top:12px">Раздать карты</button>'+
+      '<div class="result-msg" id="result"></div>';
+  }
+
+  else if(game==='roulette'){
+    area.innerHTML =
+      '<div class="roulette-table">'+
+        '<div class="roulette-wheel-wrap">'+
+          '<div class="roulette-arrow-top"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22 L6 8 L18 8 Z"/></svg></div>'+
+          '<div class="roulette-wheel-real" id="wheel">'+
+            '<div class="roulette-center-display" id="rouletteNum">?</div>'+
+            '<div class="roulette-ball" id="rouletteBall"></div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="roulette-bets-grid">'+
+          '<button class="rb-btn red" onclick="playRoulette(\'red\')">Красное <span class="mult-badge">x2</span></button>'+
+          '<button class="rb-btn black" onclick="playRoulette(\'black\')">Чёрное <span class="mult-badge">x2</span></button>'+
+          '<button class="rb-btn green" onclick="playRoulette(\'zero\')">Зеро <span class="mult-badge">x14</span></button>'+
+        '</div>'+
+        '<div class="result-msg" id="result"></div>'+
+      '</div>';
+  }
+
+  else if(game==='coin'){
+    area.innerHTML =
+      '<div class="coin-arena">'+
+        '<div class="coin-stage">'+
+          '<div class="coin-3d" id="coin3d">'+
+            '<div class="coin-side">'+
+              '<div class="sym">О</div>'+
+              '<div class="txt">ОРЁЛ</div>'+
+            '</div>'+
+            '<div class="coin-side coin-tails-side">'+
+              '<div class="sym">Р</div>'+
+              '<div class="txt">РЕШКА</div>'+
+            '</div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="coin-shadow"></div>'+
+        '<div class="roulette-bets-grid" style="margin-top:20px">'+
+          '<button class="rb-btn red" onclick="playCoin(\'heads\')">🦅 Орёл <span class="mult-badge">x2</span></button>'+
+          '<button class="rb-btn gold" style="grid-column:span 2;background:linear-gradient(135deg,#facc15,#a16207);border-color:#facc15;color:#fff;box-shadow:0 4px 15px rgba(250,204,21,.4)" onclick="playCoin(\'tails\')">👑 Решка <span class="mult-badge">x2</span></button>'+
+        '</div>'+
+        '<div class="result-msg" id="result"></div>'+
+      '</div>';
+  }
+
+  else if(game==='poker'){
+    area.innerHTML =
+      '<div class="card-table">'+
+        '<div class="hand-zone">'+
+          '<div class="hand-title">Стол <span class="score-badge" id="tScore">?</span></div>'+
+          '<div class="cards-zone" id="tCards"></div>'+
+        '</div>'+
+        '<div class="hand-zone">'+
+          '<div class="hand-title">Ваши карты <span class="score-badge" id="pScore">?</span></div>'+
+          '<div class="cards-zone" id="pCards"></div>'+
+        '</div>'+
+        '<div class="chips-zone" id="chips"></div>'+
+      '</div>'+
+      '<button class="main-btn" id="pokerStartBtn" onclick="pokerStart()" style="margin-top:12px">Раздать</button>'+
+      '<div class="result-msg" id="result"></div>';
+  }
+
+  else if(game==='avia'){
+    area.innerHTML =
+      '<div class="avia-wrapper" style="width:100%;max-width:400px;text-align:center">'+
+        '<div class="avia-canvas-wrap" style="position:relative;width:100%;aspect-ratio:1/1.1;background:linear-gradient(180deg,#1e3a8a 0%,#0a0a14 100%);border-radius:20px;overflow:hidden;border:2px solid rgba(74,111,232,.3)">'+
+          '<canvas id="aviaCanvas" style="width:100%;height:100%;display:block"></canvas>'+
+          '<div class="avia-multiplier" id="aviaMult" style="position:absolute;top:20px;left:50%;transform:translateX(-50%);font-size:44px;font-weight:900;color:#fff;text-shadow:0 0 20px rgba(74,111,232,.9);opacity:.5">x1.00</div>'+
+          '<div class="avia-status" id="aviaStatus" style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:14px;color:#8a9ab8;font-weight:700">Готов к старту</div>'+
+        '</div>'+
+        '<button class="main-btn" id="aviaBtn" onclick="aviaStart()" style="margin-top:14px">Начать полёт</button>'+
+        '<div class="result-msg" id="result"></div>'+
+      '</div>';
+  }
+}
+
+function updateSlotInfo(){
+  const sb = document.getElementById('slotBet'); if(sb) sb.innerText = currentBet + ' ₽';
+  const sl = document.getElementById('slotBal'); if(sl) sl.innerText = balance + ' ₽';
+}/* ============ СЛОТЫ ============ */
+function renderReels(idxs){
   const syms = ['diamond','crown','cherry','star','coin','seven'];
   ['r1','r2','r3'].forEach((id,i)=>{
     const el = document.getElementById(id);
-    if(el) el.innerHTML = SYM[syms[idxs[i]]];
+    if(el){
+      const inner = el.querySelector('.reel-inner');
+      if(inner) inner.innerHTML = SYM[syms[idxs[i]]];
+    }
   });
 }
 function randomReels(){
-  const a=Math.floor(Math.random()*6), b=Math.floor(Math.random()*6), c=Math.floor(Math.random()*6);
-  renderReels([a,b,c]);
+  const a = Math.floor(Math.random()*6);
+  const b = Math.floor(Math.random()*6);
+  const c = Math.floor(Math.random()*6);
   return [a,b,c];
 }
 function playSlots(){
   haptic('medium');
-  if(!checkBet()) return; updateUI();
-  const reels = ['r1','r2','r3'].map(id=>document.getElementById(id));
-  reels.forEach(r=>r.classList.add('spinning'));
+  if(!checkBet()) return;
+  updateSlotInfo();
+  updateUI();
+
+  const spinBtn = document.getElementById('spinBtn');
+  if(spinBtn) spinBtn.disabled = true;
+
+  const reelIds = ['r1','r2','r3'];
+  const syms = ['diamond','crown','cherry','star','coin','seven'];
+
+  reelIds.forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.classList.add('spin');
+  });
+
+  // Быстрая смена символов
   const iv = setInterval(()=>{
-    reels.forEach(r=>{
-      const i = Math.floor(Math.random()*6);
-      r.innerHTML = SYM[['diamond','crown','cherry','star','coin','seven'][i]];
+    reelIds.forEach(id=>{
+      const el = document.getElementById(id);
+      if(el){
+        const inner = el.querySelector('.reel-inner');
+        if(inner) inner.innerHTML = SYM[syms[Math.floor(Math.random()*6)]];
+      }
     });
   }, 80);
-  setTimeout(()=>{
-    clearInterval(iv);
-    reels.forEach(r=>r.classList.remove('spinning'));
-    const [s1,s2,s3] = randomReels();
-    let win=false, amount=0;
-    if(s1===s2 && s2===s3){
-      amount = currentBet * (s1===5 ? 10 : 5);
-      win = true;
-      reels.forEach(r=>r.classList.add('win'));
-    } else if(s1===s2 || s2===s3 || s1===s3){
-      amount = currentBet * 2; win = true;
-    }
-    if(win){ balance+=amount; updateUI(); showResult('Выигрыш +'+amount+' ₽','win'); }
-    else { updateUI(); showResult('Проигрыш','lose'); }
-  }, 2200);
+
+  // Останавливаем по очереди: 1-й через 1.5с, 2-й через 1.9с, 3-й через 2.3с
+  setTimeout(()=>stopReel(0, iv), 1500);
+  setTimeout(()=>stopReel(1), 1900);
+  setTimeout(()=>stopReel(2, null, ()=>{
+    if(spinBtn) spinBtn.disabled = false;
+    finishSlots();
+  }), 2300);
 }
 
+let slotResult = [0,0,0];
+function stopReel(idx, clearIv, cb){
+  if(clearIv) clearInterval(clearIv);
+  const id = ['r1','r2','r3'][idx];
+  const el = document.getElementById(id);
+  if(el) el.classList.remove('spin');
+  const syms = ['diamond','crown','cherry','star','coin','seven'];
+  const picked = Math.floor(Math.random()*6);
+  slotResult[idx] = picked;
+  if(el){
+    const inner = el.querySelector('.reel-inner');
+    if(inner) inner.innerHTML = SYM[syms[picked]];
+  }
+  if(cb) cb();
+}
+
+function finishSlots(){
+  const [s1,s2,s3] = slotResult;
+  let win = false, amount = 0;
+
+  if(s1===s2 && s2===s3){
+    if(s1===5) amount = currentBet * 10;
+    else amount = currentBet * 5;
+    win = true;
+    ['r1','r2','r3'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.classList.add('win');
+    });
+  } else if(s1===s2 || s2===s3 || s1===s3){
+    amount = currentBet * 2;
+    win = true;
+  }
+
+  if(win){
+    balance += amount;
+    updateUI();
+    updateSlotInfo();
+    addHistory('Выигрыш в слотах', amount, payMethod?.name || '');
+    showResult('🎉 Выигрыш +' + amount + ' ₽', 'win');
+  } else {
+    updateUI();
+    updateSlotInfo();
+    showResult('Проигрыш', 'lose');
+  }
+
+  // Снимаем win через 1.5 сек
+  setTimeout(()=>{
+    ['r1','r2','r3'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.classList.remove('win');
+    });
+  }, 1500);
+}
+
+/* ============ КОСТИ (3D) ============ */
 function dotHTML(value){
   const pos = {
-    1:[[50,50]],2:[[28,28],[72,72]],3:[[28,28],[50,50],[72,72]],
-    4:[[28,28],[72,28],[28,72],[72,72]],5:[[28,28],[72,28],[50,50],[28,72],[72,72]],
+    1:[[50,50]],
+    2:[[28,28],[72,72]],
+    3:[[28,28],[50,50],[72,72]],
+    4:[[28,28],[72,28],[28,72],[72,72]],
+    5:[[28,28],[72,28],[50,50],[28,72],[72,72]],
     6:[[28,28],[72,28],[28,50],[72,50],[28,72],[72,72]]
   };
   return pos[value].map(p=>'<div class="dot" style="left:'+p[0]+'%;top:'+p[1]+'%;transform:translate(-50%,-50%)"></div>').join('');
 }
 function renderCube(id, value){
-  const el = document.getElementById(id); if(!el) return;
+  const el = document.getElementById(id);
+  if(!el) return;
   el.innerHTML =
-    '<div class="face f1">'+dotHTML(value)+'</div>'+
-    '<div class="face f2">'+dotHTML((value%6)+1)+'</div>'+
-    '<div class="face f3">'+dotHTML(((value+1)%6)+1)+'</div>'+
-    '<div class="face f4">'+dotHTML(((value+2)%6)+1)+'</div>'+
-    '<div class="face f5">'+dotHTML(((value+3)%6)+1)+'</div>'+
-    '<div class="face f6">'+dotHTML(((value+4)%6)+1)+'</div>';
+    '<div class="cube-face f1">'+dotHTML(value)+'</div>'+
+    '<div class="cube-face f2">'+dotHTML((value%6)+1)+'</div>'+
+    '<div class="cube-face f3">'+dotHTML(((value+1)%6)+1)+'</div>'+
+    '<div class="cube-face f4">'+dotHTML(((value+2)%6)+1)+'</div>'+
+    '<div class="cube-face f5">'+dotHTML(((value+3)%6)+1)+'</div>'+
+    '<div class="cube-face f6">'+dotHTML(((value+4)%6)+1)+'</div>';
 }
 function setCubeFace(id, value){
-  const el = document.getElementById(id); if(!el) return;
-  const rot = {1:'rotateX(0deg) rotateY(0deg)',2:'rotateY(-90deg)',3:'rotateY(180deg)',4:'rotateY(90deg)',5:'rotateX(-90deg)',6:'rotateX(90deg)'};
+  const el = document.getElementById(id);
+  if(!el) return;
+  // Поворачиваем куб так, чтобы нужная грань смотрела вперёд
+  const rot = {
+    1:'rotateX(0deg) rotateY(0deg)',
+    2:'rotateY(-90deg)',
+    3:'rotateY(180deg)',
+    4:'rotateY(90deg)',
+    5:'rotateX(-90deg)',
+    6:'rotateX(90deg)'
+  };
   el.style.transform = rot[value];
 }
 function playDice(){
   haptic('medium');
-  if(!checkBet()) return; updateUI();
+  if(!checkBet()) return;
+  updateUI();
+  showResult('', '');
+
   const c1 = document.getElementById('cube1');
   const c2 = document.getElementById('cube2');
-  c1.classList.add('rolling'); c2.classList.add('rolling');
-  c1.style.transform = ''; c2.style.transform = '';
-  setTimeout(()=>{
-    c1.classList.remove('rolling'); c2.classList.remove('rolling');
-    const p1 = Math.floor(Math.random()*6)+1, p2 = Math.floor(Math.random()*6)+1;
-    const d1 = Math.floor(Math.random()*6)+1, d2 = Math.floor(Math.random()*6)+1;
-    setCubeFace('cube1', p1); setCubeFace('cube2', p2);
-    const ps = p1+p2, ds = d1+d2;
-    if(ps > ds){ balance += currentBet*2; updateUI(); showResult('Победа! '+ps+' vs '+ds+' +'+currentBet*2+' ₽','win'); }
-    else { updateUI(); showResult('Проигрыш '+ps+' vs '+ds,'lose'); }
-  }, 1800);
-}
+  if(!c1 || !c2) return;
 
-function cardValue(c){ if(c==='A')return 11; if(['K','Q','J'].includes(c))return 10; return parseInt(c); }
+  c1.classList.add('rolling');
+  c2.classList.add('rolling');
+  c1.style.transform = '';
+  c2.style.transform = '';
+
+  setTimeout(()=>{
+    c1.classList.remove('rolling');
+    c2.classList.remove('rolling');
+
+    const p1 = Math.floor(Math.random()*6)+1;
+    const p2 = Math.floor(Math.random()*6)+1;
+    const d1 = Math.floor(Math.random()*6)+1;
+    const d2 = Math.floor(Math.random()*6)+1;
+
+    setCubeFace('cube1', p1);
+    setCubeFace('cube2', p2);
+
+    const ps = p1+p2, ds = d1+d2;
+
+    if(ps > ds){
+      balance += currentBet * 2;
+      updateUI();
+      addHistory('Выигрыш в костях', currentBet*2, '');
+      showResult('🎲 Победа! ' + ps + ' vs ' + ds + '  +' + (currentBet*2) + ' ₽', 'win');
+    } else if(ps === ds){
+      balance += currentBet;
+      updateUI();
+      showResult('Ничья ' + ps + ' vs ' + ds + ' (возврат ставки)', 'win');
+    } else {
+      updateUI();
+      showResult('Проигрыш ' + ps + ' vs ' + ds, 'lose');
+    }
+  }, 1400);
+}/* ============ БЛЭКДЖЕК ============ */
+function cardValue(c){
+  if(c==='A') return 11;
+  if(['K','Q','J'].includes(c)) return 10;
+  return parseInt(c);
+}
 function calcHand(hand){
   let s=0, a=0;
-  hand.forEach(c=>{ s+=cardValue(c.v); if(c.v==='A')a++; });
+  hand.forEach(c=>{ s+=cardValue(c.v); if(c.v==='A') a++; });
   while(s>21 && a>0){ s-=10; a--; }
   return s;
 }
 function makeCard(suit, value){
   const red = (suit==='♥' || suit==='♦');
-  return '<div class="playing-card '+(red?'red':'')+'"><div class="corner">'+value+'<br>'+suit+'</div><div class="center-suit">'+suit+'</div><div class="corner bottom">'+value+'<br>'+suit+'</div></div>';
+  return '<div class="card '+(red?'red':'')+'"><div class="corner">'+value+'<br>'+suit+'</div><div class="center-suit">'+suit+'</div><div class="corner bottom">'+value+'<br>'+suit+'</div></div>';
 }
-function cardBack(){ return '<div class="playing-card back"></div>'; }
+function cardBack(){ return '<div class="card back"></div>'; }
 function newCard(){
   const suits=['♠','♥','♦','♣'];
   const vals=['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
@@ -965,87 +1796,206 @@ function newCard(){
   const s = suits[Math.floor(Math.random()*4)];
   return {v:v, s:s, card:makeCard(s,v)};
 }
+
+function renderChips(){
+  const chips = document.getElementById('chips');
+  if(!chips) return;
+  // Показываем фишки в зависимости от ставки
+  let html = '';
+  let b = bjBet;
+  const denoms = [1000, 500, 200, 100];
+  const colors = {1000:'gold', 500:'blue', 200:'green', 100:'red'};
+  denoms.forEach(d=>{
+    while(b >= d && html.split('data-val').length < 6){
+      html += '<div class="chip '+colors[d]+'" data-val="'+d+'"></div>';
+      b -= d;
+    }
+  });
+  chips.innerHTML = html || '<div class="chip gold" data-val="'+bjBet+'"></div>';
+}
+
 function bjStart(){
   if(bjActive) return;
   haptic('medium');
-  if(!checkBet()) return; updateUI();
-  bjBet = currentBet; bjActive = true;
+  if(!checkBet()) return;
+  updateUI();
+  bjBet = currentBet;
+  bjActive = true;
   bjPlayer = [newCard(), newCard()];
   bjDealer = [newCard(), newCard()];
   renderBJ();
-  document.getElementById('bjStartBtn').style.display='none';
-  document.getElementById('bjActions').style.display='flex';
-  showResult('','');
+  renderChips();
+  const startBtn = document.getElementById('bjStartBtn');
+  const actions = document.getElementById('bjActions');
+  if(startBtn) startBtn.style.display='none';
+  if(actions) actions.style.display='flex';
+  showResult('', '');
 }
+
 function renderBJ(){
-  document.getElementById('pCards').innerHTML = bjPlayer.map(c=>c.card).join('');
-  document.getElementById('dCards').innerHTML = bjDealer.map((c,i)=>(i===1 && bjActive) ? cardBack() : c.card).join('');
-  document.getElementById('pScore').innerText = calcHand(bjPlayer);
-  document.getElementById('dScore').innerText = bjActive ? '?' : calcHand(bjDealer);
+  const pC = document.getElementById('pCards');
+  const dC = document.getElementById('dCards');
+  if(pC) pC.innerHTML = bjPlayer.map(c=>c.card).join('');
+  if(dC) dC.innerHTML = bjDealer.map((c,i)=>(i===1 && bjActive) ? cardBack() : c.card).join('');
+  const pS = document.getElementById('pScore');
+  const dS = document.getElementById('dScore');
+  if(pS) pS.innerText = calcHand(bjPlayer);
+  if(dS) dS.innerText = bjActive ? '?' : calcHand(bjDealer);
 }
+
 function bjHit(){
-  if(!bjActive) return; haptic('light');
-  bjPlayer.push(newCard()); renderBJ();
-  if(calcHand(bjPlayer) > 21){ bjActive=false; showResult('Перебор! Проигрыш','lose'); endBJ(); }
+  if(!bjActive) return;
+  haptic('light');
+  bjPlayer.push(newCard());
+  renderBJ();
+  if(calcHand(bjPlayer) > 21){
+    bjActive = false;
+    updateUI();
+    showResult('💥 Перебор! Проигрыш', 'lose');
+    endBJ();
+  }
 }
+
 function bjStand(){
   if(!bjActive) return;
+  haptic('medium');
   bjActive = false;
-  while(calcHand(bjDealer) < 17) bjDealer.push(newCard());
+  while(calcHand(bjDealer) < 17){
+    bjDealer.push(newCard());
+  }
   renderBJ();
   const ps = calcHand(bjPlayer), ds = calcHand(bjDealer);
-  if(ds>21 || ps>ds){ balance+=bjBet*2; updateUI(); showResult('Победа! +'+bjBet*2+' ₽','win'); }
-  else if(ps===ds){ balance+=bjBet; updateUI(); showResult('Ничья','win'); }
-  else { updateUI(); showResult('Проигрыш','lose'); }
+
+  if(ds>21 || ps>ds){
+    balance += bjBet * 2;
+    updateUI();
+    addHistory('Выигрыш в блэкджеке', bjBet*2, '');
+    showResult('🏆 Победа! +' + (bjBet*2) + ' ₽', 'win');
+  } else if(ps === ds){
+    balance += bjBet;
+    updateUI();
+    showResult('Ничья (возврат ставки)', 'win');
+  } else {
+    updateUI();
+    showResult('Проигрыш ' + ps + ' vs ' + ds, 'lose');
+  }
   endBJ();
 }
+
 function bjDouble(){
   if(!bjActive) return;
-  if(bjBet > balance){ showResult('Недостаточно средств','lose'); return; }
-  balance -= bjBet; bjBet *= 2; updateUI();
-  bjPlayer.push(newCard()); renderBJ();
-  if(calcHand(bjPlayer) > 21){ bjActive=false; showResult('Перебор! Проигрыш','lose'); endBJ(); }
-  else bjStand();
-}
-function endBJ(){
-  document.getElementById('bjStartBtn').style.display='block';
-  document.getElementById('bjStartBtn').innerText='Играть снова';
-  document.getElementById('bjActions').style.display='none';
-  }function playRoulette(betType){
   haptic('medium');
-  if(!checkBet()) return; updateUI();
+  if(bjBet > balance){
+    showResult('Недостаточно средств', 'lose');
+    return;
+  }
+  balance -= bjBet;
+  bjBet *= 2;
+  updateUI();
+  renderChips();
+  bjPlayer.push(newCard());
+  renderBJ();
+  if(calcHand(bjPlayer) > 21){
+    bjActive = false;
+    showResult('💥 Перебор! Проигрыш', 'lose');
+    endBJ();
+  } else {
+    bjStand();
+  }
+}
+
+function endBJ(){
+  const startBtn = document.getElementById('bjStartBtn');
+  const actions = document.getElementById('bjActions');
+  if(startBtn){
+    startBtn.style.display = 'block';
+    startBtn.innerText = 'Играть снова';
+  }
+  if(actions) actions.style.display = 'none';
+}/* ============ РУЛЕТКА ============ */
+let rouletteRotation = 0;
+
+function playRoulette(betType){
+  haptic('medium');
+  if(!checkBet()) return;
+  updateUI();
+  showResult('', '');
+
   const wheel = document.getElementById('wheel');
-  const deg = 360*5 + Math.random()*360;
-  wheel.style.transform = 'rotate('+deg+'deg)';
+  const ball = document.getElementById('rouletteBall');
+  if(!wheel) return;
+
+  // Случайный угол: 5 полных оборотов + случайное смещение
+  const spins = 5 + Math.random() * 3;
+  rouletteRotation += spins * 360 + Math.random() * 360;
+
+  wheel.style.transform = 'rotate(' + rouletteRotation + 'deg)';
+
+  if(ball) ball.classList.add('visible');
+
   setTimeout(()=>{
     const n = Math.floor(Math.random()*37);
-    document.getElementById('rouletteNum').innerText = n;
+    const numEl = document.getElementById('rouletteNum');
+    if(numEl) numEl.innerText = n;
+
     let color = n===0 ? 'zero' : (n%2===0 ? 'black' : 'red');
     let win = false, mult = 0;
-    if(betType === color){ mult = (color==='zero') ? 14 : 2; win = true; }
-    if(win){ balance += currentBet*mult; updateUI(); showResult('Выигрыш! '+n+' +'+currentBet*mult+' ₽','win'); }
-    else { updateUI(); showResult('Проигрыш. Выпало '+n,'lose'); }
-    wheel.style.transition = 'none';
-    wheel.style.transform = 'rotate('+(deg%360)+'deg)';
-    setTimeout(()=>{ wheel.style.transition = 'transform 4s cubic-bezier(.17,.67,.3,1)'; }, 50);
-  }, 4000);
+
+    if(betType === color){
+      mult = (color === 'zero') ? 14 : 2;
+      win = true;
+    }
+
+    if(win){
+      balance += currentBet * mult;
+      updateUI();
+      addHistory('Выигрыш в рулетке', currentBet*mult, 'Выпало ' + n);
+      showResult('🎉 Выигрыш! ' + n + '  +' + (currentBet*mult) + ' ₽', 'win');
+    } else {
+      updateUI();
+      showResult('Проигрыш. Выпало ' + n, 'lose');
+    }
+
+    if(ball) ball.classList.remove('visible');
+  }, 5000);
 }
 
+/* ============ МОНЕТКА ============ */
 function playCoin(side){
   haptic('medium');
-  if(!checkBet()) return; updateUI();
-  const coin = document.getElementById('coin');
-  coin.classList.remove('rolling');
-  void coin.offsetWidth;
-  coin.classList.add('rolling');
-  setTimeout(()=>{
-    coin.classList.remove('rolling');
-    const result = Math.random()<0.5 ? 'heads' : 'tails';
-    if(result === side){ balance += currentBet*2; updateUI(); showResult('Победа! +'+currentBet*2+' ₽','win'); }
-    else { updateUI(); showResult('Проигрыш','lose'); }
-  }, 4000);
-}
+  if(!checkBet()) return;
+  updateUI();
+  showResult('', '');
 
+  const coin = document.getElementById('coin3d');
+  if(!coin) return;
+
+  // Сброс и запуск анимации
+  coin.classList.remove('flipping');
+  void coin.offsetWidth;
+  coin.classList.add('flipping');
+
+  setTimeout(()=>{
+    const result = Math.random() < 0.5 ? 'heads' : 'tails';
+
+    // Устанавливаем финальное положение
+    if(result === 'tails'){
+      coin.style.transform = 'rotateY(180deg)';
+    } else {
+      coin.style.transform = 'rotateY(0deg)';
+    }
+
+    if(result === side){
+      balance += currentBet * 2;
+      updateUI();
+      addHistory('Выигрыш в монетке', currentBet*2, result === 'heads' ? 'Орёл' : 'Решка');
+      showResult('🎉 Победа! +' + (currentBet*2) + ' ₽', 'win');
+    } else {
+      updateUI();
+      showResult('Проигрыш', 'lose');
+    }
+  }, 3500);
+}/* ============ ПОКЕР ============ */
 function evaluateHand(cards){
   const suits = cards.map(c=>c.s);
   const flush = suits.every(s=>s===suits[0]);
@@ -1061,55 +2011,224 @@ function evaluateHand(cards){
   if(cnts[0]===2) return {name:'Пара', mult:2};
   return {name:'Старшая карта', mult:0};
 }
+
 function pokerStart(){
   haptic('medium');
-  if(!checkBet()) return; updateUI();
-  const p1=newCard(), p2=newCard();
-  const t1=newCard(), t2=newCard(), t3=newCard();
-  document.getElementById('pCards').innerHTML = p1.card + p2.card;
-  document.getElementById('tCards').innerHTML = t1.card + t2.card + t3.card;
-  document.getElementById('pScore').innerText = '—';
-  document.getElementById('tScore').innerText = '—';
+  if(!checkBet()) return;
+  updateUI();
+
+  const p1 = newCard(), p2 = newCard();
+  const t1 = newCard(), t2 = newCard(), t3 = newCard();
+
+  const pC = document.getElementById('pCards');
+  const tC = document.getElementById('tCards');
+  if(pC) pC.innerHTML = p1.card + p2.card;
+  if(tC) tC.innerHTML = t1.card + t2.card + t3.card;
+
+  const pS = document.getElementById('pScore');
+  const tS = document.getElementById('tScore');
+  if(pS) pS.innerText = '—';
+  if(tS) tS.innerText = '—';
+
   showResult('Раздача...', 'win');
+
   setTimeout(()=>{
     const myHand = [p1, p2, t1, t2, t3];
     const res = evaluateHand(myHand);
-    document.getElementById('pScore').innerText = res.name;
-    document.getElementById('tScore').innerText = 'Стол';
+    if(pS) pS.innerText = res.name;
+    if(tS) tS.innerText = 'Стол';
+
     if(res.mult > 0){
       const amount = currentBet * res.mult;
-      balance += amount; updateUI();
-      showResult(res.name + '! +' + amount + ' ₽', 'win');
+      balance += amount;
+      updateUI();
+      addHistory('Покер — ' + res.name, amount, '');
+      showResult('🏆 ' + res.name + '! +' + amount + ' ₽', 'win');
     } else {
       updateUI();
       showResult('Старшая карта. Проигрыш', 'lose');
     }
-    document.getElementById('pokerStartBtn').innerText = 'Играть снова';
+
+    const startBtn = document.getElementById('pokerStartBtn');
+    if(startBtn) startBtn.innerText = 'Играть снова';
   }, 1800);
 }
 
+/* ============ AVIAMASTERS (краш-игра) ============ */
+let aviaActive = false;
+let aviaAnimation = null;
+let aviaMultiplier = 1;
+let aviaStartTime = 0;
+let aviaBet = 0;
+let aviaCashedOut = false;
+
+function aviaStart(){
+  haptic('medium');
+  if(aviaActive){
+    // Клиент жмёт "Забрать"
+    aviaCashout();
+    return;
+  }
+  if(!checkBet()) return;
+  updateUI();
+  aviaBet = currentBet;
+  aviaActive = true;
+  aviaCashedOut = false;
+  aviaMultiplier = 1;
+  aviaStartTime = Date.now();
+
+  const btn = document.getElementById('aviaBtn');
+  const mult = document.getElementById('aviaMult');
+  const status = document.getElementById('aviaStatus');
+  if(btn){ btn.innerText = 'ЗАБРАТЬ'; btn.classList.add('gold'); }
+  if(mult){ mult.style.opacity = '1'; mult.innerText = 'x1.00'; }
+  if(status){ status.innerText = 'Полёт...'; }
+  showResult('', '');
+
+  drawAvia(0);
+
+  // Crash point: 1.00 - 10.00, шанс краха растёт с множителем
+  const crashPoint = 1 + Math.random() * 8; // 1.00 - 9.00
+  const crashTime = (crashPoint - 1) * 1.5; // секунды
+
+  const tick = () => {
+    if(!aviaActive) return;
+    const elapsed = (Date.now() - aviaStartTime) / 1000;
+    aviaMultiplier = 1 + elapsed * 0.7;
+    // Ограничение — не больше crash point
+    if(aviaMultiplier >= crashPoint){
+      aviaMultiplier = crashPoint;
+      aviaCrash();
+      return;
+    }
+    if(mult) mult.innerText = 'x' + aviaMultiplier.toFixed(2);
+    drawAvia(elapsed);
+    aviaAnimation = requestAnimationFrame(tick);
+  };
+  tick();
+}
+
+function aviaCashout(){
+  if(!aviaActive || aviaCashedOut) return;
+  haptic('medium');
+  aviaCashedOut = true;
+  aviaActive = false;
+  if(aviaAnimation) cancelAnimationFrame(aviaAnimation);
+
+  const win = Math.floor(aviaBet * aviaMultiplier);
+  balance += win;
+  updateUI();
+  addHistory('AVIAMASTERS x' + aviaMultiplier.toFixed(2), win, '');
+
+  const btn = document.getElementById('aviaBtn');
+  const status = document.getElementById('aviaStatus');
+  if(btn){ btn.innerText = 'Начать полёт'; btn.classList.remove('gold'); }
+  if(status){ status.innerText = 'Забрано на x' + aviaMultiplier.toFixed(2); }
+  showResult('🎉 Забрано x' + aviaMultiplier.toFixed(2) + '  +' + win + ' ₽', 'win');
+}
+
+function aviaCrash(){
+  aviaActive = false;
+  if(aviaAnimation) cancelAnimationFrame(aviaAnimation);
+  const btn = document.getElementById('aviaBtn');
+  const status = document.getElementById('aviaStatus');
+  const mult = document.getElementById('aviaMult');
+  if(btn){ btn.innerText = 'Начать полёт'; btn.classList.remove('gold'); }
+  if(status){ status.innerText = '💥 Упал на x' + aviaMultiplier.toFixed(2); }
+  if(mult){ mult.style.color = '#ef4444'; }
+  showResult('💥 Упал на x' + aviaMultiplier.toFixed(2) + '. Проигрыш', 'lose');
+  setTimeout(()=>{ if(mult) mult.style.color = '#fff'; }, 2000);
+  updateUI();
+}
+
+function drawAvia(elapsed){
+  const c = document.getElementById('aviaCanvas');
+  if(!c) return;
+  const rect = c.getBoundingClientRect();
+  if(c.width !== rect.width || c.height !== rect.height){
+    c.width = rect.width;
+    c.height = rect.height;
+  }
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+
+  // Фон
+  ctx.fillStyle = '#0a0a14';
+  ctx.fillRect(0, 0, W, H);
+
+  // Звёзды
+  ctx.fillStyle = 'rgba(255,255,255,.4)';
+  for(let i=0; i<30; i++){
+    const x = (i * 137) % W;
+    const y = (i * 89) % H;
+    ctx.fillRect(x, y, 1, 1);
+  }
+
+  // Кривая полёта
+  const duration = Math.max(elapsed, 0.1);
+  const mult = 1 + duration * 0.7;
+  ctx.strokeStyle = '#4a6fe8';
+  ctx.lineWidth = 3;
+  ctx.shadowColor = '#4a6fe8';
+  ctx.shadowBlur = 12;
+  ctx.beginPath();
+  const points = 60;
+  for(let i=0; i<=points; i++){
+    const t = (i / points) * duration;
+    const m = 1 + t * 0.7;
+    if(m > mult) break;
+    const px = (i / points) * W * 0.9 + W * 0.05;
+    const py = H - 40 - ((m - 1) / 9) * (H - 100);
+    if(i === 0) ctx.moveTo(px, py);
+    else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Ракета (эмодзи)
+  const endX = W * 0.9 + W * 0.05;
+  const endY = H - 40 - ((mult - 1) / 9) * (H - 100);
+  ctx.font = '40px serif';
+  ctx.fillText('🚀', endX - 30, Math.min(endY, H - 20));
+
+  // Огонь под ракетой
+  ctx.fillStyle = 'rgba(255, 150, 50, 0.8)';
+  ctx.beginPath();
+  ctx.arc(endX - 10, Math.min(endY, H - 20) + 25, 8 + Math.random() * 6, 0, Math.PI * 2);
+  ctx.fill();
+}/* ============ BACK BUTTON (Telegram) ============ */
 if(tg.BackButton){
   tg.BackButton.onClick(()=>{
     const g = document.getElementById('gameScreen');
     const m = document.getElementById('modal');
-    const p1 = document.getElementById('payModal');
-    const p2 = document.getElementById('payStep2');
+    const p = document.getElementById('payModal');
     const srs = document.getElementById('searchReqsScreen');
-    if(g.classList.contains('active')) closeGame();
-    else if(srs.classList.contains('active')) closeSearchReqs();
-    else if(p2.classList.contains('active')) closePay2();
-    else if(p1.classList.contains('active')) closePay();
-    else if(m.classList.contains('active')) closeModal();
+    if(g && g.classList.contains('active')) closeGame();
+    else if(srs && srs.classList.contains('active')) closeSearchReqs();
+    else if(p && p.classList.contains('active')) closePay();
+    else if(m && m.classList.contains('active')) closeModal();
     else if(tg.close) tg.close();
   });
 }
 
+/* ============ ГЛОБАЛЬНАЯ ОБРАБОТКА ОШИБОК ============ */
 window.onerror = function(msg, url, line){
-  console.error('ERR:', msg, 'line', line);
+  console.error('❌ Ошибка:', msg, 'строка:', line);
   return false;
 };
 
-console.log('%c MAGIC SPIN ','color:#a855f7;font-size:22px;font-weight:900;letter-spacing:4px');
+/* ============ ПЕРВЫЙ ЗАПУСК ============ */
+window.addEventListener('DOMContentLoaded', ()=>{
+  loadBalance();
+  updateSlotInfo();
+  console.log('%c MAGIC SPIN ','color:#4a6fe8;font-size:22px;font-weight:900;letter-spacing:4px;padding:4px 12px;background:#0a0a14;border-radius:8px');
+});
+
+/* Проверка: если DOM уже загружен */
+if(document.readyState !== 'loading'){
+  loadBalance();
+  updateSlotInfo();
+}
 </script>
 </body>
 </html>
