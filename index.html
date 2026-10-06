@@ -538,10 +538,10 @@ img{display:block;max-width:100%}
       <div class="games-row" id="fastRow">
         <div class="game-tile avia-paused" onclick="openModal('aviaPaused')">
           <div class="bg-img bg-avia"></div>
-          <span class="badge-hot">NEW</span>
-          <svg class="icon-svg" viewBox="0 0 64 64" fill="#fff"><path d="M58 22 L40 34 L48 46 L42 48 L32 38 L22 42 L18 36 L30 30 L22 16 L28 14 L38 26 L52 18 Z"/></svg>
+          <span class="badge-hot">ПАУЗА</span>
+          <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3"><path d="M8 34h48"/><path d="M15 34l10-12 8 7 8-15 8 20"/></svg>
           <div class="overlay"></div>
-          <div class="title">SPACE XY</div><div class="paused-label">ПРИОСТАНОВЛЕНО</div>
+          <div class="title">AVIAMASTERS</div><div class="paused-label">ПРИОСТАНОВЛЕНО</div>
           <div class="provider">MAGIC SPIN</div>
         </div>
         <div class="game-tile" onclick="openGame('coin')">
@@ -1502,7 +1502,7 @@ window.renderGame = function(game){
     area.innerHTML = '<div class="aviator-wrap"><div class="aviator-stage" style="display:flex;align-items:center;justify-content:center"><div style="text-align:center"><div style="font-size:24px;font-weight:900">AVIAMASTERS</div><div style="margin-top:8px;color:#8a9ab8">Игра приостановлена</div></div></div><div class="result-msg">Скоро</div></div>';
   }
   else if(game === "space"){
-    area.innerHTML = '<div class="aviator-wrap"><div class="aviator-stage" style="display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,#49358d,#14132d 55%,#070710)"></div><div style="position:relative;text-align:center"><div style="font-size:46px;font-weight:900">✦</div><div style="font-size:24px;font-weight:900">SPACE XY</div><div style="margin-top:8px;color:#a9b2d0">Космическая игра</div></div></div><button class="main-btn" onclick="spacePlay()">ЗАПУСТИТЬ</button><div class="result-msg" id="result"></div></div>';
+    area.innerHTML = '<div class="aviator-wrap"><div class="aviator-stage" style="display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,#49358d,#14132d 55%,#070710)"></div><div style="position:relative;text-align:center"><svg viewBox="0 0 64 64" width="54" height="54" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="32" cy="32" r="22"/><path d="M32 14l4.5 13.5L50 32l-13.5 4.5L32 50l-4.5-13.5L14 32l13.5-4.5L32 14z"/></svg><div style="font-size:24px;font-weight:900">SPACE XY</div><div style="margin-top:8px;color:#a9b2d0">Космическая игра</div></div></div><button class="main-btn" onclick="spacePlay()">ЗАПУСТИТЬ</button><div class="result-msg" id="result"></div></div>';
   }
 };/* ================= CROWN COINS SLOT ================= */
 window.ccSlotHTML = function(){
@@ -2326,5 +2326,164 @@ console.log("%c MAGIC SPIN v2.0 ready","color:#8b5cf6;font-size:18px;font-weight
  setTimeout(()=>window.updateUI&&window.updateUI(),300);
 })();
 </script>
+
+<style>
+/* ===== FINAL PATCH ===== */
+.ms-modal{position:fixed;inset:0;z-index:99999;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
+.ms-modal.active{display:flex}
+.ms-sheet{width:min(560px,100%);max-height:90vh;overflow:auto;background:linear-gradient(180deg,#171827,#0d0e18);border:1px solid rgba(255,255,255,.10);border-radius:24px 24px 0 0;padding:20px;box-shadow:0 -20px 70px rgba(0,0,0,.55)}
+.ms-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.ms-head h3{margin:0;font-size:20px;color:#fff}
+.ms-close{width:38px;height:38px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:#202235;color:#fff;display:grid;place-items:center}
+.ms-close svg{width:20px;height:20px}
+.ms-label{display:block;color:#98a2bd;font-size:12px;font-weight:800;margin:14px 0 7px}
+.ms-input{width:100%;box-sizing:border-box;background:#0a0b12;border:1px solid #303449;border-radius:14px;color:#fff;padding:14px;font-size:16px;outline:none}
+.ms-input:focus{border-color:#8b5cf6}
+.ms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.ms-method{min-height:62px;border:1px solid #2c3042;background:#141625;border-radius:14px;padding:8px;display:flex;align-items:center;gap:9px;color:#fff;font-weight:800}
+.ms-method.active{border-color:#8b5cf6;box-shadow:0 0 0 1px #8b5cf6 inset;background:#1b1830}
+.ms-method svg{width:54px;height:32px;flex:none}
+.ms-btn{width:100%;margin-top:14px;border:0;border-radius:14px;padding:14px;font-weight:900;color:#fff;background:linear-gradient(135deg,#8b5cf6,#6366f1)}
+.ms-btn.secondary{background:#24283a}
+.ms-info{margin-top:12px;padding:13px;border-radius:14px;background:#10121d;border:1px solid #252a3c;color:#aeb7ce;font-size:12px;line-height:1.45}
+.ms-requisite{font-size:15px;font-weight:900;color:#fff;word-break:break-all;background:#090a10;border-radius:12px;padding:12px;margin-top:7px}
+.ms-copy{margin-top:8px;border:1px solid #303449;background:#191c2b;color:#fff;border-radius:10px;padding:9px 12px;font-weight:800}
+.ms-status{margin-top:10px;color:#9fe2ba;font-size:12px}
+.ms-vip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.ms-vip>div{padding:12px 8px;border-radius:14px;text-align:center;background:#151726;border:1px solid #2b3043;color:#fff}
+.ms-vip b{display:block;margin-bottom:4px}.ms-vip span{font-size:11px;color:#8f9ab5}
+</style>
+
+<div class="ms-modal" id="msDepositModal">
+  <div class="ms-sheet">
+    <div class="ms-head"><h3>Пополнение</h3><button class="ms-close" onclick="msClose('msDepositModal')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="ms-label">1. Способ оплаты</div>
+    <div class="ms-grid" id="msMethods"></div>
+    <div class="ms-label">2. Сумма</div>
+    <input id="msDepositAmount" class="ms-input" type="number" min="100" step="100" placeholder="Например, 1000">
+    <button class="ms-btn" onclick="msShowRequisites()">НАЙТИ РЕКВИЗИТЫ</button>
+    <div id="msReqBox"></div>
+  </div>
+</div>
+
+<div class="ms-modal" id="msWithdrawModal">
+  <div class="ms-sheet">
+    <div class="ms-head"><h3>Вывод средств</h3><button class="ms-close" onclick="msClose('msWithdrawModal')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="ms-label">Сумма</div>
+    <input id="msWithdrawAmount" class="ms-input" type="number" min="100" step="100" placeholder="Введите сумму">
+    <div class="ms-label">Реквизиты</div>
+    <input id="msWithdrawReq" class="ms-input" placeholder="Номер карты / кошелёк">
+    <button class="ms-btn" onclick="msWithdraw()">ОТПРАВИТЬ ЗАЯВКУ</button>
+    <div class="ms-info">Заявка только фиксируется в интерфейсе. Баланс не списывается автоматически без подтверждения операции сервером.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const BAL_KEY="magicspin_balance";
+  const USER_OK="7737187686";
+  const tgid=String((window.Telegram&&Telegram.WebApp&&Telegram.WebApp.initDataUnsafe&&Telegram.WebApp.initDataUnsafe.user&&Telegram.WebApp.initDataUnsafe.user.id) || new URLSearchParams(location.search).get("user_id") || new URLSearchParams(location.search).get("id") || "0");
+  const isOwner=tgid===USER_OK;
+  let stored=parseFloat(localStorage.getItem(BAL_KEY));
+  if(!Number.isFinite(stored)) stored=isOwner?10000:0;
+  if(!isOwner) stored=0;
+  localStorage.setItem(BAL_KEY,String(stored));
+  window.balance=stored;
+
+  function sync(){
+    window.balance=Math.max(0,parseFloat(localStorage.getItem(BAL_KEY)||"0")||0);
+    if(typeof window.updateUI==="function"){
+      try{window.updateUI();}catch(e){}
+    }
+    document.querySelectorAll("#balance,.balance").forEach(el=>{
+      if(el) el.textContent=new Intl.NumberFormat("ru-RU").format(window.balance);
+    });
+  }
+  window.msClose=function(id){document.getElementById(id).classList.remove("active")};
+
+  const logos={
+    tpay:'<svg viewBox="0 0 90 42"><rect x="1" y="1" width="88" height="40" rx="10" fill="#f5f7fb"/><path d="M14 10h25v7h-9v15h-8V17h-8z" fill="#111"/><path d="M45 17h30M45 25h22" stroke="#111" stroke-width="4" stroke-linecap="round"/></svg>',
+    sber:'<svg viewBox="0 0 90 42"><rect width="90" height="42" rx="10" fill="#09a86b"/><path d="M14 22l7 7 13-15 8 7 17-10" fill="none" stroke="#fff" stroke-width="4"/></svg>',
+    alfa:'<svg viewBox="0 0 90 42"><rect width="90" height="42" rx="10" fill="#ef3124"/><path d="M15 31L26 10l10 21M20 24h12" fill="none" stroke="#fff" stroke-width="4"/><path d="M46 12h27M46 21h21M46 30h27" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>',
+    vtb:'<svg viewBox="0 0 90 42"><rect width="90" height="42" rx="10" fill="#1976d2"/><path d="M15 12h24l-12 19z" fill="#fff"/><path d="M47 14h28M47 22h22M47 30h28" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>',
+    psb:'<svg viewBox="0 0 90 42"><rect width="90" height="42" rx="10" fill="#123a78"/><circle cx="23" cy="21" r="10" fill="none" stroke="#fff" stroke-width="4"/><path d="M43 14h31M43 22h24M43 30h31" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>',
+    gaz:'<svg viewBox="0 0 90 42"><rect width="90" height="42" rx="10" fill="#0877bd"/><circle cx="22" cy="21" r="10" fill="none" stroke="#fff" stroke-width="4"/><path d="M43 14h31M43 22h24M43 30h31" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>',
+    sbp:'<svg viewBox="0 0 90 42"><rect width="90" height="42" rx="10" fill="#fff"/><path d="M14 13h18v7H21v8h11v7H14z" fill="#111"/><path d="M46 14l15 7-15 7z" fill="#8b5cf6"/></svg>',
+    ton:'<svg viewBox="0 0 90 42"><rect width="90" height="42" rx="10" fill="#fff"/><path d="M19 11h52L45 33 32 21z" fill="none" stroke="#111" stroke-width="3"/><path d="M32 21h26" stroke="#111" stroke-width="3"/></svg>',
+    usdt:'<svg viewBox="0 0 90 42"><rect width="90" height="42" rx="10" fill="#26a17b"/><circle cx="25" cy="21" r="10" fill="none" stroke="#fff" stroke-width="3"/><path d="M25 12v18M18 16h14M19 21h12" stroke="#fff" stroke-width="2"/></svg>',
+    trx:'<svg viewBox="0 0 90 42"><rect width="90" height="42" rx="10" fill="#e71d36"/><path d="M15 12h35l-17 20zM15 12l18 20M50 12L33 32" fill="none" stroke="#fff" stroke-width="3"/></svg>',
+    eth:'<svg viewBox="0 0 90 42"><rect width="90" height="42" rx="10" fill="#fff"/><path d="M25 8l10 15-10 6-10-6zM25 31l10-5-10 10-10-10z" fill="#5864d8"/></svg>'
+  };
+  const methods=[
+    ["tpay","T-Pay"],["sber","Сбер"],["alfa","Альфа"],["vtb","ВТБ"],["psb","ПСБ"],["gaz","Газпром"],
+    ["sbp","СБП"],["ton","TON"],["usdt","USDT"],["trx","TRX"],["eth","ETH"]
+  ];
+  let selected="sbp";
+  function renderMethods(){
+    const box=document.getElementById("msMethods"); if(!box)return;
+    box.innerHTML=methods.map(([id,name])=>'<button type="button" class="ms-method '+(id===selected?'active':'')+'" data-method="'+id+'">'+logos[id]+'<span>'+name+'</span></button>').join("");
+    box.querySelectorAll(".ms-method").forEach(b=>b.onclick=()=>{selected=b.dataset.method;renderMethods()});
+  }
+  window.msOpenDeposit=function(){renderMethods();document.getElementById("msDepositAmount").value="";document.getElementById("msReqBox").innerHTML="";document.getElementById("msDepositModal").classList.add("active")};
+  window.msShowRequisites=function(){
+    const amount=Math.floor(Number(document.getElementById("msDepositAmount").value||0));
+    if(amount<100){alert("Минимальная сумма пополнения — 100");return}
+    const names={tpay:"T-Pay",sber:"Сбер",alfa:"Альфа",vtb:"ВТБ",psb:"ПСБ",gaz:"Газпром",sbp:"СБП",ton:"TON",usdt:"USDT",trx:"TRX",eth:"ETH"};
+    const req=selected==="sbp"?"Реквизиты выдаются платёжным сервером после подтверждения заявки.":("Реквизиты "+names[selected]+" выдаются платёжным сервером после подтверждения заявки.");
+    document.getElementById("msReqBox").innerHTML='<div class="ms-info"><b>3. Реквизиты</b><div class="ms-requisite">'+req+'</div><div class="ms-status">Баланс будет зачислен только после реального подтверждения платежа сервером.</div></div><button class="ms-btn secondary" onclick="msCheckPayment()">ПРОВЕРИТЬ ОПЛАТУ</button>';
+  };
+  window.msCheckPayment=function(){
+    if(window.showToast) window.showToast("Платёж ещё не подтверждён");
+    else alert("Платёж ещё не подтверждён");
+  };
+  window.msOpenWithdraw=function(){document.getElementById("msWithdrawAmount").value="";document.getElementById("msWithdrawReq").value="";document.getElementById("msWithdrawModal").classList.add("active")};
+  window.msWithdraw=function(){
+    const amount=Math.floor(Number(document.getElementById("msWithdrawAmount").value||0));
+    const req=document.getElementById("msWithdrawReq").value.trim();
+    if(amount<100){alert("Минимальная сумма вывода — 100");return}
+    if(amount>window.balance){alert("Недостаточно средств");return}
+    if(!req){alert("Укажите реквизиты");return}
+    msClose("msWithdrawModal");
+    if(window.showToast) window.showToast("Заявка на вывод создана");
+    else alert("Заявка на вывод создана");
+  };
+
+  // Replace common dead deposit/withdraw entry points if they exist.
+  window.openDeposit=window.msOpenDeposit;
+  window.showDeposit=window.msOpenDeposit;
+  window.openWithdraw=window.msOpenWithdraw;
+  window.showWithdraw=window.msOpenWithdraw;
+
+  // Keep the balance visible and persistent.
+  sync();
+  setInterval(sync,1500);
+
+  // Expose VIP tiers for profile pages that use the existing modal system.
+  window.msVipHTML='<div class="ms-vip"><div><b>VIP SILVER</b><span>5% бонус</span></div><div><b>VIP GOLD</b><span>10% бонус</span></div><div><b>VIP PLATINUM</b><span>15% бонус</span></div></div>';
+
+  // Sports becomes a real placeholder page, not a dead "soon" button.
+  const oldOpenModal=window.openModal;
+  window.openModal=function(key){
+    if(key==="sports"){
+      const body=document.getElementById("modalBody"), title=document.getElementById("modalTitle"), modal=document.getElementById("modal");
+      if(title)title.textContent="Спорт";
+      if(body)body.innerHTML='<div class="mi-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4 6 4 9s-1 6-4 9c-3-3-4-6-4-9s1-6 4-9z"/></svg></div><div class="mi-text">СКОРО<div class="mi-sub">Спортивный раздел готовится к запуску</div></div></div>';
+      if(modal)modal.classList.add("active"); return;
+    }
+    return oldOpenModal?oldOpenModal(key):undefined;
+  };
+
+  // Hook likely deposit buttons by text without touching unrelated controls.
+  document.addEventListener("click",function(e){
+    const el=e.target.closest("button,a");
+    if(!el)return;
+    const t=(el.textContent||"").trim().toLowerCase();
+    if(t==="пополнить" || t==="депозит" || t==="пополнение"){e.preventDefault();msOpenDeposit()}
+    if(t==="вывод" || t==="вывести"){e.preventDefault();msOpenWithdraw()}
+  },true);
+})();
+</script>
+
 </body>
 </html>
